@@ -27,10 +27,16 @@ jobs:
         env:
           CI: false
           
+      - name: Create .nojekyll file
+        run: touch build/.nojekyll
+          
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: gh-pages
           folder: build
           clean: true
+          clean-exclude: |
+            .nojekyll
+            CNAME
           single-commit: true
