@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Mail, Instagram, Twitter } from 'lucide-react';
 import ReleaseCard from './components/ReleaseCard';
 import ShowCard from './components/ShowCard';
 import NoShows from './components/NoShows';
-import { MailchimpEmbedded } from './components/MailchimpSignup';
 
 function App() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   // Data for releases with URLs
   const releases = [
     {
@@ -47,18 +52,38 @@ function App() {
     <div className="min-h-screen bg-gray-900 text-gray-100">
       {/* Hero Section */}
       <header 
-        className="h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat"
+        className={`h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
         style={{
           backgroundImage: `url('/images/the-boys-show.jpeg')`
         }}
       >
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/60" />
+        {/* Animated gradient overlay */}
+        <div 
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            isLoaded ? 'opacity-60' : 'opacity-0'
+          }`}
+          style={{
+            backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))'
+          }}
+        />
+
         <div className="z-10 text-center space-y-6">
-          <h1 className="text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500">
+          <h1 
+            className={`text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500 transform transition-all duration-1000 ${
+              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+            }`}
+          >
             NORTHERN NATIONAL
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300">Alternative Rock Band</p>
+          <p 
+            className={`text-xl md:text-2xl text-gray-300 transform transition-all duration-1000 delay-300 ${
+              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+            }`}
+          >
+            Alternative Rock Band
+          </p>
         </div>
       </header>
 
