@@ -21,7 +21,6 @@ function App() {
   ];
 
   // Data for shows with venue and ticket URLs
-  // Set to empty array to show "No Shows" state
   const shows = [
     // Uncomment and modify these to show tour dates
     // {
@@ -47,8 +46,14 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
       {/* Hero Section */}
-      <header className="h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/50" />
+      <header 
+        className="h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('/images/the-boys-show.jpeg')`
+        }}
+      >
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/60" />
         <div className="z-10 text-center space-y-6">
           <h1 className="text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500">
             NORTHERN NATIONAL
@@ -136,7 +141,40 @@ function App() {
               <Mail className="w-8 h-8" />
             </a>
           </div>
-          <MailchimpEmbedded />
+          <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
+            <form
+              action="https://northernnationalmusic.us17.list-manage.com/subscribe/post?u=22d3f967aaa29a31ccd2275a1&amp;id=7e228c82dc&amp;f_id=0048c2e1f0"
+              method="post"
+              id="mc-embedded-subscribe-form"
+              name="mc-embedded-subscribe-form"
+              className="validate"
+              target="_blank"
+            >
+              <h3 className="text-xl font-bold mb-4">JOIN OUR MAILING LIST</h3>
+              <div className="flex max-w-md mx-auto">
+                <input
+                  type="email"
+                  name="EMAIL"
+                  className="flex-1 p-2 bg-gray-900 border border-gray-700 rounded-l focus:outline-none focus:border-red-500"
+                  id="mce-EMAIL"
+                  placeholder="Enter your email"
+                  required
+                />
+                <button 
+                  type="submit"
+                  name="subscribe"
+                  id="mc-embedded-subscribe"
+                  className="px-6 py-2 bg-red-500 hover:bg-red-600 rounded-r transition duration-300"
+                >
+                  SUBSCRIBE
+                </button>
+              </div>
+              {/* Bot protection - don't remove */}
+              <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+                <input type="text" name="b_22d3f967aaa29a31ccd2275a1_7e228c82dc" tabIndex="-1" value="" />
+              </div>
+            </form>
+          </div>
         </div>
       </section>
 
