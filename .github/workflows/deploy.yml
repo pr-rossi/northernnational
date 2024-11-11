@@ -20,18 +20,36 @@ jobs:
         with:
           node-version: 18
 
+      - name: List files before install
+        run: ls -la
+
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install -g gh-pages --save-dev
+
+      - name: List files after install
+        run: ls -la
 
       - name: Build
         env:
           CI: false
-          PUBLIC_URL: https://northernnationalmusic.com
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: build
-          branch: gh-pages
-          clean: true
+      - name: List build directory
+        run: |
+          echo "Build directory contents:"
+          ls -la build/
+
+      - name: Setup Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+
+      - name: Deploy
+        run: |
+          echo "Starting deployment..."
+          cp public/CNAME build/
+          npx gh-pages -d build -t true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
