@@ -3,6 +3,7 @@ import { Mail, Instagram, Twitter } from 'lucide-react';
 import ReleaseCard from './components/ReleaseCard';
 import ShowCard from './components/ShowCard';
 import NoShows from './components/NoShows';
+import { MailchimpEmbedded } from './components/MailchimpSignup';
 
 function App() {
   // Data for releases with URLs
@@ -42,12 +43,6 @@ function App() {
     //   ticketUrl: "https://www.stubbsaustin.com/event/your-event"
     // }
   ];
-
-  const handleEmailSubmit = (e) => {
-    e.preventDefault();
-    // Add your email subscription logic here
-    console.log('Email submitted');
-  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
@@ -141,23 +136,7 @@ function App() {
               <Mail className="w-8 h-8" />
             </a>
           </div>
-          <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
-            <h3 className="text-xl font-bold mb-4">JOIN OUR MAILING LIST</h3>
-            <form onSubmit={handleEmailSubmit} className="flex max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 p-2 bg-gray-900 border border-gray-700 rounded-l focus:outline-none focus:border-red-500"
-                required
-              />
-              <button 
-                type="submit"
-                className="px-6 py-2 bg-red-500 hover:bg-red-600 rounded-r transition duration-300"
-              >
-                SUBSCRIBE
-              </button>
-            </form>
-          </div>
+          <MailchimpEmbedded />
         </div>
       </section>
 
