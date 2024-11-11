@@ -2,6 +2,7 @@ import React from 'react';
 import { Mail, Instagram, Twitter } from 'lucide-react';
 import ReleaseCard from './components/ReleaseCard';
 import ShowCard from './components/ShowCard';
+import NoShows from './components/NoShows';
 
 function App() {
   // Data for releases with URLs
@@ -19,26 +20,34 @@ function App() {
   ];
 
   // Data for shows with venue and ticket URLs
+  // Set to empty array to show "No Shows" state
   const shows = [
-    {
-      date: "DEC 15",
-      venue: "The Bomb Factory - Dallas, TX",
-      venueUrl: "https://thebombfactory.com",
-      ticketUrl: "https://tickets.thebombfactory.com/event/your-event"
-    },
-    {
-      date: "DEC 18",
-      venue: "House of Blues - Houston, TX",
-      venueUrl: "https://www.houseofblues.com/houston",
-      ticketUrl: "https://www.houseofblues.com/houston/event/your-event"
-    },
-    {
-      date: "DEC 20",
-      venue: "Stubb's - Austin, TX",
-      venueUrl: "https://www.stubbsaustin.com",
-      ticketUrl: "https://www.stubbsaustin.com/event/your-event"
-    }
+    // Uncomment and modify these to show tour dates
+    // {
+    //   date: "DEC 15",
+    //   venue: "The Bomb Factory - Dallas, TX",
+    //   venueUrl: "https://thebombfactory.com",
+    //   ticketUrl: "https://tickets.thebombfactory.com/event/your-event"
+    // },
+    // {
+    //   date: "DEC 18",
+    //   venue: "House of Blues - Houston, TX",
+    //   venueUrl: "https://www.houseofblues.com/houston",
+    //   ticketUrl: "https://www.houseofblues.com/houston/event/your-event"
+    // },
+    // {
+    //   date: "DEC 20",
+    //   venue: "Stubb's - Austin, TX",
+    //   venueUrl: "https://www.stubbsaustin.com",
+    //   ticketUrl: "https://www.stubbsaustin.com/event/your-event"
+    // }
   ];
+
+  const handleEmailSubmit = (e) => {
+    e.preventDefault();
+    // Add your email subscription logic here
+    console.log('Email submitted');
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
@@ -87,46 +96,67 @@ function App() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-red-500">TOUR DATES</h2>
           <div className="space-y-4">
-            {shows.map((show, index) => (
-              <ShowCard
-                key={index}
-                date={show.date}
-                venue={show.venue}
-                venueUrl={show.venueUrl}
-                ticketUrl={show.ticketUrl}
-              />
-            ))}
+            {shows.length > 0 ? (
+              shows.map((show, index) => (
+                <ShowCard
+                  key={index}
+                  date={show.date}
+                  venue={show.venue}
+                  venueUrl={show.venueUrl}
+                  ticketUrl={show.ticketUrl}
+                />
+              ))
+            ) : (
+              <NoShows />
+            )}
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 px-6 bg-gray-900">
+      <section id="mailing-list" className="py-20 px-6 bg-gray-900">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-8 text-red-500">CONNECT WITH US</h2>
           <div className="flex justify-center space-x-8 mb-12">
-            <a href="https://instagram.com/northernnational" className="text-gray-400 hover:text-red-500 transition duration-300">
+            <a 
+              href="https://instagram.com/northernnational" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-red-500 transition duration-300"
+            >
               <Instagram className="w-8 h-8" />
             </a>
-            <a href="https://twitter.com/northernnational" className="text-gray-400 hover:text-red-500 transition duration-300">
+            <a 
+              href="https://twitter.com/northernnational" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-red-500 transition duration-300"
+            >
               <Twitter className="w-8 h-8" />
             </a>
-            <a href="mailto:contact@northernnational.com" className="text-gray-400 hover:text-red-500 transition duration-300">
+            <a 
+              href="mailto:contact@northernnational.com"
+              className="text-gray-400 hover:text-red-500 transition duration-300"
+            >
               <Mail className="w-8 h-8" />
             </a>
           </div>
           <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
             <h3 className="text-xl font-bold mb-4">JOIN OUR MAILING LIST</h3>
-            <div className="flex max-w-md mx-auto">
+            <form onSubmit={handleEmailSubmit} className="flex max-w-md mx-auto">
               <input
                 type="email"
                 placeholder="Enter your email"
                 className="flex-1 p-2 bg-gray-900 border border-gray-700 rounded-l focus:outline-none focus:border-red-500"
+                required
               />
-              <button className="px-6 py-2 bg-red-500 hover:bg-red-600 rounded-r transition duration-300">
+              <button 
+                type="submit"
+                className="px-6 py-2 bg-red-500 hover:bg-red-600 rounded-r transition duration-300"
+              >
                 SUBSCRIBE
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </section>
