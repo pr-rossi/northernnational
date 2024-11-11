@@ -4,30 +4,41 @@ import ReleaseCard from './components/ReleaseCard';
 import ShowCard from './components/ShowCard';
 
 function App() {
-  // Data for releases
+  // Data for releases with URLs
   const releases = [
     {
       title: "NEW SINGLE",
-      description: "Stream our latest single now on all major platforms"
+      description: "Stream our latest single now on all major platforms",
+      url: "https://open.spotify.com/artist/your-artist-id" // Replace with your actual Spotify URL
     },
     {
       title: "UPCOMING ALBUM",
-      description: "New album dropping soon. Stay tuned!"
+      description: "New album dropping soon. Stay tuned!",
+      url: "https://music.apple.com/your-album-link" // Replace with your actual Apple Music URL
     }
   ];
 
-  // Data for shows
+  // Data for shows with venue and ticket URLs
   const shows = [
-    { date: "DEC 15", venue: "The Bomb Factory - Dallas, TX" },
-    { date: "DEC 18", venue: "House of Blues - Houston, TX" },
-    { date: "DEC 20", venue: "Stubb's - Austin, TX" }
+    {
+      date: "DEC 15",
+      venue: "The Bomb Factory - Dallas, TX",
+      venueUrl: "https://thebombfactory.com",
+      ticketUrl: "https://tickets.thebombfactory.com/event/your-event"
+    },
+    {
+      date: "DEC 18",
+      venue: "House of Blues - Houston, TX",
+      venueUrl: "https://www.houseofblues.com/houston",
+      ticketUrl: "https://www.houseofblues.com/houston/event/your-event"
+    },
+    {
+      date: "DEC 20",
+      venue: "Stubb's - Austin, TX",
+      venueUrl: "https://www.stubbsaustin.com",
+      ticketUrl: "https://www.stubbsaustin.com/event/your-event"
+    }
   ];
-
-  // Handler for ticket button clicks
-  const handleTicketClick = (show) => {
-    // Add your ticket purchase logic here
-    console.log(`Buying tickets for ${show.venue}`);
-  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
@@ -64,6 +75,7 @@ function App() {
                 key={index}
                 title={release.title}
                 description={release.description}
+                url={release.url}
               />
             ))}
           </div>
@@ -80,7 +92,8 @@ function App() {
                 key={index}
                 date={show.date}
                 venue={show.venue}
-                onTicketClick={() => handleTicketClick(show)}
+                venueUrl={show.venueUrl}
+                ticketUrl={show.ticketUrl}
               />
             ))}
           </div>
