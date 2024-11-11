@@ -1,7 +1,34 @@
 import React from 'react';
-import { Music, Mail, Instagram, Twitter } from 'lucide-react';
+import { Mail, Instagram, Twitter } from 'lucide-react';
+import ReleaseCard from './components/ReleaseCard';
+import ShowCard from './components/ShowCard';
 
 function App() {
+  // Data for releases
+  const releases = [
+    {
+      title: "NEW SINGLE",
+      description: "Stream our latest single now on all major platforms"
+    },
+    {
+      title: "UPCOMING ALBUM",
+      description: "New album dropping soon. Stay tuned!"
+    }
+  ];
+
+  // Data for shows
+  const shows = [
+    { date: "DEC 15", venue: "The Bomb Factory - Dallas, TX" },
+    { date: "DEC 18", venue: "House of Blues - Houston, TX" },
+    { date: "DEC 20", venue: "Stubb's - Austin, TX" }
+  ];
+
+  // Handler for ticket button clicks
+  const handleTicketClick = (show) => {
+    // Add your ticket purchase logic here
+    console.log(`Buying tickets for ${show.venue}`);
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
       {/* Hero Section */}
@@ -32,16 +59,13 @@ function App() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-red-500">LATEST RELEASES</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-              <Music className="w-12 h-12 text-orange-500 mb-4" />
-              <h3 className="text-xl font-bold mb-2">NEW SINGLE</h3>
-              <p className="text-gray-400">Stream our latest single now on all major platforms</p>
-            </div>
-            <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-              <Music className="w-12 h-12 text-orange-500 mb-4" />
-              <h3 className="text-xl font-bold mb-2">UPCOMING ALBUM</h3>
-              <p className="text-gray-400">New album dropping soon. Stay tuned!</p>
-            </div>
+            {releases.map((release, index) => (
+              <ReleaseCard 
+                key={index}
+                title={release.title}
+                description={release.description}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -51,18 +75,13 @@ function App() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-red-500">TOUR DATES</h2>
           <div className="space-y-4">
-            {[
-              { date: "DEC 15", venue: "The Bomb Factory - Dallas, TX" },
-              { date: "DEC 18", venue: "House of Blues - Houston, TX" },
-              { date: "DEC 20", venue: "Stubb's - Austin, TX" }
-            ].map((show, index) => (
-              <div key={index} className="flex justify-between items-center p-4 bg-gray-900 rounded-lg shadow-lg">
-                <span className="text-xl font-bold">{show.date}</span>
-                <span className="text-gray-300">{show.venue}</span>
-                <button className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded transition duration-300">
-                  TICKETS
-                </button>
-              </div>
+            {shows.map((show, index) => (
+              <ShowCard
+                key={index}
+                date={show.date}
+                venue={show.venue}
+                onTicketClick={() => handleTicketClick(show)}
+              />
             ))}
           </div>
         </div>
@@ -76,10 +95,10 @@ function App() {
             <a href="https://instagram.com/northernnational" className="text-gray-400 hover:text-red-500 transition duration-300">
               <Instagram className="w-8 h-8" />
             </a>
-            <a href="https://twitter.com/northernnatl" className="text-gray-400 hover:text-red-500 transition duration-300">
+            <a href="https://twitter.com/northernnational" className="text-gray-400 hover:text-red-500 transition duration-300">
               <Twitter className="w-8 h-8" />
             </a>
-            <a href="mailto:info@northernnational.com" className="text-gray-400 hover:text-red-500 transition duration-300">
+            <a href="mailto:contact@northernnational.com" className="text-gray-400 hover:text-red-500 transition duration-300">
               <Mail className="w-8 h-8" />
             </a>
           </div>
