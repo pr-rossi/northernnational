@@ -26,10 +26,12 @@ jobs:
       - name: Build
         env:
           CI: false
-          PUBLIC_URL: https://pr-rossi.github.io/northernnational
+          PUBLIC_URL: https://northernnationalmusic.com
         run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: build
+          branch: gh-pages
+          clean: true
