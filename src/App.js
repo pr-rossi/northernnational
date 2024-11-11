@@ -73,13 +73,13 @@ function App() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-8 text-red-500">CONNECT WITH US</h2>
           <div className="flex justify-center space-x-8 mb-12">
-            <a href="#" className="text-gray-400 hover:text-red-500 transition duration-300">
+            <a href="https://instagram.com/northernnational" className="text-gray-400 hover:text-red-500 transition duration-300">
               <Instagram className="w-8 h-8" />
             </a>
-            <a href="#" className="text-gray-400 hover:text-red-500 transition duration-300">
+            <a href="https://twitter.com/northernnational" className="text-gray-400 hover:text-red-500 transition duration-300">
               <Twitter className="w-8 h-8" />
             </a>
-            <a href="#" className="text-gray-400 hover:text-red-500 transition duration-300">
+            <a href="mailto:contact@northernnational.com" className="text-gray-400 hover:text-red-500 transition duration-300">
               <Mail className="w-8 h-8" />
             </a>
           </div>
