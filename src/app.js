@@ -1,7 +1,7 @@
 import React from 'react';
 import { Music, Mail, Instagram, Twitter } from 'lucide-react';
 
-const NorthernNationalWebsite = () => {
+function App() {
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
       {/* Hero Section */}
@@ -105,6 +105,6 @@ const NorthernNationalWebsite = () => {
       </footer>
     </div>
   );
-};
+}
 
-export default NorthernNationalWebsite;
+export default App;
