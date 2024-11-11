@@ -76,10 +76,10 @@ function App() {
             <a href="https://instagram.com/northernnational" className="text-gray-400 hover:text-red-500 transition duration-300">
               <Instagram className="w-8 h-8" />
             </a>
-            <a href="https://twitter.com/northernnational" className="text-gray-400 hover:text-red-500 transition duration-300">
+            <a href="https://twitter.com/northernnatl" className="text-gray-400 hover:text-red-500 transition duration-300">
               <Twitter className="w-8 h-8" />
             </a>
-            <a href="mailto:contact@northernnational.com" className="text-gray-400 hover:text-red-500 transition duration-300">
+            <a href="mailto:info@northernnational.com" className="text-gray-400 hover:text-red-500 transition duration-300">
               <Mail className="w-8 h-8" />
             </a>
           </div>
