@@ -5,38 +5,39 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
-
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup Node
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          
-      - name: Install Dependencies
+
+      - name: Install dependencies
         run: npm install
-        
+
       - name: Build
         run: npm run build
         env:
           CI: false
-          
-      - name: Create .nojekyll file
-        run: touch build/.nojekyll
-          
+
+      - name: Setup GitHub Pages
+        run: |
+          touch build/.nojekyll
+          echo "northernnationalmusic.com" > build/CNAME
+
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages
-          folder: build
-          clean: true
-          clean-exclude: |
-            .nojekyll
-            CNAME
-          single-commit: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          publish_branch: gh-pages
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Deploy to GitHub Pages'
+          enable_jekyll: false
