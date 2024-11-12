@@ -4,6 +4,10 @@ import gsap from 'gsap';
 import ReleaseCard from './components/ReleaseCard';
 import ShowCard from './components/ShowCard';
 import NoShows from './components/NoShows';
+import { TextPlugin } from 'gsap/TextPlugin';
+
+// Register GSAP plugins
+gsap.registerPlugin(TextPlugin);
 
 function App() {
   const titleRef = useRef(null);
