@@ -14,37 +14,33 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    <!-- Liquid Effect Filter -->
+    <!-- Smooth Liquid Effect Filter -->
     <svg style="position: absolute; width: 0; height: 0;">
       <defs>
-        <filter id="liquid" x="-50%" y="-50%" width="200%" height="200%">
+        <filter id="liquid">
           <feTurbulence 
             type="fractalNoise" 
-            baseFrequency="0.012 0.012" 
-            numOctaves="4" 
-            seed="1" 
-            stitchTiles="stitch"
+            baseFrequency="0.002 0.002" 
+            numOctaves="2" 
+            result="turbulence" 
+            seed="2"
           >
             <animate 
               attributeName="baseFrequency" 
-              dur="15s" 
-              keyTimes="0;0.25;0.5;0.75;1"
-              values="0.012 0.012;0.013 0.013;0.012 0.012;0.011 0.011;0.012 0.012"
+              dur="60s" 
+              values="0.002 0.002;0.003 0.002;0.002 0.002" 
               repeatCount="indefinite" 
+              calcMode="spline"
+              keySplines="0.45 0.05 0.55 0.95;0.45 0.05 0.55 0.95"
             />
           </feTurbulence>
           <feDisplacementMap 
             in="SourceGraphic" 
-            scale="25" 
-          >
-            <animate
-              attributeName="scale"
-              dur="10s"
-              keyTimes="0;0.25;0.5;0.75;1"
-              values="25;30;25;20;25"
-              repeatCount="indefinite"
-            />
-          </feDisplacementMap>
+            scale="15" 
+            xChannelSelector="R" 
+            yChannelSelector="G"
+            in2="turbulence"
+          />
         </filter>
       </defs>
     </svg>
