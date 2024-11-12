@@ -19,8 +19,12 @@ const MerchSection = () => {
         const response = await fetch('/api/products');
         const data = await response.json();
         
-        // Debug log to see the data structure
-        console.log('API Response:', data);
+        // Detailed debug logging
+        console.log('Raw API Response:', data);
+        if (data.result) {
+          console.log('First product example:', data.result[0]);
+          console.log('First product variants:', data.result[0]?.variants);
+        }
 
         if (data && data.result && Array.isArray(data.result)) {
           setProducts(data.result);
