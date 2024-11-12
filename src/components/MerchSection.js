@@ -87,7 +87,7 @@ const MerchSection = () => {
   return (
     <section ref={sectionRef} className="py-20 px-6 bg-black">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-[#D4FF99] font-thunder">MERCH</h2>
+        <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">MERCH</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {products.map((product) => (
             <div 
