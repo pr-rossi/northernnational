@@ -14,6 +14,8 @@ export default async function handler(req, res) {
     return;
   }
 
+  console.log('Webhook received');
+  
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
   const signature = req.headers['stripe-signature'];
   const buf = await buffer(req);
@@ -26,6 +28,7 @@ export default async function handler(req, res) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET
     );
+    console.log('Webhook event type:', event.type);
   } catch (err) {
     console.error('Webhook signature verification failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
@@ -33,73 +36,58 @@ export default async function handler(req, res) {
 
   if (event.type === 'payment_intent.succeeded') {
     const paymentIntent = event.data.object;
+    console.log('Payment succeeded:', paymentIntent.id);
     
     try {
-      console.log('Processing successful payment:', paymentIntent);
+      // Log all available data
+      console.log('Payment metadata:', paymentIntent.metadata);
+      console.log('Shipping info:', paymentIntent.shipping);
 
-      // Get order details from payment intent metadata
-      const { product_id, variant_id } = paymentIntent.metadata;
-      const shipping = paymentIntent.shipping;
+      // Create Printful order
+      const printfulOrderData = {
+        external_id: paymentIntent.id,
+        shipping: "STANDARD",
+        recipient: {
+          name: paymentIntent.shipping.name,
+          address1: paymentIntent.shipping.address.line1,
+          address2: paymentIntent.shipping.address.line2 || '',
+          city: paymentIntent.shipping.address.city,
+          state_code: paymentIntent.shipping.address.state,
+          country_code: paymentIntent.shipping.address.country,
+          zip: paymentIntent.shipping.address.postal_code,
+          email: paymentIntent.metadata.customer_email
+        },
+        items: [
+          {
+            sync_variant_id: parseInt(paymentIntent.metadata.variant_id),
+            quantity: 1
+          }
+        ]
+      };
 
-      if (!shipping) {
-        throw new Error('No shipping information provided');
-      }
+      console.log('Sending to Printful:', printfulOrderData);
 
-      // Create order in Printful
       const printfulResponse = await fetch('https://api.printful.com/orders', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          external_id: paymentIntent.id, // Use Stripe payment ID as external reference
-          shipping: "STANDARD", // or "EXPRESS" if you want to offer express shipping
-          recipient: {
-            name: shipping.name,
-            address1: shipping.address.line1,
-            address2: shipping.address.line2 || '',
-            city: shipping.address.city,
-            state_code: shipping.address.state,
-            country_code: shipping.address.country,
-            zip: shipping.address.postal_code,
-            email: paymentIntent.receipt_email || paymentIntent.metadata.customer_email,
-            phone: shipping.phone || ''
-          },
-          items: [
-            {
-              sync_variant_id: parseInt(variant_id),
-              quantity: 1,
-              retail_price: (paymentIntent.amount / 100).toString(), // Convert cents to dollars
-              name: "Custom T-Shirt", // You might want to store the product name in metadata
-              files: [
-                {
-                  url: "https://www.northernnationalmusic.com/images/logo.png" // Replace with your actual design URL
-                }
-              ]
-            }
-          ]
-        })
+        body: JSON.stringify(printfulOrderData)
       });
 
-      const printfulData = await printfulResponse.json();
-
+      const printfulResult = await printfulResponse.json();
+      
       if (!printfulResponse.ok) {
-        console.error('Printful API Error Response:', printfulData);
-        throw new Error(`Printful API error: ${JSON.stringify(printfulData)}`);
+        console.error('Printful API Error:', printfulResult);
+        throw new Error(`Printful API error: ${JSON.stringify(printfulResult)}`);
       }
 
-      console.log('Printful order created successfully:', printfulData);
+      console.log('Printful order created:', printfulResult);
 
     } catch (error) {
-      console.error('Error creating Printful order:', {
-        error: error.message,
-        paymentIntent: paymentIntent.id,
-        shipping: paymentIntent.shipping,
-        metadata: paymentIntent.metadata
-      });
-      // You might want to set up error notifications here
-      // The payment has already been processed at this point
+      console.error('Error creating Printful order:', error);
+      // Still return 200 to Stripe
     }
   }
 
