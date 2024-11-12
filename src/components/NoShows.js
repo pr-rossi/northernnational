@@ -19,6 +19,12 @@ const NoShows = () => {
       <div className="mt-8">
         <a 
           href="#mailing-list" 
+          onClick={(e) => {
+            e.preventDefault();
+            document.querySelector('#mailing-list').scrollIntoView({ 
+              behavior: 'smooth'
+            });
+          }}
           className="inline-flex items-center px-6 py-3 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-medium rounded-lg transition duration-300"
         >
           Get Updates
