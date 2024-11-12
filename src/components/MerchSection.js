@@ -43,10 +43,13 @@ const MerchSection = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const apiUrl = `${process.env.REACT_APP_API_URL}/products`;
-        console.log('Fetching products from:', apiUrl);
-        
-        const response = await fetch(apiUrl);
+        // Use Printful's API endpoint
+        const response = await fetch('https://api.printful.com/store/products', {
+          headers: {
+            'Authorization': `Bearer ${process.env.REACT_APP_PRINTFUL_API_KEY}`,
+            'Content-Type': 'application/json'
+          }
+        });
         
         // Add response debugging
         if (!response.ok) {
@@ -61,15 +64,9 @@ const MerchSection = () => {
         }
         
         const data = await response.json();
-        
-        // Detailed debug logging
-        console.log('Raw API Response:', data);
-        if (data.result) {
-          console.log('First product example:', data.result[0]);
-          console.log('First product variants:', data.result[0]?.variants);
-        }
+        console.log('Printful API Response:', data);
 
-        if (data && data.result && Array.isArray(data.result)) {
+        if (data && data.result) {
           setProducts(data.result);
         } else {
           console.error('Invalid data structure:', data);
@@ -110,25 +107,20 @@ const MerchSection = () => {
         throw new Error('Stripe is not properly initialized');
       }
 
-      // Test basic API connectivity first
-      console.log('Testing API connection...');
-      const testResponse = await fetch('/api/test');
-      console.log('Test API response:', await testResponse.text());
-
-      // Then try the sync variant endpoint
-      console.log('Attempting sync variant fetch...');
+      // Fetch variant details from Printful
       const variantId = product.id;
-      const apiUrl = `${process.env.REACT_APP_API_URL}/sync-variant/${variantId}`;
-      console.log('Calling API URL:', apiUrl);
-
-      const response = await fetch(apiUrl);
+      const response = await fetch(`https://api.printful.com/store/products/${variantId}`, {
+        headers: {
+          'Authorization': `Bearer ${process.env.REACT_APP_PRINTFUL_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
       
       if (!response.ok) {
         const errorText = await response.text();
         console.error('API Response Error:', {
           status: response.status,
-          text: errorText,
-          url: apiUrl
+          text: errorText
         });
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -143,7 +135,7 @@ const MerchSection = () => {
       const priceInCents = Math.round(parseFloat(productDetails.result.retail_price) * 100);
       const stripe = await stripePromise;
 
-      const checkoutResponse = await fetch(`${process.env.REACT_APP_API_URL}/create-checkout-session`, {
+      const checkoutResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/create-checkout-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
