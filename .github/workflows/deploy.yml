@@ -30,6 +30,11 @@ jobs:
           CI: false
         run: npm run build
 
+      - name: Copy Fonts
+        run: |
+          mkdir -p build/fonts
+          cp -r public/fonts/* build/fonts/
+
       - name: Setup GitHub Pages
         run: |
           touch build/.nojekyll
