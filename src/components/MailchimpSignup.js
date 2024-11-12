@@ -12,11 +12,11 @@ const MailchimpEmbedded = () => {
         target="_blank"
       >
         <h3 className="text-xl font-bold mb-4">JOIN OUR MAILING LIST</h3>
-        <div className="flex max-w-md mx-auto">
+        <div className="flex flex-col sm:flex-row max-w-md mx-auto">
           <input
             type="email"
             name="EMAIL"
-            className="flex-1 p-2 bg-gray-900 border border-gray-700 rounded-l focus:outline-none focus:border-red-500"
+            className="flex-1 p-2 bg-gray-900 border border-gray-700 rounded-lg sm:rounded-none sm:rounded-l focus:outline-none focus:border-red-500 mb-2 sm:mb-0"
             id="mce-EMAIL"
             placeholder="Enter your email"
             required
@@ -25,7 +25,7 @@ const MailchimpEmbedded = () => {
             type="submit"
             name="subscribe"
             id="mc-embedded-subscribe"
-            className="px-6 py-2 bg-red-500 hover:bg-red-600 rounded-r transition duration-300"
+            className="px-6 py-2 bg-red-500 hover:bg-red-600 rounded-lg sm:rounded-none sm:rounded-r transition duration-300"
           >
             SUBSCRIBE
           </button>
