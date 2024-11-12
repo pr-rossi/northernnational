@@ -1,12 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
   images: {
-    domains: ['files.cdn.printful.com'], // Add your image domains here
-  },
-  env: {
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-    PRINTFUL_API_KEY: process.env.PRINTFUL_API_KEY,
+    domains: ['files.cdn.printful.com'],
   },
 }
 
