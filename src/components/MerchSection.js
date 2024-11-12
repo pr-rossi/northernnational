@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 const MerchSection = () => {
+  console.log('Stripe Key exists:', !!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -62,13 +63,14 @@ const MerchSection = () => {
 
   const handleBuyNow = async (product) => {
     try {
-      // Debug logging
-      console.log('Full product object:', product);
-      
-      // Use the sync variant ID
+      // Test basic API connectivity first
+      console.log('Testing API connection...');
+      const testResponse = await fetch('/api/test');
+      console.log('Test API response:', await testResponse.text());
+
+      // Then try the sync variant endpoint
+      console.log('Attempting sync variant fetch...');
       const variantId = product.id;
-      console.log('Using variant ID:', variantId);
-      
       const apiUrl = `/api/sync-variant/${variantId}`;
       console.log('Calling API URL:', apiUrl);
 
@@ -78,7 +80,8 @@ const MerchSection = () => {
         const errorText = await response.text();
         console.error('API Response Error:', {
           status: response.status,
-          text: errorText
+          text: errorText,
+          url: apiUrl
         });
         throw new Error(`HTTP error! status: ${response.status}`);
       }
