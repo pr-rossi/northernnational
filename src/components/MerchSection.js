@@ -62,9 +62,11 @@ const MerchSection = () => {
 
   const handleBuyNow = async (product) => {
     try {
-      console.log('Product data:', product);
+      console.log('Product being passed to handleBuyNow:', product);
+      console.log('Product ID:', product.id);
+      console.log('Product sync_variant_id:', product.sync_variant_id);
 
-      const response = await fetch(`/api/printful/sync/variant/${product.id}`);
+      const response = await fetch(`/api/printful/sync/variant/${product.sync_variant_id}`);
       const productDetails = await response.json();
       
       console.log('Product details:', productDetails);
