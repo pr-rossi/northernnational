@@ -114,25 +114,26 @@ function App() {
         />
 
         <div className="z-10 text-center space-y-6 px-4">
-          <h1 
-  ref={titleRef}
-  className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-red-500 to-orange-500"
-  style={{ 
-    opacity: 1,
-    backgroundClip: 'text',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent'
-  }}
->
-  NORTHERN NATIONAL
-</h1>
-          <p 
-            ref={subtitleRef}
-            className="text-xl md:text-2xl text-gray-300"
-          >
-            Alternative Rock Band
-          </p>
-        </div>
+  <h1 
+    ref={titleRef}
+    className="text-6xl md:text-8xl font-bold"
+    style={{
+      background: 'linear-gradient(90deg, #ef4444 0%, #f97316 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      display: 'inline-block'
+    }}
+  >
+    NORTHERN NATIONAL
+  </h1>
+  <p 
+    ref={subtitleRef}
+    className="text-xl md:text-2xl text-gray-300"
+  >
+    Alternative Rock Band
+  </p>
+</div>
       </header>
 
       {/* About Section */}
