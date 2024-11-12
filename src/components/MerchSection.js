@@ -150,13 +150,65 @@ const MerchSection = () => {
     }
   };
 
-  const handleAddToCart = (product) => {
-    console.log('Adding product to cart:', product);
-    if (product.sync_variants?.[0]?.retail_price) {
-      addToCart(product);
+  const handleAddToCart = async (product) => {
+    console.log('Initial product:', product);
+    
+    try {
+      // Log the API URL we're calling
+      const apiUrl = `/api/product-details?id=${product.id}`;
+      console.log('Fetching product details from:', apiUrl);
+      
+      const response = await fetch(apiUrl);
+      const responseStatus = response.status;
+      console.log('API Response status:', responseStatus);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Product details API Error:', {
+          status: responseStatus,
+          statusText: response.statusText,
+          url: response.url,
+          responseText: errorText
+        });
+        throw new Error(`Failed to fetch product details: ${responseStatus}`);
+      }
+      
+      const productDetails = await response.json();
+      console.log('Product details response:', productDetails);
+
+      // Verify the response structure
+      if (!productDetails.result?.sync_variants?.[0]) {
+        console.error('Invalid product details structure:', productDetails);
+        throw new Error('Invalid product details structure');
+      }
+
+      // Get the first variant's price
+      const variant = productDetails.result.sync_variants[0];
+      console.log('Variant details:', variant);
+
+      if (!variant.retail_price) {
+        console.error('Missing retail price in variant:', variant);
+        throw new Error('Product price not available');
+      }
+
+      // Create enriched product object
+      const enrichedProduct = {
+        ...product,
+        sync_variants: [{
+          retail_price: variant.retail_price,
+          name: variant.name,
+          files: variant.files,
+          id: variant.id
+        }]
+      };
+
+      console.log('Enriched product to add to cart:', enrichedProduct);
+      addToCart(enrichedProduct);
       setIsCartOpen(true);
-    } else {
-      console.error('Product missing price information:', product);
+    } catch (error) {
+      console.error('Error preparing product for cart:', error);
+      // You might want to show an error message to the user here
+      alert('Failed to add product to cart. Please try again.');
     }
   };
 
