@@ -19,7 +19,9 @@ export function CartProvider({ children }) {
 
   const getCartTotal = () => {
     return cartItems.reduce((total, item) => {
-      return total + parseFloat(item.sync_variants[0].retail_price);
+      const price = item.sync_variants?.[0]?.retail_price;
+      if (!price) return total;
+      return total + parseFloat(price);
     }, 0).toFixed(2);
   };
 
