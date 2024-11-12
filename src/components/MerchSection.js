@@ -5,12 +5,33 @@ import { loadStripe } from '@stripe/stripe-js';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Add validation for the Stripe key
+// Debug environment variables
+if (typeof window !== 'undefined') {  // Client-side check
+  console.log('Running on client side');
+  console.log('Environment:', {
+    nodeEnv: process.env.NODE_ENV,
+    hasStripeKey: !!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+    stripeKeyPrefix: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY?.substring(0, 6)
+  });
+}
+
+// Ensure we're using the correct variable name and it's loaded
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
 if (!stripeKey) {
-  console.error('Stripe publishable key is missing');
+  console.error('⚠️ Stripe key missing. Please check:');
+  console.error('1. Key name is exactly NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY');
+  console.error('2. Key is set in Vercel environment variables');
+  console.error('3. Key is enabled for the current environment');
 }
-const stripePromise = stripeKey ? loadStripe(stripeKey) : null;
+
+// Initialize Stripe with additional error handling
+let stripePromise;
+try {
+  stripePromise = stripeKey ? loadStripe(stripeKey) : null;
+  console.log('Stripe initialization:', stripePromise ? 'successful' : 'failed');
+} catch (error) {
+  console.error('Stripe initialization error:', error);
+}
 
 const MerchSection = () => {
   console.log('Stripe Key exists:', !!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
