@@ -43,7 +43,23 @@ const MerchSection = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/products`);
+        const apiUrl = `${process.env.REACT_APP_API_URL}/products`;
+        console.log('Fetching products from:', apiUrl);
+        
+        const response = await fetch(apiUrl);
+        
+        // Add response debugging
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('API Error:', {
+            status: response.status,
+            statusText: response.statusText,
+            url: response.url,
+            responseText: errorText
+          });
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
         
         // Detailed debug logging
@@ -61,6 +77,7 @@ const MerchSection = () => {
         }
       } catch (err) {
         console.error('Error fetching products:', err);
+        console.error('Error details:', err.message);
         setError('Failed to load products');
       } finally {
         setLoading(false);
