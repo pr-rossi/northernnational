@@ -51,31 +51,41 @@ const MerchSection = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('/api/products');
-        const data = await response.json();
-        
-        // Detailed debug logging
-        console.log('Raw API Response:', data);
-        if (data.result) {
-          console.log('First product example:', data.result[0]);
-          console.log('First product variants:', data.result[0]?.variants);
+        const response = await fetch('/api/products', {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        return null;
+      }
+    };
+
+    fetchProducts()
+      .then((data) => {
         if (data && data.result && Array.isArray(data.result)) {
           setProducts(data.result);
         } else {
           console.error('Invalid data structure:', data);
           throw new Error('Invalid data structure');
         }
-      } catch (err) {
+      })
+      .catch((err) => {
         console.error('Error fetching products:', err);
         setError('Failed to load products');
-      } finally {
+      })
+      .finally(() => {
         setLoading(false);
-      }
-    };
-
-    fetchProducts();
+      });
   }, []);
 
   useEffect(() => {
