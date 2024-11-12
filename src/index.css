@@ -30,3 +30,9 @@
 .animate-fade-in {
   animation: fadeIn 1.5s ease-out forwards;
 }
+
+/* Water effect */
+.water-effect {
+  filter: url('#turbulence');
+  transform: translateZ(0);
+}
