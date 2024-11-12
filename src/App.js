@@ -58,12 +58,12 @@ function App() {
     {
       title: "NEW SINGLE",
       description: "Stream our latest single now on all major platforms",
-      url: "https://open.spotify.com/artist/your-artist-id" // Replace with your actual Spotify URL
+      url: "https://open.spotify.com/artist/your-artist-id"
     },
     {
       title: "UPCOMING ALBUM",
       description: "New album dropping soon. Stay tuned!",
-      url: "https://music.apple.com/your-album-link" // Replace with your actual Apple Music URL
+      url: "https://music.apple.com/your-album-link"
     }
   ];
 
@@ -75,18 +75,6 @@ function App() {
     //   venue: "The Bomb Factory - Dallas, TX",
     //   venueUrl: "https://thebombfactory.com",
     //   ticketUrl: "https://tickets.thebombfactory.com/event/your-event"
-    // },
-    // {
-    //   date: "DEC 18",
-    //   venue: "House of Blues - Houston, TX",
-    //   venueUrl: "https://www.houseofblues.com/houston",
-    //   ticketUrl: "https://www.houseofblues.com/houston/event/your-event"
-    // },
-    // {
-    //   date: "DEC 20",
-    //   venue: "Stubb's - Austin, TX",
-    //   venueUrl: "https://www.stubbsaustin.com",
-    //   ticketUrl: "https://www.stubbsaustin.com/event/your-event"
     // }
   ];
 
@@ -94,38 +82,38 @@ function App() {
     <div className="min-h-screen bg-gray-900 text-gray-100">
       {/* Hero Section */}
       <header className="h-screen flex items-center justify-center relative overflow-hidden">
-  {/* Liquid effect overlay */}
-  <div className="absolute inset-0 water-effect">
-    <div 
-      className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
-      style={{
-        backgroundImage: `url('/images/the-boys-show.jpeg')`
-      }}
-    />
-  </div>
+        <div className="ripple-background absolute inset-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('/images/the-boys-show.jpeg')`
+            }}
+          />
+        </div>
 
-  {/* Gradient overlay */}
-  <div 
-    className="absolute inset-0"
-    style={{
-      backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))',
-      zIndex: 1
-    }}
-  />
+        {/* Gradient overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))',
+            zIndex: 1
+          }}
+        />
+
         <div className="z-10 text-center space-y-6 px-4">
-  <h1 
-    ref={titleRef}
-    className="text-6xl md:text-8xl font-bold text-white"
-  >
-    NORTHERN NATIONAL
-  </h1>
-  <p 
-    ref={subtitleRef}
-    className="text-xl md:text-2xl text-gray-300"
-  >
-    Alternative Rock Band
-  </p>
-</div>
+          <h1 
+            ref={titleRef}
+            className="text-6xl md:text-8xl font-bold text-white"
+          >
+            NORTHERN NATIONAL
+          </h1>
+          <p 
+            ref={subtitleRef}
+            className="text-xl md:text-2xl text-gray-300"
+          >
+            Alternative Rock Band
+          </p>
+        </div>
       </header>
 
       {/* About Section */}
