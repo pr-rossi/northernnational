@@ -133,7 +133,8 @@ const MerchSection = () => {
       const productDetails = await response.json();
       console.log('Success - Product Details:', productDetails);
 
-      const variant = productDetails.result.variant_details;
+      // Get the first variant's retail price
+      const variant = productDetails.result.sync_variants[0];
       if (!variant?.retail_price) {
         throw new Error('Product price not available');
       }
@@ -152,7 +153,7 @@ const MerchSection = () => {
               currency: 'usd',
               product_data: {
                 name: variant.name || productDetails.result.name,
-                images: [variant.files[0]?.preview_url || productDetails.result.thumbnail_url],
+                images: [variant.files?.[0]?.preview_url || productDetails.result.thumbnail_url],
               },
               unit_amount: priceInCents,
             },

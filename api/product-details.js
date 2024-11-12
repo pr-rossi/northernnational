@@ -28,8 +28,8 @@ export default async function handler(req, res) {
 
     console.log('Processing request for product ID:', id);
 
-    // First get the sync product details - add store_id
-    const productUrl = `https://api.printful.com/sync/products/${id}?store_id=${process.env.PRINTFUL_STORE_ID}`;
+    // Get the sync product details
+    const productUrl = `https://api.printful.com/store/products/${id}?store_id=${process.env.PRINTFUL_STORE_ID}`;
     console.log('Fetching product details from:', productUrl);
 
     const productResponse = await fetch(productUrl, {
@@ -54,18 +54,15 @@ export default async function handler(req, res) {
     const productData = JSON.parse(productResponseText);
     console.log('Parsed product data:', productData);
 
-    if (!productData.result?.sync_variants?.length) {
-      throw new Error('No variants found for product');
+    if (!productData.result) {
+      throw new Error('Invalid product data received');
     }
 
-    // Then get the variant details - add store_id
-    const variantId = productData.result.sync_variants[0].id;
-    console.log('Found variant ID:', variantId);
+    // Get the sync variant details using the sync_product endpoint
+    const syncProductUrl = `https://api.printful.com/store/products/${id}/sync_variants?store_id=${process.env.PRINTFUL_STORE_ID}`;
+    console.log('Fetching sync variants from:', syncProductUrl);
 
-    const variantUrl = `https://api.printful.com/sync/variants/${variantId}?store_id=${process.env.PRINTFUL_STORE_ID}`;
-    console.log('Fetching variant details from:', variantUrl);
-
-    const variantResponse = await fetch(variantUrl, {
+    const variantResponse = await fetch(syncProductUrl, {
       headers: {
         'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
         'Content-Type': 'application/json'
@@ -79,7 +76,7 @@ export default async function handler(req, res) {
       console.error('Printful Variant API Error:', {
         status: variantResponse.status,
         text: variantResponseText,
-        url: variantUrl
+        url: syncProductUrl
       });
       throw new Error(`Printful API error: ${variantResponse.status} - ${variantResponseText}`);
     }
@@ -91,7 +88,7 @@ export default async function handler(req, res) {
     const combinedData = {
       result: {
         ...productData.result,
-        variant_details: variantData.result
+        sync_variants: variantData.result
       }
     };
 
