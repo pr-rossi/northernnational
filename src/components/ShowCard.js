@@ -1,8 +1,14 @@
 import React from 'react';
+import { useInView } from '../hooks/useInView';
 
 const ShowCard = ({ date, venue, venueUrl, ticketUrl }) => {
+  const cardRef = useInView();
+
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center p-4 bg-black rounded-lg shadow-lg space-y-4 md:space-y-0 border border-zinc-900">
+    <div 
+      ref={cardRef}
+      className="flex flex-col md:flex-row justify-between items-center p-4 bg-black rounded-lg shadow-lg space-y-4 md:space-y-0 border border-zinc-900"
+    >
       <span className="text-xl font-bold text-[#D4FF99]">{date}</span>
       <a 
         href={venueUrl}
