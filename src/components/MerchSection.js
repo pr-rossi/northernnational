@@ -144,6 +144,8 @@ const MerchSection = () => {
       const priceInCents = Math.round(parseFloat(variant.retail_price) * 100);
       const stripe = await stripePromise;
 
+      console.log('Creating checkout session with price:', priceInCents);
+
       const checkoutResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/create-checkout-session`, {
         method: 'POST',
         headers: {
@@ -164,16 +166,28 @@ const MerchSection = () => {
         }),
       });
 
+      if (!checkoutResponse.ok) {
+        const errorText = await checkoutResponse.text();
+        console.error('Checkout Error:', {
+          status: checkoutResponse.status,
+          text: errorText
+        });
+        throw new Error('Failed to create checkout session');
+      }
+
       const { id } = await checkoutResponse.json();
       
       if (!id) throw new Error('Failed to create checkout session');
+
+      console.log('Redirecting to checkout with session ID:', id);
 
       const result = await stripe.redirectToCheckout({
         sessionId: id
       });
 
       if (result.error) {
-        console.error(result.error);
+        console.error('Stripe redirect error:', result.error);
+        throw new Error(result.error.message);
       }
     } catch (error) {
       console.error('Error in handleBuyNow:', error);
