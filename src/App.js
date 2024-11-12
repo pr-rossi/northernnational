@@ -10,28 +10,41 @@ function App() {
   const subtitleRef = useRef(null);
 
   useEffect(() => {
-    // GSAP Text Animation
-    const words = titleRef.current.innerText.split('');
-    titleRef.current.innerHTML = words
-      .map(letter => `<span class="inline-block">${letter}</span>`)
-      .join('');
+    // Split text into spans for animation
+    if (titleRef.current) {
+      const text = titleRef.current.innerText;
+      const characters = text.split('');
+      
+      titleRef.current.innerHTML = characters
+        .map(char => char === ' ' 
+          ? '<span class="inline-block">&nbsp;</span>' 
+          : `<span class="inline-block opacity-0">${char}</span>`
+        )
+        .join('');
 
-    gsap.from(titleRef.current.children, {
-      y: 100,
-      opacity: 0,
-      duration: 0.7,
-      stagger: 0.04,
-      ease: "power4.out",
-      delay: 0.5
-    });
+      // GSAP Animation
+      const chars = titleRef.current.querySelectorAll('span');
+      gsap.to(chars, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.04,
+        ease: "power4.out",
+        delay: 0.5,
+        from: { opacity: 0, y: 100 }
+      });
+    }
 
-    gsap.from(subtitleRef.current, {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      ease: "power4.out",
-      delay: 1.2
-    });
+    // Subtitle animation
+    if (subtitleRef.current) {
+      gsap.from(subtitleRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out",
+        delay: 1.2
+      });
+    }
   }, []);
 
   // Data for releases with URLs
@@ -56,6 +69,18 @@ function App() {
     //   venue: "The Bomb Factory - Dallas, TX",
     //   venueUrl: "https://thebombfactory.com",
     //   ticketUrl: "https://tickets.thebombfactory.com/event/your-event"
+    // },
+    // {
+    //   date: "DEC 18",
+    //   venue: "House of Blues - Houston, TX",
+    //   venueUrl: "https://www.houseofblues.com/houston",
+    //   ticketUrl: "https://www.houseofblues.com/houston/event/your-event"
+    // },
+    // {
+    //   date: "DEC 20",
+    //   venue: "Stubb's - Austin, TX",
+    //   venueUrl: "https://www.stubbsaustin.com",
+    //   ticketUrl: "https://www.stubbsaustin.com/event/your-event"
     // }
   ];
 
@@ -84,7 +109,8 @@ function App() {
         <div className="z-10 text-center space-y-6 px-4">
           <h1 
             ref={titleRef}
-            className="text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500"
+            className="text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500"
+            style={{ opacity: 1 }}
           >
             NORTHERN NATIONAL
           </h1>
