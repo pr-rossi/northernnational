@@ -36,3 +36,9 @@
   filter: url('#turbulence');
   transform: translateZ(0);
 }
+
+/* Optional: Smooth font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
