@@ -29,6 +29,19 @@ function CheckoutForm({ clientSecret, onSuccess, onCancel }) {
       elements,
       confirmParams: {
         return_url: `${window.location.origin}/success`,
+        payment_method_data: {
+          shipping: {
+            name: 'shipping',
+            address: {
+              line1: '',
+              line2: '',
+              city: '',
+              state: '',
+              postal_code: '',
+              country: 'US'
+            }
+          }
+        }
       },
       redirect: 'if_required',
     });
@@ -44,6 +57,11 @@ function CheckoutForm({ clientSecret, onSuccess, onCancel }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <PaymentElement />
+      <div className="space-y-4">
+        <div className="text-sm text-zinc-400">
+          Shipping information will be collected during payment
+        </div>
+      </div>
       {error && (
         <div className="text-red-500 text-sm">{error}</div>
       )}

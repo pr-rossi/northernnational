@@ -24,7 +24,7 @@ export default async function handler(req, res) {
       throw new Error('Invalid price data');
     }
 
-    // Create payment intent with shipping required
+    // Create payment intent with shipping
     const paymentIntent = await stripe.paymentIntents.create({
       amount: items[0].price_data.unit_amount,
       currency: 'usd',
@@ -37,10 +37,15 @@ export default async function handler(req, res) {
         customer_email: email || ''
       },
       shipping: {
+        name: 'shipping',
         address: {
-          collection_mode: 'required',
-        },
-        name: { required: true },
+          line1: null,
+          line2: null,
+          city: null,
+          state: null,
+          postal_code: null,
+          country: null
+        }
       }
     });
 
