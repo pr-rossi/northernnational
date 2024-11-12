@@ -109,13 +109,41 @@ const MerchSection = () => {
     }
   }, [products]);
 
-  const handleBuyNow = (product) => {
+  const handleBuyNow = async (product) => {
     console.log('Selected product:', product);
-    if (!product.sync_variants?.[0]?.retail_price) {
-      console.error('Invalid product data:', product);
-      return;
+    
+    try {
+      // Fetch detailed product info first
+      const response = await fetch(`/api/product-details?id=${product.id}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch product details');
+      }
+      
+      const productDetails = await response.json();
+      console.log('Product details:', productDetails);
+
+      // Get the first variant's price
+      const variant = productDetails.result.sync_variants[0];
+      if (!variant?.retail_price) {
+        throw new Error('Product price not available');
+      }
+
+      // Create enriched product object
+      const enrichedProduct = {
+        ...product,
+        sync_variants: [{
+          retail_price: variant.retail_price,
+          name: variant.name,
+          files: variant.files
+        }]
+      };
+
+      console.log('Enriched product:', enrichedProduct);
+      setSelectedProduct(enrichedProduct);
+    } catch (error) {
+      console.error('Error preparing product for checkout:', error);
+      // You might want to show an error message to the user here
     }
-    setSelectedProduct(product);
   };
 
   if (loading) {

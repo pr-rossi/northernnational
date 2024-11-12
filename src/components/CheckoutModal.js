@@ -71,10 +71,12 @@ function CheckoutForm({ clientSecret, onSuccess, onCancel }) {
 // Modal Component
 export default function CheckoutModal({ isOpen, onClose, product }) {
   const [clientSecret, setClientSecret] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (isOpen && product && product.sync_variants?.[0]?.retail_price) {
-      // Create payment intent when modal opens
+      console.log('Creating payment intent for:', product);
+      
       fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -96,21 +98,19 @@ export default function CheckoutModal({ isOpen, onClose, product }) {
         .then((data) => {
           if (data.error) {
             console.error('Payment Intent Error:', data.error);
+            setError(data.error.message || 'Failed to create payment intent');
           } else {
             setClientSecret(data.clientSecret);
           }
         })
-        .catch((error) => console.error('Fetch Error:', error));
+        .catch((error) => {
+          console.error('Fetch Error:', error);
+          setError('Failed to initialize payment');
+        });
     }
   }, [isOpen, product]);
 
-  const handleSuccess = (paymentIntent) => {
-    onClose();
-    // Navigate to success page or show success message
-    window.location.href = '/success';
-  };
-
-  if (!isOpen || !product || !clientSecret) return null;
+  if (!isOpen || !product) return null;
 
   // Safely access product price
   const price = product.sync_variants?.[0]?.retail_price 
@@ -127,13 +127,29 @@ export default function CheckoutModal({ isOpen, onClose, product }) {
             <span>${price}</span>
           </div>
         </div>
-        <Elements stripe={stripePromise} options={{ clientSecret }}>
-          <CheckoutForm 
-            clientSecret={clientSecret}
-            onSuccess={handleSuccess}
-            onCancel={onClose}
-          />
-        </Elements>
+        {error ? (
+          <div className="text-red-500 text-center py-4">
+            {error}
+            <button 
+              onClick={onClose}
+              className="block w-full mt-4 px-4 py-2 bg-zinc-800 text-white rounded hover:bg-zinc-700"
+            >
+              Close
+            </button>
+          </div>
+        ) : clientSecret ? (
+          <Elements stripe={stripePromise} options={{ clientSecret }}>
+            <CheckoutForm 
+              clientSecret={clientSecret}
+              onSuccess={handleSuccess}
+              onCancel={onClose}
+            />
+          </Elements>
+        ) : (
+          <div className="flex justify-center py-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#D4FF99]"></div>
+          </div>
+        )}
       </div>
     </div>
   );
