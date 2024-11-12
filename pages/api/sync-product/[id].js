@@ -1,4 +1,4 @@
-import { syncProduct } from '../../../utils/printful';
+import { printfulApi } from '../../../utils/printful';
 
 export default async function handler(req, res) {
   const { id } = req.query;
@@ -8,14 +8,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const product = await syncProduct(id);
-    
-    res.status(200).json({
-      code: product.code,
-      result: product.result
-    });
+    // Using the Sync Products API endpoint
+    const response = await printfulApi.get(`/sync/products/${id}`);
+    res.status(200).json(response.data);
   } catch (error) {
-    console.error('Error syncing product:', error);
-    res.status(500).json({ error: 'Failed to sync product' });
+    console.error('Error fetching sync product:', error);
+    res.status(500).json({ error: 'Failed to fetch sync product details' });
   }
 }
