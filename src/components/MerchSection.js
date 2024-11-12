@@ -154,33 +154,32 @@ const MerchSection = () => {
     console.log('Initial product:', product);
     
     try {
-      // Log the API URL we're calling
       const apiUrl = `${process.env.REACT_APP_API_URL}/api/product-details?id=${product.id}`;
       console.log('Fetching product details from:', apiUrl);
       
       const response = await fetch(apiUrl);
       console.log('Response status:', response.status);
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('API Error:', {
-          status: response.status,
-          statusText: response.statusText,
-          url: response.url,
-          responseText: errorText
-        });
-        throw new Error('Failed to fetch product details');
-      }
-      
-      const productDetails = await response.json();
-      console.log('Product details:', productDetails);
+      const responseData = await response.json();
+      console.log('Response data:', responseData);
 
-      if (!productDetails.result?.sync_variants?.[0]) {
+      if (!response.ok) {
+        throw new Error(responseData.details || 'Failed to fetch product details');
+      }
+
+      if (!responseData.result?.sync_variants?.[0]) {
+        console.error('Invalid product details structure:', responseData);
         throw new Error('Invalid product details structure');
       }
 
-      const variant = productDetails.result.sync_variants[0];
+      const variant = responseData.result.sync_variants[0];
+      console.log('Variant data:', variant);
       
+      if (!variant.retail_price) {
+        console.error('Missing retail price in variant:', variant);
+        throw new Error('Product price not available');
+      }
+
       const enrichedProduct = {
         ...product,
         sync_variants: [{
@@ -196,7 +195,7 @@ const MerchSection = () => {
       setIsCartOpen(true);
     } catch (error) {
       console.error('Error adding to cart:', error);
-      alert('Failed to add product to cart. Please try again.');
+      alert(error.message || 'Failed to add product to cart. Please try again.');
     }
   };
 

@@ -17,25 +17,36 @@ export default async function handler(req, res) {
   }
 
   const { id } = req.query;
+  console.log('Received request for product ID:', id);
 
   if (!id) {
+    console.log('Missing product ID in request');
     return res.status(400).json({ error: 'Product ID is required' });
   }
 
-  try {
-    console.log('Fetching Printful product:', id);
-    console.log('Using API key:', process.env.PRINTFUL_API_KEY?.substring(0, 5) + '...');
+  if (!process.env.PRINTFUL_API_KEY || !process.env.PRINTFUL_STORE_ID) {
+    console.error('Missing required environment variables:', {
+      hasApiKey: !!process.env.PRINTFUL_API_KEY,
+      hasStoreId: !!process.env.PRINTFUL_STORE_ID
+    });
+    return res.status(500).json({ error: 'Missing required configuration' });
+  }
 
-    const printfulResponse = await fetch(
-      `https://api.printful.com/store/products/${id}`,
-      {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+  try {
+    const apiUrl = `https://api.printful.com/sync/products/${id}?store_id=${process.env.PRINTFUL_STORE_ID}`;
+    console.log('Fetching from Printful:', apiUrl);
+
+    const headers = {
+      'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+      'Content-Type': 'application/json',
+    };
+
+    const printfulResponse = await fetch(apiUrl, {
+      method: 'GET',
+      headers: headers,
+    });
+
+    console.log('Printful response status:', printfulResponse.status);
 
     if (!printfulResponse.ok) {
       const errorText = await printfulResponse.text();
@@ -52,15 +63,17 @@ export default async function handler(req, res) {
     }
 
     const data = await printfulResponse.json();
-    console.log('Printful response:', data);
+    console.log('Printful response data:', {
+      result: data.result ? 'present' : 'missing',
+      sync_variants: data.result?.sync_variants ? 'present' : 'missing'
+    });
 
     return res.status(200).json(data);
   } catch (error) {
     console.error('Server error:', error);
     return res.status(500).json({
       error: 'Internal server error',
-      message: error.message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      message: error.message
     });
   }
 } 
