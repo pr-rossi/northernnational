@@ -16,9 +16,13 @@ const MerchSection = () => {
         const response = await fetch('/api/products');
         const data = await response.json();
         
-        if (data.result) {
+        // Debug log to see the data structure
+        console.log('API Response:', data);
+
+        if (data && data.result && Array.isArray(data.result)) {
           setProducts(data.result);
         } else {
+          console.error('Invalid data structure:', data);
           throw new Error('Invalid data structure');
         }
       } catch (err) {
@@ -69,6 +73,17 @@ const MerchSection = () => {
     );
   }
 
+  // Add a check for products array
+  if (!Array.isArray(products)) {
+    return (
+      <section className="py-20 px-6 bg-black">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-red-500">No products available</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section ref={sectionRef} className="py-20 px-6 bg-black">
       <div className="max-w-4xl mx-auto">
@@ -91,16 +106,14 @@ const MerchSection = () => {
                 {product.retail_price && (
                   <p className="text-[#D4FF99] mb-4">${product.retail_price.toFixed(2)}</p>
                 )}
-                {product.sync_variants && product.sync_variants[0] && (
-                  <a 
-                    href={`https://[your-store-name].printful.com/product/${product.id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block w-full text-center px-6 py-2 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-medium rounded transition duration-300"
-                  >
-                    BUY NOW
-                  </a>
-                )}
+                <a 
+                  href={product.direct_checkout_url || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block w-full text-center px-6 py-2 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-medium rounded transition duration-300"
+                >
+                  BUY NOW
+                </a>
               </div>
             </div>
           ))}
