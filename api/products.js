@@ -27,10 +27,10 @@ export default async function handler(req, res) {
     const printfulUrl = 'https://api.printful.com/store/products';
     console.log('Calling Printful API:', printfulUrl);
 
-    // Update the Authorization header format
+    // Update the Authorization header format to include 'Bearer '
     const response = await fetch(printfulUrl, {
       headers: {
-        'Authorization': process.env.PRINTFUL_API_KEY, // Remove 'Bearer ' prefix
+        'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
         'Content-Type': 'application/json'
       }
     });
