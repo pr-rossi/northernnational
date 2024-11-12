@@ -2,43 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Add after your Tailwind imports */
-@keyframes fadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.animate-fade-up {
-  animation: fadeUp 1s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fadeIn 1.5s ease-out forwards;
-}
-
-/* Water effect */
 .water-effect {
   filter: url('#turbulence');
+  will-change: transform;
   transform: translateZ(0);
 }
 
-/* Optional: Smooth font rendering */
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.water-effect > div {
+  will-change: transform;
+  backface-visibility: hidden;
 }
