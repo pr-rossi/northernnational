@@ -14,25 +14,31 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    <!-- Smoother Water Effect Filter -->
+    <!-- Water Effect Filter -->
     <svg style="position: absolute; width: 0; height: 0;">
-  <filter id="turbulence" x="0" y="0" width="100%" height="100%">
-    <feTurbulence 
-      type="turbulence" 
-      baseFrequency="0.002 0.003"
-      numOctaves="2" 
-      seed="2" 
-      stitchTiles="stitch"
-    >
-      <animate 
-        attributeName="baseFrequency"
-        dur="20s"
-        values="0.002 0.003;0.002 0.002;0.002 0.003"
-        repeatCount="indefinite"
-      />
-    </feTurbulence>
-    <feDisplacementMap in="SourceGraphic" scale="8" />
-  </filter>
-</svg>
+      <defs>
+        <filter id="turbulence" x="-50%" y="-50%" width="200%" height="200%">
+          <feTurbulence 
+            type="turbulence" 
+            baseFrequency="0.005 0.003"
+            numOctaves="3" 
+            seed="1" 
+            stitchTiles="stitch"
+          >
+            <animate 
+              attributeName="baseFrequency"
+              dur="30s"
+              keyTimes="0;0.5;1"
+              values="0.005 0.003;0.005 0.004;0.005 0.003"
+              repeatCount="indefinite"
+            />
+          </feTurbulence>
+          <feDisplacementMap 
+            in="SourceGraphic" 
+            scale="10"
+          />
+        </filter>
+      </defs>
+    </svg>
   </body>
 </html>
