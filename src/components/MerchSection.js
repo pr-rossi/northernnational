@@ -64,7 +64,7 @@ const MerchSection = () => {
     try {
       console.log('Product data:', product);
 
-      const response = await fetch(`/api/printful/sync/variant/${product.id}`);
+      const response = await fetch(`/api/printful/sync/variant/${product.external_id}`);
       if (!response.ok) {
         throw new Error(`API responded with status ${response.status}`);
       }

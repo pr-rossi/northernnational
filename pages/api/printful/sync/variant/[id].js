@@ -8,13 +8,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(`https://api.printful.com/sync/variant/${id}`, {
+    const response = await fetch(`https://api.printful.com/store/products/${id}`, {
       headers: {
         'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`
       }
     });
 
     if (!response.ok) {
+      console.error('Printful API error:', await response.text());
       throw new Error(`Printful API responded with status ${response.status}`);
     }
 
@@ -22,6 +23,6 @@ export default async function handler(req, res) {
     res.status(200).json(data);
   } catch (error) {
     console.error('Error fetching from Printful:', error);
-    res.status(500).json({ error: 'Failed to fetch variant details' });
+    res.status(500).json({ error: 'Failed to fetch product details' });
   }
 }
