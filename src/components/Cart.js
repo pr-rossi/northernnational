@@ -25,7 +25,7 @@ export default function Cart({ isOpen, onClose }) {
       // Set new timer for 5 seconds
       timerRef.current = setTimeout(() => {
         onClose();
-      }, 5000);
+      }, 3000);
 
       // Add click outside handler
       function handleClickOutside(event) {
