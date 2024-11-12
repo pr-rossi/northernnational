@@ -116,14 +116,7 @@ function App() {
         <div className="z-10 text-center space-y-6 px-4">
   <h1 
     ref={titleRef}
-    className="text-6xl md:text-8xl font-bold"
-    style={{
-      background: 'linear-gradient(90deg, #ef4444 0%, #f97316 100%)',
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-      backgroundClip: 'text',
-      display: 'inline-block'
-    }}
+    className="text-6xl md:text-8xl font-bold text-white"
   >
     NORTHERN NATIONAL
   </h1>
