@@ -69,7 +69,6 @@ function App() {
 
   // Data for shows with venue and ticket URLs
   const shows = [
-    // Uncomment and modify these to show tour dates
     // {
     //   date: "DEC 15",
     //   venue: "The Bomb Factory - Dallas, TX",
@@ -79,12 +78,12 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
+    <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
       <header className="h-screen flex items-center justify-center relative overflow-hidden">
         <div className="ripple-background absolute inset-0">
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat brightness-75"
             style={{
               backgroundImage: `url('/images/the-boys-show.jpeg')`
             }}
@@ -95,7 +94,7 @@ function App() {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))',
+            backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9))',
             zIndex: 1
           }}
         />
@@ -109,7 +108,7 @@ function App() {
           </h1>
           <p 
             ref={subtitleRef}
-            className="text-xl md:text-2xl text-gray-300"
+            className="text-xl md:text-2xl text-[#D4FF99]"
           >
             Alternative Rock Band
           </p>
@@ -117,9 +116,9 @@ function App() {
       </header>
 
       {/* About Section */}
-      <section className="py-20 px-6 bg-gray-800">
+      <section className="py-20 px-6 bg-zinc-950">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-red-500">ABOUT THE BAND</h2>
+          <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">ABOUT THE BAND</h2>
           <p className="text-lg text-gray-300 leading-relaxed">
             Northern National brings raw energy and authentic storytelling to the alternative rock scene. 
             With powerful vocals, driving guitars, and dynamic performances, we create an unforgettable 
@@ -129,9 +128,9 @@ function App() {
       </section>
 
       {/* Music Section */}
-      <section className="py-20 px-6 bg-gray-900">
+      <section className="py-20 px-6 bg-black">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-red-500">LATEST RELEASES</h2>
+          <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">LATEST RELEASES</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {releases.map((release, index) => (
               <ReleaseCard 
@@ -146,9 +145,9 @@ function App() {
       </section>
 
       {/* Tour Section */}
-      <section className="py-20 px-6 bg-gray-800">
+      <section className="py-20 px-6 bg-zinc-950">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-red-500">TOUR DATES</h2>
+          <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">TOUR DATES</h2>
           <div className="space-y-4">
             {shows.length > 0 ? (
               shows.map((show, index) => (
@@ -168,15 +167,15 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="mailing-list" className="py-20 px-6 bg-gray-900">
+      <section id="mailing-list" className="py-20 px-6 bg-black">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8 text-red-500">CONNECT WITH US</h2>
+          <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">CONNECT WITH US</h2>
           <div className="flex justify-center space-x-8 mb-12">
             <a 
               href="https://instagram.com/northernnational" 
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-red-500 transition duration-300"
+              className="text-white hover:text-[#D4FF99] transition duration-300"
             >
               <Instagram className="w-8 h-8" />
             </a>
@@ -184,18 +183,18 @@ function App() {
               href="https://twitter.com/northernnational" 
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-red-500 transition duration-300"
+              className="text-white hover:text-[#D4FF99] transition duration-300"
             >
               <Twitter className="w-8 h-8" />
             </a>
             <a 
               href="mailto:contact@northernnational.com"
-              className="text-gray-400 hover:text-red-500 transition duration-300"
+              className="text-white hover:text-[#D4FF99] transition duration-300"
             >
               <Mail className="w-8 h-8" />
             </a>
           </div>
-          <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
+          <div className="bg-zinc-950 p-8 rounded-lg shadow-lg">
             <form
               action="https://northernnationalmusic.us17.list-manage.com/subscribe/post?u=22d3f967aaa29a31ccd2275a1&amp;id=7e228c82dc&amp;f_id=0048c2e1f0"
               method="post"
@@ -209,7 +208,7 @@ function App() {
                 <input
                   type="email"
                   name="EMAIL"
-                  className="flex-1 p-2 bg-gray-900 border border-gray-700 rounded-l focus:outline-none focus:border-red-500"
+                  className="flex-1 p-2 bg-black border border-zinc-800 rounded-l focus:outline-none focus:border-[#D4FF99]"
                   id="mce-EMAIL"
                   placeholder="Enter your email"
                   required
@@ -218,7 +217,7 @@ function App() {
                   type="submit"
                   name="subscribe"
                   id="mc-embedded-subscribe"
-                  className="px-6 py-2 bg-red-500 hover:bg-red-600 rounded-r transition duration-300"
+                  className="px-6 py-2 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-medium rounded-r transition duration-300"
                 >
                   SUBSCRIBE
                 </button>
@@ -233,7 +232,7 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 bg-gray-800 text-center">
+      <footer className="py-8 px-6 bg-zinc-950 text-center">
         <p className="text-gray-400">© 2024 Northern National. All rights reserved.</p>
       </footer>
     </div>
