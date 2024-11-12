@@ -27,9 +27,10 @@ export default async function handler(req, res) {
     const printfulUrl = 'https://api.printful.com/store/products';
     console.log('Calling Printful API:', printfulUrl);
 
+    // Update the Authorization header format
     const response = await fetch(printfulUrl, {
       headers: {
-        'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+        'Authorization': process.env.PRINTFUL_API_KEY, // Remove 'Bearer ' prefix
         'Content-Type': 'application/json'
       }
     });
@@ -41,7 +42,7 @@ export default async function handler(req, res) {
         text: errorText,
         url: printfulUrl
       });
-      throw new Error(`Printful API error: ${response.status}`);
+      throw new Error(`Printful API error: ${response.status} - ${errorText}`);
     }
 
     const data = await response.json();
@@ -51,12 +52,16 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Server Error:', {
       message: error.message,
-      stack: error.stack
+      stack: error.stack,
+      name: error.name,
+      code: error.code
     });
     res.status(500).json({ 
       error: 'Failed to fetch products',
       details: error.message,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      type: error.name,
+      code: error.code
     });
   }
 } 
