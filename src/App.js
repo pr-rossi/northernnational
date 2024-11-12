@@ -140,20 +140,21 @@ function App() {
 
       {/* Music Section */}
       <section className="py-20 px-6 bg-black">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">LATEST RELEASES</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {releases.map((release, index) => (
-              <ReleaseCard 
-                key={index}
-                title={release.title}
-                description={release.description}
-                url={release.url}
-              />
-            ))}
-          </div>
+  <div className="max-w-4xl mx-auto">
+    <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">LATEST RELEASES</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {releases.map((release, index) => (
+        <div key={index} style={{ opacity: 0 }}> {/* Add wrapper with initial opacity */}
+          <ReleaseCard 
+            title={release.title}
+            description={release.description}
+            url={release.url}
+          />
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Tour Section */}
       <section className="py-20 px-6 bg-zinc-950">
