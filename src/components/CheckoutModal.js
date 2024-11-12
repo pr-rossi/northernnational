@@ -110,6 +110,13 @@ export default function CheckoutModal({ isOpen, onClose, product }) {
     }
   }, [isOpen, product]);
 
+  const handleSuccess = (paymentIntent) => {
+    console.log('Payment successful:', paymentIntent);
+    onClose();
+    // Navigate to success page or show success message
+    window.location.href = '/success';
+  };
+
   if (!isOpen || !product) return null;
 
   // Safely access product price
