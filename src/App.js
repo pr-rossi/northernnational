@@ -5,6 +5,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import ReleaseCard from './components/ReleaseCard';
 import ShowCard from './components/ShowCard';
 import NoShows from './components/NoShows';
+import MerchSection from './components/MerchSection';
 
 function App() {
   const titleRef = useRef(null);
@@ -191,6 +192,8 @@ function App() {
     </div>
   </div>
 </section>
+
+<MerchSection />
 
       {/* Tour Section */}
       <section className="py-20 px-6 bg-zinc-950">
