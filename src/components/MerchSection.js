@@ -1,15 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import dynamic from 'next/dynamic';
-
-// Dynamically import GSAP with no SSR
-const gsap = dynamic(() => import('gsap'), { ssr: false });
-const ScrollTrigger = dynamic(() => 
-  import('gsap/dist/ScrollTrigger').then(mod => {
-    gsap.registerPlugin(mod.default);
-    return mod.default;
-  }),
-  { ssr: false }
-);
 
 const MerchSection = () => {
   const [products, setProducts] = useState([]);
@@ -20,23 +9,24 @@ const MerchSection = () => {
   useEffect(() => {
     // GSAP animations
     const initGSAP = async () => {
-      const gsapLoaded = await import('gsap');
-      const ScrollTriggerLoaded = await import('gsap/dist/ScrollTrigger');
-      
-      gsapLoaded.default.registerPlugin(ScrollTriggerLoaded.default);
-      
-      if (sectionRef.current) {
-        gsapLoaded.default.from('.product-card', {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top center',
-            end: 'bottom center',
-          },
-          y: 50,
-          opacity: 0,
-          duration: 1,
-          stagger: 0.2,
-        });
+      if (typeof window !== 'undefined') {
+        const { gsap } = await import('gsap');
+        const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+        gsap.registerPlugin(ScrollTrigger);
+        
+        if (sectionRef.current) {
+          gsap.from('.product-card', {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top center',
+              end: 'bottom center',
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+          });
+        }
       }
     };
 
