@@ -57,6 +57,18 @@ const MerchSection = () => {
   }, [products]);
 
   const handleBuyNow = async (product) => {
+    // Log the price before processing
+    console.log('Original price:', product.retail_price);
+    
+    // Ensure the price exists and is a number
+    if (!product.retail_price || isNaN(product.retail_price)) {
+      console.error('Invalid price:', product.retail_price);
+      return;
+    }
+
+    const priceInCents = Math.round(product.retail_price * 100);
+    console.log('Price in cents:', priceInCents);
+
     const stripe = await stripePromise;
 
     try {
@@ -73,7 +85,7 @@ const MerchSection = () => {
                 name: product.name,
                 images: [product.thumbnail_url], // Add product image if available
               },
-              unit_amount: Math.round(product.retail_price * 100), // Convert to cents
+              unit_amount: priceInCents, // Make sure this is a valid integer
             },
             quantity: 1,
           }],
