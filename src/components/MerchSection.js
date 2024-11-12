@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const stripePromise = loadStripe('pk_live_51LuoloFR20GYDi9Z1aSXUDloBFockA4PcRyzjN0mr23NKjlmyx95josOePSPRzKpgHjtxdAjosPlyLfOiy82jn8j00xvrpHri1');
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 const MerchSection = () => {
   console.log('Stripe Key exists:', !!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
