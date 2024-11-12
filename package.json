@@ -4,6 +4,7 @@
   "homepage": "https://northernnationalmusic.com",
   "private": true,
   "dependencies": {
+    "@stripe/react-stripe-js": "^2.9.0",
     "@stripe/stripe-js": "^4.10.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { loadStripe } from '@stripe/stripe-js';
+import CheckoutModal from './CheckoutModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,6 +40,7 @@ const MerchSection = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const sectionRef = useRef(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -107,92 +109,8 @@ const MerchSection = () => {
     }
   }, [products]);
 
-  const handleBuyNow = async (product) => {
-    try {
-      if (!stripePromise) {
-        throw new Error('Stripe is not properly initialized');
-      }
-
-      console.log('Product data:', product);
-
-      console.log('Attempting to fetch product details...');
-      const productId = product.id;
-      const apiUrl = `${process.env.REACT_APP_API_URL}/api/product-details?id=${productId}`;
-      console.log('Calling API URL:', apiUrl);
-
-      const response = await fetch(apiUrl);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('API Response Error:', {
-          status: response.status,
-          text: errorText,
-          url: apiUrl
-        });
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const productDetails = await response.json();
-      console.log('Success - Product Details:', productDetails);
-
-      // Get the first variant's retail price
-      const variant = productDetails.result.sync_variants[0];
-      if (!variant?.retail_price) {
-        throw new Error('Product price not available');
-      }
-
-      const priceInCents = Math.round(parseFloat(variant.retail_price) * 100);
-      const stripe = await stripePromise;
-
-      console.log('Creating checkout session with price:', priceInCents);
-
-      const checkoutResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/create-checkout-session`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          items: [{
-            price_data: {
-              currency: 'usd',
-              product_data: {
-                name: variant.name || productDetails.result.name,
-                images: [variant.files?.[0]?.preview_url || productDetails.result.thumbnail_url],
-              },
-              unit_amount: priceInCents,
-            },
-            quantity: 1,
-          }],
-        }),
-      });
-
-      if (!checkoutResponse.ok) {
-        const errorText = await checkoutResponse.text();
-        console.error('Checkout Error:', {
-          status: checkoutResponse.status,
-          text: errorText
-        });
-        throw new Error('Failed to create checkout session');
-      }
-
-      const { id } = await checkoutResponse.json();
-      
-      if (!id) throw new Error('Failed to create checkout session');
-
-      console.log('Redirecting to checkout with session ID:', id);
-
-      const result = await stripe.redirectToCheckout({
-        sessionId: id
-      });
-
-      if (result.error) {
-        console.error('Stripe redirect error:', result.error);
-        throw new Error(result.error.message);
-      }
-    } catch (error) {
-      console.error('Error in handleBuyNow:', error);
-      setError('Payment system is currently unavailable');
-    }
+  const handleBuyNow = (product) => {
+    setSelectedProduct(product);
   };
 
   if (loading) {
@@ -280,6 +198,11 @@ const MerchSection = () => {
           ))}
         </div>
       </div>
+      <CheckoutModal 
+        isOpen={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        product={selectedProduct}
+      />
     </section>
   );
 };
