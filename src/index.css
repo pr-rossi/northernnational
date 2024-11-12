@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .water-effect {
-  filter: url('#turbulence');
+  filter: url('#liquid');
   will-change: transform;
   transform: translateZ(0);
 }
@@ -11,4 +11,5 @@
 .water-effect > div {
   will-change: transform;
   backface-visibility: hidden;
+  transition: all 0.5s ease-in-out;
 }
