@@ -1,7 +1,25 @@
+import { useRef, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 
 export default function Cart({ isOpen, onClose }) {
   const { cartItems, removeFromCart, getCartTotal } = useCart();
+  const cartRef = useRef();
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (cartRef.current && !cartRef.current.contains(event.target)) {
+        onClose();
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, onClose]);
 
   console.log('Cart Items:', cartItems);
 
@@ -40,7 +58,7 @@ export default function Cart({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black/75 flex justify-end z-50">
-      <div className="bg-zinc-900 w-full max-w-md p-6 overflow-y-auto">
+      <div ref={cartRef} className="bg-zinc-900 w-full max-w-md p-6 overflow-y-auto">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-white">Cart</h2>
           <button onClick={onClose} className="text-zinc-400 hover:text-white">

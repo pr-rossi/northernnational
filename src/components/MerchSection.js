@@ -114,39 +114,43 @@ const MerchSection = () => {
   }, [products]);
 
   const handleBuyNow = async (product) => {
-    console.log('Selected product:', product);
-    
     try {
-      // Fetch detailed product info first
-      const response = await fetch(`/api/product-details?id=${product.id}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch product details');
-      }
-      
+      // Fetch product details first
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/product-details?id=${product.id}`);
       const productDetails = await response.json();
-      console.log('Product details:', productDetails);
-
-      // Get the first variant's price
-      const variant = productDetails.result.sync_variants[0];
-      if (!variant?.retail_price) {
-        throw new Error('Product price not available');
+      
+      if (!response.ok) {
+        throw new Error(productDetails.details || 'Failed to fetch product details');
       }
 
-      // Create enriched product object
-      const enrichedProduct = {
-        ...product,
-        sync_variants: [{
-          retail_price: variant.retail_price,
-          name: variant.name,
-          files: variant.files
-        }]
-      };
+      const variant = productDetails.result.sync_variants[0];
+      
+      // Create checkout session
+      const checkoutResponse = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: [{
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: product.name,
+                images: [product.thumbnail_url],
+              },
+              unit_amount: Math.round(parseFloat(variant.retail_price) * 100),
+            },
+            quantity: 1,
+          }],
+        }),
+      });
 
-      console.log('Enriched product:', enrichedProduct);
-      setSelectedProduct(enrichedProduct);
+      const { url } = await checkoutResponse.json();
+      window.location = url;
     } catch (error) {
-      console.error('Error preparing product for checkout:', error);
-      // You might want to show an error message to the user here
+      console.error('Error processing buy now:', error);
+      alert('Failed to process purchase. Please try again.');
     }
   };
 
@@ -268,12 +272,20 @@ const MerchSection = () => {
                     </span>
                   </div>
                 )}
-                <button
-                  onClick={() => handleAddToCart(product)}
-                  className="w-full px-6 py-3 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-bold rounded-lg"
-                >
-                  Add to Cart
-                </button>
+                <div className="space-y-3">
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    className="w-full px-6 py-3 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-lg transition-colors"
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    onClick={() => handleBuyNow(product)}
+                    className="w-full px-6 py-3 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-bold rounded-lg transition-colors"
+                  >
+                    Buy Now
+                  </button>
+                </div>
                 <div className="mt-4 flex items-center justify-center space-x-2 text-zinc-500 text-sm">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
