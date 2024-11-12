@@ -1,4 +1,4 @@
-import { printfulApi } from '../../utils/printful';
+import { getProductDetails } from '../../utils/printful';
 
 export default async function handler(req, res) {
   const { id } = req.query;
@@ -8,12 +8,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await printfulApi.get(`/store/products/${id}`);
-    const product = response.data.result;
+    const product = await getProductDetails(id);
     
     res.status(200).json({
-      code: response.data.code,
-      result: product
+      code: product.code,
+      result: product.result
     });
   } catch (error) {
     console.error('Error fetching product details:', error);
