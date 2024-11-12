@@ -22,9 +22,15 @@ export default async function handler(req, res) {
       throw new Error('Product ID is required');
     }
 
-    // First get the sync product details
-    const productUrl = `https://api.printful.com/sync/products/${id}`;
-    console.log('Fetching product details:', productUrl);
+    if (!process.env.PRINTFUL_STORE_ID) {
+      throw new Error('Printful Store ID is missing');
+    }
+
+    console.log('Processing request for product ID:', id);
+
+    // First get the sync product details - add store_id
+    const productUrl = `https://api.printful.com/sync/products/${id}?store_id=${process.env.PRINTFUL_STORE_ID}`;
+    console.log('Fetching product details from:', productUrl);
 
     const productResponse = await fetch(productUrl, {
       headers: {
@@ -33,22 +39,31 @@ export default async function handler(req, res) {
       }
     });
 
+    const productResponseText = await productResponse.text();
+    console.log('Product API Response:', productResponseText);
+
     if (!productResponse.ok) {
-      const errorText = await productResponse.text();
       console.error('Printful Product API Error:', {
         status: productResponse.status,
-        text: errorText,
+        text: productResponseText,
         url: productUrl
       });
-      throw new Error(`Printful API error: ${productResponse.status} - ${errorText}`);
+      throw new Error(`Printful API error: ${productResponse.status} - ${productResponseText}`);
     }
 
-    const productData = await productResponse.json();
-    
-    // Then get the variant details
-    const variantId = productData.result.sync_variants[0].id; // Get first variant ID
-    const variantUrl = `https://api.printful.com/sync/variants/${variantId}`;
-    console.log('Fetching variant details:', variantUrl);
+    const productData = JSON.parse(productResponseText);
+    console.log('Parsed product data:', productData);
+
+    if (!productData.result?.sync_variants?.length) {
+      throw new Error('No variants found for product');
+    }
+
+    // Then get the variant details - add store_id
+    const variantId = productData.result.sync_variants[0].id;
+    console.log('Found variant ID:', variantId);
+
+    const variantUrl = `https://api.printful.com/sync/variants/${variantId}?store_id=${process.env.PRINTFUL_STORE_ID}`;
+    console.log('Fetching variant details from:', variantUrl);
 
     const variantResponse = await fetch(variantUrl, {
       headers: {
@@ -57,17 +72,20 @@ export default async function handler(req, res) {
       }
     });
 
+    const variantResponseText = await variantResponse.text();
+    console.log('Variant API Response:', variantResponseText);
+
     if (!variantResponse.ok) {
-      const errorText = await variantResponse.text();
       console.error('Printful Variant API Error:', {
         status: variantResponse.status,
-        text: errorText,
+        text: variantResponseText,
         url: variantUrl
       });
-      throw new Error(`Printful API error: ${variantResponse.status} - ${errorText}`);
+      throw new Error(`Printful API error: ${variantResponse.status} - ${variantResponseText}`);
     }
 
-    const variantData = await variantResponse.json();
+    const variantData = JSON.parse(variantResponseText);
+    console.log('Parsed variant data:', variantData);
 
     // Combine the data
     const combinedData = {
@@ -77,7 +95,7 @@ export default async function handler(req, res) {
       }
     };
 
-    console.log('Combined product and variant data:', combinedData);
+    console.log('Combined response data:', combinedData);
 
     res.status(200).json(combinedData);
   } catch (error) {
@@ -85,13 +103,14 @@ export default async function handler(req, res) {
       message: error.message,
       stack: error.stack,
       name: error.name,
-      code: error.code
+      code: error.code,
+      type: error.constructor.name
     });
     res.status(500).json({ 
       error: 'Failed to fetch product details',
       details: error.message,
       timestamp: new Date().toISOString(),
-      type: error.name,
+      type: error.constructor.name,
       code: error.code
     });
   }
