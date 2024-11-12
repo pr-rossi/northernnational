@@ -57,21 +57,21 @@ const MerchSection = () => {
   }, [products]);
 
   const handleBuyNow = async (product) => {
-    // Log the price before processing
-    console.log('Original price:', product.retail_price);
-    
-    // Ensure the price exists and is a number
-    if (!product.retail_price || isNaN(product.retail_price)) {
-      console.error('Invalid price:', product.retail_price);
-      return;
-    }
-
-    const priceInCents = Math.round(product.retail_price * 100);
-    console.log('Price in cents:', priceInCents);
-
-    const stripe = await stripePromise;
-
     try {
+      // Fetch the product details including price
+      const detailsResponse = await fetch(`/api/product-details?id=${product.id}`);
+      const productDetails = await detailsResponse.json();
+      
+      console.log('Product details:', productDetails);
+
+      if (!productDetails.retail_price) {
+        throw new Error('Product price not available');
+      }
+
+      const priceInCents = Math.round(productDetails.retail_price * 100);
+
+      const stripe = await stripePromise;
+
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
@@ -158,16 +158,11 @@ const MerchSection = () => {
               )}
               <div className="p-4">
                 <h3 className="text-white text-xl font-bold mb-2">{product.name}</h3>
-                {product.retail_price && (
-                  <p className="text-[#D4FF99] mb-4">${product.retail_price.toFixed(2)}</p>
-                )}
                 <a
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    // Log the full product object to see what data we have
-                    console.log('Full product:', product);
-                    handleBuyNow(product);  // Pass the entire product object
+                    handleBuyNow(product);
                   }}
                   className="inline-block w-full text-center px-6 py-2 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-medium rounded transition duration-300"
                 >
