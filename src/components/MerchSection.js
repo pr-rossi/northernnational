@@ -151,8 +151,13 @@ const MerchSection = () => {
   };
 
   const handleAddToCart = (product) => {
-    addToCart(product);
-    setIsCartOpen(true);
+    console.log('Adding product to cart:', product);
+    if (product.sync_variants?.[0]?.retail_price) {
+      addToCart(product);
+      setIsCartOpen(true);
+    } else {
+      console.error('Product missing price information:', product);
+    }
   };
 
   if (loading) {

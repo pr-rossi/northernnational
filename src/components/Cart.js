@@ -7,30 +7,17 @@ export default function Cart({ isOpen, onClose }) {
 
   const handleCheckout = async () => {
     try {
-      const lineItems = cartItems.map(item => {
-        const price = item.sync_variants?.[0]?.retail_price;
-        if (!price) {
-          console.error('Invalid price for item:', item);
-          return null;
-        }
-
-        return {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: item.name,
-              images: [item.thumbnail_url],
-            },
-            unit_amount: Math.round(parseFloat(price) * 100),
+      const lineItems = cartItems.map(item => ({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: item.name,
+            images: [item.thumbnail_url],
           },
-          quantity: 1,
-        };
-      }).filter(Boolean); // Remove any null items
-
-      if (lineItems.length === 0) {
-        console.error('No valid items to checkout');
-        return;
-      }
+          unit_amount: Math.round(parseFloat(item.sync_variants[0].retail_price) * 100),
+        },
+        quantity: 1,
+      }));
 
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
@@ -66,27 +53,30 @@ export default function Cart({ isOpen, onClose }) {
         ) : (
           <>
             <div className="space-y-4 mb-6">
-              {cartItems.map((item) => (
-                <div key={item.id} className="flex items-center gap-4 bg-zinc-800 p-4 rounded-lg">
-                  <img 
-                    src={item.thumbnail_url} 
-                    alt={item.name} 
-                    className="w-20 h-20 object-cover rounded"
-                  />
-                  <div className="flex-1">
-                    <h3 className="text-white font-medium">{item.name}</h3>
-                    <p className="text-[#D4FF99]">
-                      ${item.sync_variants?.[0]?.retail_price}
-                    </p>
+              {cartItems.map((item) => {
+                const price = item.sync_variants?.[0]?.retail_price;
+                return (
+                  <div key={item.id} className="flex items-center gap-4 bg-zinc-800 p-4 rounded-lg">
+                    <img 
+                      src={item.thumbnail_url} 
+                      alt={item.name} 
+                      className="w-20 h-20 object-cover rounded"
+                    />
+                    <div className="flex-1">
+                      <h3 className="text-white font-medium">{item.name}</h3>
+                      <p className="text-[#D4FF99]">
+                        ${price ? parseFloat(price).toFixed(2) : '0.00'}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-zinc-400 hover:text-white"
+                    >
+                      Remove
+                    </button>
                   </div>
-                  <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-zinc-400 hover:text-white"
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="border-t border-zinc-800 pt-4 mb-6">
