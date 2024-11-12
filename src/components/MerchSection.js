@@ -59,35 +59,40 @@ const MerchSection = () => {
   const handleBuyNow = async (product) => {
     const stripe = await stripePromise;
 
-    const response = await fetch('/api/create-checkout-session', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        items: [
-          {
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: [{
             price_data: {
               currency: 'usd',
               product_data: {
                 name: product.name,
+                images: [product.thumbnail_url], // Add product image if available
               },
-              unit_amount: product.retail_price * 100, // Convert to cents
+              unit_amount: Math.round(product.retail_price * 100), // Convert to cents
             },
             quantity: 1,
-          },
-        ],
-      }),
-    });
+          }],
+        }),
+      });
 
-    const session = await response.json();
+      const { id } = await response.json();
+      
+      if (!id) throw new Error('Failed to create checkout session');
 
-    const result = await stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
+      const result = await stripe.redirectToCheckout({
+        sessionId: id
+      });
 
-    if (result.error) {
-      console.error(result.error.message);
+      if (result.error) {
+        console.error(result.error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
@@ -148,7 +153,11 @@ const MerchSection = () => {
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleBuyNow(product);
+                    handleBuyNow({
+                      name: product.name,
+                      retail_price: product.retail_price,
+                      thumbnail_url: product.thumbnail_url // if available
+                    });
                   }}
                   className="inline-block w-full text-center px-6 py-2 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-medium rounded transition duration-300"
                 >
