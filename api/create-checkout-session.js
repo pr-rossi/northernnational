@@ -15,7 +15,8 @@ export default async function handler(req, res) {
 
       res.status(200).json({ id: session.id });
     } catch (err) {
-      res.status(500).json({ error: err.message });
+      console.error('Stripe error:', err);
+      res.status(500).json({ statusCode: 500, message: err.message });
     }
   } else {
     res.setHeader('Allow', 'POST');
