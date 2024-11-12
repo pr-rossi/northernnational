@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="%PUBLIC_URL%/images/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Northern National - Alternative Rock Band" />
@@ -20,6 +19,22 @@
     <meta property="twitter:title" content="Northern National" />
     <meta property="twitter:description" content="Northern National - Alternative Rock Band" />
     <meta property="twitter:image" content="https://northernnationalmusic.com/images/the-boys-show.jpeg" />
+
+    <!-- Light mode favicon (dark SVG for light backgrounds) -->
+    <link 
+      rel="icon" 
+      type="image/svg+xml" 
+      href="%PUBLIC_URL%/images/favicon-light.svg"
+      media="(prefers-color-scheme: light)"
+    />
+    
+    <!-- Dark mode favicon (light SVG for dark backgrounds) -->
+    <link 
+      rel="icon" 
+      type="image/svg+xml" 
+      href="%PUBLIC_URL%/images/favicon-dark.svg"
+      media="(prefers-color-scheme: dark)"
+    />
 
     <title>Northern National</title>
   </head>
