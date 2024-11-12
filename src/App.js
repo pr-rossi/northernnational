@@ -4,10 +4,6 @@ import gsap from 'gsap';
 import ReleaseCard from './components/ReleaseCard';
 import ShowCard from './components/ShowCard';
 import NoShows from './components/NoShows';
-import { TextPlugin } from 'gsap/TextPlugin';
-
-// Register GSAP plugins
-gsap.registerPlugin(TextPlugin);
 
 function App() {
   const titleRef = useRef(null);
@@ -20,34 +16,40 @@ function App() {
       const characters = text.split('');
       
       titleRef.current.innerHTML = characters
-        .map(char => char === ' ' 
-          ? '<span class="inline-block">&nbsp;</span>' 
-          : `<span class="inline-block opacity-0">${char}</span>`
+        .map((char, index) => char === ' ' 
+          ? '<span style="display: inline-block; margin: 0 0.1em;">&nbsp;</span>' 
+          : `<span style="display: inline-block; transform: translateY(100px); opacity: 0;">${char}</span>`
         )
         .join('');
 
-      // GSAP Animation
+      // Animate each character
       const chars = titleRef.current.querySelectorAll('span');
-      gsap.to(chars, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        stagger: 0.04,
-        ease: "power4.out",
-        delay: 0.5,
-        from: { opacity: 0, y: 100 }
+      chars.forEach((char, index) => {
+        gsap.fromTo(char, 
+          { y: 100, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            delay: 0.5 + (index * 0.04),
+            ease: "power4.out"
+          }
+        );
       });
     }
 
     // Subtitle animation
     if (subtitleRef.current) {
-      gsap.from(subtitleRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: "power4.out",
-        delay: 1.2
-      });
+      gsap.fromTo(subtitleRef.current,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          delay: 1.2,
+          ease: "power4.out"
+        }
+      );
     }
   }, []);
 
@@ -94,7 +96,8 @@ function App() {
       <header className="h-screen flex items-center justify-center relative overflow-hidden">
         {/* Water effect overlay */}
         <div className="absolute inset-0 water-effect">
-          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: `url('/images/the-boys-show.jpeg')`
             }}
