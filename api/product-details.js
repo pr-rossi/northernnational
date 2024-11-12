@@ -28,8 +28,8 @@ export default async function handler(req, res) {
 
     console.log('Processing request for product ID:', id);
 
-    // Get the sync product details
-    const productUrl = `https://api.printful.com/store/products/${id}?store_id=${process.env.PRINTFUL_STORE_ID}`;
+    // Get the sync product details using the correct endpoint
+    const productUrl = `https://api.printful.com/sync/products/${id}?store_id=${process.env.PRINTFUL_STORE_ID}`;
     console.log('Fetching product details from:', productUrl);
 
     const productResponse = await fetch(productUrl, {
@@ -58,37 +58,12 @@ export default async function handler(req, res) {
       throw new Error('Invalid product data received');
     }
 
-    // Get the sync variant details using the sync_product endpoint
-    const syncProductUrl = `https://api.printful.com/store/products/${id}/sync_variants?store_id=${process.env.PRINTFUL_STORE_ID}`;
-    console.log('Fetching sync variants from:', syncProductUrl);
-
-    const variantResponse = await fetch(syncProductUrl, {
-      headers: {
-        'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
-        'Content-Type': 'application/json'
-      }
-    });
-
-    const variantResponseText = await variantResponse.text();
-    console.log('Variant API Response:', variantResponseText);
-
-    if (!variantResponse.ok) {
-      console.error('Printful Variant API Error:', {
-        status: variantResponse.status,
-        text: variantResponseText,
-        url: syncProductUrl
-      });
-      throw new Error(`Printful API error: ${variantResponse.status} - ${variantResponseText}`);
-    }
-
-    const variantData = JSON.parse(variantResponseText);
-    console.log('Parsed variant data:', variantData);
-
-    // Combine the data
+    // The sync/products endpoint already includes variant information
+    // No need for a separate variant call
     const combinedData = {
       result: {
         ...productData.result,
-        sync_variants: variantData.result
+        sync_variants: productData.result.sync_variants || []
       }
     };
 

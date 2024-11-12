@@ -113,6 +113,8 @@ const MerchSection = () => {
         throw new Error('Stripe is not properly initialized');
       }
 
+      console.log('Product data:', product);
+
       console.log('Attempting to fetch product details...');
       const productId = product.id;
       const apiUrl = `${process.env.REACT_APP_API_URL}/api/product-details?id=${productId}`;
