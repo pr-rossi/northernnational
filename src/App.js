@@ -94,25 +94,24 @@ function App() {
     <div className="min-h-screen bg-gray-900 text-gray-100">
       {/* Hero Section */}
       <header className="h-screen flex items-center justify-center relative overflow-hidden">
-        {/* Water effect overlay */}
-        <div className="absolute inset-0 water-effect">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('/images/the-boys-show.jpeg')`
-            }}
-          />
-        </div>
+  {/* Liquid effect overlay */}
+  <div className="absolute inset-0 water-effect">
+    <div 
+      className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
+      style={{
+        backgroundImage: `url('/images/the-boys-show.jpeg')`
+      }}
+    />
+  </div>
 
-        {/* Gradient overlay */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))',
-            zIndex: 1
-          }}
-        />
-
+  {/* Gradient overlay */}
+  <div 
+    className="absolute inset-0"
+    style={{
+      backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))',
+      zIndex: 1
+    }}
+  />
         <div className="z-10 text-center space-y-6 px-4">
   <h1 
     ref={titleRef}
