@@ -15,20 +15,28 @@ if (typeof window !== 'undefined') {  // Client-side check
   });
 }
 
-// Ensure we're using the correct variable name and it's loaded
-const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
-if (!stripeKey) {
-  console.error('⚠️ Stripe key missing. Please check:');
-  console.error('1. Key name is exactly NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY');
-  console.error('2. Key is set in Vercel environment variables');
-  console.error('3. Key is enabled for the current environment');
-}
+// Add more detailed environment debugging
+console.log('Environment Variables Check:', {
+  allEnvKeys: Object.keys(process.env),
+  stripeKeyExists: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY' in process.env,
+  stripeKeyValue: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY?.substring(0, 10) + '...',
+  nodeEnv: process.env.NODE_ENV,
+  vercelEnv: process.env.NEXT_PUBLIC_VERCEL_ENV
+});
 
-// Initialize Stripe with additional error handling
+// Initialize Stripe with more error handling
 let stripePromise;
 try {
-  stripePromise = stripeKey ? loadStripe(stripeKey) : null;
-  console.log('Stripe initialization:', stripePromise ? 'successful' : 'failed');
+  const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+  console.log('Stripe key type:', typeof stripeKey);
+  console.log('Stripe key length:', stripeKey?.length);
+  
+  if (!stripeKey) {
+    throw new Error('Stripe key is missing');
+  }
+  
+  stripePromise = loadStripe(stripeKey);
+  console.log('Stripe initialized successfully');
 } catch (error) {
   console.error('Stripe initialization error:', error);
 }
