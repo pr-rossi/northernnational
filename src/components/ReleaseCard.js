@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Music } from 'lucide-react';
-import { useInView } from '../hooks/useInView';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ReleaseCard = ({ title, description, url }) => {
-  const cardRef = useInView();
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      cardRef.current,
+      {
+        y: 50,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: "top bottom-=100",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+  }, []);
 
   return (
     <a 
