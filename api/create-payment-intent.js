@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
   try {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-    const { items } = req.body;
+    const { items, email, variantId } = req.body;
 
     // Create payment intent
     const paymentIntent = await stripe.paymentIntents.create({
@@ -18,7 +18,12 @@ export default async function handler(req, res) {
         enabled: true,
       },
       metadata: {
-        product_name: items[0].price_data.product_data.name,
+        product_id: items[0].product_id,
+        variant_id: variantId,
+        customer_email: email
+      },
+      shipping_address_collection: {
+        allowed_countries: ['US'], // Add other countries as needed
       },
     });
 

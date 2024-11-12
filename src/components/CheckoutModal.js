@@ -72,6 +72,7 @@ function CheckoutForm({ clientSecret, onSuccess, onCancel }) {
 export default function CheckoutModal({ isOpen, onClose, product }) {
   const [clientSecret, setClientSecret] = useState(null);
   const [error, setError] = useState(null);
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     if (isOpen && product && product.sync_variants?.[0]?.retail_price) {
@@ -91,7 +92,10 @@ export default function CheckoutModal({ isOpen, onClose, product }) {
               unit_amount: Math.round(parseFloat(product.sync_variants[0].retail_price) * 100),
             },
             quantity: 1,
+            product_id: product.id
           }],
+          email: email,
+          variantId: product.sync_variants[0].id
         }),
       })
         .then((res) => res.json())
@@ -108,7 +112,7 @@ export default function CheckoutModal({ isOpen, onClose, product }) {
           setError('Failed to initialize payment');
         });
     }
-  }, [isOpen, product]);
+  }, [isOpen, product, email]);
 
   const handleSuccess = (paymentIntent) => {
     console.log('Payment successful:', paymentIntent);
