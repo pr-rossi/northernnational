@@ -56,14 +56,14 @@ function App() {
   // Data for releases with URLs
   const releases = [
     {
-      title: "NEW SINGLE",
+      title: "LATEST SINGLE",
       description: "Stream our latest single now on all major platforms",
-      url: "https://open.spotify.com/artist/your-artist-id"
+      url: "https://open.spotify.com/track/1rM0BBBaWZ0OMQtPHVZatl?si=49e44d58176846ff"
     },
     {
-      title: "UPCOMING ALBUM",
-      description: "New album dropping soon. Stay tuned!",
-      url: "https://music.apple.com/your-album-link"
+      title: "THIS IS NN",
+      description: "Listen to all our music on our official Spotify playlist!",
+      url: "https://open.spotify.com/playlist/37i9dQZF1DZ06evO4daEGQ?si=78a79f6bacdd4641"
     }
   ];
 
