@@ -1,108 +1,46 @@
 import React, { useEffect, useState, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { loadStripe } from '@stripe/stripe-js';
+import dynamic from 'next/dynamic';
 
-gsap.registerPlugin(ScrollTrigger);
-
-// Debug environment variables
-if (typeof window !== 'undefined') {  // Client-side check
-  console.log('Running on client side');
-  console.log('Environment:', {
-    nodeEnv: process.env.NODE_ENV,
-    hasStripeKey: !!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-    stripeKeyPrefix: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY?.substring(0, 6)
-  });
-}
-
-// Add more detailed environment debugging
-console.log('Environment Variables Check:', {
-  allEnvKeys: Object.keys(process.env),
-  stripeKeyExists: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY' in process.env,
-  stripeKeyValue: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY?.substring(0, 10) + '...',
-  nodeEnv: process.env.NODE_ENV,
-  vercelEnv: process.env.NEXT_PUBLIC_VERCEL_ENV
-});
-
-// Initialize Stripe with more error handling
-let stripePromise;
-try {
-  const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
-  console.log('Stripe key type:', typeof stripeKey);
-  console.log('Stripe key length:', stripeKey?.length);
-  
-  if (!stripeKey) {
-    throw new Error('Stripe key is missing');
-  }
-  
-  stripePromise = loadStripe(stripeKey);
-  console.log('Stripe initialized successfully');
-} catch (error) {
-  console.error('Stripe initialization error:', error);
-}
+// Dynamically import GSAP with no SSR
+const gsap = dynamic(() => import('gsap'), { ssr: false });
+const ScrollTrigger = dynamic(() => 
+  import('gsap/dist/ScrollTrigger').then(mod => {
+    gsap.registerPlugin(mod.default);
+    return mod.default;
+  }),
+  { ssr: false }
+);
 
 const MerchSection = () => {
-  console.log('Stripe Key exists:', !!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('/api/products', {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
+    // GSAP animations
+    const initGSAP = async () => {
+      const gsapLoaded = await import('gsap');
+      const ScrollTriggerLoaded = await import('gsap/dist/ScrollTrigger');
+      
+      gsapLoaded.default.registerPlugin(ScrollTriggerLoaded.default);
+      
+      if (sectionRef.current) {
+        gsapLoaded.default.from('.product-card', {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top center',
+            end: 'bottom center',
           },
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.2,
         });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        return null;
       }
     };
 
-    fetchProducts()
-      .then((data) => {
-        if (data && data.result && Array.isArray(data.result)) {
-          setProducts(data.result);
-        } else {
-          console.error('Invalid data structure:', data);
-          throw new Error('Invalid data structure');
-        }
-      })
-      .catch((err) => {
-        console.error('Error fetching products:', err);
-        setError('Failed to load products');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (products.length > 0) {
-      gsap.from('.product-card', {
-        y: 50,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom-=100',
-          toggleActions: 'play none none reverse'
-        }
-      });
-    }
+    initGSAP();
   }, [products]);
 
   const handleBuyNow = async (product) => {
