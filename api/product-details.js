@@ -1,8 +1,20 @@
+import fetch from 'node-fetch';
+
 export default async function handler(req, res) {
-  // Enable CORS
+  // Add CORS headers
+  res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  );
+
+  // Handle OPTIONS request
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
 
   const { id } = req.query;
 
@@ -11,11 +23,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log('Fetching product details for ID:', id);
-    
-    const response = await fetch(
+    console.log('Fetching Printful product:', id);
+    console.log('Using API key:', process.env.PRINTFUL_API_KEY?.substring(0, 5) + '...');
+
+    const printfulResponse = await fetch(
       `https://api.printful.com/store/products/${id}`,
       {
+        method: 'GET',
         headers: {
           'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
           'Content-Type': 'application/json',
@@ -23,24 +37,28 @@ export default async function handler(req, res) {
       }
     );
 
-    if (!response.ok) {
-      const errorText = await response.text();
+    if (!printfulResponse.ok) {
+      const errorText = await printfulResponse.text();
       console.error('Printful API Error:', {
-        status: response.status,
-        statusText: response.statusText,
-        body: errorText
+        status: printfulResponse.status,
+        statusText: printfulResponse.statusText,
+        error: errorText
       });
-      throw new Error(`HTTP error! status: ${response.status}`);
+      
+      return res.status(printfulResponse.status).json({
+        error: 'Printful API error',
+        details: errorText
+      });
     }
 
-    const data = await response.json();
-    console.log('Printful API Response:', data);
-    
-    res.status(200).json(data);
+    const data = await printfulResponse.json();
+    console.log('Printful response:', data);
+
+    return res.status(200).json(data);
   } catch (error) {
-    console.error('Error fetching product details:', error);
-    res.status(500).json({ 
-      error: 'Failed to fetch product details',
+    console.error('Server error:', error);
+    return res.status(500).json({
+      error: 'Internal server error',
       message: error.message,
       stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
