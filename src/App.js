@@ -110,7 +110,7 @@ function App() {
             ref={subtitleRef}
             className="text-xl md:text-2xl text-[#D4FF99]"
           >
-            Alternative Rock Band
+            Alternative Rock Band from Dallas, TX
           </p>
         </div>
               <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
