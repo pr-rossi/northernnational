@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
 
   if (!process.env.PRINTFUL_API_KEY) {
@@ -8,9 +8,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log('Attempting to fetch Printful product:', id);
+    console.log('Attempting to fetch Printful variant:', id);
 
-    const response = await fetch(`https://api.printful.com/sync/products`, {
+    const response = await fetch(`https://api.printful.com/sync/variants/${id}`, {
       headers: {
         'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
         'Content-Type': 'application/json'
@@ -23,16 +23,9 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
-    
-    const product = data.result.find(p => p.id.toString() === id.toString());
-    
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
-
-    res.status(200).json({ result: product });
+    res.status(200).json(data);
   } catch (error) {
     console.error('Error fetching from Printful:', error);
-    res.status(500).json({ error: 'Failed to fetch product details' });
+    res.status(500).json({ error: 'Failed to fetch variant details' });
   }
 }
