@@ -1,14 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req, res) {
+  console.log('API Route hit:', req.query);
   const { id } = req.query;
 
   if (!process.env.PRINTFUL_API_KEY) {
+    console.log('No API key found');
     return res.status(500).json({ error: 'Printful API key is not configured' });
   }
 
   try {
-    const response = await fetch(`https://api.printful.com/store/products/${id}`, {
+    console.log('Fetching from Printful:', id);
+    const response = await fetch(`https://api.printful.com/sync/products/${id}`, {
       headers: {
         'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`
       }
