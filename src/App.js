@@ -1,14 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Mail, Instagram, Twitter } from 'lucide-react';
+import gsap from 'gsap';
 import ReleaseCard from './components/ReleaseCard';
 import ShowCard from './components/ShowCard';
 import NoShows from './components/NoShows';
 
 function App() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
 
   useEffect(() => {
-    setIsLoaded(true);
+    // GSAP Text Animation
+    const words = titleRef.current.innerText.split('');
+    titleRef.current.innerHTML = words
+      .map(letter => `<span class="inline-block">${letter}</span>`)
+      .join('');
+
+    gsap.from(titleRef.current.children, {
+      y: 100,
+      opacity: 0,
+      duration: 0.7,
+      stagger: 0.04,
+      ease: "power4.out",
+      delay: 0.5
+    });
+
+    gsap.from(subtitleRef.current, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power4.out",
+      delay: 1.2
+    });
   }, []);
 
   // Data for releases with URLs
@@ -33,54 +56,41 @@ function App() {
     //   venue: "The Bomb Factory - Dallas, TX",
     //   venueUrl: "https://thebombfactory.com",
     //   ticketUrl: "https://tickets.thebombfactory.com/event/your-event"
-    // },
-    // {
-    //   date: "DEC 18",
-    //   venue: "House of Blues - Houston, TX",
-    //   venueUrl: "https://www.houseofblues.com/houston",
-    //   ticketUrl: "https://www.houseofblues.com/houston/event/your-event"
-    // },
-    // {
-    //   date: "DEC 20",
-    //   venue: "Stubb's - Austin, TX",
-    //   venueUrl: "https://www.stubbsaustin.com",
-    //   ticketUrl: "https://www.stubbsaustin.com/event/your-event"
     // }
   ];
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
       {/* Hero Section */}
-      <header 
-        className={`h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
-          isLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{
-          backgroundImage: `url('/images/the-boys-show.jpeg')`
-        }}
-      >
-        {/* Animated gradient overlay */}
+      <header className="h-screen flex items-center justify-center relative overflow-hidden">
+        {/* Water effect overlay */}
+        <div className="absolute inset-0 water-effect">
+          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('/images/the-boys-show.jpeg')`
+            }}
+          />
+        </div>
+
+        {/* Gradient overlay */}
         <div 
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            isLoaded ? 'opacity-60' : 'opacity-0'
-          }`}
+          className="absolute inset-0"
           style={{
-            backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))'
+            backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))',
+            zIndex: 1
           }}
         />
 
-        <div className="z-10 text-center space-y-6">
+        <div className="z-10 text-center space-y-6 px-4">
           <h1 
-            className={`text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500 transform transition-all duration-1000 ${
-              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}
+            ref={titleRef}
+            className="text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500"
           >
             NORTHERN NATIONAL
           </h1>
           <p 
-            className={`text-xl md:text-2xl text-gray-300 transform transition-all duration-1000 delay-300 ${
-              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}
+            ref={subtitleRef}
+            className="text-xl md:text-2xl text-gray-300"
           >
             Alternative Rock Band
           </p>
