@@ -57,6 +57,15 @@ const MerchSection = () => {
             url: response.url,
             responseText: errorText
           });
+          
+          // Try to parse error response as JSON
+          try {
+            const errorJson = JSON.parse(errorText);
+            console.error('Detailed error:', errorJson);
+          } catch (e) {
+            console.error('Raw error text:', errorText);
+          }
+          
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
@@ -72,7 +81,7 @@ const MerchSection = () => {
       } catch (err) {
         console.error('Error fetching products:', err);
         console.error('Error details:', err.message);
-        setError('Failed to load products');
+        setError(`Failed to load products: ${err.message}`);
       } finally {
         setLoading(false);
       }

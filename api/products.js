@@ -17,7 +17,17 @@ export default async function handler(req, res) {
       return;
     }
 
-    const response = await fetch('https://api.printful.com/store/products', {
+    // Log the Printful API key (first few characters)
+    console.log('Printful API Key prefix:', process.env.PRINTFUL_API_KEY?.substring(0, 4));
+    
+    if (!process.env.PRINTFUL_API_KEY) {
+      throw new Error('Printful API key is missing');
+    }
+
+    const printfulUrl = 'https://api.printful.com/store/products';
+    console.log('Calling Printful API:', printfulUrl);
+
+    const response = await fetch(printfulUrl, {
       headers: {
         'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
         'Content-Type': 'application/json'
@@ -28,15 +38,25 @@ export default async function handler(req, res) {
       const errorText = await response.text();
       console.error('Printful API Error:', {
         status: response.status,
-        text: errorText
+        text: errorText,
+        url: printfulUrl
       });
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`Printful API error: ${response.status}`);
     }
 
     const data = await response.json();
+    console.log('Printful API success, product count:', data.result?.length);
+
     res.status(200).json(data);
   } catch (error) {
-    console.error('Server Error:', error);
-    res.status(500).json({ error: 'Failed to fetch products' });
+    console.error('Server Error:', {
+      message: error.message,
+      stack: error.stack
+    });
+    res.status(500).json({ 
+      error: 'Failed to fetch products',
+      details: error.message,
+      timestamp: new Date().toISOString()
+    });
   }
 } 
