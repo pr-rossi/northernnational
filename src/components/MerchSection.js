@@ -155,43 +155,32 @@ const MerchSection = () => {
     
     try {
       // Log the API URL we're calling
-      const apiUrl = `/api/product-details?id=${product.id}`;
+      const apiUrl = `${process.env.REACT_APP_API_URL}/api/product-details?id=${product.id}`;
       console.log('Fetching product details from:', apiUrl);
       
       const response = await fetch(apiUrl);
-      const responseStatus = response.status;
-      console.log('API Response status:', responseStatus);
-      
+      console.log('Response status:', response.status);
+
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('Product details API Error:', {
-          status: responseStatus,
+        console.error('API Error:', {
+          status: response.status,
           statusText: response.statusText,
           url: response.url,
           responseText: errorText
         });
-        throw new Error(`Failed to fetch product details: ${responseStatus}`);
+        throw new Error('Failed to fetch product details');
       }
       
       const productDetails = await response.json();
-      console.log('Product details response:', productDetails);
+      console.log('Product details:', productDetails);
 
-      // Verify the response structure
       if (!productDetails.result?.sync_variants?.[0]) {
-        console.error('Invalid product details structure:', productDetails);
         throw new Error('Invalid product details structure');
       }
 
-      // Get the first variant's price
       const variant = productDetails.result.sync_variants[0];
-      console.log('Variant details:', variant);
-
-      if (!variant.retail_price) {
-        console.error('Missing retail price in variant:', variant);
-        throw new Error('Product price not available');
-      }
-
-      // Create enriched product object
+      
       const enrichedProduct = {
         ...product,
         sync_variants: [{
@@ -202,12 +191,11 @@ const MerchSection = () => {
         }]
       };
 
-      console.log('Enriched product to add to cart:', enrichedProduct);
+      console.log('Adding to cart:', enrichedProduct);
       addToCart(enrichedProduct);
       setIsCartOpen(true);
     } catch (error) {
-      console.error('Error preparing product for cart:', error);
-      // You might want to show an error message to the user here
+      console.error('Error adding to cart:', error);
       alert('Failed to add product to cart. Please try again.');
     }
   };
