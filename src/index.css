@@ -9,6 +9,19 @@
   filter: url(#displacement-filter);
 }
 
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-25%);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
+
 @keyframes ripple {
   50% {
     transform: scale(0.9);
