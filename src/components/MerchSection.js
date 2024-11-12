@@ -113,20 +113,19 @@ const MerchSection = () => {
         throw new Error('Stripe is not properly initialized');
       }
 
-      // Fetch variant details from Printful
-      const variantId = product.id;
-      const response = await fetch(`https://api.printful.com/store/products/${variantId}`, {
-        headers: {
-          'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
-          'Content-Type': 'application/json'
-        }
-      });
+      console.log('Attempting to fetch product details...');
+      const productId = product.id;
+      const apiUrl = `${process.env.REACT_APP_API_URL}/api/product-details?id=${productId}`;
+      console.log('Calling API URL:', apiUrl);
+
+      const response = await fetch(apiUrl);
       
       if (!response.ok) {
         const errorText = await response.text();
         console.error('API Response Error:', {
           status: response.status,
-          text: errorText
+          text: errorText,
+          url: apiUrl
         });
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -134,11 +133,12 @@ const MerchSection = () => {
       const productDetails = await response.json();
       console.log('Success - Product Details:', productDetails);
 
-      if (!productDetails.result?.retail_price) {
+      const variant = productDetails.result.variant_details;
+      if (!variant?.retail_price) {
         throw new Error('Product price not available');
       }
 
-      const priceInCents = Math.round(parseFloat(productDetails.result.retail_price) * 100);
+      const priceInCents = Math.round(parseFloat(variant.retail_price) * 100);
       const stripe = await stripePromise;
 
       const checkoutResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/create-checkout-session`, {
@@ -151,8 +151,8 @@ const MerchSection = () => {
             price_data: {
               currency: 'usd',
               product_data: {
-                name: productDetails.result.name || product.name,
-                images: [productDetails.result.files[0]?.preview_url || product.thumbnail_url],
+                name: variant.name || productDetails.result.name,
+                images: [variant.files[0]?.preview_url || productDetails.result.thumbnail_url],
               },
               unit_amount: priceInCents,
             },
