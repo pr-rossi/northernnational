@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
     // Log to check if we're getting the API key
     console.log('API Key present:', !!process.env.PRINTFUL_API_KEY);
 
-    const response = await fetch('https://api.printful.com/store/products', {
+    const response = await fetch('https://api.printful.com/store/products?store_id=14808970', {
       headers: {
         'Authorization': process.env.PRINTFUL_API_KEY.startsWith('Bearer ') 
           ? process.env.PRINTFUL_API_KEY 
