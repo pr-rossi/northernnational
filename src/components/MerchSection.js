@@ -245,6 +245,11 @@ const MerchSection = () => {
               )}
               <div className="p-4">
                 <h3 className="text-white text-xl font-bold mb-2">{product.name}</h3>
+                {product.sync_variants && product.sync_variants[0] && (
+                  <p className="text-[#D4FF99] text-lg font-medium mb-4">
+                    ${parseFloat(product.sync_variants[0].retail_price).toFixed(2)}
+                  </p>
+                )}
                 <a
                   href="#"
                   onClick={(e) => {
