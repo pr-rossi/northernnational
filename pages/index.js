@@ -7,11 +7,17 @@ export default function Home() {
       <Head>
         <title>Northern National</title>
         <meta name="description" content="Northern National Official Website" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="min-h-screen bg-black">
-        <MerchSection />
+        <div className="container mx-auto px-4">
+          <h1 className="text-[#D4FF99] text-4xl font-bold py-8">
+            Northern National
+          </h1>
+          <MerchSection />
+        </div>
       </main>
     </>
   )
