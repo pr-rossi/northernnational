@@ -23,19 +23,25 @@ export function CartProvider({ children }) {
     }, 0).toFixed(2);
   };
 
+  const value = {
+    cartItems,
+    addToCart,
+    removeFromCart,
+    clearCart,
+    getCartTotal
+  };
+
   return (
-    <CartContext.Provider value={{
-      cartItems,
-      addToCart,
-      removeFromCart,
-      clearCart,
-      getCartTotal
-    }}>
+    <CartContext.Provider value={value}>
       {children}
     </CartContext.Provider>
   );
 }
 
 export function useCart() {
-  return useContext(CartContext);
+  const context = useContext(CartContext);
+  if (context === undefined) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
+  return context;
 } 
