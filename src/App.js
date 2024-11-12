@@ -10,6 +10,7 @@ function App() {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const heroImageRef = useRef(null);
+  const releaseCardsRef = useRef([]);
 
   useEffect(() => {
     // Register ScrollTrigger plugin
@@ -68,6 +69,20 @@ function App() {
         }
       );
     }
+
+    // Release cards stagger animation
+    gsap.from(releaseCardsRef.current, {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: releaseCardsRef.current[0],
+        start: "top bottom-=100",
+        toggleActions: "play none none reverse"
+      }
+    });
   }, []);
 
   // Data for releases with URLs
@@ -162,7 +177,10 @@ function App() {
     <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">LATEST RELEASES</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       {releases.map((release, index) => (
-        <div key={index}> {/* Add wrapper with initial opacity */}
+        <div 
+          key={index}
+          ref={el => releaseCardsRef.current[index] = el}
+        >
           <ReleaseCard 
             title={release.title}
             description={release.description}
