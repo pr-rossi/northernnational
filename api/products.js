@@ -17,6 +17,11 @@ export default async function handler(req, res) {
       return;
     }
 
+    // Check for store ID
+    if (!process.env.PRINTFUL_STORE_ID) {
+      throw new Error('Printful Store ID is missing');
+    }
+
     // Log the Printful API key (first few characters)
     console.log('Printful API Key prefix:', process.env.PRINTFUL_API_KEY?.substring(0, 4));
     
@@ -24,10 +29,10 @@ export default async function handler(req, res) {
       throw new Error('Printful API key is missing');
     }
 
-    const printfulUrl = 'https://api.printful.com/store/products';
+    // Update URL to include store_id
+    const printfulUrl = `https://api.printful.com/sync/products?store_id=${process.env.PRINTFUL_STORE_ID}`;
     console.log('Calling Printful API:', printfulUrl);
 
-    // Update the Authorization header format to include 'Bearer '
     const response = await fetch(printfulUrl, {
       headers: {
         'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
