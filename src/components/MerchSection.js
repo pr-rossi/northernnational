@@ -5,7 +5,12 @@ import { loadStripe } from '@stripe/stripe-js';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+// Add validation for the Stripe key
+const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+if (!stripeKey) {
+  console.error('Stripe publishable key is missing');
+}
+const stripePromise = stripeKey ? loadStripe(stripeKey) : null;
 
 const MerchSection = () => {
   console.log('Stripe Key exists:', !!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
@@ -63,6 +68,10 @@ const MerchSection = () => {
 
   const handleBuyNow = async (product) => {
     try {
+      if (!stripePromise) {
+        throw new Error('Stripe is not properly initialized');
+      }
+
       // Test basic API connectivity first
       console.log('Testing API connection...');
       const testResponse = await fetch('/api/test');
@@ -129,7 +138,7 @@ const MerchSection = () => {
       }
     } catch (error) {
       console.error('Error in handleBuyNow:', error);
-      // Handle the error appropriately (e.g., show an error message to the user)
+      setError('Payment system is currently unavailable');
     }
   };
 
