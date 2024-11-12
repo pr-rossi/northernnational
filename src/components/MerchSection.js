@@ -10,16 +10,16 @@ if (typeof window !== 'undefined') {  // Client-side check
   console.log('Running on client side');
   console.log('Environment:', {
     nodeEnv: process.env.NODE_ENV,
-    hasStripeKey: !!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-    stripeKeyPrefix: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY?.substring(0, 6)
+    hasStripeKey: !!process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY,
+    stripeKeyPrefix: process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY?.substring(0, 6)
   });
 }
 
 // Ensure we're using the correct variable name and it's loaded
-const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+const stripeKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 if (!stripeKey) {
   console.error('⚠️ Stripe key missing. Please check:');
-  console.error('1. Key name is exactly NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY');
+  console.error('1. Key name is exactly REACT_APP_STRIPE_PUBLISHABLE_KEY');
   console.error('2. Key is set in Vercel environment variables');
   console.error('3. Key is enabled for the current environment');
 }
@@ -34,7 +34,7 @@ try {
 }
 
 const MerchSection = () => {
-  console.log('Stripe Key exists:', !!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+  console.log('Stripe Key exists:', !!process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -43,7 +43,7 @@ const MerchSection = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('/api/products');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/products`);
         const data = await response.json();
         
         // Detailed debug logging
@@ -101,7 +101,7 @@ const MerchSection = () => {
       // Then try the sync variant endpoint
       console.log('Attempting sync variant fetch...');
       const variantId = product.id;
-      const apiUrl = `/api/sync-variant/${variantId}`;
+      const apiUrl = `${process.env.REACT_APP_API_URL}/sync-variant/${variantId}`;
       console.log('Calling API URL:', apiUrl);
 
       const response = await fetch(apiUrl);
@@ -126,7 +126,7 @@ const MerchSection = () => {
       const priceInCents = Math.round(parseFloat(productDetails.result.retail_price) * 100);
       const stripe = await stripePromise;
 
-      const checkoutResponse = await fetch('/api/create-checkout-session', {
+      const checkoutResponse = await fetch(`${process.env.REACT_APP_API_URL}/create-checkout-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
