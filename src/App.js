@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Mail, Instagram, Twitter } from 'lucide-react';
+import { Mail, Instagram, Twitter, ChevronDown } from 'lucide-react';
 import gsap from 'gsap';
 import ReleaseCard from './components/ReleaseCard';
 import ShowCard from './components/ShowCard';
@@ -113,6 +113,17 @@ function App() {
             Alternative Rock Band
           </p>
         </div>
+              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+    <ChevronDown 
+      className="w-8 h-8 text-[#D4FF99] animate-bounce cursor-pointer"
+      onClick={() => {
+        window.scrollTo({
+          top: window.innerHeight,
+          behavior: 'smooth'
+        });
+      }}
+    />
+  </div>
       </header>
 
       {/* About Section */}
