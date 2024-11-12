@@ -3,6 +3,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutModal from './CheckoutModal';
+import { useCart } from '../context/CartContext';
+import Cart from './Cart';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,6 +43,8 @@ const MerchSection = () => {
   const [error, setError] = useState(null);
   const sectionRef = useRef(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { addToCart, cartItems } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -146,6 +150,11 @@ const MerchSection = () => {
     }
   };
 
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    setIsCartOpen(true);
+  };
+
   if (loading) {
     return (
       <section className="py-20 px-6 bg-black">
@@ -180,13 +189,19 @@ const MerchSection = () => {
   return (
     <section ref={sectionRef} className="py-20 px-6 bg-black">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold mb-12 text-[#D4FF99] text-center">MERCH</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-4xl font-bold text-[#D4FF99]">MERCH</h2>
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="flex items-center gap-2 text-white"
+          >
+            Cart ({cartItems.length})
+          </button>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {products.map((product) => (
-            <div 
-              key={product.id}
-              className="product-card bg-zinc-950 rounded-xl overflow-hidden border border-zinc-800 hover:border-[#D4FF99] transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#D4FF99]/10"
-            >
+            <div key={product.id} className="product-card">
               <div className="relative group">
                 {product.thumbnail_url && (
                   <img 
@@ -209,16 +224,12 @@ const MerchSection = () => {
                     </span>
                   </div>
                 )}
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleBuyNow(product);
-                  }}
-                  className="inline-block w-full text-center px-6 py-3 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-bold rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className="w-full px-6 py-3 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-bold rounded-lg"
                 >
-                  BUY NOW
-                </a>
+                  Add to Cart
+                </button>
                 <div className="mt-4 flex items-center justify-center space-x-2 text-zinc-500 text-sm">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
@@ -231,11 +242,8 @@ const MerchSection = () => {
           ))}
         </div>
       </div>
-      <CheckoutModal 
-        isOpen={!!selectedProduct}
-        onClose={() => setSelectedProduct(null)}
-        product={selectedProduct}
-      />
+
+      <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </section>
   );
 };
