@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Mail, Instagram, Twitter, ChevronDown } from 'lucide-react';
 import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import ReleaseCard from './components/ReleaseCard';
 import ShowCard from './components/ShowCard';
 import NoShows from './components/NoShows';
@@ -8,8 +9,24 @@ import NoShows from './components/NoShows';
 function App() {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
+  const heroImageRef = useRef(null);
 
   useEffect(() => {
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero image scale effect
+    gsap.to(heroImageRef.current, {
+      scale: 1.2,
+      ease: "none",
+      scrollTrigger: {
+        trigger: heroImageRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
     // Split text into spans for animation
     if (titleRef.current) {
       const text = titleRef.current.innerText;
@@ -83,7 +100,8 @@ function App() {
       <header className="h-screen flex items-center justify-center relative overflow-hidden">
         <div className="ripple-background absolute inset-0">
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat brightness-75"
+            ref={heroImageRef}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat brightness-75 origin-center"
             style={{
               backgroundImage: `url('/images/the-boys-show.jpeg')`
             }}
