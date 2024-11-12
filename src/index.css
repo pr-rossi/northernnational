@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+#root {
+  background-color: #17181A;
+}
+
 @font-face {
   font-family: 'Thunder';
   src: url('./fonts/Thunder-BlackLC.woff2') format('woff2');
