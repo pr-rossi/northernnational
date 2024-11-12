@@ -101,11 +101,11 @@ function App() {
 
         <div className="z-10 text-center space-y-6 px-4">
           <h1 
-            ref={titleRef}
-            className="text-6xl md:text-8xl font-bold text-white"
-          >
-            NORTHERN NATIONAL
-          </h1>
+              ref={titleRef}
+              className="text-6xl md:text-8xl font-thunder text-white"
+            >
+              NORTHERN NATIONAL
+            </h1>
           <p 
             ref={subtitleRef}
             className="text-xl md:text-2xl text-[#D4FF99]"
