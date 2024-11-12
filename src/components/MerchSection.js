@@ -46,7 +46,7 @@ const MerchSection = () => {
         // Use Printful's API endpoint
         const response = await fetch('https://api.printful.com/store/products', {
           headers: {
-            'Authorization': `Bearer ${process.env.REACT_APP_PRINTFUL_API_KEY}`,
+            'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
             'Content-Type': 'application/json'
           }
         });
@@ -111,7 +111,7 @@ const MerchSection = () => {
       const variantId = product.id;
       const response = await fetch(`https://api.printful.com/store/products/${variantId}`, {
         headers: {
-          'Authorization': `Bearer ${process.env.REACT_APP_PRINTFUL_API_KEY}`,
+          'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
           'Content-Type': 'application/json'
         }
       });
