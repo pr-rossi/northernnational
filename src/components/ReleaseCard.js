@@ -1,9 +1,13 @@
 import React from 'react';
 import { Music } from 'lucide-react';
+import { useInView } from '../hooks/useInView';
 
 const ReleaseCard = ({ title, description, url }) => {
+  const cardRef = useInView();
+
   return (
     <a 
+      ref={cardRef}
       href={url}
       target="_blank"
       rel="noopener noreferrer"
