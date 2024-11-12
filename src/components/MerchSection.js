@@ -110,6 +110,11 @@ const MerchSection = () => {
   }, [products]);
 
   const handleBuyNow = (product) => {
+    console.log('Selected product:', product);
+    if (!product.sync_variants?.[0]?.retail_price) {
+      console.error('Invalid product data:', product);
+      return;
+    }
     setSelectedProduct(product);
   };
 

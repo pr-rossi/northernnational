@@ -7,6 +7,9 @@ import {
   useElements,
 } from '@stripe/react-stripe-js';
 
+// Initialize Stripe outside of component
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+
 // Checkout Form Component
 function CheckoutForm({ clientSecret, onSuccess, onCancel }) {
   const stripe = useStripe();
@@ -68,10 +71,9 @@ function CheckoutForm({ clientSecret, onSuccess, onCancel }) {
 // Modal Component
 export default function CheckoutModal({ isOpen, onClose, product }) {
   const [clientSecret, setClientSecret] = useState(null);
-  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
   useEffect(() => {
-    if (isOpen && product) {
+    if (isOpen && product && product.sync_variants?.[0]?.retail_price) {
       // Create payment intent when modal opens
       fetch('/api/create-payment-intent', {
         method: 'POST',
@@ -91,7 +93,14 @@ export default function CheckoutModal({ isOpen, onClose, product }) {
         }),
       })
         .then((res) => res.json())
-        .then((data) => setClientSecret(data.clientSecret));
+        .then((data) => {
+          if (data.error) {
+            console.error('Payment Intent Error:', data.error);
+          } else {
+            setClientSecret(data.clientSecret);
+          }
+        })
+        .catch((error) => console.error('Fetch Error:', error));
     }
   }, [isOpen, product]);
 
@@ -101,7 +110,12 @@ export default function CheckoutModal({ isOpen, onClose, product }) {
     window.location.href = '/success';
   };
 
-  if (!isOpen || !clientSecret) return null;
+  if (!isOpen || !product || !clientSecret) return null;
+
+  // Safely access product price
+  const price = product.sync_variants?.[0]?.retail_price 
+    ? parseFloat(product.sync_variants[0].retail_price).toFixed(2)
+    : 'Price unavailable';
 
   return (
     <div className="fixed inset-0 bg-black/75 flex items-center justify-center z-50">
@@ -110,7 +124,7 @@ export default function CheckoutModal({ isOpen, onClose, product }) {
           <h2 className="text-2xl font-bold text-white mb-2">Complete Purchase</h2>
           <div className="flex items-center justify-between text-zinc-400">
             <span>{product.name}</span>
-            <span>${parseFloat(product.sync_variants[0].retail_price).toFixed(2)}</span>
+            <span>${price}</span>
           </div>
         </div>
         <Elements stripe={stripePromise} options={{ clientSecret }}>
