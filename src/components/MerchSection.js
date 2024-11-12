@@ -165,11 +165,9 @@ const MerchSection = () => {
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleBuyNow({
-                      name: product.name,
-                      retail_price: product.retail_price,
-                      thumbnail_url: product.thumbnail_url // if available
-                    });
+                    // Log the full product object to see what data we have
+                    console.log('Full product:', product);
+                    handleBuyNow(product);  // Pass the entire product object
                   }}
                   className="inline-block w-full text-center px-6 py-2 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-medium rounded transition duration-300"
                 >
