@@ -7,7 +7,6 @@ export default function Cart({ isOpen, onClose }) {
   const timerRef = useRef(null);
 
   useEffect(() => {
-    // Clear any existing timer when component unmounts or isOpen changes
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
@@ -17,17 +16,14 @@ export default function Cart({ isOpen, onClose }) {
 
   useEffect(() => {
     if (isOpen) {
-      // Clear any existing timer
       if (timerRef.current) {
         clearTimeout(timerRef.current);
       }
       
-      // Set new timer for 5 seconds
       timerRef.current = setTimeout(() => {
         onClose();
-      }, 3000);
+      }, 2000);
 
-      // Add click outside handler
       function handleClickOutside(event) {
         if (cartRef.current && !cartRef.current.contains(event.target)) {
           onClose();
@@ -36,7 +32,6 @@ export default function Cart({ isOpen, onClose }) {
       document.addEventListener('mousedown', handleClickOutside);
 
       return () => {
-        // Clean up
         if (timerRef.current) {
           clearTimeout(timerRef.current);
         }
@@ -45,7 +40,6 @@ export default function Cart({ isOpen, onClose }) {
     }
   }, [isOpen, onClose]);
 
-  // Reset timer when user interacts with cart
   const handleCartInteraction = () => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
@@ -88,17 +82,19 @@ export default function Cart({ isOpen, onClose }) {
     }
   };
 
-  if (!isOpen) return null;
-
   return (
     <div 
-      className="fixed inset-0 bg-black/75 flex justify-end z-50"
+      className={`fixed inset-0 bg-black/75 flex justify-end z-50 transition-opacity duration-300 ${
+        isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}
       onMouseMove={handleCartInteraction}
       onClick={handleCartInteraction}
     >
       <div 
         ref={cartRef} 
-        className="bg-zinc-900 w-full max-w-md p-6 overflow-y-auto"
+        className={`bg-zinc-900 w-full max-w-md p-6 overflow-y-auto transform transition-transform duration-300 ease-out ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
       >
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-white">Cart</h2>
@@ -112,30 +108,27 @@ export default function Cart({ isOpen, onClose }) {
         ) : (
           <>
             <div className="space-y-4 mb-6">
-              {cartItems.map((item) => {
-                const price = item.sync_variants?.[0]?.retail_price;
-                return (
-                  <div key={item.id} className="flex items-center gap-4 bg-zinc-800 p-4 rounded-lg">
-                    <img 
-                      src={item.thumbnail_url} 
-                      alt={item.name} 
-                      className="w-20 h-20 object-cover rounded"
-                    />
-                    <div className="flex-1">
-                      <h3 className="text-white font-medium">{item.name}</h3>
-                      <p className="text-[#D4FF99]">
-                        ${price ? parseFloat(price).toFixed(2) : '0.00'}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="text-zinc-400 hover:text-white"
-                    >
-                      Remove
-                    </button>
+              {cartItems.map((item) => (
+                <div key={item.id} className="flex items-center gap-4 bg-zinc-800 p-4 rounded-lg">
+                  <img 
+                    src={item.thumbnail_url} 
+                    alt={item.name} 
+                    className="w-20 h-20 object-cover rounded"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-white font-medium">{item.name}</h3>
+                    <p className="text-[#D4FF99]">
+                      ${item.sync_variants?.[0]?.retail_price}
+                    </p>
                   </div>
-                );
-              })}
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className="text-zinc-400 hover:text-white"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
             </div>
 
             <div className="border-t border-zinc-800 pt-4 mb-6">
