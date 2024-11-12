@@ -12,7 +12,7 @@ const MailchimpEmbedded = () => {
         target="_blank"
       >
         <h3 className="text-xl font-bold mb-4">JOIN OUR MAILING LIST</h3>
-        <div className="flex flex-col max-w-md mx-auto space-y-2 md:space-y-0 md:flex-row">
+        <div className="flex flex-col md:flex-row max-w-md mx-auto gap-2 md:gap-0">
           <input
             type="email"
             name="EMAIL"
@@ -30,7 +30,6 @@ const MailchimpEmbedded = () => {
             SUBSCRIBE
           </button>
         </div>
-        {/* Bot protection - don't remove */}
         <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
           <input type="text" name="b_22d3f967aaa29a31ccd2275a1_7e228c82dc" tabIndex="-1" value="" />
         </div>
