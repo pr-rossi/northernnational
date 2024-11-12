@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const stripePromise = loadStripe('your-publishable-key');
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 const MerchSection = () => {
   const [products, setProducts] = useState([]);
@@ -62,14 +62,29 @@ const MerchSection = () => {
 
   const handleBuyNow = async (product) => {
     try {
-      const response = await fetch(`/api/printful/sync/variant/${product.id}`);
+      // Debug logging
+      console.log('Full product object:', product);
+      
+      // Use the sync variant ID
+      const variantId = product.id;
+      console.log('Using variant ID:', variantId);
+      
+      const apiUrl = `/api/sync-variant/${variantId}`;
+      console.log('Calling API URL:', apiUrl);
+
+      const response = await fetch(apiUrl);
       
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error('API Response Error:', {
+          status: response.status,
+          text: errorText
+        });
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
       const productDetails = await response.json();
-      console.log('Product details:', productDetails);
+      console.log('Success - Product Details:', productDetails);
 
       if (!productDetails.result?.retail_price) {
         throw new Error('Product price not available');
@@ -88,8 +103,8 @@ const MerchSection = () => {
             price_data: {
               currency: 'usd',
               product_data: {
-                name: product.name,
-                images: [product.thumbnail_url],
+                name: productDetails.result.name || product.name,
+                images: [productDetails.result.files[0]?.preview_url || product.thumbnail_url],
               },
               unit_amount: priceInCents,
             },
