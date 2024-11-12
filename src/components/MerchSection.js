@@ -64,18 +64,16 @@ const MerchSection = () => {
     try {
       console.log('Product data:', product);
 
-      const response = await fetch(`/api/printful/sync/products/${product.id}`);
+      const response = await fetch(`/api/printful/sync/variant/${product.id}`);
       const productDetails = await response.json();
       
       console.log('Product details:', productDetails);
 
-      // Printful sync API returns variant prices in the result.sync_variants array
-      const defaultVariant = productDetails.result.sync_variants?.[0];
-      if (!defaultVariant?.retail_price) {
+      if (!productDetails.result?.retail_price) {
         throw new Error('Product price not available');
       }
 
-      const priceInCents = Math.round(parseFloat(defaultVariant.retail_price) * 100);
+      const priceInCents = Math.round(parseFloat(productDetails.result.retail_price) * 100);
       const stripe = await stripePromise;
 
       const checkoutResponse = await fetch('/api/create-checkout-session', {
