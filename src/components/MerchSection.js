@@ -65,16 +65,20 @@ const MerchSection = () => {
       // Debug log to see the product structure
       console.log('Product data:', product);
 
-      // Printful typically includes variant pricing
-      const price = product.variants?.[0]?.retail_price || product.retail_price;
-      if (!price) {
+      // Fetch the product details including price
+      const response = await fetch(`/api/product-details?id=${product.id}`);
+      const productDetails = await response.json();
+      
+      console.log('Product details:', productDetails);
+
+      if (!productDetails.retail_price) {
         throw new Error('Product price not available');
       }
 
-      const priceInCents = Math.round(parseFloat(price) * 100);
+      const priceInCents = Math.round(parseFloat(productDetails.retail_price) * 100);
       const stripe = await stripePromise;
 
-      const response = await fetch('/api/create-checkout-session', {
+      const checkoutResponse = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,16 +89,16 @@ const MerchSection = () => {
               currency: 'usd',
               product_data: {
                 name: product.name,
-                images: [product.thumbnail_url], // Add product image if available
+                images: [product.thumbnail_url],
               },
-              unit_amount: priceInCents, // Make sure this is a valid integer
+              unit_amount: priceInCents,
             },
             quantity: 1,
           }],
         }),
       });
 
-      const { id } = await response.json();
+      const { id } = await checkoutResponse.json();
       
       if (!id) throw new Error('Failed to create checkout session');
 
