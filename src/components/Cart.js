@@ -3,6 +3,8 @@ import { useCart } from '../context/CartContext';
 export default function Cart({ isOpen, onClose }) {
   const { cartItems, removeFromCart, getCartTotal } = useCart();
 
+  console.log('Cart Items:', cartItems);
+
   const handleCheckout = async () => {
     try {
       const lineItems = cartItems.map(item => {
@@ -59,39 +61,32 @@ export default function Cart({ isOpen, onClose }) {
           </button>
         </div>
 
-        {cartItems.length === 0 ? (
+        {(!cartItems || cartItems.length === 0) ? (
           <p className="text-zinc-400">Your cart is empty</p>
         ) : (
           <>
             <div className="space-y-4 mb-6">
-              {cartItems.map((item) => {
-                const price = item.sync_variants?.[0]?.retail_price;
-                if (!price) return null;
-
-                return (
-                  <div key={item.id} className="flex items-center gap-4 bg-zinc-800 p-4 rounded-lg">
-                    {item.thumbnail_url && (
-                      <img 
-                        src={item.thumbnail_url} 
-                        alt={item.name} 
-                        className="w-20 h-20 object-cover rounded"
-                      />
-                    )}
-                    <div className="flex-1">
-                      <h3 className="text-white font-medium">{item.name}</h3>
-                      <p className="text-[#D4FF99]">
-                        ${parseFloat(price).toFixed(2)}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="text-zinc-400 hover:text-white"
-                    >
-                      Remove
-                    </button>
+              {cartItems.map((item) => (
+                <div key={item.id} className="flex items-center gap-4 bg-zinc-800 p-4 rounded-lg">
+                  <img 
+                    src={item.thumbnail_url} 
+                    alt={item.name} 
+                    className="w-20 h-20 object-cover rounded"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-white font-medium">{item.name}</h3>
+                    <p className="text-[#D4FF99]">
+                      ${item.sync_variants?.[0]?.retail_price}
+                    </p>
                   </div>
-                );
-              })}
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className="text-zinc-400 hover:text-white"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
             </div>
 
             <div className="border-t border-zinc-800 pt-4 mb-6">

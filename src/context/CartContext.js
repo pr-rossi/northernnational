@@ -6,7 +6,12 @@ export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
-    setCartItems(prev => [...prev, product]);
+    console.log('Adding to cart:', product);
+    setCartItems(prev => {
+      const newItems = [...prev, product];
+      console.log('New cart state:', newItems);
+      return newItems;
+    });
   };
 
   const removeFromCart = (productId) => {
@@ -18,6 +23,7 @@ export function CartProvider({ children }) {
   };
 
   const getCartTotal = () => {
+    console.log('Calculating total for items:', cartItems);
     return cartItems.reduce((total, item) => {
       const price = item.sync_variants?.[0]?.retail_price;
       if (!price) return total;
