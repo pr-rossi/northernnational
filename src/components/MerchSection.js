@@ -58,17 +58,20 @@ const MerchSection = () => {
 
   const handleBuyNow = async (product) => {
     try {
-      // Fetch the product details including price
-      const detailsResponse = await fetch(`/api/product-details?id=${product.id}`);
-      const productDetails = await detailsResponse.json();
-      
-      console.log('Product details:', productDetails);
-
-      if (!productDetails.retail_price) {
-        throw new Error('Product price not available');
+      let priceInCents;
+      try {
+        const detailsResponse = await fetch(`/api/product-details?id=${product.id}`);
+        const productDetails = await detailsResponse.json();
+        priceInCents = Math.round(productDetails.retail_price * 100);
+      } catch (error) {
+        console.error('Error fetching product details:', error);
+        // Fallback to using the price from the product object
+        priceInCents = Math.round(product.retail_price * 100);
       }
 
-      const priceInCents = Math.round(productDetails.retail_price * 100);
+      if (!priceInCents) {
+        throw new Error('Product price not available');
+      }
 
       const stripe = await stripePromise;
 
