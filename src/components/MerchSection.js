@@ -43,13 +43,10 @@ const MerchSection = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        // Use Printful's API endpoint
-        const response = await fetch('https://api.printful.com/store/products', {
-          headers: {
-            'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
-            'Content-Type': 'application/json'
-          }
-        });
+        const apiUrl = `${process.env.REACT_APP_API_URL}/api/products`;
+        console.log('Fetching products from:', apiUrl);
+        
+        const response = await fetch(apiUrl);
         
         // Add response debugging
         if (!response.ok) {
@@ -64,7 +61,7 @@ const MerchSection = () => {
         }
         
         const data = await response.json();
-        console.log('Printful API Response:', data);
+        console.log('API Response:', data);
 
         if (data && data.result) {
           setProducts(data.result);
