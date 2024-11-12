@@ -32,10 +32,13 @@ export default async function handler(req, res) {
         enabled: true,
       },
       metadata: {
-        product_id: items[0].product_id || '',
-        variant_id: variantId || '',
-        customer_email: email || ''
+        product_id: items[0].product_id,
+        variant_id: variantId,
+        customer_email: email,
+        product_name: items[0].price_data.product_data.name,
+        product_image: items[0].price_data.product_data.images[0]
       },
+      receipt_email: email,
       shipping: {
         name: 'shipping',
         address: {
