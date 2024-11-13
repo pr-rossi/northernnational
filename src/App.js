@@ -7,6 +7,7 @@ import ReleaseCard from './components/ReleaseCard';
 import ShowCard from './components/ShowCard';
 import NoShows from './components/NoShows';
 import MerchSection from './components/MerchSection';
+import FeaturedBlogs from './components/FeaturedBlogs';
 import { CartProvider } from './context/CartContext';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
@@ -221,7 +222,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Latest News Section */}
+      {/* Blog Section */}
       <section className="py-20 px-6 bg-zinc-950">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">LATEST NEWS</h2>
