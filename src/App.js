@@ -172,14 +172,108 @@ function HomePage() {
         </header>
 
         {/* About Section */}
-        <section className="py-20 px-6 bg-zinc-950">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">ABOUT THE BAND</h2>
-            <p className="text-lg text-gray-300 leading-relaxed">
-              Northern National brings raw energy and authentic storytelling to the alternative rock scene. 
-              With powerful vocals, driving guitars, and dynamic performances, we create an unforgettable 
-              experience that resonates with audiences everywhere.
-            </p>
+        <section className="py-32 px-6 bg-zinc-950 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              {/* Text Content */}
+              <div className="space-y-8">
+                <motion.h2 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="text-5xl md:text-6xl font-bold text-[#D4FF99]"
+                >
+                  ABOUT THE BAND
+                </motion.h2>
+                
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="space-y-6"
+                >
+                  <p className="text-xl text-gray-300 leading-relaxed">
+                    Northern National brings raw energy and authentic storytelling to the alternative rock scene. 
+                    With powerful vocals, driving guitars, and dynamic performances, we create an unforgettable 
+                    experience that resonates with audiences everywhere.
+                  </p>
+                  
+                  <p className="text-xl text-gray-300 leading-relaxed">
+                    Based in Dallas, TX, we've been crafting our unique sound since 2016, blending modern rock 
+                    with atmospheric elements and honest lyrics that speak to the human experience.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  <a 
+                    href="https://open.spotify.com/artist/your-id" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-2 bg-[#D4FF99] text-black px-6 py-3 rounded-full 
+                               font-medium hover:bg-white transition-colors duration-300"
+                  >
+                    <span>LISTEN ON SPOTIFY</span>
+                    <ExternalLink size={20} />
+                  </a>
+                </motion.div>
+              </div>
+
+              {/* Image Grid */}
+              <div className="grid grid-cols-2 gap-4">
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="space-y-4"
+                >
+                  <div className="aspect-[3/4] rounded-lg overflow-hidden">
+                    <img 
+                      src="/images/band-1.jpg" 
+                      alt="Northern National performance" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="aspect-[3/4] rounded-lg overflow-hidden">
+                    <img 
+                      src="/images/band-2.jpg" 
+                      alt="Northern National backstage" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="space-y-4 pt-8"
+                >
+                  <div className="aspect-[3/4] rounded-lg overflow-hidden">
+                    <img 
+                      src="/images/band-3.jpg" 
+                      alt="Northern National studio session" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="aspect-[3/4] rounded-lg overflow-hidden">
+                    <img 
+                      src="/images/band-4.jpg" 
+                      alt="Northern National candid" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </section>
 
