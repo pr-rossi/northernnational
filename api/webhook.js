@@ -86,7 +86,7 @@ export default async function handler(req, res) {
         confirm: true
       };
 
-      console.log('Printful order payload:', JSON.stringify(printfulOrder, null, 2));
+      console.log('Printful order payload (stringified):', JSON.stringify(printfulOrder));
 
       const printfulResponse = await fetch('https://api.printful.com/orders', {
         method: 'POST',
