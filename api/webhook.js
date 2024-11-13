@@ -54,8 +54,15 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'No valid variant IDs' });
       }
 
+      // Debug the session ID
+      console.log('Original session ID:', session.id);
+      
+      // Create a more strictly formatted external ID
+      const externalId = `stripe_order_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      console.log('Generated external ID:', externalId);
+
       const printfulOrder = {
-        external_id: `stripe_${session.id.replace(/[^a-zA-Z0-9]/g, '_')}`,
+        external_id: externalId,
         recipient: {
           name: session.shipping_details.name,
           address1: session.shipping_details.address.line1,
