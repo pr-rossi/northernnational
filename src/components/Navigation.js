@@ -23,13 +23,47 @@ function Navigation() {
       setHasScrolled(lenis.scroll > 50);
     }
 
-    // Subscribe to scroll updates
     lenis.on('scroll', handleScroll);
 
     return () => {
       lenis.off('scroll', handleScroll);
     };
   }, [lenis]);
+
+  const menuVariants = {
+    closed: {
+      opacity: 0,
+      height: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.22, 1, 0.36, 1]
+      }
+    },
+    open: {
+      opacity: 1,
+      height: "100vh",
+      transition: {
+        duration: 0.4,
+        ease: [0.22, 1, 0.36, 1]
+      }
+    }
+  };
+
+  const linkVariants = {
+    closed: {
+      opacity: 0,
+      y: 20,
+    },
+    open: i => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.4,
+        ease: [0.22, 1, 0.36, 1]
+      }
+    })
+  };
 
   return (
     <nav 
@@ -44,7 +78,7 @@ function Navigation() {
               src="/images/nn-logo.svg" 
               alt="Northern National" 
               className={`transition-all duration-300 brightness-0 invert
-                ${hasScrolled ? 'h-8 md:h-10' : 'h-10 md:h-12'}`}
+                ${hasScrolled ? 'h-16' : 'h-20'}`}
             />
           </Link>
 
@@ -78,26 +112,35 @@ function Navigation() {
           <AnimatePresence>
             {isOpen && (
               <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
-                className="absolute inset-x-0 top-0 bg-zinc-950 p-6 md:hidden"
+                variants={menuVariants}
+                initial="closed"
+                animate="open"
+                exit="closed"
+                className="fixed inset-0 bg-zinc-950 md:hidden"
               >
-                <div className="pt-16 pb-6 space-y-6">
-                  {navLinks.map((link) => (
-                    <Link
+                <div className="flex flex-col justify-center items-center h-full">
+                  {navLinks.map((link, i) => (
+                    <motion.div
                       key={link.name}
-                      to={link.path}
-                      onClick={() => setIsOpen(false)}
-                      className={`block text-lg font-medium transition-colors duration-200 
-                        ${location.pathname === link.path 
-                          ? 'text-[#D4FF99]' 
-                          : 'text-white hover:text-[#D4FF99]'
-                        }`}
+                      custom={i}
+                      variants={linkVariants}
+                      initial="closed"
+                      animate="open"
+                      exit="closed"
+                      className="mb-8"
                     >
-                      {link.name}
-                    </Link>
+                      <Link
+                        to={link.path}
+                        onClick={() => setIsOpen(false)}
+                        className={`text-4xl font-bold transition-colors duration-200 
+                          ${location.pathname === link.path 
+                            ? 'text-[#D4FF99]' 
+                            : 'text-white hover:text-[#D4FF99]'
+                          }`}
+                      >
+                        {link.name}
+                      </Link>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
