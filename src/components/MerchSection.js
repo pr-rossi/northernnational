@@ -115,7 +115,6 @@ const MerchSection = () => {
 
   const handleBuyNow = async (product) => {
     try {
-      // Fetch product details first
       const response = await fetch(`${process.env.REACT_APP_API_URL}/api/product-details?id=${product.id}`);
       const productDetails = await response.json();
       
@@ -125,7 +124,6 @@ const MerchSection = () => {
 
       const variant = productDetails.result.sync_variants[0];
       
-      // Create checkout session
       const checkoutResponse = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
@@ -142,6 +140,7 @@ const MerchSection = () => {
               unit_amount: Math.round(parseFloat(variant.retail_price) * 100),
             },
             quantity: 1,
+            variantId: variant.id
           }],
         }),
       });
