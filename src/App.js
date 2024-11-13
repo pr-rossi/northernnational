@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { Mail, Instagram, Twitter, ChevronDown, ExternalLink } from 'lucide-react';
+import { Mail, Instagram, Twitter, ChevronDown, ExternalLink, ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import ReleaseCard from './components/ReleaseCard';
@@ -324,10 +324,41 @@ function HomePage() {
         </section>
 
         {/* Blog Section */}
-        <section className="py-20 px-6 bg-zinc-950">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">LATEST NEWS</h2>
-            <FeaturedBlogs />
+        <section className="py-32 px-6 bg-zinc-950">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="flex flex-col md:flex-row justify-between items-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-[#D4FF99]">LATEST NEWS</h2>
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <Link 
+                  to="/blog"
+                  className="inline-flex items-center space-x-2 text-white hover:text-[#D4FF99] transition-colors duration-300"
+                >
+                  <span>VIEW ALL</span>
+                  <ArrowRight size={20} />
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            >
+              <FeaturedBlogs limit={3} />
+            </motion.div>
           </div>
         </section>
 
