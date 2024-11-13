@@ -100,7 +100,7 @@ function BlogPost() {
             />
           </div>
 
-          <div className="max-w-3xl mx-auto px-6 pb-20">
+          <div className="max-w-3xl mx-auto px-6">
             <div className="prose prose-invert prose-lg max-w-none">
               <ReactMarkdown
                 components={{
