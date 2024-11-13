@@ -1,31 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPostBySlug } from '../utils/blogUtils';
-import Markdown from 'react-markdown';
 import PageTransition from '../components/PageTransition';
 
 function BlogPost() {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getPostBySlug(slug)
-      .then(post => {
-        setPost(post);
-        setLoading(false);
-      });
+    getPostBySlug(slug).then(setPost);
   }, [slug]);
 
-  if (loading) {
-    return <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
-      <div className="text-[#D4FF99]">Loading...</div>
-    </div>;
-  }
-
-  if (!post) {
-    return <div>Post not found</div>;
-  }
+  if (!post) return null;
 
   return (
     <PageTransition>
