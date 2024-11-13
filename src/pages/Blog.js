@@ -2,30 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getSortedPosts } from '../utils/blogUtils';
 import PageTransition from '../components/PageTransition';
-import LoadingTransition from '../components/LoadingTransition';
 
 function Blog() {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const fetchedPosts = await getSortedPosts();
-        setPosts(fetchedPosts);
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
+    getSortedPosts().then(setPosts);
   }, []);
-
-  if (loading) {
-    return <LoadingTransition />;
-  }
 
   return (
     <PageTransition>
