@@ -67,9 +67,3 @@ body {
   font-size: 3.5rem;
   line-height: 3.5rem;
 }
-
-html, body {
-  overflow: auto !important;
-  height: auto !important;
-  position: relative !important;
-}
