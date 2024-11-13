@@ -53,7 +53,7 @@ As the song wraps up, the lyrics oscillate between resignation and a desperate s
 
 "IDGAF" is more than just a breakup song; it’s a raw, introspective look at the emotional landscapes we navigate in our personal journeys. With their latest single, Northern National continues to demonstrate their mastery of conveying complex emotions through compelling lyrics and dynamic melodies.
 
-For more updates on their music and tour dates, follow Northern National on [their official website](http://www.northernnationalmusic.com).
+For more updates on their music and tour dates, follow Northern National on [their official website](https://www.northernnationalmusic.com).
 
 ---
-Stay tuned for more music insights and artist spotlights at [YourMusicBlog.com](http://yourmusicblog.com).
+Follow us for more music updates and band reviews at [NN Updates](https://www.northernnationalmusic.com/blog).
