@@ -53,16 +53,11 @@ export default function Cart({ isOpen, onClose }) {
 
   const handleCheckout = async () => {
     try {
-      const lineItems = cartItems.map(item => ({
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: item.name,
-            images: [item.thumbnail_url],
-          },
-          unit_amount: Math.round(parseFloat(item.sync_variants[0].retail_price) * 100),
-        },
-        quantity: 1,
+      const items = cartItems.map(item => ({
+        name: item.name,
+        image: item.thumbnail_url,
+        unit_amount: Math.round(parseFloat(item.sync_variants[0].retail_price) * 100),
+        variantId: item.sync_variants[0].id.toString(),
       }));
 
       const response = await fetch('/api/create-checkout-session', {
@@ -70,15 +65,19 @@ export default function Cart({ isOpen, onClose }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          items: lineItems,
-        }),
+        body: JSON.stringify({ items }),
       });
 
       const { url } = await response.json();
-      window.location = url;
+      
+      if (url) {
+        window.location = url;
+      } else {
+        throw new Error('No checkout URL received');
+      }
     } catch (error) {
-      console.error('Error creating checkout session:', error);
+      console.error('Error initiating checkout:', error);
+      alert('Failed to initiate checkout. Please try again.');
     }
   };
 
@@ -131,19 +130,23 @@ export default function Cart({ isOpen, onClose }) {
               ))}
             </div>
 
-            <div className="border-t border-zinc-800 pt-4 mb-6">
-              <div className="flex justify-between text-lg font-bold text-white">
-                <span>Total</span>
-                <span>${getCartTotal()}</span>
-              </div>
-            </div>
+            {cartItems.length > 0 && (
+              <>
+                <div className="border-t border-zinc-800 pt-4 mb-6">
+                  <div className="flex justify-between text-lg font-bold text-white">
+                    <span>Total</span>
+                    <span>${getCartTotal()}</span>
+                  </div>
+                </div>
 
-            <button
-              onClick={handleCheckout}
-              className="w-full px-6 py-3 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-bold rounded-lg transition-all duration-300"
-            >
-              Checkout
-            </button>
+                <button
+                  onClick={handleCheckout}
+                  className="w-full px-6 py-3 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-bold rounded-lg transition-all duration-300"
+                >
+                  Checkout
+                </button>
+              </>
+            )}
           </>
         )}
       </div>
