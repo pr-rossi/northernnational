@@ -16,6 +16,7 @@ import PageTransition from './components/PageTransition';
 import LenisProvider from './components/LenisProvider';
 import { useLenis } from '@studio-freight/react-lenis'
 import { motion } from 'framer-motion';
+import { useInitialTransition } from './hooks/useInitialTransition';
 
 function HomePage() {
   const titleRef = useRef(null);
@@ -451,6 +452,8 @@ function AnimatedRoutes() {
 }
 
 function App() {
+  useInitialTransition();
+
   return (
     <div className="min-h-screen bg-zinc-950">
       <Router>
