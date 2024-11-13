@@ -50,16 +50,40 @@ const overlayVariants = {
   }
 };
 
+const logoVariants = {
+  initial: {
+    opacity: 1,
+    scale: 1
+  },
+  animate: {
+    opacity: 0,
+    scale: 0.8,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+};
+
 function PageTransition({ children }) {
   return (
     <>
       <motion.div
-        className="fixed inset-0 bg-[#D4FF99] z-50"
+        className="fixed inset-0 bg-[#D4FF99] z-50 flex items-center justify-center"
         variants={overlayVariants}
         initial="initial"
         animate="animate"
         exit="exit"
-      />
+      >
+        <motion.img
+          src="/images/nn-logo.svg"
+          alt="Northern National"
+          className="w-32 h-32" // Adjust size as needed
+          variants={logoVariants}
+          initial="initial"
+          animate="animate"
+        />
+      </motion.div>
       <motion.div
         variants={pageVariants}
         initial="initial"
