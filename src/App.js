@@ -214,7 +214,7 @@ function HomePage() {
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
                   <a 
-                    href="https://open.spotify.com/artist/your-id" 
+                    href="https://open.spotify.com/artist/77uddrwADVuSI16ASFWF3c?si=bVUiHtZyS-u8cE4CuxYLFA" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center space-x-2 bg-[#D4FF99] text-black px-6 py-3 rounded-full 
