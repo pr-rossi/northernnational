@@ -1,9 +1,11 @@
 import React from 'react';
 import { CalendarX } from 'lucide-react';
 import { useInView } from '../hooks/useInView';
+import { useLenis } from '@studio-freight/react-lenis';
 
 const NoShows = () => {
   const cardRef = useInView();
+  const lenis = useLenis();
 
   return (
     <div 
@@ -21,9 +23,14 @@ const NoShows = () => {
           href="#mailing-list" 
           onClick={(e) => {
             e.preventDefault();
-            document.querySelector('#mailing-list').scrollIntoView({ 
-              behavior: 'smooth'
-            });
+            const footer = document.querySelector('footer');
+            if (footer && lenis) {
+              lenis.scrollTo(footer, {
+                offset: -50, // Adds some padding at the top
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+              });
+            }
           }}
           className="inline-flex items-center px-6 py-3 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-medium rounded-lg transition duration-300"
         >
