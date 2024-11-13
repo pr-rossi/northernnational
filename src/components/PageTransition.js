@@ -21,37 +21,27 @@ function PageTransition({ children }) {
       </svg>
 
       <motion.div
-        initial={{ y: "100%", filter: "url(#liquid)" }}
+        initial={{ opacity: 1, filter: "url(#liquid)" }}
         animate={{ 
-          y: "-100%",
+          opacity: 0,
           transition: { 
-            duration: 1.5,
-            ease: [0.45, 0, 0.55, 1]
+            duration: 2,
+            ease: "easeOut"
           }
         }}
         exit={{ 
-          y: "-200%",
+          opacity: 1,
           transition: { 
-            duration: 1.5,
-            ease: [0.45, 0, 0.55, 1]
+            duration: 2,
+            ease: "easeIn"
           }
         }}
         className="fixed inset-0 bg-[#D4FF99] z-50"
       />
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ 
-          opacity: 1,
-          transition: { 
-            duration: 0.5,
-            delay: 0.5 
-          }
-        }}
-        exit={{ opacity: 0 }}
-      >
+      <div className="relative z-0">
         {children}
-      </motion.div>
+      </div>
     </>
   );
 }
