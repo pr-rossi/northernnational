@@ -14,13 +14,23 @@ function BlogPost() {
     getPostBySlug(slug).then(setPost);
   }, [slug]);
 
+  const handleClose = () => {
+    // First, force scroll to top
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTo(0, 0);
+    document.body.scrollTo(0, 0);
+    
+    // Then navigate back
+    navigate(-1);
+  };
+
   if (!post) return null;
 
   return (
     <PageTransition>
       <div className="min-h-screen bg-zinc-950">
         <button
-          onClick={() => navigate(-1)}
+          onClick={handleClose}
           className="fixed top-8 right-8 z-50 p-2 rounded-full bg-black/50 backdrop-blur-sm 
                      text-white hover:text-[#D4FF99] transition-colors duration-200"
           aria-label="Close"
