@@ -1,6 +1,6 @@
 ---
 title: "Northern National Releases Poignant New Single 'IDGAF'"
-date: "2024-11-14"
+date: "2024-01-05"
 coverImage: "/images/blog/IDGAFArtwork.png"
 excerpt: "Dive deep into the raw emotions and stark realism of Northern National's latest track, 'IDGAF'."
 ---
