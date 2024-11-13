@@ -17,23 +17,21 @@ function BlogPost() {
   }, [slug]);
 
   const handleClose = () => {
-    // Stop Lenis smooth scrolling temporarily
+    // Stop Lenis smooth scrolling
     if (lenis) {
       lenis.stop();
     }
 
-    // Force scroll to absolute top
+    // Force scroll to top on current page
     window.scrollTo(0, 0);
+    document.documentElement.scrollTo(0, 0);
+    document.body.scrollTo(0, 0);
+    
+    // Store the instruction to scroll to top
+    sessionStorage.setItem('scrollToTop', 'true');
     
     // Navigate back
     navigate(-1);
-
-    // Re-enable Lenis after a brief delay
-    setTimeout(() => {
-      if (lenis) {
-        lenis.start();
-      }
-    }, 100);
   };
 
   if (!post) return null;
