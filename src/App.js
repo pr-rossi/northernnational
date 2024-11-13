@@ -324,13 +324,15 @@ function AnimatedRoutes() {
 
 function App() {
   return (
-    <Router>
-      <LenisProvider>
-        <CartProvider>
-          <AnimatedRoutes />
-        </CartProvider>
-      </LenisProvider>
-    </Router>
+    <div className="min-h-screen bg-zinc-950">
+      <Router>
+        <LenisProvider>
+          <CartProvider>
+            <AnimatedRoutes />
+          </CartProvider>
+        </LenisProvider>
+      </Router>
+    </div>
   );
 }
 

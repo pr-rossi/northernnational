@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #09090B; /* zinc-950 */
+  min-height: 100vh;
+}
+
 #root {
-  background-color: #17181A;
+  min-height: 100vh;
+  background-color: #09090B; /* zinc-950 */
 }
 
 @font-face {
