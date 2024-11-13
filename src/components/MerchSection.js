@@ -123,7 +123,8 @@ const MerchSection = () => {
       }
 
       const variant = productDetails.result.sync_variants[0];
-      
+      console.log('Variant details:', variant);
+
       const checkoutResponse = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
@@ -131,16 +132,10 @@ const MerchSection = () => {
         },
         body: JSON.stringify({
           items: [{
-            price_data: {
-              currency: 'usd',
-              product_data: {
-                name: product.name,
-                images: [product.thumbnail_url],
-              },
-              unit_amount: Math.round(parseFloat(variant.retail_price) * 100),
-            },
-            quantity: 1,
-            variantId: variant.id
+            name: product.name,
+            image: product.thumbnail_url,
+            unit_amount: Math.round(parseFloat(variant.retail_price) * 100),
+            variantId: variant.id.toString(),
           }],
         }),
       });

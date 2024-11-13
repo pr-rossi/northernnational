@@ -39,8 +39,21 @@ export default async function handler(req, res) {
     const session = event.data.object;
     
     try {
-      const variantIds = session.metadata.variant_ids.split(',').filter(Boolean);
+      console.log('Session metadata:', session.metadata);
       
+      if (!session.metadata?.variant_ids) {
+        console.error('No variant_ids in session metadata');
+        return res.status(400).json({ error: 'Missing variant_ids in session metadata' });
+      }
+
+      const variantIds = session.metadata.variant_ids.split(',').filter(Boolean);
+      console.log('Parsed variant IDs:', variantIds);
+
+      if (variantIds.length === 0) {
+        console.error('No valid variant IDs found after parsing');
+        return res.status(400).json({ error: 'No valid variant IDs' });
+      }
+
       const printfulOrder = {
         recipient: {
           name: session.shipping_details.name,
@@ -74,26 +87,16 @@ export default async function handler(req, res) {
         body: JSON.stringify(printfulOrder),
       });
 
-      if (!printfulResponse.ok) {
-        const errorText = await printfulResponse.text();
-        console.error('Printful API Error:', {
-          status: printfulResponse.status,
-          statusText: printfulResponse.statusText,
-          error: errorText
-        });
-        throw new Error(`Printful API error: ${errorText}`);
-      }
+      const responseText = await printfulResponse.text();
+      console.log('Printful API response:', responseText);
 
-      const printfulResult = await printfulResponse.json();
-      console.log('Printful order created:', printfulResult);
+      if (!printfulResponse.ok) {
+        throw new Error(`Printful API error: ${responseText}`);
+      }
 
       return res.status(200).json({ received: true });
     } catch (error) {
-      console.error('Error processing order:', {
-        message: error.message,
-        stack: error.stack,
-        session: session
-      });
+      console.error('Error processing order:', error);
       return res.status(500).json({ 
         error: 'Error processing order',
         details: error.message 
