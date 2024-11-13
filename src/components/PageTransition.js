@@ -7,24 +7,17 @@ function PageTransition({ children }) {
 
   useEffect(() => {
     document.body.style.backgroundColor = '#09090B';
+
+    // Make sure Lenis is running when component mounts
+    if (lenis) {
+      lenis.start();
+    }
     
     return () => {
-      // Temporarily stop Lenis
-      if (lenis) {
-        lenis.stop();
-      }
-
-      // Force scroll to top
+      // On unmount, scroll to top before transition
       window.scrollTo(0, 0);
       document.documentElement.scrollTo(0, 0);
       document.body.scrollTo(0, 0);
-
-      // Immediately restart Lenis
-      if (lenis) {
-        requestAnimationFrame(() => {
-          lenis.start();
-        });
-      }
     };
   }, [lenis]);
 
@@ -46,6 +39,12 @@ function PageTransition({ children }) {
         transition: {
           duration: 0.5,
           ease: [0.22, 1, 0.36, 1]
+        }
+      }}
+      onAnimationComplete={() => {
+        // Ensure Lenis is running after animation completes
+        if (lenis) {
+          lenis.start();
         }
       }}
     >
