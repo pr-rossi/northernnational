@@ -11,7 +11,7 @@ const pageVariants = {
     scale: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 1.2,
       ease: [0.22, 1, 0.36, 1]
     }
   },
@@ -20,7 +20,7 @@ const pageVariants = {
     scale: 0.98,
     y: -30,
     transition: {
-      duration: 0.5,
+      duration: 0.8,
       ease: [0.22, 1, 0.36, 1]
     }
   }
@@ -35,7 +35,8 @@ const overlayVariants = {
     scaleY: 0,
     originY: 0,
     transition: {
-      duration: 0.5,
+      duration: 1,
+      delay: 0.2,
       ease: [0.22, 1, 0.36, 1]
     }
   },
@@ -43,7 +44,7 @@ const overlayVariants = {
     scaleY: 1,
     originY: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.8,
       ease: [0.22, 1, 0.36, 1]
     }
   }
