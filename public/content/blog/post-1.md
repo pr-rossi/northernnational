@@ -1,11 +1,9 @@
 ---
 title: "Spotlight on Northern National: Dallas's Alternative Rock Phenomenon"
-date: "2024-11-14"
+date: "2024-11-13"
 coverImage: "/images/blog/nn-og.jpg"
 excerpt: "Dive into the story of Northern National, a band from Dallas that's making waves in the alternative rock scene with their unique sound and electrifying performances."
 ---
-
-![Northern National Band](/images/blog/nn-og.jpg)
 
 Based in the vibrant city of Dallas, TX, **Northern National** is an alternative rock band that has been captivating audiences with their unique blend of rock and indie melodies since their formation. The band is known for its powerful lyrics, dynamic soundscapes, and the electrifying energy they bring to every performance.
 
