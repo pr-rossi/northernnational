@@ -22,16 +22,20 @@ function BlogPost() {
       lenis.stop();
     }
 
-    // Force scroll to top on current page
+    // Force scroll to top
     window.scrollTo(0, 0);
     document.documentElement.scrollTo(0, 0);
     document.body.scrollTo(0, 0);
     
-    // Store the instruction to scroll to top
-    sessionStorage.setItem('scrollToTop', 'true');
-    
     // Navigate back
     navigate(-1);
+
+    // Re-enable Lenis after navigation
+    requestAnimationFrame(() => {
+      if (lenis) {
+        lenis.start();
+      }
+    });
   };
 
   if (!post) return null;
