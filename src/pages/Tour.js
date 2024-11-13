@@ -1,8 +1,21 @@
+import { useEffect } from 'react';
+import { useLenis } from '@studio-freight/react-lenis';
 import PageTransition from '../components/PageTransition';
 import ShowCard from '../components/ShowCard';
 import NoShows from '../components/NoShows';
 
 function Tour() {
+  const lenis = useLenis();
+
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+    // Also reset Lenis scroll
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    }
+  }, [lenis]);
+
   // You can move this to a data file or fetch from an API
   const shows = [
     // {
