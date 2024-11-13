@@ -6,6 +6,7 @@ import CheckoutModal from './CheckoutModal';
 import { useCart } from '../context/CartContext';
 import Cart from './Cart';
 import './MerchSection.css';
+import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -50,6 +51,30 @@ const MerchSection = ({
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { addToCart, cartItems } = useCart();
+
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { 
+      opacity: 0,
+      y: 50 // Start 50px below final position
+    },
+    show: { 
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1]
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -243,9 +268,19 @@ const MerchSection = ({
           <h2 className="text-4xl md:text-6xl font-bold text-[#D4FF99] mb-12">MERCH</h2>
         )}
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+        >
           {products.map((product) => (
-            <div key={product.id} className="product-card">
+            <motion.div
+              key={product.id}
+              variants={itemVariants}
+              className="bg-black p-6 rounded-lg border border-zinc-900"
+            >
               <div className="relative group">
                 {product.thumbnail_url && (
                   <img 
@@ -290,9 +325,9 @@ const MerchSection = ({
                   <span>Secure checkout</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
