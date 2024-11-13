@@ -95,7 +95,7 @@ function App() {
       url: "https://open.spotify.com/track/1rM0BBBaWZ0OMQtPHVZatl?si=49e44d58176846ff"
     },
     {
-      title: "THIS IS NN",
+      title: "THIS IS Northern National",
       description: "Listen to all our music on our official Spotify playlist!",
       url: "https://open.spotify.com/playlist/37i9dQZF1DZ06evO4daEGQ?si=78a79f6bacdd4641"
     }
