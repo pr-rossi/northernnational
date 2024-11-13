@@ -5,6 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import CheckoutModal from './CheckoutModal';
 import { useCart } from '../context/CartContext';
 import Cart from './Cart';
+import './MerchSection.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
