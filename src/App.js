@@ -237,14 +237,14 @@ function HomePage() {
                 >
                   <div className="aspect-[3/4] rounded-lg overflow-hidden">
                     <img 
-                      src="/images/band-1.jpg" 
+                      src="/images/nn-boys-show.jpg" 
                       alt="Northern National performance" 
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="aspect-[3/4] rounded-lg overflow-hidden">
                     <img 
-                      src="/images/band-2.jpg" 
+                      src="/images/rossi.jpg" 
                       alt="Northern National backstage" 
                       className="w-full h-full object-cover"
                     />
@@ -260,14 +260,14 @@ function HomePage() {
                 >
                   <div className="aspect-[3/4] rounded-lg overflow-hidden">
                     <img 
-                      src="/images/band-3.jpg" 
+                      src="/images/anthony.jpg" 
                       alt="Northern National studio session" 
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="aspect-[3/4] rounded-lg overflow-hidden">
                     <img 
-                      src="/images/band-4.jpg" 
+                      src="/images/dylan.jpg" 
                       alt="Northern National candid" 
                       className="w-full h-full object-cover"
                     />
