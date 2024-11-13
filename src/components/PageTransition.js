@@ -36,7 +36,11 @@ function PageTransition({ children }) {
             ease: "easeIn"
           }
         }}
-        className="fixed inset-0 bg-[#D4FF99] z-50"
+        className="fixed inset-0 z-50 pointer-events-none"
+        style={{ 
+          background: 'rgba(0, 0, 0, 0.5)',
+          backdropFilter: 'blur(10px)'
+        }}
       />
 
       <div className="relative z-0">
