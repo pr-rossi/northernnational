@@ -186,7 +186,7 @@ function HomePage() {
                   transition={{ duration: 0.6 }}
                   className="text-5xl md:text-6xl font-bold text-[#D4FF99]"
                 >
-                  ABOUT THE BAND
+                  ABOUT THE BOYS
                 </motion.h2>
                 
                 <motion.div 
