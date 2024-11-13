@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "post-1",
+    "title": "New Single Coming Soon",
+    "date": "2024-03-15",
+    "coverImage": "/images/blog/single-announcement.jpg",
+    "excerpt": "We're excited to announce our latest single dropping next month..."
+  },
+  {
+    "slug": "post-2",
+    "title": "Another Blog Post",
+    "date": "2024-03-10",
+    "coverImage": "/images/blog/another-post.jpg",
+    "excerpt": "This is another blog post..."
+  }
+] 
