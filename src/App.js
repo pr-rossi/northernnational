@@ -452,18 +452,18 @@ function AnimatedRoutes() {
 }
 
 function App() {
+  useInitialTransition();
+
   return (
-    <Router>
-      <LenisProvider>
-        <AnimatePresence mode="wait">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-          </Routes>
-        </AnimatePresence>
-      </LenisProvider>
-    </Router>
+    <div className="min-h-screen bg-zinc-950">
+      <Router>
+        <LenisProvider>
+          <CartProvider>
+            <AnimatedRoutes />
+          </CartProvider>
+        </LenisProvider>
+      </Router>
+    </div>
   );
 }
 
