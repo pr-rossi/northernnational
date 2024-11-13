@@ -63,6 +63,7 @@ export default async function handler(req, res) {
 
       const printfulOrder = {
         external_id: externalId,
+        shipping: "STANDARD",
         recipient: {
           name: session.shipping_details.name,
           address1: session.shipping_details.address.line1,
