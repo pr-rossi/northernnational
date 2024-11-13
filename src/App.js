@@ -14,12 +14,14 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import PageTransition from './components/PageTransition';
 import LenisProvider from './components/LenisProvider';
+import { useLenis } from '@studio-freight/react-lenis';
 
 function HomePage() {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const heroImageRef = useRef(null);
   const releaseCardsRef = useRef([]);
+  const lenis = useLenis();
 
   useEffect(() => {
     // Register ScrollTrigger plugin
@@ -160,9 +162,9 @@ function HomePage() {
           <ChevronDown 
             className="w-8 h-8 text-[#D4FF99] animate-bounce cursor-pointer"
             onClick={() => {
-              window.scrollTo({
-                top: window.innerHeight,
-                behavior: 'smooth'
+              lenis?.scrollTo(window.innerHeight, {
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
               });
             }}
           />

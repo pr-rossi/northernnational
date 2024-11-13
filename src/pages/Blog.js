@@ -17,7 +17,7 @@ function Blog() {
     <PageTransition>
       <div className="min-h-screen bg-zinc-950">
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate(-1)}
           className="fixed top-8 right-8 z-50 p-2 rounded-full bg-black/50 backdrop-blur-sm 
                      text-white hover:text-[#D4FF99] transition-colors duration-200"
           aria-label="Close"
