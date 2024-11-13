@@ -57,8 +57,8 @@ export default async function handler(req, res) {
       // Debug the session ID
       console.log('Original session ID:', session.id);
       
-      // Create a more strictly formatted external ID
-      const externalId = `stripe_order_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+      // Create a simple numeric external ID
+      const externalId = Date.now().toString();
       console.log('Generated external ID:', externalId);
 
       const printfulOrder = {
