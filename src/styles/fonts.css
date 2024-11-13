@@ -66,4 +66,15 @@
   font-weight: 900;
   font-style: normal;
   font-display: swap;
+}
+
+/* Base styles for paragraphs and headings */
+p {
+  font-family: 'Aeonik Pro', system-ui, sans-serif;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Aeonik Pro', system-ui, sans-serif;
+  font-weight: 700;
 } 
