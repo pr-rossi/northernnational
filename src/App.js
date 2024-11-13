@@ -7,6 +7,7 @@ import ShowCard from './components/ShowCard';
 import NoShows from './components/NoShows';
 import MerchSection from './components/MerchSection';
 import { CartProvider } from './context/CartContext';
+import FeaturedBlogs from './components/FeaturedBlogs';
 
 function App() {
   const titleRef = useRef(null);
@@ -216,6 +217,14 @@ function App() {
                 <NoShows />
               )}
             </div>
+          </div>
+        </section>
+
+        {/* Latest News Section */}
+        <section className="py-20 px-6 bg-zinc-950">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">LATEST NEWS</h2>
+            <FeaturedBlogs />
           </div>
         </section>
 
