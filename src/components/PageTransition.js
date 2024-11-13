@@ -44,7 +44,7 @@ function PageTransition({ children }) {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    const particleCount = 500;
+    const particleCount = 1000;
     for (let i = 0; i < particleCount; i++) {
       const x = Math.random() * canvas.width;
       const y = canvas.height + Math.random() * 100;
@@ -54,27 +54,24 @@ function PageTransition({ children }) {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      let allParticlesGone = true;
-      
       particlesRef.current.forEach((particle) => {
         particle.update();
         particle.draw(ctx);
-        if (particle.alpha > 0) allParticlesGone = false;
       });
-
-      if (allParticlesGone) {
-        canvas.style.opacity = '0';
-        cancelAnimationFrame(animationRef.current);
-        return;
-      }
 
       animationRef.current = requestAnimationFrame(animate);
     };
 
+    canvas.style.opacity = '1';
+    animate();
+
     setTimeout(() => {
-      canvas.style.opacity = '1';
-      animate();
-    }, 100);
+      canvas.style.opacity = '0';
+      setTimeout(() => {
+        cancelAnimationFrame(animationRef.current);
+        canvas.style.display = 'none';
+      }, 300);
+    }, 2000);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
