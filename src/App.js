@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { Mail, Instagram, Twitter, ChevronDown } from 'lucide-react';
+import { Mail, Instagram, Twitter, ChevronDown, ExternalLink } from 'lucide-react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import ReleaseCard from './components/ReleaseCard';
@@ -15,6 +15,7 @@ import BlogPost from './pages/BlogPost';
 import PageTransition from './components/PageTransition';
 import LenisProvider from './components/LenisProvider';
 import { useLenis } from '@studio-freight/react-lenis'
+import { motion } from 'framer-motion';
 
 function HomePage() {
   const titleRef = useRef(null);
