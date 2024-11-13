@@ -18,6 +18,8 @@ import { useLenis } from '@studio-freight/react-lenis'
 import { motion } from 'framer-motion';
 import { useInitialTransition } from './hooks/useInitialTransition';
 import Navigation from './components/Navigation';
+import Merch from './pages/Merch';
+import Tour from './pages/Tour';
 
 function HomePage() {
   const titleRef = useRef(null);
@@ -445,6 +447,8 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<HomePage />} />
+        <Route path="/merch" element={<Merch />} />
+        <Route path="/tour" element={<Tour />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
