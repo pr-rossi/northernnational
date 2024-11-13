@@ -325,35 +325,6 @@ function AnimatedRoutes() {
 }
 
 function App() {
-  const location = useLocation();
-  const lenis = useLenis();
-
-  useEffect(() => {
-    // Check if we should scroll to top
-    const shouldScrollToTop = sessionStorage.getItem('scrollToTop');
-    if (shouldScrollToTop) {
-      // Stop Lenis
-      if (lenis) {
-        lenis.stop();
-      }
-
-      // Force scroll to top
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTo(0, 0);
-      document.body.scrollTo(0, 0);
-
-      // Clear the instruction
-      sessionStorage.removeItem('scrollToTop');
-
-      // Restart Lenis after a brief delay
-      setTimeout(() => {
-        if (lenis) {
-          lenis.start();
-        }
-      }, 100);
-    }
-  }, [location.pathname, lenis]);
-
   return (
     <div className="min-h-screen bg-zinc-950">
       <Router>
