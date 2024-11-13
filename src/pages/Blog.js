@@ -15,6 +15,11 @@ function Blog() {
     getSortedPosts().then(setPosts);
   }, []);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    lenis?.scrollTo(0, { immediate: true });
+  }, [lenis]);
+
   return (
     <PageTransition>
       <div className="min-h-screen bg-zinc-950">
