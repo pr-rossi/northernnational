@@ -441,13 +441,23 @@ function AnimatedRoutes() {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-      </Routes>
-    </AnimatePresence>
+    <Routes location={location}>
+      <Route path="/" element={
+        <AnimatePresence mode="wait">
+          <HomePage key="home" />
+        </AnimatePresence>
+      } />
+      <Route path="/blog" element={
+        <AnimatePresence mode="wait">
+          <Blog key="blog" />
+        </AnimatePresence>
+      } />
+      <Route path="/blog/:slug" element={
+        <AnimatePresence mode="wait">
+          <BlogPost key="blogpost" />
+        </AnimatePresence>
+      } />
+    </Routes>
   );
 }
 
