@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import { getPostBySlug } from '../utils/blogUtils';
 import PageTransition from '../components/PageTransition';
 import { useLenis } from '@studio-freight/react-lenis';
+import '../styles/blog.css';
 
 function BlogPost() {
   const { slug } = useParams();
