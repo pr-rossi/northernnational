@@ -250,7 +250,7 @@ const MerchSection = () => {
                   <img 
                     src={product.thumbnail_url} 
                     alt={product.name} 
-                    className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-80 object-cover transition-transform duration-300"
                   />
                 )}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
