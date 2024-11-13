@@ -55,7 +55,7 @@ export default async function handler(req, res) {
       }
 
       const printfulOrder = {
-        external_id: session.id,
+        external_id: `stripe_${session.id.replace(/[^a-zA-Z0-9]/g, '_')}`,
         recipient: {
           name: session.shipping_details.name,
           address1: session.shipping_details.address.line1,
