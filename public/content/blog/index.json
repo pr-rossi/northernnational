@@ -2,15 +2,22 @@
   {
     "slug": "post-1",
     "title": "Spotlight on Northern National: Dallas's Alternative Rock Phenomenon",
-    "date": "2024-11-13",
+    "date": "2024-11-12",
     "coverImage": "/images/blog/nn-og.jpg",
     "excerpt": "Dive into the story of Northern National..."
   },
   {
-    "slug": "post-2",
-    "title": "Northern National Releases Poignant New Single 'IDGAF'",
-    "date": "2024-01-05",
-    "coverImage": "/images/blog/IDGAFArtwork.png",
-    "excerpt": "Dive deep into the raw emotions and..."
-  }
+      "slug": "post-2",
+      "title": "Northern National Releases Poignant New Single 'IDGAF'",
+      "date": "2024-01-05",
+      "coverImage": "/images/blog/IDGAFArtwork.png",
+      "excerpt": "Dive deep into the raw emotions and..."
+    },
+    {
+      "slug": "post-3",
+      "title": "Northern National: Crafting New Sounds for 2025",
+      "date": "2024-11-13",
+      "coverImage": "/images/blog/nn-studio.jpg",
+      "excerpt": "Northern National is back in the studio..."
+    }
 ]

@@ -1,6 +1,6 @@
 ---
 title: "Spotlight on Northern National: Dallas's Alternative Rock Phenomenon"
-date: "2024-11-13"
+date: "2024-11-12"
 coverImage: "/images/blog/nn-og.jpg"
 excerpt: "Dive into the story of Northern National, a band from Dallas that's making waves in the alternative rock scene with their unique sound and electrifying performances."
 ---
