@@ -324,9 +324,11 @@ function AnimatedRoutes() {
 function App() {
   return (
     <Router>
-      <CartProvider>
-        <AnimatedRoutes />
-      </CartProvider>
+      <div className="min-h-screen bg-zinc-950">
+        <CartProvider>
+          <AnimatedRoutes />
+        </CartProvider>
+      </div>
     </Router>
   );
 }

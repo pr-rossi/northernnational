@@ -20,6 +20,7 @@ function PageTransition({ children }) {
           ease: [0.22, 1, 0.36, 1]
         }
       }}
+      className="bg-zinc-950"
     >
       {children}
     </motion.div>
