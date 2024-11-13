@@ -42,7 +42,7 @@ const overlayVariants = {
   },
   exit: {
     scaleY: 1,
-    originY: 1,
+    originY: 0,
     transition: {
       duration: 0.8,
       ease: [0.22, 1, 0.36, 1]
@@ -52,15 +52,23 @@ const overlayVariants = {
 
 const logoVariants = {
   initial: {
-    opacity: 1,
-    scale: 1
+    opacity: 0,
+    scale: 0.8
   },
   animate: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 1.5,
+      delay: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  },
+  exit: {
     opacity: 0,
     scale: 0.8,
     transition: {
-      duration: 0.5,
-      delay: 0.8,
+      duration: 0.8,
       ease: [0.22, 1, 0.36, 1]
     }
   }
@@ -83,6 +91,7 @@ function PageTransition({ children }) {
           variants={logoVariants}
           initial="initial"
           animate="animate"
+          exit="exit"
         />
       </motion.div>
       <motion.div
