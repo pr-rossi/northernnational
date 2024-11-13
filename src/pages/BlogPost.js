@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPostBySlug } from '../utils/blogUtils';
 import PageTransition from '../components/PageTransition';
+import ReactMarkdown from 'react-markdown';
 
 function BlogPost() {
   const { slug } = useParams();
@@ -30,7 +31,7 @@ function BlogPost() {
               </div>
             </div>
             <div className="prose prose-invert prose-lg max-w-none">
-              <Markdown>{post.content}</Markdown>
+              <ReactMarkdown>{post.content}</ReactMarkdown>
             </div>
           </article>
         </div>
