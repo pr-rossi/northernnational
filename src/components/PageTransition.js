@@ -9,30 +9,29 @@ function PageTransition({ children }) {
     document.body.style.backgroundColor = '#09090B';
     
     return () => {
+      // Temporarily stop Lenis
       if (lenis) {
         lenis.stop();
       }
 
-      // Force scroll to top immediately
+      // Force scroll to top
       window.scrollTo(0, 0);
       document.documentElement.scrollTo(0, 0);
       document.body.scrollTo(0, 0);
 
-      // Restart Lenis after transition
-      setTimeout(() => {
-        if (lenis) {
-          requestAnimationFrame(() => {
-            lenis.start();
-          });
-        }
-      }, 600); // Match with exit animation duration
+      // Immediately restart Lenis
+      if (lenis) {
+        requestAnimationFrame(() => {
+          lenis.start();
+        });
+      }
     };
   }, [lenis]);
 
   return (
     <motion.div
       className="min-h-screen bg-zinc-950"
-      initial={{ opacity: 0, y: 100 }} // Increased y value for more noticeable slide
+      initial={{ opacity: 0, y: 100 }}
       animate={{ 
         opacity: 1, 
         y: 0,
