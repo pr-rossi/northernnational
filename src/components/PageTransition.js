@@ -1,19 +1,24 @@
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
+import { useLenis } from '@studio-freight/react-lenis';
 
 function PageTransition({ children }) {
+  const lenis = useLenis();
+
   useEffect(() => {
-    // Reset any scroll-blocking styles
+    // Only set background color
     document.body.style.backgroundColor = '#09090B';
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    document.body.style.overflow = '';
-    
-    // Ensure the page is scrollable
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
-  }, []);
+
+    // Ensure Lenis is running
+    if (lenis) {
+      lenis.start();
+    }
+
+    return () => {
+      // Scroll to top on unmount
+      window.scrollTo(0, 0);
+    };
+  }, [lenis]);
 
   return (
     <motion.div

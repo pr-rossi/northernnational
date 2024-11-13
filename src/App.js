@@ -465,15 +465,15 @@ function App() {
   useInitialTransition();
 
   return (
-    <div className="min-h-screen bg-zinc-950">
-      <Router>
-        <LenisProvider>
+    <LenisProvider>
+      <div className="min-h-screen bg-zinc-950">
+        <Router>
           <CartProvider>
             <AnimatedRoutes />
           </CartProvider>
-        </LenisProvider>
-      </Router>
-    </div>
+        </Router>
+      </div>
+    </LenisProvider>
   );
 }
 
