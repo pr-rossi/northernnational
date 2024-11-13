@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLenis } from '@studio-freight/react-lenis';
 
 function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
   const location = useLocation();
+  const lenis = useLenis();
 
   const navLinks = [
     { name: 'MERCH', path: '/merch' },
@@ -13,16 +16,35 @@ function Navigation() {
     { name: 'BLOG', path: '/blog' }
   ];
 
+  useEffect(() => {
+    if (!lenis) return;
+
+    function handleScroll() {
+      setHasScrolled(lenis.scroll > 50);
+    }
+
+    // Subscribe to scroll updates
+    lenis.on('scroll', handleScroll);
+
+    return () => {
+      lenis.off('scroll', handleScroll);
+    };
+  }, [lenis]);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-lg">
-      <div className="max-w-7xl mx-auto px-6 py-4">
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+        ${hasScrolled ? 'bg-zinc-950/80 backdrop-blur-lg py-4' : 'bg-transparent py-8'}`}
+    >
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="relative z-50">
             <img 
               src="/images/nn-logo.svg" 
               alt="Northern National" 
-              className="h-8 md:h-10"
+              className={`transition-all duration-300 brightness-0 invert
+                ${hasScrolled ? 'h-8 md:h-10' : 'h-10 md:h-12'}`}
             />
           </Link>
 
