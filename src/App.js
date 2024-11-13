@@ -435,9 +435,6 @@ function HomePage() {
             </div>
           </div>
         </section>
-
-        {/* Footer */}
-        <Footer />
       </div>
     </PageTransition>
   );
@@ -457,7 +454,6 @@ function AnimatedRoutes() {
           <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>
       </AnimatePresence>
-      <Footer />
     </>
   );
 }
@@ -472,6 +468,7 @@ function App() {
           <div className="min-h-screen bg-zinc-950">
             <Navigation />
             <AnimatedRoutes />
+            <Footer />
           </div>
         </CartProvider>
       </LenisProvider>
