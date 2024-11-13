@@ -13,6 +13,8 @@ import { CartProvider } from './context/CartContext';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import PageTransition from './components/PageTransition';
+import ScrollToTop from './components/ScrollToTop';
+import ScrollProvider from './components/ScrollProvider';
 
 function HomePage() {
   const titleRef = useRef(null);
@@ -324,11 +326,12 @@ function AnimatedRoutes() {
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-zinc-950">
+      <ScrollProvider>
+        <ScrollToTop />
         <CartProvider>
           <AnimatedRoutes />
         </CartProvider>
-      </div>
+      </ScrollProvider>
     </Router>
   );
 }
