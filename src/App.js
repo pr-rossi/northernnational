@@ -404,9 +404,9 @@ function App() {
     <LenisProvider>
       <CartProvider>
         <div className="min-h-screen bg-zinc-950">
-          {!isBlogPost && <Navigation />} {/* Only show Navigation if not on a blog post */}
+          {!isBlogPost && <Navigation />}
           <AnimatedRoutes />
-          <Footer />
+          {!isBlogPost && <Footer />}
         </div>
       </CartProvider>
     </LenisProvider>
