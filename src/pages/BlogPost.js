@@ -33,14 +33,14 @@ function BlogPost() {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 py-8">
-          <h1 className="text-6xl font-bold text-[#D4FF99] leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-[#D4FF99] leading-tight">
             {post.title}
           </h1>
         </div>
 
         <div className="w-full h-[70vh] relative mb-16">
-          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 to-transparent z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/60 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 to-transparent z-10" />
           <img 
             src={post.coverImage}
             alt={post.title}
@@ -53,10 +53,10 @@ function BlogPost() {
             <ReactMarkdown
               components={{
                 h2: ({ children }) => (
-                  <h2 className="text-3xl font-bold text-[#D4FF99] mt-12 mb-6">{children}</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#D4FF99] mt-12 mb-6">{children}</h2>
                 ),
                 h3: ({ children }) => (
-                  <h3 className="text-2xl font-bold text-white mt-8 mb-4">{children}</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mt-8 mb-4">{children}</h3>
                 ),
                 p: ({ children }) => (
                   <p className="text-gray-300 leading-relaxed mb-6">{children}</p>
