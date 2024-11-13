@@ -49,10 +49,15 @@
   }
 }
 
-h1.text-6xl.md\:text-8xl.font-bold.text-white {
+h1.text-4xl.md\:text-8xl.font-bold.text-white {
     overflow: hidden;
 }
 
 .relative.group {
   overflow: hidden;
+}
+
+.text-4xl {
+  font-size: 3.5rem;
+  line-height: 3.5rem;
 }
