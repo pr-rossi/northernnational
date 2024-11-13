@@ -257,11 +257,11 @@ function App() {
                 target="_blank"
               >
                 <h3 className="text-xl font-bold mb-4 text-white">JOIN OUR MAILING LIST</h3>
-                <div className="flex max-w-md mx-auto">
+                <div className="flex flex-col sm:flex-row max-w-md mx-auto space-y-2 sm:space-y-0">
                   <input
                     type="email"
                     name="EMAIL"
-                    className="flex-1 p-2 bg-black border border-zinc-800 rounded-l focus:outline-none focus:border-[#D4FF99]"
+                    className="flex-1 p-2 bg-black border border-zinc-800 rounded sm:rounded-l focus:outline-none focus:border-[#D4FF99]"
                     id="mce-EMAIL"
                     placeholder="Enter your email"
                     required
@@ -270,7 +270,7 @@ function App() {
                     type="submit"
                     name="subscribe"
                     id="mc-embedded-subscribe"
-                    className="px-6 py-2 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-medium rounded-r transition duration-300"
+                    className="px-6 py-2 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-medium rounded sm:rounded-r transition duration-300"
                   >
                     SUBSCRIBE
                   </button>
