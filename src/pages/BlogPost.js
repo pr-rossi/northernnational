@@ -4,10 +4,12 @@ import { X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { getPostBySlug } from '../utils/blogUtils';
 import PageTransition from '../components/PageTransition';
+import { useLenis } from '@studio-freight/react-lenis';
 
 function BlogPost() {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const lenis = useLenis();
   const [post, setPost] = useState(null);
 
   useEffect(() => {
@@ -15,13 +17,23 @@ function BlogPost() {
   }, [slug]);
 
   const handleClose = () => {
-    // First, force scroll to top
+    // Stop Lenis smooth scrolling temporarily
+    if (lenis) {
+      lenis.stop();
+    }
+
+    // Force scroll to absolute top
     window.scrollTo(0, 0);
-    document.documentElement.scrollTo(0, 0);
-    document.body.scrollTo(0, 0);
     
-    // Then navigate back
+    // Navigate back
     navigate(-1);
+
+    // Re-enable Lenis after a brief delay
+    setTimeout(() => {
+      if (lenis) {
+        lenis.start();
+      }
+    }, 100);
   };
 
   if (!post) return null;
