@@ -17,26 +17,52 @@ function BlogPost() {
   }, [slug]);
 
   const handleClose = () => {
-    // Stop Lenis smooth scrolling
+    // First, disable smooth scrolling
     if (lenis) {
       lenis.stop();
     }
 
-    // Force scroll to top
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTo(0, 0);
-    document.body.scrollTo(0, 0);
-    
+    // Store current scroll position
+    const currentScroll = window.scrollY;
+
+    // Set a fixed position to prevent any scroll jumps
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${currentScroll}px`;
+    document.body.style.width = '100%';
+
     // Navigate back
     navigate(-1);
 
-    // Re-enable Lenis after navigation
+    // After navigation, reset the scroll position and re-enable scrolling
     requestAnimationFrame(() => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      
+      // Force scroll to top
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTo(0, 0);
+      document.body.scrollTo(0, 0);
+
+      // Re-enable Lenis
       if (lenis) {
         lenis.start();
       }
     });
   };
+
+  // Ensure scroll is enabled when component unmounts
+  useEffect(() => {
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      
+      if (lenis) {
+        lenis.start();
+      }
+    };
+  }, [lenis]);
 
   if (!post) return null;
 
