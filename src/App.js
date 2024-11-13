@@ -17,6 +17,7 @@ import LenisProvider from './components/LenisProvider';
 import { useLenis } from '@studio-freight/react-lenis'
 import { motion } from 'framer-motion';
 import { useInitialTransition } from './hooks/useInitialTransition';
+import Navigation from './components/Navigation';
 
 function HomePage() {
   const titleRef = useRef(null);
@@ -459,6 +460,7 @@ function App() {
       <LenisProvider>
         <CartProvider>
           <div className="min-h-screen bg-zinc-950">
+            <Navigation />
             <AnimatedRoutes />
           </div>
         </CartProvider>
