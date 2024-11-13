@@ -4,10 +4,12 @@ import { X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getSortedPosts } from '../utils/blogUtils';
 import PageTransition from '../components/PageTransition';
+import { useLenis } from 'use-lenis';
 
 function Blog() {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
+  const lenis = useLenis();
 
   useEffect(() => {
     getSortedPosts().then(setPosts);
@@ -17,7 +19,10 @@ function Blog() {
     <PageTransition>
       <div className="min-h-screen bg-zinc-950">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => {
+            lenis?.scrollTo(0, { immediate: true });
+            navigate('/');
+          }}
           className="fixed top-8 right-8 z-50 p-2 rounded-full bg-black/50 backdrop-blur-sm 
                      text-white hover:text-[#D4FF99] transition-colors duration-200"
           aria-label="Close"

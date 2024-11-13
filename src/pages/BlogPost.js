@@ -8,6 +8,7 @@ import PageTransition from '../components/PageTransition';
 function BlogPost() {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const lenis = useLenis();
   const [post, setPost] = useState(null);
 
   useEffect(() => {
@@ -20,7 +21,10 @@ function BlogPost() {
     <PageTransition>
       <div className="min-h-screen bg-zinc-950">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => {
+            lenis?.scrollTo(0, { immediate: true });
+            navigate('/blog');
+          }}
           className="fixed top-8 right-8 z-50 p-2 rounded-full bg-black/50 backdrop-blur-sm 
                      text-white hover:text-[#D4FF99] transition-colors duration-200"
           aria-label="Close"
