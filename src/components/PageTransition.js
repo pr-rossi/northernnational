@@ -1,96 +1,55 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
-class Particle {
-  constructor(x, y, canvas) {
-    this.x = x;
-    this.y = y;
-    this.canvas = canvas;
-    this.size = Math.random() * 3 + 1;
-    this.speedY = Math.random() * 3 - 0.5;
-    this.color = '#D4FF99';
-    this.alpha = 1;
-  }
-
-  update() {
-    this.y += this.speedY;
-    if (this.y < this.canvas.height / 2) {
-      this.alpha -= 0.02;
-    }
-  }
-
-  draw(ctx) {
-    ctx.fillStyle = `rgba(212, 255, 153, ${this.alpha})`;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
-}
-
 function PageTransition({ children }) {
-  const canvasRef = useRef(null);
-  const particlesRef = useRef([]);
-  const animationRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    const particleCount = 1000;
-    for (let i = 0; i < particleCount; i++) {
-      const x = Math.random() * canvas.width;
-      const y = canvas.height + Math.random() * 100;
-      particlesRef.current.push(new Particle(x, y, canvas));
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      particlesRef.current.forEach((particle) => {
-        particle.update();
-        particle.draw(ctx);
-      });
-
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    canvas.style.opacity = '1';
-    animate();
-
-    setTimeout(() => {
-      canvas.style.opacity = '0';
-      setTimeout(() => {
-        cancelAnimationFrame(animationRef.current);
-        canvas.style.display = 'none';
-      }, 300);
-    }, 2000);
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      cancelAnimationFrame(animationRef.current);
-    };
-  }, []);
-
   return (
     <>
-      <canvas
-        ref={canvasRef}
-        className="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300"
-        style={{ background: '#000', opacity: 0 }}
+      <svg
+        className="fixed top-0 left-0 w-0 h-0"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <filter id="liquid">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feColorMatrix
+              in="blur"
+              mode="matrix"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+              result="liquid"
+            />
+          </filter>
+        </defs>
+      </svg>
+
+      <motion.div
+        initial={{ y: "100%", filter: "url(#liquid)" }}
+        animate={{ 
+          y: "-100%",
+          transition: { 
+            duration: 1.5,
+            ease: [0.45, 0, 0.55, 1]
+          }
+        }}
+        exit={{ 
+          y: "-200%",
+          transition: { 
+            duration: 1.5,
+            ease: [0.45, 0, 0.55, 1]
+          }
+        }}
+        className="fixed inset-0 bg-[#D4FF99] z-50"
       />
+
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ 
+          opacity: 1,
+          transition: { 
+            duration: 0.5,
+            delay: 0.5 
+          }
+        }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
       >
         {children}
       </motion.div>
