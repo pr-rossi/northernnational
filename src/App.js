@@ -138,7 +138,7 @@ function App() {
           <div className="z-10 text-center space-y-6 px-4">
             <h1 
                 ref={titleRef}
-                className="text-4xl md:text-8xl font-thunder text-white"
+                className="hero-title text-4xl md:text-8xl font-thunder text-white"
               >
                 NORTHERN NATIONAL
               </h1>
