@@ -239,14 +239,14 @@ function HomePage() {
                     <img 
                       src="/images/nn-boys-show.jpg" 
                       alt="Northern National performance" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-left"
                     />
                   </div>
                   <div className="aspect-[3/4] rounded-lg overflow-hidden">
                     <img 
                       src="/images/rossi.jpg" 
                       alt="Northern National backstage" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-center"
                     />
                   </div>
                 </motion.div>
@@ -262,14 +262,14 @@ function HomePage() {
                     <img 
                       src="/images/anthony.jpg" 
                       alt="Northern National studio session" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-center"
                     />
                   </div>
                   <div className="aspect-[3/4] rounded-lg overflow-hidden">
                     <img 
                       src="/images/dylan.jpg" 
                       alt="Northern National candid" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-center"
                     />
                   </div>
                 </motion.div>
