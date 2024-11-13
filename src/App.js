@@ -269,7 +269,7 @@ function HomePage() {
                     <img 
                       src="/images/dylan.jpg" 
                       alt="Northern National candid" 
-                      className="w-full h-full object-cover object-center"
+                      className="w-full h-full object-cover object-right"
                     />
                   </div>
                 </motion.div>
