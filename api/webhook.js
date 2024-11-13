@@ -55,6 +55,7 @@ export default async function handler(req, res) {
       }
 
       const printfulOrder = {
+        external_id: session.id,
         recipient: {
           name: session.shipping_details.name,
           address1: session.shipping_details.address.line1,
@@ -67,13 +68,14 @@ export default async function handler(req, res) {
         },
         items: variantIds.map(variantId => ({
           sync_variant_id: parseInt(variantId, 10),
-          quantity: 1
+          quantity: 1,
         })),
         retail_costs: {
           subtotal: (session.amount_subtotal / 100).toFixed(2),
           total: (session.amount_total / 100).toFixed(2)
         },
-        store_id: parseInt(process.env.PRINTFUL_STORE_ID, 10)
+        store_id: parseInt(process.env.PRINTFUL_STORE_ID, 10),
+        confirm: true
       };
 
       console.log('Printful order payload:', JSON.stringify(printfulOrder, null, 2));
