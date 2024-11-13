@@ -18,7 +18,7 @@ const pageVariants = {
   exit: {
     opacity: 0,
     scale: 0.98,
-    y: -30,
+    y: 30,
     transition: {
       duration: 0.8,
       ease: [0.22, 1, 0.36, 1]
@@ -29,11 +29,11 @@ const pageVariants = {
 const overlayVariants = {
   initial: {
     scaleY: 1,
-    originY: 0
+    originY: 1
   },
   animate: {
     scaleY: 0,
-    originY: 0,
+    originY: 1,
     transition: {
       duration: 1,
       delay: 0.2,
