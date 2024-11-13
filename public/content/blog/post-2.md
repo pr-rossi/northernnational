@@ -11,41 +11,41 @@ Northern National is back, and they're pulling no punches with their latest sing
 
 The song opens with a stark confrontation:
 
-    You don't gotta say it
-    I already know it
-    That you never gave a fuck
-    I was never hoping
-    For another treason
-    I just want to make it up
+> You don't gotta say it  
+> I already know it  
+> That you never gave a fuck  
+> I was never hoping  
+> For another treason  
+> I just want to make it up
 
 These lines set the tone for a narrative about understanding and resignation, not just in a relationship but within oneself. The speaker recognizes the futility in expecting change from someone who is indifferent, encapsulating a sense of inevitability that resonates with anyone who's felt underappreciated or misunderstood.
 
 ### The Chorus: A Cry for Clarity
 
-    If I give in
-    Bad feelings
-    Should I reason
-    With my thoughts?
+> If I give in  
+> Bad feelings  
+> Should I reason  
+> With my thoughts?
 
 The chorus presents a poignant internal conflict—debating whether to give in to despair or to fight against the tide of negative emotions. This repeated motif asks a universal question about how to deal with internal turmoil and whether one should even attempt to rationalize feelings that seem beyond control.
 
 ### A Reflection on Stagnation and Self-Realization
 
-    Going through the motions
-    We don't need an omen
-    Just to let us know we're stuck
-    Bet that you were thinking
-    That I was a person
-    Who could never give it up
+> Going through the motions  
+> We don't need an omen  
+> Just to let us know we're stuck  
+> Bet that you were thinking  
+> That I was a person  
+> Who could never give it up
 
-Here, the lyrics speak to a common human experience: the feeling of being stuck and the realization that no external signs are needed to confirm this state. The acknowledgment of one’s own persistence—perhaps past the point of reason—highlights a deep self-awareness and the pain that can accompany it.
+Here, the lyrics speak to a common human experience: the feeling of being stuck and the realization that no external signs are needed to confirm this state. The acknowledgment of one's own persistence—perhaps past the point of reason—highlights a deep self-awareness and the pain that can accompany it.
 
 ### Concluding Thoughts
 
-    There's no meaning
-    Am I dreaming?
-    Can I reason
-    With my thoughts?
+> There's no meaning  
+> Am I dreaming?  
+> Can I reason  
+> With my thoughts?
 
 As the song wraps up, the lyrics oscillate between resignation and a desperate search for meaning, encapsulating the emotional turmoil of trying to find reason in the unreasonable. The repetition of these questions serves as a haunting reminder of the ongoing struggle within the mind.
 

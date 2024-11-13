@@ -1,0 +1,15 @@
+blockquote {
+  border-left: 4px solid #D4FF99;
+  margin: 2rem 0;
+  padding: 1rem 0 1rem 2rem;
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #D4FF99;
+  background: rgba(212, 255, 153, 0.05);
+  border-radius: 0 8px 8px 0;
+}
+
+blockquote p {
+  margin: 0;
+} 
