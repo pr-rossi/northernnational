@@ -114,7 +114,10 @@ export default async function handler(req, res) {
         headers: {
           'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
           'Content-Type': 'application/json',
-        }
+        },
+        body: JSON.stringify({
+          store_id: parseInt(process.env.PRINTFUL_STORE_ID, 10)
+        })
       });
 
       const confirmData = await confirmResponse.json();
