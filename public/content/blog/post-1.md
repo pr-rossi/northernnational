@@ -40,4 +40,4 @@ For updates on tour dates and new releases, follow Northern National on [their o
 Northern National has not only put Dallas on the map in the alternative rock scene but has also established themselves as one of the promising bands to watch out for in the coming years. With each new release, they continue to prove that they are a powerhouse of talent and creativity. If you're a fan of heartfelt, energetic rock music, Northern National is a band you won't want to miss.
 
 ---
-Follow us for more music updates and band reviews at [YourMusicBlog.com](http://yourmusicblog.com).
+Follow us for more music updates and band reviews at [NN Updates](https://www.northernnationalmusic.com/blog).
