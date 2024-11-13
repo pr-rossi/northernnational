@@ -1,6 +1,14 @@
 import { ReactLenis } from '@studio-freight/react-lenis'
+import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 function LenisProvider({ children }) {
+  const location = useLocation()
+  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
+
   return (
     <ReactLenis
       root

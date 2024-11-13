@@ -4,12 +4,10 @@ import { X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { getPostBySlug } from '../utils/blogUtils';
 import PageTransition from '../components/PageTransition';
-import { useLenis } from '@studio-freight/react-lenis';
 
 function BlogPost() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const lenis = useLenis();
   const [post, setPost] = useState(null);
 
   useEffect(() => {
@@ -22,10 +20,7 @@ function BlogPost() {
     <PageTransition>
       <div className="min-h-screen bg-zinc-950">
         <button
-          onClick={() => {
-            lenis?.scrollTo(0, { immediate: true });
-            navigate(-1);
-          }}
+          onClick={() => navigate(-1)}
           className="fixed top-8 right-8 z-50 p-2 rounded-full bg-black/50 backdrop-blur-sm 
                      text-white hover:text-[#D4FF99] transition-colors duration-200"
           aria-label="Close"
