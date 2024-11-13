@@ -1,25 +1,6 @@
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
-import { useLenis } from '@studio-freight/react-lenis';
 
 function PageTransition({ children }) {
-  const lenis = useLenis();
-
-  useEffect(() => {
-    // Only set background color
-    document.body.style.backgroundColor = '#09090B';
-
-    // Ensure Lenis is running
-    if (lenis) {
-      lenis.start();
-    }
-
-    return () => {
-      // Scroll to top on unmount
-      window.scrollTo(0, 0);
-    };
-  }, [lenis]);
-
   return (
     <motion.div
       className="min-h-screen bg-zinc-950"
