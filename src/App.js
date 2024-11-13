@@ -95,7 +95,7 @@ function App() {
       url: "https://open.spotify.com/track/1rM0BBBaWZ0OMQtPHVZatl?si=49e44d58176846ff"
     },
     {
-      title: "THIS IS Northern National",
+      title: "THIS IS NORTHERN NATIONAL",
       description: "Listen to all our music on our official Spotify playlist!",
       url: "https://open.spotify.com/playlist/37i9dQZF1DZ06evO4daEGQ?si=78a79f6bacdd4641"
     }
@@ -115,7 +115,7 @@ function App() {
     <CartProvider>
       <div className="App">
         {/* Hero Section */}
-        <header className="h-screen flex items-center justify-center relative overflow-hidden">
+        <header className="min-h-dvh flex items-center justify-center relative overflow-hidden">
           <div className="ripple-background absolute inset-0">
             <div 
               ref={heroImageRef}
