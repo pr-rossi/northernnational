@@ -4,7 +4,7 @@ import { X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getSortedPosts } from '../utils/blogUtils';
 import PageTransition from '../components/PageTransition';
-import { useLenis } from 'use-lenis';
+import { useLenis } from '@studio-freight/react-lenis';
 
 function Blog() {
   const [posts, setPosts] = useState([]);
