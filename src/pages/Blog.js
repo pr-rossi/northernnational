@@ -7,17 +7,26 @@ function Blog() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getSortedPosts()
-      .then(posts => {
-        setPosts(posts);
+    const fetchPosts = async () => {
+      try {
+        const fetchedPosts = await getSortedPosts();
+        setPosts(fetchedPosts);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchPosts();
   }, []);
 
   if (loading) {
-    return <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
-      <div className="text-[#D4FF99]">Loading...</div>
-    </div>;
+    return (
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+        <div className="text-[#D4FF99]">Loading...</div>
+      </div>
+    );
   }
 
   return (

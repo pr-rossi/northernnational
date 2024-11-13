@@ -5,17 +5,34 @@ import { getSortedPosts } from '../utils/blogUtils';
 function FeaturedBlogs() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getSortedPosts()
-      .then(allPosts => {
-        setPosts(allPosts.slice(0, 3)); // Get latest 3 posts
+    const fetchPosts = async () => {
+      try {
+        const allPosts = await getSortedPosts();
+        setPosts(allPosts.slice(0, 3));
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+        setError(error);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchPosts();
   }, []);
 
   if (loading) {
     return <div className="text-gray-400">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="text-red-400">Failed to load blog posts</div>;
+  }
+
+  if (!posts.length) {
+    return null;
   }
 
   return (
