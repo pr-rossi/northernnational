@@ -45,7 +45,7 @@ export default async function handler(req, res) {
         recipient: {
           name: session.shipping_details.name,
           address1: session.shipping_details.address.line1,
-          address2: session.shipping_details.address.line2,
+          address2: session.shipping_details.address.line2 || '',
           city: session.shipping_details.address.city,
           state_code: session.shipping_details.address.state,
           country_code: session.shipping_details.address.country,
@@ -57,15 +57,15 @@ export default async function handler(req, res) {
           quantity: 1
         })),
         retail_costs: {
-          subtotal: session.amount_subtotal / 100,
-          total: session.amount_total / 100
-        }
+          subtotal: (session.amount_subtotal / 100).toFixed(2),
+          total: (session.amount_total / 100).toFixed(2)
+        },
+        store_id: parseInt(process.env.PRINTFUL_STORE_ID, 10)
       };
 
-      console.log('Creating Printful order:', printfulOrder);
+      console.log('Printful order payload:', JSON.stringify(printfulOrder, null, 2));
 
-      // Updated Printful API endpoint with store_id
-      const printfulResponse = await fetch(`https://api.printful.com/store/orders?store_id=${process.env.PRINTFUL_STORE_ID}`, {
+      const printfulResponse = await fetch('https://api.printful.com/orders', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
