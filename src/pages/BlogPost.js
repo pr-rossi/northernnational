@@ -69,7 +69,7 @@ function BlogPost() {
 
   return (
     <PageTransition>
-      <div className="pt-48 pb-32 min-h-screen bg-zinc-950">
+      <div className="pt-24 pb-16 min-h-screen bg-zinc-950">
         <button
           onClick={handleClose}
           className="fixed top-8 right-8 z-50 p-2 rounded-full bg-black/50 backdrop-blur-sm 
