@@ -2,44 +2,36 @@ import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 
 function PageTransition({ children }) {
-  // Prevent scroll jump on exit
   useEffect(() => {
-    const originalStyle = window.getComputedStyle(document.body).overflow;
+    // Reset any scroll-blocking styles
+    document.body.style.backgroundColor = '#09090B';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    document.body.style.overflow = '';
     
-    return () => {
-      // Lock scroll position when component unmounts
-      const scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-
-      // Cleanup after animation completes
-      setTimeout(() => {
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflow = originalStyle;
-        window.scrollTo(0, scrollY);
-      }, 1000); // Match this with your transition duration
-    };
+    // Ensure the page is scrollable
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
   }, []);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      className="min-h-screen bg-zinc-950"
+      initial={{ opacity: 0, y: 100 }}
       animate={{ 
         opacity: 1, 
         y: 0,
         transition: {
-          duration: 0.8,
+          duration: 0.6,
           ease: [0.22, 1, 0.36, 1]
         }
       }}
       exit={{ 
         opacity: 0,
-        y: 20,
+        y: 100,
         transition: {
-          duration: 0.6,
+          duration: 0.5,
           ease: [0.22, 1, 0.36, 1]
         }
       }}
