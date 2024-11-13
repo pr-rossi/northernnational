@@ -101,14 +101,24 @@ export default async function handler(req, res) {
         body: JSON.stringify(printfulOrder),
       });
 
-      const responseText = await printfulResponse.text();
-      console.log('Printful API Response Status:', printfulResponse.status);
-      console.log('Printful API Response Headers:', JSON.stringify(Object.fromEntries(printfulResponse.headers)));
-      console.log('Printful API Response Body:', responseText);
+      const responseData = await printfulResponse.json();
+      console.log('Initial Printful Response:', JSON.stringify(responseData));
 
       if (!printfulResponse.ok) {
-        throw new Error(`Printful API error (${printfulResponse.status}): ${responseText}`);
+        throw new Error(`Printful API error (${printfulResponse.status}): ${JSON.stringify(responseData)}`);
       }
+
+      const orderId = responseData.result.id;
+      const confirmResponse = await fetch(`https://api.printful.com/orders/${orderId}/confirm`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+          'Content-Type': 'application/json',
+        }
+      });
+
+      const confirmData = await confirmResponse.json();
+      console.log('Confirm Response:', JSON.stringify(confirmData));
 
       return res.status(200).json({ received: true });
     } catch (error) {
