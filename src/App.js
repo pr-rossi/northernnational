@@ -303,7 +303,7 @@ function HomePage() {
           </div>
         </section>
 
-        <MerchSection />
+        <MerchSection showTitle={true} />
 
         {/* Tour Section */}
         <section className="py-20 px-6 bg-zinc-950">

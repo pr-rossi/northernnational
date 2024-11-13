@@ -22,21 +22,9 @@ function Blog() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-zinc-950">
-        <button
-          onClick={() => {
-            lenis?.scrollTo(0, { immediate: true });
-            navigate('/');
-          }}
-          className="fixed top-8 right-8 z-50 p-2 rounded-full bg-black/50 backdrop-blur-sm 
-                     text-white hover:text-[#D4FF99] transition-colors duration-200"
-          aria-label="Close"
-        >
-          <X size={24} />
-        </button>
-
-        <div className="max-w-7xl mx-auto py-20 px-6">
-          <h1 className="text-4xl md:text-6xl font-bold text-[#D4FF99] mb-16">Journal</h1>
+      <div className="pt-48 min-h-screen bg-zinc-950">
+        <div className="max-w-7xl mx-auto px-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-[#D4FF99] mb-12">BLOG</h1>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {posts.map((post, index) => (

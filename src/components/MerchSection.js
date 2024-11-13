@@ -37,7 +37,7 @@ try {
   console.error('Stripe initialization error:', error);
 }
 
-const MerchSection = () => {
+const MerchSection = ({ showTitle = true }) => {
   console.log('Stripe Key exists:', !!process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -232,15 +232,9 @@ const MerchSection = () => {
   return (
     <section ref={sectionRef} className="py-20 px-6 bg-black">
       <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-4xl font-bold text-[#D4FF99]">MERCH</h2>
-          <button
-            onClick={() => setIsCartOpen(true)}
-            className="flex items-center gap-2 text-white"
-          >
-            Cart ({cartItems.length})
-          </button>
-        </div>
+        {showTitle && (
+          <h2 className="text-4xl font-bold text-[#D4FF99] mb-12">MERCH</h2>
+        )}
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {products.map((product) => (
