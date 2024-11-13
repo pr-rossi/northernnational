@@ -37,7 +37,11 @@ try {
   console.error('Stripe initialization error:', error);
 }
 
-const MerchSection = ({ showTitle = true }) => {
+const MerchSection = ({ 
+  showTitle = true,
+  showPadding = true,
+  showBackground = true
+}) => {
   console.log('Stripe Key exists:', !!process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -230,10 +234,13 @@ const MerchSection = ({ showTitle = true }) => {
   }
 
   return (
-    <section ref={sectionRef} className="py-20 px-6 bg-black">
-      <div className="max-w-6xl mx-auto">
+    <section ref={sectionRef} className={`
+      ${showPadding ? 'py-20 px-6' : ''} 
+      ${showBackground ? 'bg-zinc-950' : ''}
+    `}>
+      <div className="max-w-7xl mx-auto">
         {showTitle && (
-          <h2 className="text-4xl font-bold text-[#D4FF99] mb-12">MERCH</h2>
+          <h2 className="text-4xl md:text-6xl font-bold text-[#D4FF99] mb-12">MERCH</h2>
         )}
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

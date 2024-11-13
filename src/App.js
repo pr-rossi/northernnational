@@ -20,6 +20,7 @@ import { useInitialTransition } from './hooks/useInitialTransition';
 import Navigation from './components/Navigation';
 import Merch from './pages/Merch';
 import Tour from './pages/Tour';
+import Footer from './components/Footer';
 
 function HomePage() {
   const titleRef = useRef(null);
@@ -303,7 +304,11 @@ function HomePage() {
           </div>
         </section>
 
-        <MerchSection showTitle={true} />
+        <MerchSection 
+          showTitle={true}
+          showPadding={true}
+          showBackground={true}
+        />
 
         {/* Tour Section */}
         <section className="py-20 px-6 bg-zinc-950">
@@ -432,9 +437,7 @@ function HomePage() {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 px-6 bg-zinc-950 text-center">
-          <p className="text-gray-400">© 2024 Northern National. All rights reserved.</p>
-        </footer>
+        <Footer />
       </div>
     </PageTransition>
   );
@@ -444,15 +447,18 @@ function AnimatedRoutes() {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/merch" element={<Merch />} />
-        <Route path="/tour" element={<Tour />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-      </Routes>
-    </AnimatePresence>
+    <>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/merch" element={<Merch />} />
+          <Route path="/tour" element={<Tour />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+        </Routes>
+      </AnimatePresence>
+      <Footer />
+    </>
   );
 }
 
