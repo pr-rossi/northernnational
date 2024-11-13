@@ -35,8 +35,8 @@ const overlayVariants = {
     scaleY: 0,
     originY: 1,
     transition: {
-      duration: 1,
-      delay: 0.2,
+      duration: 1.5,
+      delay: 0.5,
       ease: [0.22, 1, 0.36, 1]
     }
   },
@@ -60,6 +60,7 @@ const logoVariants = {
     scale: 0.8,
     transition: {
       duration: 0.5,
+      delay: 0.8,
       ease: [0.22, 1, 0.36, 1]
     }
   }
