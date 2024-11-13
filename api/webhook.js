@@ -98,10 +98,12 @@ export default async function handler(req, res) {
       });
 
       const responseText = await printfulResponse.text();
-      console.log('Printful API response:', responseText);
+      console.log('Printful API Response Status:', printfulResponse.status);
+      console.log('Printful API Response Headers:', JSON.stringify(Object.fromEntries(printfulResponse.headers)));
+      console.log('Printful API Response Body:', responseText);
 
       if (!printfulResponse.ok) {
-        throw new Error(`Printful API error: ${responseText}`);
+        throw new Error(`Printful API error (${printfulResponse.status}): ${responseText}`);
       }
 
       return res.status(200).json({ received: true });
