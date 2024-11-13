@@ -256,7 +256,7 @@ function App() {
                 className="validate"
                 target="_blank"
               >
-                <h3 className="text-xl font-bold mb-4">JOIN OUR MAILING LIST</h3>
+                <h3 className="text-xl font-bold mb-4 text-white">JOIN OUR MAILING LIST</h3>
                 <div className="flex max-w-md mx-auto">
                   <input
                     type="email"
