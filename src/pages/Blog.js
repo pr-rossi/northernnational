@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { X } from 'lucide-react';
 import { getSortedPosts } from '../utils/blogUtils';
 import PageTransition from '../components/PageTransition';
 
 function Blog() {
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getSortedPosts().then(setPosts);
@@ -13,6 +15,15 @@ function Blog() {
   return (
     <PageTransition>
       <div className="min-h-screen bg-zinc-950">
+        <button
+          onClick={() => navigate('/')}
+          className="fixed top-8 right-8 z-50 p-2 rounded-full bg-black/50 backdrop-blur-sm 
+                     text-white hover:text-[#D4FF99] transition-colors duration-200"
+          aria-label="Close"
+        >
+          <X size={24} />
+        </button>
+
         <div className="max-w-4xl mx-auto py-20 px-6">
           <h1 className="text-4xl font-bold text-[#D4FF99] mb-12">Blog</h1>
           <div className="grid grid-cols-1 gap-12">
