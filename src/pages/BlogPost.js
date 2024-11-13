@@ -24,7 +24,7 @@ function BlogPost() {
         <button
           onClick={() => {
             lenis?.scrollTo(0, { immediate: true });
-            navigate('/blog');
+            navigate(-1);
           }}
           className="fixed top-8 right-8 z-50 p-2 rounded-full bg-black/50 backdrop-blur-sm 
                      text-white hover:text-[#D4FF99] transition-colors duration-200"
