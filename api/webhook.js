@@ -77,9 +77,13 @@ export default async function handler(req, res) {
         items: variantIds.map(variantId => ({
           sync_variant_id: parseInt(variantId, 10),
           quantity: 1,
+          retail_price: (session.amount_total / 100).toFixed(2)
         })),
         retail_costs: {
+          currency: "USD",
           subtotal: (session.amount_subtotal / 100).toFixed(2),
+          shipping: "0.00",
+          tax: "0.00",
           total: (session.amount_total / 100).toFixed(2)
         },
         store_id: parseInt(process.env.PRINTFUL_STORE_ID, 10),
