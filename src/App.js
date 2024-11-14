@@ -396,6 +396,14 @@ function AnimatedRoutes() {
 function App() {
   useInitialTransition();
   const location = useLocation();
+  const lenis = useLenis();
+
+  useEffect(() => {
+    // Scroll to top on route change
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    }
+  }, [location.pathname, lenis]);
 
   // Check if current path is a blog post
   const isBlogPost = location.pathname.startsWith('/blog/');
