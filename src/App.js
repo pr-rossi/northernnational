@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Mail, Instagram, Twitter, ChevronDown, ExternalLink, ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
@@ -22,6 +22,7 @@ import Merch from './pages/Merch';
 import Tour from './pages/Tour';
 import Footer from './components/Footer';
 import ProductDetails from './pages/ProductDetails';
+import { Toaster, toast } from 'react-hot-toast';
 
 function HomePage() {
   const titleRef = useRef(null);
@@ -396,14 +397,40 @@ function AnimatedRoutes() {
 function App() {
   useInitialTransition();
   const location = useLocation();
+  const navigate = useNavigate();
   const lenis = useLenis();
 
   useEffect(() => {
-    // Scroll to top on route change
     if (lenis) {
       lenis.scrollTo(0, { immediate: true });
     }
   }, [location.pathname, lenis]);
+
+  useEffect(() => {
+    // Check URL parameters for success/cancel
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success')) {
+      toast.success('Order placed successfully!', {
+        icon: '🎉',
+        style: {
+          background: '#D4FF99',
+          color: 'black',
+        },
+      });
+      // Clean up URL and redirect to home
+      navigate('/', { replace: true });
+    } else if (urlParams.get('canceled')) {
+      toast.error('Order was canceled', {
+        icon: '❌',
+        style: {
+          background: '#ff4444',
+          color: 'white',
+        },
+      });
+      // Clean up URL and redirect to home
+      navigate('/', { replace: true });
+    }
+  }, [location.search, navigate]);
 
   // Check if current path is a blog post
   const isBlogPost = location.pathname.startsWith('/blog/');
@@ -412,6 +439,17 @@ function App() {
     <LenisProvider>
       <CartProvider>
         <div className="min-h-screen bg-zinc-950">
+          <Toaster 
+            position="top-center"
+            toastOptions={{
+              duration: 5000,
+              style: {
+                borderRadius: '10px',
+                padding: '16px',
+                fontWeight: '500',
+              },
+            }}
+          />
           {!isBlogPost && <Navigation />}
           <AnimatedRoutes />
           {!isBlogPost && <Footer />}

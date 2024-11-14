@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import PageTransition from '../components/PageTransition';
 import { useLenis } from '@studio-freight/react-lenis';
+import toast from 'react-hot-toast';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -12,6 +13,7 @@ function ProductDetails() {
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
   const lenis = useLenis();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Scroll to top when component mounts
@@ -96,7 +98,7 @@ function ProductDetails() {
             image: productData.images[0],
             unit_amount: Math.round(parseFloat(selectedVariant.retail_price) * 100),
             quantity: 1,
-            variantId: selectedVariant.id,
+            variantId: selectedVariant.id.toString(),
             product_data: productData
           }],
         }),
@@ -108,10 +110,24 @@ function ProductDetails() {
       }
 
       const { url } = await response.json();
-      window.location = url;
+      
+      // Instead of directly redirecting, open in new tab
+      const checkoutWindow = window.open(url, '_blank');
+      
+      // Listen for messages from the checkout window
+      window.addEventListener('message', function(event) {
+        if (event.data === 'checkout-complete') {
+          toast.success('Order placed successfully!');
+          navigate('/');
+        } else if (event.data === 'checkout-canceled') {
+          toast.error('Order was canceled');
+          navigate('/');
+        }
+      });
+
     } catch (error) {
       console.error('Error processing buy now:', error);
-      alert('Failed to process purchase. Please try again.');
+      toast.error('Failed to process purchase. Please try again.');
     }
   };
 
