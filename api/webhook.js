@@ -19,7 +19,8 @@ async function buffer(readable) {
 
 async function createPrintfulOrder(variantIds, customer) {
   try {
-    const response = await fetch('https://api.printful.com/orders', {
+    // First create the order
+    const createResponse = await fetch('https://api.printful.com/orders', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
@@ -45,21 +46,41 @@ async function createPrintfulOrder(variantIds, customer) {
       }),
     });
 
-    const data = await response.json();
+    const orderData = await createResponse.json();
     
-    if (!response.ok) {
+    if (!createResponse.ok) {
       console.error('Printful API Error:', {
-        status: response.status,
-        statusText: response.statusText,
-        error: JSON.stringify(data)
+        status: createResponse.status,
+        statusText: createResponse.statusText,
+        error: JSON.stringify(orderData)
       });
-      throw new Error(data.result || 'Failed to create Printful order');
+      throw new Error(orderData.result || 'Failed to create Printful order');
     }
 
-    console.log('Printful order created:', data);
-    return data;
+    // Then confirm the order explicitly
+    const confirmResponse = await fetch(`https://api.printful.com/orders/${orderData.result.id}/confirm`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+        'Content-Type': 'application/json',
+      }
+    });
+
+    const confirmData = await confirmResponse.json();
+
+    if (!confirmResponse.ok) {
+      console.error('Printful Confirm Error:', {
+        status: confirmResponse.status,
+        statusText: confirmResponse.statusText,
+        error: JSON.stringify(confirmData)
+      });
+      throw new Error(confirmData.result || 'Failed to confirm Printful order');
+    }
+
+    console.log('Printful order created and confirmed:', confirmData);
+    return confirmData;
   } catch (error) {
-    console.error('Error creating Printful order:', error);
+    console.error('Error creating/confirming Printful order:', error);
     throw error;
   }
 }
