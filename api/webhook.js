@@ -40,7 +40,8 @@ async function createPrintfulOrder(variantIds, customer) {
           sync_variant_id: parseInt(id, 10),
           quantity: 1
         })),
-        store_id: process.env.PRINTFUL_STORE_ID
+        store_id: process.env.PRINTFUL_STORE_ID,
+        confirm: true
       }),
     });
 
