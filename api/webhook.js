@@ -17,6 +17,46 @@ async function buffer(readable) {
   return Buffer.concat(chunks);
 }
 
+async function createPrintfulOrder(variantIds, customer) {
+  try {
+    const response = await fetch('https://api.printful.com/orders', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        recipient: {
+          name: customer.name,
+          email: customer.email,
+          address1: customer.address.line1,
+          address2: customer.address.line2,
+          city: customer.address.city,
+          state_code: customer.address.state,
+          country_code: customer.address.country,
+          zip: customer.address.postal_code,
+        },
+        items: variantIds.map(id => ({
+          sync_variant_id: parseInt(id, 10),
+          quantity: 1
+        })),
+      }),
+    });
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.result || 'Failed to create Printful order');
+    }
+
+    console.log('Printful order created:', data);
+    return data;
+  } catch (error) {
+    console.error('Error creating Printful order:', error);
+    throw error;
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
@@ -58,10 +98,13 @@ export default async function handler(req, res) {
       console.log('Processing order for customer:', customer);
       console.log('Variant IDs:', variantIds);
 
-      // Process the order with Printful
-      // Add your Printful order creation logic here
+      // Create the Printful order
+      const printfulOrder = await createPrintfulOrder(variantIds, customer);
 
-      return res.status(200).json({ received: true });
+      return res.status(200).json({ 
+        received: true,
+        printfulOrder: printfulOrder
+      });
     } catch (error) {
       console.error('Error processing order:', error);
       return res.status(500).json({ 
