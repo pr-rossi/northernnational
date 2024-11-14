@@ -4,6 +4,8 @@ import { useCart } from '../context/CartContext';
 import PageTransition from '../components/PageTransition';
 import { useLenis } from '@studio-freight/react-lenis';
 import toast from 'react-hot-toast';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -14,6 +16,7 @@ function ProductDetails() {
   const { addToCart } = useCart();
   const lenis = useLenis();
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     // Scroll to top when component mounts
@@ -142,6 +145,70 @@ function ProductDetails() {
     return variantName.split('/').pop().trim();
   };
 
+  // Custom size selector component
+  const SizeSelector = ({ variants, selectedVariant, onSelect }) => {
+    return (
+      <div className="relative">
+        <label className="block text-sm font-medium text-gray-200 mb-2">
+          Select Size
+        </label>
+        
+        {/* Selected Size Button */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white flex items-center justify-between hover:bg-zinc-700 transition-colors"
+        >
+          <span>{selectedVariant ? selectedVariant.name : 'Select a size'}</span>
+          <ChevronDown 
+            className={`w-5 h-5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          />
+        </button>
+
+        {/* Dropdown Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute z-50 w-full mt-2 bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg overflow-hidden"
+            >
+              {variants.map((variant) => (
+                <motion.button
+                  key={variant.id}
+                  onClick={() => {
+                    onSelect(variant);
+                    setIsOpen(false);
+                  }}
+                  className={`w-full p-3 text-left hover:bg-[#D4FF99] hover:text-black transition-colors
+                    ${selectedVariant?.id === variant.id 
+                      ? 'bg-[#D4FF99] text-black' 
+                      : 'text-white'}`}
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {variant.name}
+                </motion.button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Overlay to close dropdown when clicking outside */}
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40"
+            onClick={() => setIsOpen(false)}
+          />
+        )}
+      </div>
+    );
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -186,29 +253,13 @@ function ProductDetails() {
                 ${selectedVariant?.retail_price || product?.retail_price}
               </div>
 
-              {/* Size Selection - Only show if there are variants */}
+              {/* Custom Size Selector */}
               {product?.sync_variants && product.sync_variants.length > 1 && (
-                <div>
-                  <label htmlFor="size" className="block text-sm font-medium text-gray-200 mb-2">
-                    Select Size
-                  </label>
-                  <select
-                    id="size"
-                    value={selectedVariant?.id || ''}
-                    onChange={(e) => {
-                      const variant = product.sync_variants.find(v => v.id === parseInt(e.target.value));
-                      setSelectedVariant(variant);
-                    }}
-                    className="w-full p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white"
-                  >
-                    <option value="">Select a size</option>
-                    {product.sync_variants.map(variant => (
-                      <option key={variant.id} value={variant.id}>
-                        {getSimpleSize(variant.name)}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <SizeSelector
+                  variants={product.sync_variants}
+                  selectedVariant={selectedVariant}
+                  onSelect={setSelectedVariant}
+                />
               )}
 
               {/* Buy Now Button */}
