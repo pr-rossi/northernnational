@@ -29,7 +29,16 @@ function ProductDetails() {
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.details || 'Failed to fetch product details');
+          console.error('Printful API Error:', {
+            status: response.status,
+            statusText: response.statusText,
+            error: JSON.stringify(data)
+          });
+          throw new Error(data.error?.message || data.result || 'Failed to fetch product details');
+        }
+
+        if (!data.result) {
+          throw new Error('No product data received');
         }
 
         setProduct(data.result);
@@ -45,7 +54,9 @@ function ProductDetails() {
       }
     };
 
-    fetchProductDetails();
+    if (id) {
+      fetchProductDetails();
+    }
   }, [id]);
 
   const handleAddToCart = () => {
@@ -69,12 +80,24 @@ function ProductDetails() {
         body: JSON.stringify({
           items: [{
             name: product.name,
-            image: product.thumbnail_url,
+            description: product.description,
+            image: product.files?.[0]?.preview_url || product.thumbnail_url,
             unit_amount: Math.round(parseFloat(selectedVariant.retail_price) * 100),
+            quantity: 1,
             variantId: selectedVariant.id.toString(),
+            product_data: {
+              name: product.name,
+              description: product.description || '',
+              images: [product.files?.[0]?.preview_url || product.thumbnail_url]
+            }
           }],
         }),
       });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to create checkout session');
+      }
 
       const { url } = await response.json();
       window.location = url;
