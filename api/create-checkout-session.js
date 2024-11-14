@@ -22,8 +22,8 @@ export default async function handler(req, res) {
       payment_method_types: ['card'],
       line_items: items.map(item => {
         const productData = {
-          name: `${product.name} - ${selectedVariant.name}`,
-        images: [product.files?.[0]?.preview_url || product.thumbnail_url],
+          name: `${item.name}`,
+          images: [item.image],
         };
 
         if (item.product_data?.description) {
