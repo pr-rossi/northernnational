@@ -140,7 +140,7 @@ function ProductDetails() {
             <div>
               {product && (
                 <img 
-                  src={product.sync_product?.thumbnail_url || product.thumbnail_url} 
+                  src={product.thumbnail_url} 
                   alt={product.name}
                   className="w-full rounded-lg"
                 />
@@ -149,64 +149,51 @@ function ProductDetails() {
 
             {/* Product Details */}
             <div className="space-y-8">
-              <h1 className="text-4xl font-bold text-white">{product.name}</h1>
+              <h1 className="text-4xl font-bold text-white">{product?.name}</h1>
+              <p className="text-gray-300">{product?.description}</p>
               
-              {selectedVariant && (
-                <p className="text-3xl font-bold text-[#D4FF99]">
-                  ${parseFloat(selectedVariant.retail_price).toFixed(2)}
-                </p>
+              {/* Price */}
+              <div className="text-2xl font-bold text-white">
+                ${selectedVariant?.retail_price || product?.retail_price}
+              </div>
+
+              {/* Size Selection - Only show if there are variants */}
+              {product?.sync_variants && product.sync_variants.length > 1 && (
+                <div>
+                  <label htmlFor="size" className="block text-sm font-medium text-gray-200 mb-2">
+                    Select Size
+                  </label>
+                  <select
+                    id="size"
+                    value={selectedVariant?.id || ''}
+                    onChange={(e) => {
+                      const variant = product.sync_variants.find(v => v.id === parseInt(e.target.value));
+                      setSelectedVariant(variant);
+                    }}
+                    className="w-full p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white"
+                  >
+                    <option value="">Select a size</option>
+                    {product.sync_variants.map(variant => (
+                      <option key={variant.id} value={variant.id}>
+                        {variant.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               )}
 
-              {/* Size Selection */}
-              <div>
-                <label htmlFor="size" className="block text-sm font-medium text-gray-200 mb-2">
-                  Select Size
-                </label>
-                <select
-                  id="size"
-                  value={selectedVariant?.id || ''}
-                  onChange={(e) => {
-                    const variant = product.sync_variants.find(v => v.id === parseInt(e.target.value));
-                    setSelectedVariant(variant);
-                  }}
-                  className="w-full p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white"
-                >
-                  <option value="">Select a size</option>
-                  {product?.sync_variants?.map(variant => (
-                    <option key={variant.id} value={variant.id}>
-                      {variant.name.split('/').pop().trim()} {/* This will show only the size part */}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Add to Cart & Buy Now Buttons */}
-              <div className="space-y-4">
-                <button
-                  onClick={handleAddToCart}
-                  disabled={!selectedVariant}
-                  className="w-full px-6 py-3 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Add to Cart
-                </button>
-                <button
-                  onClick={handleBuyNow}
-                  disabled={!selectedVariant}
-                  className="w-full px-6 py-3 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Buy Now
-                </button>
-              </div>
-
-              {/* Product Description */}
-              <div className="prose prose-invert max-w-none">
-                <p>{product.description}</p>
-              </div>
-
-              {/* Shipping Info */}
-              <p className="text-gray-400 text-sm">
-                Free shipping on orders over $50
-              </p>
+              {/* Buy Now Button */}
+              <button
+                onClick={handleBuyNow}
+                disabled={product?.sync_variants?.length > 1 && !selectedVariant}
+                className={`w-full px-6 py-3 text-black font-bold rounded-lg transition-colors ${
+                  product?.sync_variants?.length > 1 && !selectedVariant
+                    ? 'bg-gray-500 cursor-not-allowed'
+                    : 'bg-[#D4FF99] hover:bg-[#bfe589]'
+                }`}
+              >
+                {product?.sync_variants?.length > 1 && !selectedVariant ? 'Select a size' : 'Buy Now'}
+              </button>
             </div>
           </div>
         </div>
