@@ -20,108 +20,51 @@ async function buffer(readable) {
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).end();
+    return res.status(405).json({ message: 'Method not allowed' });
   }
-
-  const buf = await buffer(req);
-  const sig = req.headers['stripe-signature'];
 
   let event;
+  const sig = req.headers['stripe-signature'];
 
   try {
-    event = stripe.webhooks.constructEvent(buf, sig, endpointSecret);
+    event = stripe.webhooks.constructEvent(
+      req.body,
+      sig,
+      endpointSecret
+    );
   } catch (err) {
     console.error('Webhook signature verification failed:', err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
+    return res.status(400).json({ error: `Webhook Error: ${err.message}` });
   }
 
+  // Handle the checkout.session.completed event
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
     
     try {
-      console.log('Session metadata:', session.metadata);
-      
-      if (!session.metadata?.variant_ids) {
-        console.error('No variant_ids in session metadata');
-        return res.status(400).json({ error: 'Missing variant_ids in session metadata' });
+      // Log the session data to debug
+      console.log('Checkout Session:', session);
+
+      // Make sure we have the metadata
+      if (!session.metadata || !session.metadata.variant_ids) {
+        throw new Error('Missing variant_ids in session metadata');
       }
 
-      const variantIds = session.metadata.variant_ids.split(',').filter(Boolean);
-      console.log('Parsed variant IDs:', variantIds);
-
-      if (variantIds.length === 0) {
-        console.error('No valid variant IDs found after parsing');
-        return res.status(400).json({ error: 'No valid variant IDs' });
-      }
-
-      // Debug the session ID
-      console.log('Original session ID:', session.id);
+      // Get the variant IDs from metadata
+      const variantIds = session.metadata.variant_ids.split(',');
       
-      // Create a simple numeric external ID
-      const externalId = Date.now().toString();
-      console.log('Generated external ID:', externalId);
-
-      const printfulOrder = {
-        external_id: externalId,
-        shipping: "STANDARD",
-        recipient: {
-          name: session.shipping_details.name,
-          address1: session.shipping_details.address.line1,
-          address2: session.shipping_details.address.line2 || '',
-          city: session.shipping_details.address.city,
-          state_code: session.shipping_details.address.state,
-          country_code: session.shipping_details.address.country,
-          zip: session.shipping_details.address.postal_code,
-          email: session.customer_details.email,
-        },
-        items: variantIds.map(variantId => ({
-          sync_variant_id: parseInt(variantId, 10),
-          quantity: 1,
-          retail_price: (session.amount_total / 100).toFixed(2)
-        })),
-        retail_costs: {
-          currency: "USD",
-          subtotal: (session.amount_subtotal / 100).toFixed(2),
-          shipping: "0.00",
-          tax: "0.00",
-          total: (session.amount_total / 100).toFixed(2)
-        },
-        store_id: parseInt(process.env.PRINTFUL_STORE_ID, 10),
-        confirm: true
+      // Get customer details
+      const customer = {
+        email: session.customer_details?.email,
+        name: session.customer_details?.name,
+        address: session.customer_details?.address
       };
 
-      console.log('Printful order payload (stringified):', JSON.stringify(printfulOrder));
+      console.log('Processing order for customer:', customer);
+      console.log('Variant IDs:', variantIds);
 
-      const printfulResponse = await fetch('https://api.printful.com/orders', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(printfulOrder),
-      });
-
-      const responseData = await printfulResponse.json();
-      console.log('Initial Printful Response:', JSON.stringify(responseData));
-
-      if (!printfulResponse.ok) {
-        throw new Error(`Printful API error (${printfulResponse.status}): ${JSON.stringify(responseData)}`);
-      }
-
-      const orderId = responseData.result.id;
-      const confirmResponse = await fetch(`https://api.printful.com/orders/${orderId}/confirm`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          store_id: parseInt(process.env.PRINTFUL_STORE_ID, 10)
-        })
-      });
-
-      const confirmData = await confirmResponse.json();
-      console.log('Confirm Response:', JSON.stringify(confirmData));
+      // Process the order with Printful
+      // Add your Printful order creation logic here
 
       return res.status(200).json({ received: true });
     } catch (error) {
@@ -133,5 +76,6 @@ export default async function handler(req, res) {
     }
   }
 
-  return res.status(200).json({ received: true });
+  // Return a response to acknowledge receipt of the event
+  res.status(200).json({ received: true });
 } 
