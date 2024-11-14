@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import PageTransition from '../components/PageTransition';
+import { useLenis } from '@studio-freight/react-lenis';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -10,6 +11,16 @@ function ProductDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
+  const lenis = useLenis();
+
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+    // Also reset Lenis scroll
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    }
+  }, [lenis]);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -96,10 +107,10 @@ function ProductDetails() {
       <div className="pt-48 pb-32 min-h-screen bg-zinc-950">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Product Image */}
+            {/* Product Image - Updated to use files array */}
             <div>
               <img 
-                src={product.thumbnail_url} 
+                src={product.files?.[0]?.preview_url || product.thumbnail_url} 
                 alt={product.name}
                 className="w-full rounded-lg"
               />
