@@ -136,13 +136,15 @@ function ProductDetails() {
       <div className="pt-48 pb-32 min-h-screen bg-zinc-950">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Product Image - Updated to use files array */}
+            {/* Product Image */}
             <div>
-              <img 
-                src={product.files?.[0]?.preview_url || product.thumbnail_url} 
-                alt={product.name}
-                className="w-full rounded-lg"
-              />
+              {product && (
+                <img 
+                  src={product.sync_product?.thumbnail_url || product.thumbnail_url} 
+                  alt={product.name}
+                  className="w-full rounded-lg"
+                />
+              )}
             </div>
 
             {/* Product Details */}
@@ -155,29 +157,28 @@ function ProductDetails() {
                 </p>
               )}
 
-              {/* Variant Selection */}
-              {product.sync_variants && product.sync_variants.length > 0 && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">
-                    Select Size
-                  </label>
-                  <div className="grid grid-cols-4 gap-2">
-                    {product.sync_variants.map((variant) => (
-                      <button
-                        key={variant.id}
-                        onClick={() => setSelectedVariant(variant)}
-                        className={`px-4 py-2 rounded-lg border ${
-                          selectedVariant?.id === variant.id
-                            ? 'border-[#D4FF99] text-[#D4FF99]'
-                            : 'border-zinc-800 text-white hover:border-[#D4FF99]'
-                        } transition-colors`}
-                      >
-                        {variant.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+              {/* Size Selection */}
+              <div>
+                <label htmlFor="size" className="block text-sm font-medium text-gray-200 mb-2">
+                  Select Size
+                </label>
+                <select
+                  id="size"
+                  value={selectedVariant?.id || ''}
+                  onChange={(e) => {
+                    const variant = product.sync_variants.find(v => v.id === parseInt(e.target.value));
+                    setSelectedVariant(variant);
+                  }}
+                  className="w-full p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white"
+                >
+                  <option value="">Select a size</option>
+                  {product?.sync_variants?.map(variant => (
+                    <option key={variant.id} value={variant.id}>
+                      {variant.name.split('/').pop().trim()} {/* This will show only the size part */}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
               {/* Add to Cart & Buy Now Buttons */}
               <div className="space-y-4">
