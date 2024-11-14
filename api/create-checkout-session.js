@@ -22,7 +22,7 @@ export default async function handler(req, res) {
       payment_method_types: ['card'],
       line_items: items.map(item => {
         const productData = {
-          name: item.name,
+          name: `${item.name}`,
           images: [item.image],
         };
 
@@ -46,14 +46,14 @@ export default async function handler(req, res) {
       success_url: `${domain}?success=true`,
       cancel_url: `${domain}?canceled=true`,
       shipping_address_collection: {
-        allowed_countries: ['US'], // Add other countries as needed
+        allowed_countries: ['US'],
       },
       shipping_options: [
         {
           shipping_rate_data: {
             type: 'fixed_amount',
             fixed_amount: {
-              amount: 500, // $5.00
+              amount: 500,
               currency: 'usd',
             },
             display_name: 'Standard Shipping',
@@ -73,7 +73,7 @@ export default async function handler(req, res) {
           shipping_rate_data: {
             type: 'fixed_amount',
             fixed_amount: {
-              amount: 1500, // $15.00
+              amount: 1500,
               currency: 'usd',
             },
             display_name: 'Express Shipping',
