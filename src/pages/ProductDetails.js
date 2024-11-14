@@ -82,13 +82,9 @@ function ProductDetails() {
 
     try {
       const productData = {
-        name: `${product.name} - ${selectedVariant.name}`,
+        name: product.name ? `${product.name}${selectedVariant.name ? ` - ${selectedVariant.name}` : ''}` : '',
         images: [product.files?.[0]?.preview_url || product.thumbnail_url],
       };
-
-      if (product.description && product.description.trim()) {
-        productData.description = product.description;
-      }
 
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
@@ -114,19 +110,8 @@ function ProductDetails() {
 
       const { url } = await response.json();
       
-      // Instead of directly redirecting, open in new tab
-      const checkoutWindow = window.open(url, '_blank');
-      
-      // Listen for messages from the checkout window
-      window.addEventListener('message', function(event) {
-        if (event.data === 'checkout-complete') {
-          toast.success('Order placed successfully!');
-          navigate('/');
-        } else if (event.data === 'checkout-canceled') {
-          toast.error('Order was canceled');
-          navigate('/');
-        }
-      });
+      // Redirect in same window instead of opening new tab
+      window.location.href = url;
 
     } catch (error) {
       console.error('Error processing buy now:', error);
