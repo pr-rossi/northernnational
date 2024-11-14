@@ -82,7 +82,7 @@ function ProductDetails() {
 
     try {
       const productData = {
-        name: `${product.name} - ${selectedVariant.name}`,
+        name: product.name ? `${product.name}${selectedVariant.name ? ` - ${selectedVariant.name}` : ''}` : '',
         images: [product.files?.[0]?.preview_url || product.thumbnail_url],
       };
 
