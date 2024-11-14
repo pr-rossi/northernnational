@@ -1,5 +1,4 @@
 import Stripe from 'stripe';
-import fetch from 'node-fetch';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -24,11 +23,12 @@ export default async function handler(req, res) {
   }
 
   let event;
-  const sig = req.headers['stripe-signature'];
-
   try {
+    const rawBody = await buffer(req);
+    const sig = req.headers['stripe-signature'];
+
     event = stripe.webhooks.constructEvent(
-      req.body,
+      rawBody,
       sig,
       endpointSecret
     );
@@ -37,27 +37,22 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: `Webhook Error: ${err.message}` });
   }
 
-  // Handle the checkout.session.completed event
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
     
     try {
-      // Log the session data to debug
       console.log('Checkout Session:', session);
 
-      // Make sure we have the metadata
       if (!session.metadata || !session.metadata.variant_ids) {
         throw new Error('Missing variant_ids in session metadata');
       }
 
-      // Get the variant IDs from metadata
       const variantIds = session.metadata.variant_ids.split(',');
       
-      // Get customer details
       const customer = {
-        email: session.customer_details?.email,
-        name: session.customer_details?.name,
-        address: session.customer_details?.address
+        email: session.customer_details?.email || '',
+        name: session.customer_details?.name || '',
+        address: session.customer_details?.address || {}
       };
 
       console.log('Processing order for customer:', customer);
@@ -76,6 +71,5 @@ export default async function handler(req, res) {
     }
   }
 
-  // Return a response to acknowledge receipt of the event
   res.status(200).json({ received: true });
 } 
