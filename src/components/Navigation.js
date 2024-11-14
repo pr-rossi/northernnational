@@ -72,8 +72,12 @@ function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="relative z-50">
+          {/* Logo - Added onClick to close menu */}
+          <Link 
+            to="/" 
+            className="relative z-50"
+            onClick={() => setIsOpen(false)}
+          >
             <img 
               src="/images/nn-logo.svg" 
               alt="Northern National" 
