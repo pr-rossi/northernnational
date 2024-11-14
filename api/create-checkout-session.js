@@ -45,6 +45,54 @@ export default async function handler(req, res) {
       },
       success_url: `${domain}?success=true`,
       cancel_url: `${domain}?canceled=true`,
+      shipping_address_collection: {
+        allowed_countries: ['US'], // Add other countries as needed
+      },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: 'fixed_amount',
+            fixed_amount: {
+              amount: 500, // $5.00
+              currency: 'usd',
+            },
+            display_name: 'Standard Shipping',
+            delivery_estimate: {
+              minimum: {
+                unit: 'business_day',
+                value: 5,
+              },
+              maximum: {
+                unit: 'business_day',
+                value: 7,
+              },
+            },
+          },
+        },
+        {
+          shipping_rate_data: {
+            type: 'fixed_amount',
+            fixed_amount: {
+              amount: 1500, // $15.00
+              currency: 'usd',
+            },
+            display_name: 'Express Shipping',
+            delivery_estimate: {
+              minimum: {
+                unit: 'business_day',
+                value: 2,
+              },
+              maximum: {
+                unit: 'business_day',
+                value: 3,
+              },
+            },
+          },
+        },
+      ],
+      phone_number_collection: {
+        enabled: true,
+      },
     });
 
     res.status(200).json({ url: session.url });
