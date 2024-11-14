@@ -40,12 +40,18 @@ async function createPrintfulOrder(variantIds, customer) {
           sync_variant_id: parseInt(id, 10),
           quantity: 1
         })),
+        store_id: process.env.PRINTFUL_STORE_ID
       }),
     });
 
     const data = await response.json();
     
     if (!response.ok) {
+      console.error('Printful API Error:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: JSON.stringify(data)
+      });
       throw new Error(data.result || 'Failed to create Printful order');
     }
 
