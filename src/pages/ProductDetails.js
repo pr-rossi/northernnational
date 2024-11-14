@@ -29,7 +29,7 @@ function ProductDetails() {
         const data = await response.json();
 
         if (!response.ok) {
-          console.error('Printful API Error:', {
+          console.error('API Error:', {
             status: response.status,
             statusText: response.statusText,
             error: JSON.stringify(data)
@@ -41,8 +41,10 @@ function ProductDetails() {
           throw new Error('No product data received');
         }
 
+        console.log('Product data received:', data.result);
         setProduct(data.result);
-        // Set first variant as default
+        
+        // Set first variant as default if available
         if (data.result.sync_variants?.length > 0) {
           setSelectedVariant(data.result.sync_variants[0]);
         }
@@ -113,6 +115,17 @@ function ProductDetails() {
     }
   };
 
+  // Helper function to get the correct image URL
+  const getImageUrl = (product) => {
+    return product?.sync_product?.thumbnail_url || product?.thumbnail_url;
+  };
+
+  // Helper function to simplify variant names
+  const getSimpleSize = (variantName) => {
+    // Split by '/' and get the last part, then trim whitespace
+    return variantName.split('/').pop().trim();
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -140,7 +153,7 @@ function ProductDetails() {
             <div>
               {product && (
                 <img 
-                  src={product.thumbnail_url} 
+                  src={getImageUrl(product)} 
                   alt={product.name}
                   className="w-full rounded-lg"
                 />
@@ -175,7 +188,7 @@ function ProductDetails() {
                     <option value="">Select a size</option>
                     {product.sync_variants.map(variant => (
                       <option key={variant.id} value={variant.id}>
-                        {variant.name}
+                        {getSimpleSize(variant.name)}
                       </option>
                     ))}
                   </select>
