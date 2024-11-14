@@ -71,6 +71,8 @@ function ProductDetails() {
   };
 
   const handleBuyNow = async () => {
+    if (!selectedVariant) return;
+
     try {
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
@@ -79,17 +81,11 @@ function ProductDetails() {
         },
         body: JSON.stringify({
           items: [{
-            name: product.name,
-            description: product.description,
+            name: `${product.name} - ${selectedVariant.name}`,
+            description: product.description || '',
             image: product.files?.[0]?.preview_url || product.thumbnail_url,
             unit_amount: Math.round(parseFloat(selectedVariant.retail_price) * 100),
-            quantity: 1,
-            variantId: selectedVariant.id.toString(),
-            product_data: {
-              name: product.name,
-              description: product.description || '',
-              images: [product.files?.[0]?.preview_url || product.thumbnail_url]
-            }
+            quantity: 1
           }],
         }),
       });
