@@ -11,18 +11,25 @@ export default async function handler(req, res) {
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: items.map(item => ({
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: item.name,
-            description: item.description,
-            images: [item.image],
+      line_items: items.map(item => {
+        const productData = {
+          name: item.name,
+          images: [item.image],
+        };
+
+        if (item.product_data?.description) {
+          productData.description = item.product_data.description;
+        }
+
+        return {
+          price_data: {
+            currency: 'usd',
+            product_data: productData,
+            unit_amount: item.unit_amount,
           },
-          unit_amount: item.unit_amount,
-        },
-        quantity: item.quantity || 1,
-      })),
+          quantity: item.quantity || 1,
+        };
+      }),
       mode: 'payment',
       success_url: `${process.env.DOMAIN}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.DOMAIN}/canceled`,
