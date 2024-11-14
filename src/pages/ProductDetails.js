@@ -74,13 +74,11 @@ function ProductDetails() {
     if (!selectedVariant) return;
 
     try {
-      // Create the base product data
       const productData = {
         name: `${product.name} - ${selectedVariant.name}`,
         images: [product.files?.[0]?.preview_url || product.thumbnail_url],
       };
 
-      // Only add description if it exists and is not empty
       if (product.description && product.description.trim()) {
         productData.description = product.description;
       }
@@ -96,6 +94,7 @@ function ProductDetails() {
             image: productData.images[0],
             unit_amount: Math.round(parseFloat(selectedVariant.retail_price) * 100),
             quantity: 1,
+            variantId: selectedVariant.id,
             product_data: productData
           }],
         }),
