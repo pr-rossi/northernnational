@@ -41,7 +41,7 @@ async function createPrintfulOrder(variantIds, customer) {
           sync_variant_id: parseInt(id, 10),
           quantity: 1
         })),
-        store_id: process.env.PRINTFUL_STORE_ID,
+        store_id: parseInt(process.env.PRINTFUL_STORE_ID, 10),
         confirm: true
       }),
     });
@@ -63,7 +63,10 @@ async function createPrintfulOrder(variantIds, customer) {
       headers: {
         'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
         'Content-Type': 'application/json',
-      }
+      },
+      body: JSON.stringify({
+        store_id: parseInt(process.env.PRINTFUL_STORE_ID, 10)
+      })
     });
 
     const confirmData = await confirmResponse.json();
