@@ -21,6 +21,7 @@ import Navigation from './components/Navigation';
 import Merch from './pages/Merch';
 import Tour from './pages/Tour';
 import Footer from './components/Footer';
+import ProductDetails from './pages/ProductDetails';
 
 function HomePage() {
   const titleRef = useRef(null);
@@ -379,17 +380,16 @@ function AnimatedRoutes() {
   const location = useLocation();
 
   return (
-    <>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/merch" element={<Merch />} />
-          <Route path="/tour" element={<Tour />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-        </Routes>
-      </AnimatePresence>
-    </>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/merch" element={<Merch />} />
+        <Route path="/tour" element={<Tour />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+      </Routes>
+    </AnimatePresence>
   );
 }
 

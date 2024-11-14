@@ -7,6 +7,7 @@ import { useCart } from '../context/CartContext';
 import Cart from './Cart';
 import './MerchSection.css';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -294,36 +295,16 @@ const MerchSection = ({
               <div className="p-6">
                 <h3 className="text-2xl font-bold mb-3 text-white tracking-tight">{product.name}</h3>
                 {product.sync_variants && product.sync_variants[0] && (
-                  <div className="flex items-center justify-between mb-6">
-                    <p className="text-[#D4FF99] text-2xl font-bold">
-                      ${parseFloat(product.sync_variants[0].retail_price).toFixed(2)}
-                    </p>
-                    <span className="text-zinc-400 text-sm">
-                      Free shipping on orders over $50
-                    </span>
-                  </div>
+                  <p className="text-[#D4FF99] text-2xl font-bold mb-6">
+                    ${parseFloat(product.sync_variants[0].retail_price).toFixed(2)}
+                  </p>
                 )}
-                <div className="space-y-3">
-                  <button
-                    onClick={() => handleAddToCart(product)}
-                    className="w-full px-6 py-3 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-lg transition-colors"
-                  >
-                    Add to Cart
-                  </button>
-                  <button
-                    onClick={() => handleBuyNow(product)}
-                    className="w-full px-6 py-3 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-bold rounded-lg transition-colors"
-                  >
-                    Buy Now
-                  </button>
-                </div>
-                <div className="mt-4 flex items-center justify-center space-x-2 text-zinc-500 text-sm">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-                    <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
-                  </svg>
-                  <span>Secure checkout</span>
-                </div>
+                <Link
+                  to={`/product/${product.id}`}
+                  className="block w-full px-6 py-3 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-bold rounded-lg transition-colors text-center"
+                >
+                  View Product
+                </Link>
               </div>
             </motion.div>
           ))}
