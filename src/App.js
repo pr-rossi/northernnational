@@ -401,8 +401,36 @@ function App() {
   const lenis = useLenis();
 
   useEffect(() => {
+    // Google Analytics initialization
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-47W02TXQRW';
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-47W02TXQRW');
+    };
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
+  useEffect(() => {
     if (lenis) {
       lenis.scrollTo(0, { immediate: true });
+    }
+    
+    // Track page view
+    if (window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_path: location.pathname + location.search
+      });
     }
   }, [location.pathname, lenis]);
 
