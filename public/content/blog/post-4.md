@@ -51,32 +51,7 @@ convenience init(
 @interface PSPDFEmbeddedFile : PSPDFModel
 ```
 
-```python
-import requests
-import json
-
-body = json.dumps(null
-)
-
-response = requests.request(
-  'POST',
-  'https://api.nutrient.io/build',
-  headers = {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer your_api_key_here'
-  },
-  data = body,
-  stream = True
-)
-
-if response.ok:
-  with open('result.pdf', 'wb') as fd:
-    for chunk in response.iter_content(chunk_size=8096):
-      fd.write(chunk)
-else:
-  print(response.text)
-  exit()
-```
+## Test
 
 ## Choosing the Right SDK
 
