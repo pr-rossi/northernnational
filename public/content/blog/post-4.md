@@ -33,6 +33,11 @@ console.log("PSPDFKit for Web is ready!");
 console.log(instance);
 ```
 
+```bash
+git clone git@github.com:geokogh/redesigned-waddle.git
+cd redesigned-waddle
+```
+
 ## Choosing the Right SDK
 
 When selecting a PDF SDK for your project, consider these crucial factors:
