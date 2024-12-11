@@ -1,7 +1,7 @@
 ---
 title: "Understanding PDF SDKs: A Developer's Guide to Document Management"
 date: "2024-12-11"
-coverImage: "pdf-sdk.png"
+coverImage: "/images/blog/pdf-sdk.png"
 excerpt: "Explore the world of PDF SDKs and learn how these powerful tools can transform your document management capabilities with practical code examples and implementation strategies."
 ---
 
@@ -58,8 +58,6 @@ When selecting a PDF SDK for your project, consider these crucial factors:
 ## Best Practices for Implementation
 
 Success with PDF SDKs comes down to following established best practices. Implement proper memory handling for large files, robust error management for corrupted documents, and appropriate security measures for sensitive content. Performance optimization through queuing and background processing is essential for batch operations.
-
-![PDF Processing](pdf-processing.png)
 
 ## Looking Forward
 
