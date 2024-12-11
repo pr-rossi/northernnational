@@ -52,7 +52,7 @@ convenience init(
 ```
 
 ```php
-<?php
+&lt;?php
 
 $FileHandle = fopen('result.pdf', 'w+');
 
@@ -95,6 +95,7 @@ if ($response === false) {
 
 curl_close($curl);
 fclose($FileHandle);
+?&gt;
 ```
 
 ## Choosing the Right SDK
