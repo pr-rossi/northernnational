@@ -38,6 +38,15 @@ git clone git@github.com:geokogh/redesigned-waddle.git
 cd redesigned-waddle
 ```
 
+```swift
+convenience init(
+  ownerPassword: String?,
+  userPassword: String?,
+  keyLength: UInt,
+  permissions documentPermissions: DocumentPermissions
+) throws
+```
+
 ## Choosing the Right SDK
 
 When selecting a PDF SDK for your project, consider these crucial factors:
