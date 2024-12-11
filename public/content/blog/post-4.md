@@ -51,51 +51,31 @@ convenience init(
 @interface PSPDFEmbeddedFile : PSPDFModel
 ```
 
-```php
-&lt;?php
+```python
+import requests
+import json
 
-$FileHandle = fopen('result.pdf', 'w+');
+body = json.dumps(null
+)
 
-if (!$FileHandle) {
-    die('Failed to open file handle.');
-}
+response = requests.request(
+  'POST',
+  'https://api.nutrient.io/build',
+  headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer your_api_key_here'
+  },
+  data = body,
+  stream = True
+)
 
-$curl = curl_init();
-
-$postFields = array(
-    'instructions' => json_encode(array(
-        "parts" => array(
-            array("file" => "document")
-        ),
-        "actions" => array(
-            array("type" => "flatten")
-        )
-    )),
-    'document' => new CURLFILE('input-file.pdf')
-);
-
-curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://api.nutrient.io/build',
-    CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_POSTFIELDS => $postFields,
-    CURLOPT_HTTPHEADER => array(
-        'Authorization: Bearer your_api_key_here',
-        'Content-Type: multipart/form-data'
-    ),
-    CURLOPT_FILE => $FileHandle,
-));
-
-$response = curl_exec($curl);
-
-if ($response === false) {
-    echo 'cURL Error: ' . curl_error($curl);
-}
-
-curl_close($curl);
-fclose($FileHandle);
-?&gt;
+if response.ok:
+  with open('result.pdf', 'wb') as fd:
+    for chunk in response.iter_content(chunk_size=8096):
+      fd.write(chunk)
+else:
+  print(response.text)
+  exit()
 ```
 
 ## Choosing the Right SDK
