@@ -1,7 +1,7 @@
 ---
 title: "Understanding PDF SDKs: A Developer's Guide to Document Management"
 date: "2024-12-11"
-coverImage: "/images/blog/pdf-sdk.png"
+coverImage: "pdf-sdk.jpg"
 excerpt: "Explore the world of PDF SDKs and learn how these powerful tools can transform your document management capabilities with practical code examples and implementation strategies."
 ---
 
@@ -24,9 +24,9 @@ import PSPDFKit from "pspdfkit";
 
 // Obtain a PSPDFKit document instance.
 const instance = await PSPDFKit.load({
-	container: "#pspdfkit",
-	document: "<document-file-path>",
-	licenseKey: "<license-key>"
+    container: "#pspdfkit",
+    document: "<document-file-path>",
+    licenseKey: "<license-key>"
 });
 
 console.log("PSPDFKit for Web is ready!");
@@ -40,10 +40,10 @@ cd redesigned-waddle
 
 ```swift
 convenience init(
-  ownerPassword: String?,
-  userPassword: String?,
-  keyLength: UInt,
-  permissions documentPermissions: DocumentPermissions
+    ownerPassword: String?,
+    userPassword: String?,
+    keyLength: UInt,
+    permissions documentPermissions: DocumentPermissions
 ) throws
 ```
 
@@ -75,16 +75,16 @@ $postFields = array(
 );
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://api.nutrient.io/build',
-  CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_POSTFIELDS => $postFields,
-  CURLOPT_HTTPHEADER => array(
-    'Authorization: Bearer your_api_key_here',
-    'Content-Type: multipart/form-data'
-  ),
-  CURLOPT_FILE => $FileHandle,
+    CURLOPT_URL => 'https://api.nutrient.io/build',
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_POSTFIELDS => $postFields,
+    CURLOPT_HTTPHEADER => array(
+        'Authorization: Bearer your_api_key_here',
+        'Content-Type: multipart/form-data'
+    ),
+    CURLOPT_FILE => $FileHandle,
 ));
 
 $response = curl_exec($curl);
@@ -111,11 +111,11 @@ When selecting a PDF SDK for your project, consider these crucial factors:
 
 Success with PDF SDKs comes down to following established best practices. Implement proper memory handling for large files, robust error management for corrupted documents, and appropriate security measures for sensitive content. Performance optimization through queuing and background processing is essential for batch operations.
 
-![PDF Processing](/images/blog/pdf-processing.png)
+![PDF processing workflow and optimization diagram](pdf-processing.jpg)
 
 ## Looking Forward
 
 As document management continues to evolve, PDF SDKs are keeping pace with innovations in digital signatures, AI-powered text analysis, and cloud integration. Staying informed about these developments ensures your document management solutions remain cutting-edge.
 
 ---
-For more development insights and technical guides, visit our [Developer Blog](https://example.com/dev-blog).
+For more development insights and technical guides, visit our [Developer Blog](https://nutrient.io/blog)
