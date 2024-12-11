@@ -1,0 +1,1372 @@
+[
+	{
+		"image": "/assets/images/people/abdullahi-gbadamosi.jpg",
+		"name": "Abdullahi Gbadamosi",
+		"role": "Sharepoint Support Engineer",
+		"location": "Nigeria",
+		"gender": "He/Him/His",
+		"bio": "Abdullahi is an experienced Microsoft 365 associate and certified Azure Administrator who has spent years handling SharePoint on-premises and SharePoint Online. He’s helped numerous organizations realize the potential of SharePoint and Microsoft 365 environments and products.",
+		"socials": [
+			{ "type": "linkedin", "username": "lolu-gbadamosi-6b438b30/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/adrian-bigaj.jpg",
+		"name": "Adrian Bigaj",
+		"role": "Web Engineer",
+		"location": "Poland",
+		"gender": "He/Him/His",
+		"bio": "Senior JavaScript Developer | Full-Stack Enthusiast | Crafting Innovative Frontend Solutions",
+		"socials": [
+			{ "type": "github", "username": "bigsondev" },
+			{ "type": "twitter", "username": "bigsondev" },
+			{ "type": "website", "url": "https://bigsondev.com/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/aishwarya-singh.jpg",
+		"name": "Aishwarya Singh",
+		"role": "Technical Writer",
+		"location": "UAE",
+		"gender": "She/Her/Hers",
+		"bio": "Aishwarya works to turn engineering brilliance into digestible, precise guides. She takes the intricate, code-driven details of what our company creates and crafts them into documentation that’s clear, functional, and empowering for users — ensuring our work isn’t just understood, but loved.",
+		"socials":[ { "type": "linkedin", "username": "aishwarya-singh-b169ab14a" } ]
+	},
+	{
+		"image": "/assets/images/people/ajda-bevc.jpg",
+		"name": "Ajda Bevc",
+		"role": "Designer",
+		"location": "Slovenia",
+		"gender": "She/Her/Hers",
+		"socials":[ { "type": "linkedin", "username": "ajda-bevc-419b49b" } ]
+	},
+	{
+		"image": "/assets/images/people/akshay-sharma.jpg",
+		"name": "Akshay Sharma",
+		"role": "Senior Android Engineer",
+		"location": "India",
+		"gender": "He/Him/His",
+		"bio": "Akshay is an open source enthusiast who loves creating mobile apps and traveling to new places. He usually spends his free time with his family.",
+		"socials":[
+			{ "type": "github", "username": "akshay2211" },
+			{ "type": "twitter", "username": "_akshay22" },
+			{ "type": "website", "url": "https://ak1.io" },
+			{ "type": "linkedin", "username": "akshay-sharma-80478448" }
+		]
+	},
+	{
+		"image": "/assets/images/people/alex-donhou.jpg",
+		"name": "Alex Donhou",
+		"role": "Software Engineer",
+		"location": "United Kingdom",
+		"gender": "He/Him/His",
+		"bio": "Alex is a software developer who enjoys problem solving and deciphering how unfamiliar code works. In his free time, he enjoys video games, making cocktails, and teaching himself Mandarin.",
+		"socials":[
+			{ "type": "linkedin", "username": "alex-donhou-00a443207/" },
+			{ "type": "github", "username": "Alex-Aquaforest" }
+		]
+	},
+	{
+		"image": "/assets/images/people/alex-huynh.jpg",
+		"name": "Alex Huynh",
+		"role": "Regional Sales Representative",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Alex has a background in software sales. In his free time, he enjoys golfing, working out, and hitting the bars.",
+		"socials": [
+			{ "type": "linkedin", "username": "alex-huynh-99a718157" }
+		]
+	},
+	{
+		"image": "/assets/images/people/alexandros-apostolakis.jpg",
+		"name": "Alexandros Apostolakis",
+		"role": "Product Engineer",
+		"location": "Greece",
+		"gender": "He/Him/His",
+		"bio": "Alexandros enjoys learning new things, coffee, board games, cooking, traveling, spending time with his beloved people, setting and achieving goals, anime, and almost anything creative. His ultimate goal is freedom, and for the moment, his plan to achieve that is to create a self-sufficient home and lifestyle.",
+		"socials": [
+			{ "type": "github", "username": "Ntelikatos" },
+			{ "type": "linkedin", "username": "alexandros-apos" }
+		]
+	},
+	{
+		"image": "/assets/images/people/amit-nayar.jpg",
+		"name": "Amit Nayar",
+		"role": "Android Team Lead",
+		"location": "Germany",
+		"gender": "He/Him/His",
+		"bio": "Amit would rather spend his time making pizza, poking campfires, eating cheese and crisps, or climbing trees, but sadly he has to write great software to help save the world from deforestation. It’s a hard life, but someone’s gotta do it.",
+		"socials": [
+			{ "type": "linkedin", "username": "amit-n-b6685162" }
+		]
+	},
+	{
+		"image": "/assets/images/people/anastasia-kahn.jpg",
+		"name": "Anastasia Kahn",
+		"role": "Sales and Customer Success Manager",
+		"location": "France",
+		"gender": "She/Her/Hers",
+		"bio": "Anastasia is a cultural hybrid who enjoys working with smart people who build software. Outside of work, she loves spending time outdoors and can often be found in the midst of an unlikely conversation."
+	},
+	{
+		"image": "/assets/images/people/anna-bunn.jpg",
+		"name": "Anna Bunn",
+		"role": "Regional Sales Representative",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"bio": "Anna has a background in sales. In her free time, she enjoys reading, running, and hiking with her collie, Murphy.",
+		"socials":[ { "type": "linkedin", "username": "anna-bunn-28b491162" } ]
+	},
+	{
+		"image": "/assets/images/people/anna-engel.jpg",
+		"name": "Anna Engel",
+		"role": "Server and Services Engineer",
+		"location": "Poland",
+		"gender": "She/Her/Hers"
+	},
+	{
+		"image": "/assets/images/people/austin-ramsey.jpg",
+		"name": "Austin Ramsey",
+		"role": "Manager, Mid-Market Sales",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Austin joined Nutrient in June of 2022. He has 15+ years of sales experience as a logistics specialist, financial advisor, and more recently, in software sales. In his spare time, he enjoys cooking, going to concerts, and anything that brings friends and family together for a good time. You can find him chasing his kids around the yard with his dog, Amos.",
+		"socials": [ { "type": "linkedin", "username": "austin-r-912612152" } ]
+	},
+	{
+		"image": "/assets/images/people/babi-brasileiro.jpg",
+		"name": "Babi Brasileiro",
+		"role": "Designer",
+		"location": "Finland",
+		"gender": "She/Her/Hers",
+		"bio": "Babi enjoys creating inspiring visuals that solve problems and communicate ideas engagingly. Outside of the office, find her camping at the archipelago or meeting friends.",
+		"socials": [ 
+			{ "type": "linkedin", "username": "babibrasileiro" },
+			{ "type": "website", "url": "https://www.grafia.fi/tekijat/tekija/babi-brasileiro/" },
+			{ "type": "twitter", "username": "babibrasileiro" }
+		]
+	},
+	{
+		"image": "/assets/images/people/balazs-molnar.jpg",
+		"name": "Balázs Molnár",
+		"role": "Windows Tools Team Lead",
+		"location": "United Kingdom",
+		"bio": "As part of the Windows and SharePoint Team, Balazs loves to solve challenging problems and finds great pleasure in helping others. He loves his family and relaxes by building things. He’s as good with a hammer and saw as he is with a keyboard and mouse.",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/bartosz-szafran.jpg",
+		"name": "Bartosz Szafran",
+		"role": "Server and Services Engineer",
+		"location": "Poland",
+		"gender": "He/Him/His",
+		"bio": "Bartosz is a software engineer primarily interested in technologies pertaining to Erlang VM and distributed and large-scale systems. He’s also a functional programming enthusiast. In his free time, Bartosz enjoys spending time in nature and eating pierogi."
+	},
+	{
+		"image": "/assets/images/people/ben-goble.jpg",
+		"name": "Ben Goble",
+		"role": "Senior Technical Support Engineer",
+		"location": "United Kingdom",
+		"bio": "Ben is an IT engineer who enjoys troubleshooting software and hardware issues using knowledge from previous roles working with Office 365 and Azure. In his spare time, he likes to research new hardware and play games on his gaming PC.",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/ben-grantham.jpg",
+		"name": "Ben Grantham",
+		"role": "VP, Financial, Planning & Analysis",
+		"location": "United States",
+		"bio": "Ben lives in Portland, Oregon, with his wife and three children. He enjoys reading, cycling, and sports, and he has a passion for financial reporting and analytics.",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/bradley-hearn.jpg",
+		"name": "Bradley Hearn",
+		"role": "Senior Product Marketing Manager",
+		"location": "United States",
+		"bio": "Bradley Hearn is a senior product marketer with more than a decade of experience helping technology companies articulate and communicate the value of their B2B solutions. When not writing or speaking about Nutrient, Bradley loves fishing, exploring new music, and spending time with his family.",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/brandon-iturralde.jpg",
+		"name": "Brandon Iturralde",
+		"role": "Sales Development Representative",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Brandon joined Nutrient as a sales development representative in 2022 to help generate new business opportunities and provide support for the team when possible. Outside of work, he enjoys drawing cartoons, listening to music, and spending time with his friends, family, and cat."
+	},
+	{
+		"image": "/assets/images/people/brian-munoz.jpg",
+		"name": "Brian Muñoz",
+		"role": "Project Manager",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Brian is passionate about supporting teams by helping set goals, organizing, communicating, removing boundaries, and solving complex problems. He enjoys time with his family, beekeeping, woodworking, cooking, and playing music.",
+		"socials": [
+			{ "type": "linkedin", "username": "brian-muñoz-2021" }
+		]
+	},
+	{
+		"image": "/assets/images/people/carson-bott.jpg",
+		"name": "Carson Bott",
+		"role": "Regional Sales Representative",
+		"location": "Canada",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/chantel-duncan.jpg",
+		"name": "Chantel Duncan",
+		"role": "Staff Accountant",
+		"location": "Canada",
+		"socials": [
+			{ "type": "linkedin", "username": "chantel-d-b2631696" }
+		]
+	},
+	{
+		"image": "/assets/images/people/chris-hamby.jpg",
+		"name": "Chris Hamby",
+		"role": "Commercial Contracts Attorney",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "With a passion for all things related to business law, Chris came to Nutrient after developing a background in intellectual property, contract drafting and negotiations, state/federal permitting, and general counsel for North Carolina businesses.",
+		"socials": [
+			{ "type": "linkedin", "username": "chrisoramiss" }
+		]
+	},
+	{
+		"image": "/assets/images/people/christoph.jpg",
+		"name": "Christoph Mantler",
+		"role": "Head of Technical Support",
+		"location": "Austria",
+		"gender": "He/Him/His",
+		"bio": "Christoph loves experimenting, learning new things, and working with our customers. He enjoys working out with weights; playing volleyball, football, and tennis; and playing video games."
+	},
+	{
+		"image": "/assets/images/people/christy-addy.jpg",
+		"name": "Christy Addy",
+		"role": "Sales Operations Associate",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"bio": "Christy has extensive experience in business analysis, project management, process creation, and improvement, with a certification as a Six Sigma Green Belt."
+	},
+	{
+		"image": "/assets/images/people/clavin-fernandes.jpg",
+		"name": "Clavin Fernandes",
+		"role": "Developer Relations and Support Services",
+		"location": "India",
+		"gender": "He/Him/His",
+		"bio": "Clavin is a Microsoft Business Applications MVP who supports 1,000+ high-level enterprise customers with challenges related to PDF conversion in combination with SharePoint on-premises Office 365, Azure, Nintex, K2, and Power Platform mostly no-code solutions.",
+		"socials": [
+			{ "type": "linkedin", "username": "clavin-fernandes-38a30862" },
+			{ "type": "website", "url": "https://clavinfernandes.wordpress.com/" },
+			{ "type": "twitter", "username": "clavinfernandes" },
+			{ "type": "github", "username": "cfernandes-muhimbi" }
+		]
+	},
+	{
+		"image": "/assets/images/people/coralie-carlier.jpg",
+		"name": "Coralie Carlier",
+		"role": "QA Engineer",
+		"location": "France",
+		"gender": "She/Her/Hers",
+		"socials": [{ "type": "linkedin", "username": "coralie-carlier-1490177b" }]
+	},
+	{
+		"image": "/assets/images/people/cosmin-iorgus.jpg",
+		"name": "Cosmin Iorgus",
+		"role": "Web Integrator and Designer",
+		"location": "Romania",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/costinel-mitrea.jpg",
+		"name": "Costinel Mitrea",
+		"role": "Senior Developer",
+		"location": "Romania",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/dan-jankowski.jpg",
+		"name": "Dan Jankowski",
+		"role": "VP Technology, Workflow Automation Platform",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Dan has built his career on delivering quality software to customers and helping them succeed through exceptional support and service. In his spare time, he enjoys performing as a musician and running.",
+		"socials":[ { "type": "linkedin", "username": "dan-jankowski-57a8ba64" } ]
+	},
+	{
+		"image": "/assets/images/people/dan-pereira.jpg",
+		"name": "Dan Pereira",
+		"role": "Customer Success Representative",
+		"location": "United Kingdom",
+		"gender": "He/Him/His",
+		"bio": "Dan has a background in Customer Success and Sales, and he enjoys getting into the finer points of a problem to ensure customers are happy. He lives in Bristol, and in his spare time, he enjoys running, watching rugby, and reading. You’re likely to find him exploring restaurants and bars for new cuisines and drinks!"
+	},
+	{
+		"image": "/assets/images/people/daniel-martin.jpg",
+		"name": "Daniel Martín",
+		"role": "Core Engineer",
+		"location": "Spain",
+		"gender": "He/Him/His",
+		"bio": "Daniel is part of the Core Team at Nutrient and has worked on multiple topics, ranging from cryptography and text systems, to file format support and JavaScript engines. Outside of work, he likes spending time with his family, football, reading books, and watching films.",
+		"socials": [
+			{ "type": "github", "username": "danielmartin" },
+			{ "type": "twitter", "username": "dmartincy" },
+			{ "type": "linkedin", "username": "dmartincy" }
+		]
+	},
+	{
+		"image": "/assets/images/people/danielle-delregno.jpg ",
+		"name": "Danielle Del Regno ",
+		"role": "Customer Success Specialist",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"bio": "Danielle joined Nutrient in 2021 and enjoys assisting customers with anything they may need. In her free time, she loves to cook and spend time with her Shiba Inu, Cash!"
+	},
+	{
+		"image": "/assets/images/people/danielle-west.jpg",
+		"name": "Danielle West",
+		"role": "Director of Corporate Marketing",
+		"location": "United Kingdom",
+		"gender": "She/Her/Hers",
+		"bio": "Danielle is passionate about brand development and bringing brands to life through campaigns and events. She loves to travel, learn about (and drink) wine, hike with her dog, and listen to true crime podcasts.",
+		"socials":[ { "type": "linkedin", "username": "dcwest" } ]
+	},
+	{
+		"image": "/assets/images/people/dany-kurian.jpg",
+		"name": "Dany Kurian",
+		"role": "Senior Director of Growth Strategy and Operations",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"socials":[ { "type": "linkedin", "username": "danykurian" } ]
+	},
+	{
+		"image": "/assets/images/people/david-radford.jpg",
+		"name": "David Radford",
+		"role": "Sales and Support Engineer",
+		"location": "Canada",
+		"gender": "He/Him/His",
+		"bio": "David joined Nutrient in 2022, when the previous company he worked for (Muhimbi) was acquired and became a part of it. His primary work duty is ensuring prospective customers are introduced to the best mix of solutions to meet their operational needs. In his free time, he enjoys exploring the rich tapestry of different cultures that thrive in our world, arranging an ice cream party for his grandkids, or simply kicking back with friends at a backyard BBQ."
+	},
+	{
+		"image": "/assets/images/people/delphine-sauguet.jpg",
+		"name": "Delphine Sauguet",
+		"role": "Human Resources Director",
+		"location": "France",
+		"gender": "She/Her/Hers",
+		"bio": "Delphine joined ORPALIS (which was later acquired by Nutrient) in 2019. Before that, she spent 13 years in various industries structuring, developing, and growing people and resource functions. She lives in Toulouse and enjoy reading, cooking, water sports, and spending time with family and friends.",
+		"socials":[ { "type": "linkedin", "username": "delphine-sauguet" } ]
+	},
+	{
+		"image": "/assets/images/people/devyn-hildebrandt.jpg",
+		"name": "Devyn Hildebrandt",
+		"role": "Human Resources Manager",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Devyn is a dedicated professional in HR, leveraging expertise to create impactful solutions that drive value and foster sustainable growth. With a passion for improving processes and cultivating environments where talent thrives, Devyn excels in optimizing organizational effectiveness. Beyond work, Devyn enjoys spending time with his wife and dog, golfing, and staying active in various pursuits."
+	},
+	{
+		"image": "/assets/images/people/dion-choi.jpg",
+		"name": "Dion Choi",
+		"role": "Social Media Intern",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"socials":[ { "type": "linkedin", "username": "dion-choi" } ]
+	},
+	{
+		"image": "/assets/images/people/divyanshu-maithani.jpg",
+		"name": "Divyanshu Maithani",
+		"role": "Web Engineer",
+		"location": "India",
+		"gender": "He/Him/His",
+		"bio": "Divyanshu is passionate about the web, frontend infrastructure, DX, dev tooling, and open source. He enjoys playing guitar, running, and computer games. As a side career, he plays in a band called Streets of Summer.",
+		"socials": [
+			{ "type": "linkedin", "username": "divyanshu-maithani" },
+			{ "type": "github", "username": "divyanshu013" },
+			{ "type": "twitter", "username": "divyanshu013" },
+			{ "type": "website", "url": "https://divyanshu013.dev/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/douglas-hill.jpg",
+		"name": "Douglas Hill",
+		"role": "iOS Team Lead",
+		"location": "United Kingdom",
+		"gender": "He/Him/His",
+		"bio": "Douglas makes the most of our fully remote setup by frequently traveling around Europe by train. He’s a proponent of iPad as a productivity platform and is obsessive about the details of great user experiences. He’s also an organizer of the NSLondon meetup.",
+		"socials": [{ "type": "website", "url": "https://douglashill.co/" }]
+	},
+	{
+		"image": "/assets/images/people/dusan-maksimovic.jpg",
+		"name": "Dusan Maksimovic",
+		"role": "QA Engineer",
+		"location": "Bosnia and Herzegovina",
+		"gender": "He/Him/His",
+		"bio": "Dusan loves finding issues within the system and reporting them so that the users can have the best possible experience with the product. Behind the scenes, Dusan is a motorcycle enthusiast and a gamer.",
+		"socials":[ { "type": "linkedin", "username": "dusan-maksimovicc" } ]
+	},
+	{
+		"image": "/assets/images/people/eli-payano.jpg",
+		"name": "Eli Payano",
+		"role": "Support Engineer",
+		"location": "Dominican Republic",
+		"gender": "He/Him/His, They/Them/Their"
+	},
+	{
+		"image": "/assets/images/people/erhard-brand.jpg",
+		"name": "Erhard Brand",
+		"role": "Hybrids Engineer",
+		"location": "South Africa",
+		"gender": "He/Him/His",
+		"bio": "Erhard is a mobile software engineer with a focus on iOS. He enjoys working in a fast-paced environment and is a solution-focused person. In his spare time, he enjoys spending time with his family and traveling."
+	},
+	{
+		"image": "/assets/images/people/eric-cavolowsky.jpg",
+		"name": "Eric Cavolowsky",
+		"role": "Regional Sales Director",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Eric is a native of the Boston area now living in North Carolina. He’s been in software sales for more than 10 years. Outside of work, he enjoys traveling and exploring with his wife, lifting, reading, and writing."
+	},
+	{
+		"image": "/assets/images/people/etienne-alby.jpg",
+		"name": "Etienne Alby",
+		"role": "Senior Software Engineer",
+		"location": "France",
+		"gender": "He/Him/His",
+		"bio": "Etienne is a software engineer with a keen interest in the inner workings of technology. He's well-versed in game engine development and R&D, and he enjoys brainstorming fresh ideas, devising new processes, and experimenting with new concepts. He's developing an adventure game and he enjoys the company of his numerous cats!",
+		"socials":[ { "type": "linkedin", "username": "etiennealby" } ]
+	},
+	{
+		"image": "/assets/images/people/fabien-viollet.jpg",
+		"name": "Fabien Viollet",
+		"role": "Software Engineer",
+		"location": "France",
+		"gender": "He/Him/His",
+		"socials": [ { "type": "linkedin", "username": "fabien-viollet-297832b6" } ]
+	},
+	{
+		"image": "/assets/images/people/fabio-de-rose.jpg",
+		"name": "Fabio De Rose",
+		"role": "Solutions Engineer",
+		"location": "France",
+		"gender": "He/Him/His",
+		"bio": "Fabio is French and has an MSc in computer science. He’s a musician, dog lover, and meme addict.",
+		"socials":[ { "type": "linkedin", "username": "fabio-de-rose-43854a8a" } ]
+	},
+	{
+		"image": "/assets/images/people/frank-cabrera.jpg",
+		"name": "Frank Cabrera",
+		"role": "Product Support Manager",
+		"location": "United States",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/gavin-smith.jpg",
+		"name": "Gavin Smith",
+		"role": "Regional Sales Representative",
+		"location": "United Kingdom",
+		"gender": "He/Him/His",
+		"bio": "Gavin has more than 20 years of experience working in different software and tech companies, large and small. He’s father to a 10-year-old daughter and lives with his family in a Cambridgeshire town called Godmanchester."
+	},
+	{
+		"image": "/assets/images/people/georg-nikola-pavlov.jpg",
+		"name": "Georg-Nikola Pavlov",
+		"role": "Platform Team Manager",
+		"location": "Bulgaria",
+		"gender": "He/Him/His",
+		"bio": "Georg-Nikola is a tech enthusiast with a passion for problem solving and continuous learning. Outside work, he enjoys exploring new cuisines and going on hiking adventures.",
+		"socials": [
+			{ "type": "github", "username": "georg-nikola" },
+			{ "type": "linkedin", "username": "georg-nikola-pavlov-profile" },
+			{ "type": "website", "url": "https://georg-nikola.com/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/gerson-leiva.jpg",
+		"name": "Gerson Leiva",
+		"role": "Junior Product Developer",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"socials":[ { "type": "linkedin", "username": "gerson-l-54990320b" } ]
+	},
+	{
+		"image": "/assets/images/people/grace-burgoine.jpg",
+		"name": "Grace Burgoine",
+		"role": "Accounts Administrator",
+		"location": "United Kingdom",
+		"gender": "She/Her/Hers",
+		"bio": "Grace joined Nutrient after returning from four years spent living overseas in Canada and Abu Dhabi. She has more than 30 years of experience working in the finance industry."
+	},
+	{
+		"image": "/assets/images/people/grant-booth.jpg",
+		"name": "Grant Booth",
+		"role": "Regional Sales Representative",
+		"location": "United States",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/greg-ives.jpg",
+		"name": "Greg Ives",
+		"role": "Director of Product Marketing",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"socials":[ { "type": "linkedin", "username": "gives" } ]
+	},
+	{
+		"image": "/assets/images/people/harry-turner.jpg",
+		"name": "Harry Brady-Turner",
+		"role": "Regional Sales Representative",
+		"location": "United Kingdom",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/helgi-bloom.jpg",
+		"name": "Helgi Bloom",
+		"role": "Chief Financial Officer",
+		"location": "United States",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/hugh-woodfall.jpg",
+		"name": "Hugh Woodfall",
+		"role": "DevOps Engineer",
+		"location": "Spain",
+		"gender": "He/Him/His",
+		"bio": "Hugh is originally from Melbourne, Australia, but he now lives in Barcelona, Spain. He loves to travel, meet new people, and experience different cultures. In his downtime, Hugh enjoys playing video games and exercising (running, gym, tennis).",
+		"socials":[ { "type": "github", "username": "huewood" } ]
+	},
+	{
+		"image": "/assets/images/people/hugo-cudd.jpg",
+		"name": "Hugo Cudd",
+		"role": "Support Specialist",
+		"location": "France",
+		"gender": "He/Him/His",
+		"bio": "Hugo is an English/French bilingual living in France. He works providing end user support for Nutrient products and currently manages customer feedback and technical support for the GdPicture SDK. He also handles the GdPicture forum and social media messages. He’s interested in online gaming, music, and cinema."
+	},
+	{
+		"image": "/assets/images/people/hulya-masharipov.jpg",
+		"name": "Hulya Masharipov",
+		"role": "Technical Writer",
+		"location": "Uzbekistan/Turkiye",
+		"gender": "She/Her/Hers",
+		"bio": "Hulya is a frontend web developer and technical writer at Nutrient who enjoys creating responsive, scalable, and maintainable web experiences. She’s passionate about open source, web accessibility, cybersecurity privacy, and blockchain.",
+		"socials": [
+			{ "type": "github", "username": "hulyak " }
+		]
+	},
+	{
+		"image": "/assets/images/people/huw-kimber.jpg",
+		"name": "Huw Kimber",
+		"role": "Regional Sales Representative",
+		"location": "United Kingdom",
+		"gender": "He/Him/His",
+		"bio": "Huw has been in software sales since 2016. In his free time, he enjoys field hockey, going to the gym, cooking, and being as social as possible.",
+		"socials":[ { "type": "linkedin", "username": "huw-kimber-701a7779" } ]
+	},
+	{
+		"image": "/assets/images/people/ignacio-santana.jpg",
+		"name": "Ignacio Santana",
+		"role": "Support Engineer",
+		"location": "Dominican Republic",
+		"gender": "He/Him/His",
+		"bio": "Ignacio loves learning new things, particularly things that are tech related. He also loves custom mechanical keyboards, RC cars, and spending time with his family."
+	},
+	{
+		"image": "/assets/images/people/igor-perzic.jpg",
+		"name": "Igor Perzić",
+		"role": "Web Engineer",
+		"location": "Serbia",
+		"gender": "He/Him/His",
+		"bio": "Igor is a curious creature who probably knows way too much unnecessary information. If he isn’t spending time in front of a computer, he’s traveling with his family or watching anything related to Formula 1.",
+		"socials": [
+			{ "type": "github", "username": "iperzic" },
+			{ "type": "linkedin", "username": "iperzic" }
+		]
+	},
+	{
+		"image": "/assets/images/people/ingvarr-zhmakin.jpg",
+		"name": "Ingvarr Zhmakin",
+		"role": "Server and Services Team Lead",
+		"location": "Norway",
+		"gender": "He/Him/His",
+		"socials": [{ "type": "linkedin", "username": "ingvarr" }]
+	},
+	{
+		"image": "/assets/images/people/irina-alexandru.jpg",
+		"name": "Irina Alexandru",
+		"role": "Windows Tools Engineer",
+		"location": "Austria",
+		"gender": "She/Her/Hers",
+		"bio": "Irina is a former PHP developer who switched to .NET and never looked back. She’s worked with a bit of everything. She enjoys reading fantasy books, salsa dancing, and badminton.",
+		"socials": [{ "type": "linkedin", "username": "irina-alexandru-8b8a2b168/" }]
+	},
+	{
+		"image": "/assets/images/people/jack-biernacki.jpg",
+		"name": "Jack Biernacki",
+		"role": "Business Development Representative",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Jack has been with Nutrient since October 2018, and his sales style is conversational, consultative, and transparent. When he’s not developing new business, he spends time with his wife of 17 years, coaching his 12-year-old son’s travel baseball team, and playing with an energetic Bichon puppy named Ralphie.",
+	"socials":[ { "type": "linkedin", "username": "jackbiernacki" } ]
+	},
+	{
+		"image": "/assets/images/people/jack-buckland.jpg",
+		"name": "Jack Buckland",
+		"role": "Senior Frontend Developer",
+		"location": "United Kingdom",
+		"gender": "He/Him/His",
+		"bio": "Jack loves building shiny things and spends too much time tinkering with the latest tech. When he's not starting personal tech projects he'll never finish, he enjoys DIY, woodworking, bike rides, and old school martial arts films.",
+		"socials": [
+			{ "type": "github", "username": "theninja" },
+			{ "type": "linkedin", "username": "jackbuckland" }
+		]
+	},
+	{
+		"image": "/assets/images/people/james-mcleod.jpg",
+		"name": "James Mcleod",
+		"role": "Sales Operations Associate",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "James has worked in the sales and customer service field for more than 10 years. He served 6 years in the Army National Guard.",
+		"socials":[ { "type": "linkedin", "username": "james-mcleod-169b83228" } ]
+	},
+	{
+		"image": "/assets/images/people/jay-amin.jpg",
+		"name": "Jay Amin",
+		"role": "Software Developer",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Jay joined Nutrient in July 2023 as part of Integrify as a senior software engineer. He enjoys coding, stargazing, solving complex problems, and refactoring old and outdated codebases! Outside of work, he enjoys watching movies and TV series, swimming, and exploring nature!"
+	},
+	{
+		"image": "/assets/images/people/joanna-ciesielska-cysek.jpg",
+		"name": "Joanna Ciesielska-Cysek",
+		"role": "Product Manager",
+		"location": "France",
+		"gender": "She/Her/Hers",
+		"bio": "Joanna is a product manager who believes that through cooperation and teamwork, we can achieve outstanding value. She loves reading, baking, and traveling.",
+		"socials": [{ "type": "linkedin", "username": "joanna-ciesielska-cysek-b189b113a" }]
+	},
+	{
+		"image": "/assets/images/people/john-bartlett.jpg",
+		"name": "John Bartlett",
+		"role": "VP Product Solutions, Workflow Automation Platform",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "John has more than 20 years experience leading enterprise workflow implementations. He enjoys working with customers and tailoring IT solutions to address their business needs.",
+		"socials":[ { "type": "linkedin", "username": "john-bartlett-329749b9" } ]
+	},
+	{
+		"image": "/assets/images/people/jon-addams.jpg",
+		"name": "Jon Addams",
+		"role": "Solutions Engineer",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Jon is a Solutions Engineer with more than 20 years of experience in the software industry. For fun, he likes traveling, trying new restaurants, and making craft cocktails.",
+		"socials": [
+			{ "type": "linkedin", "username": "jonaddams" }
+		]
+	},
+	{
+		"image": "/assets/images/people/jonathan-rhyne.jpg",
+		"name": "Jonathan D. Rhyne",
+		"role": "Co-Founder and CEO",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Jonathan joined Nutrient in 2014. As CEO, Jonathan defines the company’s vision and strategic goals, bolsters the team culture, and steers product direction. When he’s not working, he enjoys being a dad, photography, and soccer.",
+		"socials": [
+			{ "type": "twitter", "username": "jdrhyne" },
+			{ "type": "linkedin", "username": "jonathan-rhyne-54084811" }
+		]
+	},
+	{
+		"image": "/assets/images/people/julia-prause.jpg",
+		"name": "Julia Prause",
+		"role": "VP, Customer Success",
+		"location": "United States",
+		"gender": "She/Her/Hers"
+	},
+	{
+		"image": "/assets/images/people/julius-kato-mutumba.jpg",
+		"name": "Julius Kato Mutumba",
+		"role": "Native Engineer",
+		"location": "Uganda",
+		"gender": "He/Him/His",
+		"bio": "Julius joined Nutrient in 2021 as an Android engineer and is now the Cross-Platform Team Lead. He has a passion for exploring new technologies and solving everyday problems. His daily tools are Dart and Flutter, which he finds fascinating. Outside of work, he enjoys movies, running, and weightlifting.",
+		"socials": [{ "type": "twitter", "username": "mutumbakato" }]
+	},
+	{
+		"image": "/assets/images/people/keith-stanislaw.jpg",
+		"name": "Keith Stanislaw",
+		"role": "Software Development Manager",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Keith has 25+ years of management and software development experience across multiple industries. He enjoys the beach, music, cooking, and sports.",
+		"socials":[ { "type": "linkedin", "username": "keith-stanislaw-69250827" } ]
+	},
+	{
+		"image": "/assets/images/people/kelly-benitez.jpg",
+		"name": "Kelly Benitez",
+		"role": "Marketing Operations Manager",
+		"location": "United Kingdom",
+		"gender": "She/Her/Hers",
+		"bio": "Kelly joined Nutrient in 2017 as an intern and now handles marketing operations. She loves diving into data and a good spreadsheet. Outside of work, she enjoys bouldering, reading, crocheting, and going for walks.",
+		"socials": [{ "type": "linkedin", "username": "kellygbenitez/" }]
+	},
+	{
+		"image": "/assets/images/people/kelly-evans.jpg",
+		"name": "Kelly Evans",
+		"role": "Customer Success Representative",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"bio": "Kelly has a background in sales and customer service. She enjoys spending time with friends and family and loves being outdoors, craft beer, live music, traveling, and hiking with her two dogs.",
+		"socials": [
+			{ "type": "linkedin", "username": "kelly-evans0408/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/krati-goyal.jpg",
+		"name": "Krati Goyal",
+		"role": "QA Engineer",
+		"location": "India",
+	"gender": "She/Her/Hers",
+		"socials":[ { "type": "linkedin", "username": "krati-goyal-agrawal-a7b47016" } ]
+	},
+	{
+		"image": "/assets/images/people/lejla-vejzovic.jpg",
+		"name": "Lejla Vejzović",
+		"role": "Support Engineer",
+		"location": "Bosnia and Herzegovina",
+		"gender": "She/Her/Hers",
+		"socials": [ { "type": "linkedin", "username": "lejla-vejzovic" } ]
+	},
+	{
+		"image": "/assets/images/people/liam-dunlop.jpg",
+		"name": "Liam Dunlop",
+		"role": "Customer Success Representative",
+		"location": "United Kingdom",
+		"gender": "He/Him/His",
+		"bio": "Liam is passionate about helping people and has a background in customer success and sales. He’s as happy dynamically problem solving as he is having a catchup. In his personal time, he likes to head to the bar with friends, go to concerts, and game."
+	},
+	{
+		"image": "/assets/images/people/lloyd-mason.jpg",
+		"name": "Lloyd Mason",
+		"role": "Regional Sales Representative",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Lloyd is a native North Carolinian with 6 years experience selling software and managing partnerships. Outside of work, he enjoys building and racing vintage motorcycles, taking his kids camping, and spending late nights in his workshop.",
+		"socials":[ { "type": "linkedin", "username": "rlloydmason" } ]
+	},
+	{
+		"image": "/assets/images/people/mahmoud-elsayad.jpg",
+		"name": "Mahmoud Elsayad",
+		"role": "Web Engineer",
+		"location": "Egypt",
+		"gender": "He/Him/His",
+		"socials": [
+			{ "type": "github", "username": "MahmoudElsayad" },
+			{ "type": "linkedin", "username": "mahmoud-osama-elsayad" }
+		]
+	},
+	{
+		"image": "/assets/images/people/manoranjan-mohapatra.jpg",
+		"name": "Manoranjan Mohapatra",
+		"role": "SharePoint and Windows Engineer",
+		"location": "India",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/marianne-corgne.jpg",
+		"name": "Marianne Corgne",
+		"role": "Accounts and Admin Administrator",
+		"location": "France",
+		"gender": "She/Her/Hers",
+		"bio": "After spending five years in Ireland, Marianne now lives back in France. She thrives on facilitating her team’s work day by helping out wherever she can. She loves both watching her three kids grow up and partying with friends.",
+		"socials": [ { "type": "linkedin", "username": "marianne-corgne" } ]
+	},
+	{
+		"image": "/assets/images/people/marija-trpkovic.jpg",
+		"name": "Marija Trpkovic",
+		"role": "Product Marketing Manager",
+		"location": "Serbia",
+		"gender": "She/Her/Hers",
+		"bio": "Marija is a product marketing manager who likes to launch new products and features and target the right people with them. Outside of work, she likes spending time outdoors with her family and dogs.",
+		"socials": [ { "type": "linkedin", "username": "marija-trpkovic-58809a42" } ]
+	},
+	{
+		"image": "/assets/images/people/markus-woschank.jpg",
+		"name": "Markus Woschank",
+		"role": "Core Engineer",
+		"location": "Austria",
+		"gender": "He/Him/His",
+		"bio": "Markus loves to build things. He’s learned way too many things about document formats and text systems since he joined in 2019."
+	},
+	{
+		"image": "/assets/images/people/masa-majce.jpg",
+		"name": "Maša Majce",
+		"role": "Designer",
+		"location": "Slovenia",
+		"gender": "She/Her/Hers",
+		"bio": "Maša is super fond of the challenges of the digital day and age. Her approach to design is driven by curiosity. You might also find her at a dance studio or exploring the streets to find inspirational architecture and design.",
+		"socials": [{ "type": "twitter", "username": "MajceMasa" }]
+	},
+	{
+		"image": "/assets/images/people/matej-bukovinski.jpg",
+		"name": "Matej Bukovinski",
+		"role": "CTO",
+		"location": "Slovenia",
+		"gender": "He/Him/His",
+		"bio": "Matej is a software engineering leader from Slovenia. He began his career freelancing and contributing to open source software. Later, he joined Nutrient, where he played a key role in creating its initial products and teams, eventually taking over as the company’s Chief Technology Officer. Outside of work, Matej enjoys playing tennis, skiing, and traveling.",
+		"socials": [
+			{ "type": "github", "username": "matej" },
+			{ "type": "twitter", "username": "bukovinski" },
+			{ "type": "website", "url": "https://www.bukovinski.com/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/matt-gummow.jpg",
+		"name": "Matt Gummow",
+		"role": "Frontend Web Developer",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"socials":[ { "type": "linkedin", "username": "mattgummow" } ]
+	},
+	{
+		"image": "/assets/images/people/matthew-manderson.jpg",
+		"name": "Matthew Manderson",
+		"role": "Product Manager",
+		"location": "Bulgaria",
+		"gender": "He/Him/His",
+		"bio": "Matthew joined Nutrient as a Product Manager in October 2022. He exercises multiple times a week, and he lives for rock climbing, snowboarding, and windsurfing. He enjoys working in a group, and being able to share in one another’s achievements is especially rewarding for him."
+	},
+	{
+		"image": "/assets/images/people/matus-pizur.jpg",
+		"name": "Matúš Pizúr",
+		"role": "Senior Developer",
+		"location": "Slovakia",
+		"gender": "He/Him/His",
+		"bio": "Matúš began working with PDF technology before graduation and accumulated more than 10 years of experience in the industry. Outside of work, he enjoys time with family and friends, building and fixing stuff, cooking, and listening to music.",
+		"socials":[ { "type": "linkedin", "username": "matuspizur" } ]
+	},
+	{
+		"image": "/assets/images/people/megan-suchland.jpg",
+		"name": "Megan Suchland",
+		"role": "Customer Success Representative",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"socials":[ { "type": "linkedin", "username": "megansuchland" } ]
+	},
+	{
+		"image": "/assets/images/people/michael-del-regno.jpg",
+		"name": "Michael Del Regno",
+		"role": "Junior Software Developer",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Michael joined Nutrient as a junior software developer in March 2023 as a part of Integrify. He loves dissecting code and bug fixing. Outside of developing, he enjoys audiobooks, video games, and films."
+	},
+	{
+		"image": "/assets/images/people/michael-ebner.jpg",
+		"name": "Michael Ebner",
+		"role": "Customer Solutions Manager",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"socials":[ { "type": "linkedin", "username": "michaeleebner" } ]
+	},
+	{
+		"image": "/assets/images/people/michael-kellner.jpg",
+		"name": "Michael Kellner",
+		"role": "Native Engineer",
+		"location": "Costa Rica",
+		"gender": "He/Him/His",
+		"bio": "Michael has a thing for architecture (slick software and unconventional buildings). If he’s not sitting in front of a computer or watching a series, you’ll find him in a CrossFit gym, in the kitchen, or at some Burning Man event."
+	},
+	{
+		"image": "/assets/images/people/miguel-calderon.jpg",
+		"name": "Miguel Calderón",
+		"role": "Web Team Lead",
+		"location": "Spain",
+		"gender": "He/Him/His",
+		"bio": "As part of the Web Team, Miguel loves finding new challenges and trying to determine what the newest technologies can do to improve our product. Writing fiction, reading, and traveling are his passions the rest of the time.",
+		"socials": [
+			{ "type": "github", "username": "miguelcalderon" },
+			{ "type": "twitter", "username": "miguelca" },
+			{ "type": "linkedin", "username": "miguelcalderonalonso" }
+		]
+	},
+	{       "image": "/assets/images/people/mike-banic.jpg",
+    "name": "Mike Banic",
+    "role": "Chief Marketing Officer",
+    "location": "United States",
+    "gender": "He/Him/His",
+    "bio": "Mike brings 30+ years of experience building and leading marketing teams, and he’s passionate about putting customers at the forefront of creating a company’s brand identity. Outside of work, Mike loves to sail, race autocross, and hike. He enjoys impressionist art, architecture, landscaping, music, history, and travel.",
+	"socials": [
+            { "type": "linkedin", "username": "mikebanic/" }
+        ]
+    },
+	{
+		"image": "/assets/images/people/milos-dekic.jpg",
+		"name": "Miloš Đekić",
+		"role": "Vice President, Product Management",
+		"location": "Serbia",
+		"gender": "He/Him/His",
+		"bio": "Miloš loves to create extraordinary value and experiences through software and digital content. His hashtags are #saas, #product, #leadership, #organization, and #personalgrowth.",
+		"socials": [
+			{ "type": "linkedin", "username": "mdjekic" },
+			{ "type": "website", "url": "https://thesaaslife.com/" },
+			{ "type": "website", "url": "https://milos.djekic.net/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/narashiman-krishnamurthy.jpg",
+		"name": "Narashiman Krishnamurthy",
+		"role": "Solutions Engineer",
+		"location": "United Kingdom",
+		"gender": "He/Him/His",
+		"bio": "Narashiman has more than 16 years of IT industry experience. He’s originally from Mysuru, India, and now works in London. He likes exploring new technologies and gadgets, playing badminton and carrom, and practicing karate (he has a 3rd Dan Black Belt in Shotokan Karate).",
+		"socials":[ { "type": "linkedin", "username": "narashimank" } ]
+	},
+	{
+		"image": "/assets/images/people/natalia-battisti.jpg",
+		"name": "Natalia Battisti",
+		"role": "Senior Staff Accountant",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"bio": "Natalia joined Nutrient in February 2022 and supports our Finance department. She has 5+ years in the technology industry growing the finance function and providing excellent customer service. Natalia lives in North Carolina and enjoys traveling, outdoor activities, and spending time with her family."
+	},
+	{
+		"image": "/assets/images/people/natalye-childress.jpg",
+		"name": "Natalye Childress",
+		"role": "Editor",
+		"location": "Germany",
+		"gender": "She/Her/Hers",
+		"bio": "Natalye is a copy editor and copywriter from California. She’s passionate about storytelling, immaculate grammar, clean copy, and quality journalism. She loves coffee and beer, mixtapes and books, and road bikes and punk rock.",
+		"socials": [
+			{ "type": "github", "username": "deutschbitte" },
+			{ "type": "twitter", "username": "deutschbitte" },
+			{ "type": "website", "url": "https://natalye.com/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/neil-pitman.jpg",
+		"name": "Neil Pitman",
+		"role": "Head of IT Business Solutions",
+		"location": "United Kingdom",
+		"gender": "He/Him/His",
+		"bio": "Neil established Aquaforest (later acquired by Nutrient) in 2001 to provide high-performance PDF, OCR, and SharePoint products to a worldwide market.",
+		"socials": [
+			{ "type": "linkedin", "username": "neilpitman/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/nick-winder.jpg",
+		"name": "Nick Winder",
+		"role": "Core Engineer",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "When Nick started tinkering with guitar effects pedals, he didn’t realize it’d take him all the way to a career in software. He has worked on products that communicate with space, blast Metallica to packed stadiums, and enable millions to use documents through Nutrient, but in his personal life, he enjoys the simplicity of running in the mountains.",
+		"socials": [
+			{ "type": "linkedin", "username": "nicholas-winder-57a6a292" },
+			{ "type": "website", "url": "https://nickwinder.com/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/nishant-desai.jpg",
+		"name": "Nishant Desai",
+		"role": "iOS Engineer",
+		"location": "India",
+		"gender": "He/Him/His",
+		"bio": "As a result of his fascination with computers, Nishant became an iOS engineer. Other than computers, he loves cricket, cars, coffee, cinemas, and chocolates! He also likes to read up on facts and stories from history.",
+		"socials": [
+			{ "type": "twitter", "username": "nish_desai" },
+			{ "type": "linkedin", "username": "nishantdesai1" },
+			{ "type": "website", "url": "https://nishantdesai.me/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/noel-chrisman.jpg",
+		"name": "Noël Chrisman",
+		"role": "Sales Operations Associate",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"bio": "Noël is a document enthusiast from the San Francisco Bay Area who enjoys supporting teams doing meaningful work and whipping up homemade hot fudge brownie sundaes in 45 minutes flat.",
+		"socials": [ { "type": "linkedin", "username": "no%C3%ABl-chrisman-7015523a" } ]
+	},
+	{
+		"image": "/assets/images/people/oghenerukevwe-henrietta-kofi.jpg",
+		"name": "Oghenerukevwe Henrietta Kofi",
+		"role": "Server and Services Engineer",
+		"location": "Nigeria",
+		"gender": "She/Her/Hers",
+		"bio": "Rukky joined Nutrient as an intern in 2022 and is currently a software engineer on the Server and Services Team. She’s passionate about building great software, and in her spare time, she enjoys reading cheesy novels, watching films, and playing video games.",
+		"socials": [
+			{ "type": "github", "username": "rukykf" },
+			{ "type": "website", "url": "https://dev.to/rukykf" }
+		]
+	},
+	{
+		"image": "/assets/images/people/olivier-houssin.jpg",
+		"name": "Olivier Houssin",
+		"role": "Fullstack & Software Developer",
+		"location": "France",
+		"gender": "He/Him/His",
+		"bio": "Once upon a time, in the bustling world of code, there emerged a fullstack and software developer named Oli. Since joining us in 2020, Oli has been tinkering away, especially with POCs, and he has a special knack for all things .NET. When Oli isn't busy coding up a storm, you'll likely find him belting out tunes at a karaoke party or exploring the great outdoors on a hike. And let's not forget his love for cats — because every great developer needs a purring companion!",
+		"socials": [
+			{ "type": "github", "username": "olihou" },
+			{ "type": "linkedin", "username": "olihou" }
+		]
+	},
+	{
+		"image": "/assets/images/people/ollie-cook.jpg",
+		"name": "Ollie Cook",
+		"role": "Customer Success Representative",
+		"location": "United Kingdom",
+		"gender": "He/Him/His",
+		"bio": "Ollie has worked in Customer Success for a number of years, and he thoroughly enjoys building relationships and resolving issues people may have. He’s always happy to chat about anything customers may want or need! He’s a keen football (soccer) fan and long-distance runner."
+	},
+	{
+		"image": "/assets/images/people/omar-padilla.jpg",
+		"name": "Omar Padilla",
+		"role": "Senior Software Developer",
+		"location": "United States",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/omar-talaat.jpg",
+		"name": "Omar Talaat",
+		"role": "Support Engineer",
+		"location": "Egypt",
+		"gender": "He/Him/His",
+		"bio": "Omar is a relentless problem solver who enjoys learning and succeeding. He loves helping and engaging with people. Nothing makes him happier than listening to good music while hiking on the beach.",
+		"socials": [
+			{ "type": "linkedin", "username": "omar-talaat-544628130/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/pankaj-katkar.jpg",
+		"name": "Pankaj Katkar",
+		"role": "QA Engineer",
+		"location": "Netherlands",
+		"gender": "He/Him/His",
+		"bio": "Pankaj has 9+ years of experience as a QA engineer with manual and automation testing skills on SharePoint servers and mobile and web-based applications. He’s experienced in designing, developing, and implementing test plans, test cases, and processes. He also enjoys being a mentor to new team members.",
+		"socials": [
+			{ "type": "linkedin", "username": "katkarpankaj" },
+			{ "type": "website", "url": "https://quicksoftwaretesting.wordpress.com/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/patrik-weiskircher.jpg",
+		"name": "Patrik Weiskircher",
+		"role": "Core Team Lead",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Patrik is the team lead of the Core Team, which oversees the shared codebase between our products. He knows far too many things about PDFs — ask him about fonts!",
+		"socials": [{ "type": "twitter", "username": "pweisk" }]
+	},
+	{
+		"image": "/assets/images/people/pav-josan.jpg",
+		"name": "Pavitter Josan",
+		"role": "Solutions Engineer",
+		"location": "Canada",
+		"gender": "He/Him/His",
+		"bio": "As part of the Solutions Engineering Team, Pavitter consults customers on deploying complex technical projects across a wide range of technologies, including web development, enterprise platforms like Salesforce, .NET, generative AI, and other advanced technologies. With more than three years of industry experience, Pavitter has honed his expertise in navigating diverse technical landscapes."
+	},
+	{
+		"image": "/assets/images/people/penny-liu.jpg",
+		"name": "Penny Liu",
+		"role": "Workflow Automation Engineer",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"bio": "Penny is Chinese and based in the United States. She worked in Hong Kong for five years before moving to the US in 2017. She’s passionate about working with customers, and she strongly believes in advocating for customers through helping them with technology. Outside of work, she loves reading and writing stories.",
+		"socials":[ { "type": "linkedin", "username": "penny-tongtong-liu" } ]
+	},
+	{
+		"image": "/assets/images/people/petra-bukovinski.jpg",
+		"name": "Petra Bukovinski",
+		"role": "Designer",
+		"location": "Slovenia",
+		"gender": "She/Her/Hers",
+		"bio": "Petra loves to take on complex design problems. She believes that good design is a reflection of a company’s vision. When not designing, she can be found in nature or experimenting in the kitchen.",
+		"socials": [{ "type": "twitter", "username": "PetraBukovinski" }]
+	},
+	{
+		"image": "/assets/images/people/peyton-ware.jpg",
+		"name": "Peyton Ware",
+		"role": "Customer Success Representative",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"bio": "Peyton is a graduate of Virginia Commonwealth University and a Richmond, VA native. She has been in the Raleigh, NC area for seven years. Peyton has more than eight years of experience with account management and client success.",
+		"socials": [
+			{ "type": "linkedin", "username": "peyton-ware-39452120" }
+		]
+	},
+	{
+		"image": "/assets/images/people/rachel-moore.jpg",
+		"name": "Rachel Moore",
+		"role": "Content",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"socials": [
+			{ "type": "linkedin", "username": "rachelhasthemic" }
+		]
+	},
+	{
+		"image": "/assets/images/people/rahul-soni.jpg",
+		"name": "Rahul Soni",
+		"role": "Support Engineer",
+		"location": "India",
+		"gender": "He/Him/His",
+		"socials": [
+			{ "type": "linkedin", "username": "rahulsoni04" },
+			{ "type": "github", "username": "inosrahul" }
+		]
+	},
+	{
+		"image": "/assets/images/people/reinaldo-barreiros.jpg",
+		"name": "Reinaldo Barreiros",
+		"role": "Business Development Manager",
+		"location": "France",
+		"gender": "He/Him/His",
+		"bio": "Reinaldo comes from a background in leadership positions in the UK and software sales. He now lives in France and loves hiking, football, his guitars, and spending time with his wife and two kids."
+	},
+	{
+		"image": "/assets/images/people/rhonda-gaines.jpg",
+		"name": "Rhonda Gaines",
+		"role": "Human Resources Director",
+		"location": "United States",
+		"gender": "She/Her/Hers"
+	},
+	{
+		"image": "/assets/images/people/richard-malloy.jpg",
+		"name": "Richard Malloy",
+		"role": "Vice President, Sales",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Richard has worked at Nutrient since 2015. He loves traveling with his wife and three Labradors, and their favorite activities include hiking in Yosemite, visiting Christmas markets in Vienna, and camping in the Blue Ridge Mountains.",
+		"socials": [
+			{ "type": "linkedin", "username": "richard-malloy-702a195a" }
+		]
+	},
+	{
+		"image": "/assets/images/people/ritesh-kumar.jpg",
+		"name": "Ritesh Kumar",
+		"role": "Web Engineer",
+		"location": "India",
+		"gender": "He/Him/His",
+		"bio": "Ritesh loves to write code, play keyboard, and paint. He likes working on projects that involve developer tooling, design systems, and music. He wants to make art a part of everyone’s life by using technology.",
+		"socials": [
+			{ "type": "github", "username": "ritz078" },
+			{ "type": "twitter", "username": "ritz078" },
+			{ "type": "website", "url": "https://riteshkr.com/" }
+		]
+	},
+	{
+		"image": "/assets/images/people/rob-lackey.jpg",
+		"name": "Rob Lackey",
+		"role": "DevOps Engineer",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Rob is a Support Engineer turned DevOps Engineer, with a brief stop as a poker dealer in between. His passions are music (listening/playing), hockey (watching/playing), photography (learning), traveling, trying new restaurants, and spending time with his wife."
+	},
+	{
+		"image": "/assets/images/people/robert-vojta.jpg",
+		"name": "Robert Vojta",
+		"role": "Internal Tooling Engineer",
+		"location": "Czech Republic",
+		"gender": "He/Him/His",
+		"bio": "Robert is a software engineer working on the Platform Team. He loves Ruby on Rails and connecting all the dots. Outside of work, he likes photography, running, planes, computer games, and the great outdoors.",
+		"socials": [{ "type": "github", "username": "zrzka" }]
+	},
+	{
+		"image": "/assets/images/people/rolf-garcia-gallont.jpg",
+		"name": "Rolf Garcia-Gallont",
+		"role": "General Counsel",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Rolf joined Nutrient in 2022 after being a litigator at a big law firm for six years and working with early- and growth-stage technology companies in the US and Latin America before that. He likes to try and learn new things.",
+		"socials": [{ "type": "linkedin", "username": "rolfgarciagallont" }]
+	},
+	{
+		"image": "/assets/images/people/roman-pendzich.jpg",
+		"name": "Roman Pendzich",
+		"role": "Sales Engineer",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Roman joined Nutrient in January 2023 as part of Integrify, having been a senior implementation specialist in the Professional Services group, and more recently, a sales engineer.  In his free time, Roman enjoys reading, baking, and sailing."
+	},
+	{
+		"image": "/assets/images/people/ron-taylor.jpg",
+		"name": "Ron Taylor",
+		"role": "Senior Implementation Specialist",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"socials":[ { "type": "linkedin", "username": "ronstaylor" } ]
+	},
+	{
+		"image": "/assets/images/people/sam-fleder.jpg",
+		"name": "Sam Fleder",
+		"role": "COO",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Sam loves teamwork and gleaning insights from business data. He strongly dislikes incomplete projects. Sam previously worked as a litigation attorney for 10 years. He enjoys both spending time with his kids and the occasional homebrew.",
+		"socials": [
+			{ "type": "twitter", "username": "fleders" },
+			{ "type": "linkedin", "username": "samuel-fleder-99571317" }
+		]
+	},
+	{
+		"image": "/assets/images/people/serana-warren.jpg",
+		"name": "Serana Warren",
+		"role": "Information Security Officer",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"bio": "Serana is a cybersecurity specialist with a passion for open source technologies, digital rights, and online privacy. Outside of work, she enjoys writing science fiction and playing tabletop roleplaying games."
+	},
+	{
+		"image": "/assets/images/people/shantanu-methikar.jpg",
+		"name": "Shantanu Methikar",
+		"role": ".NET Engineer",
+		"location": "India",
+		"gender": "He/Him/His",
+		"bio": "Shantanu likes to explore and experiment — be it with technology, traveling, food, or almost anything else.",
+		"socials": [
+			{ "type": "linkedin", "username": "mshantanu18" },
+			{ "type": "website", "url": "https://takeabyte18.wordpress.com/" },
+			{ "type": "github", "username": "Take-A-Byte" }
+		]
+	},
+	{
+		"image": "/assets/images/people/shrevin-sookun.jpg",
+		"name": "Shrevin Sookun",
+		"role": "Software Development Manager",
+		"location": "United Kingdom",
+		"gender": "He/Him/His",
+		"bio": "Shrevin is a software engineer with a focus on Microsoft technologies and solutions, including SharePoint, Power Automate, and Azure. In his spare time, he enjoys hiking, trail biking, and watching movies.",
+		"socials": [ { "type": "linkedin", "username": "shrevinsookun" } ]
+	},
+	{
+		"image": "/assets/images/people/siddharth-kamboj.jpg",
+		"name": "Siddharth Kamboj",
+		"role": "Solutions Consultant",
+		"location": "India",
+		"gender": "He/Him/His",
+		"bio": "Siddharth was born and raised in Dehradun, a town in the foothills of the Himalayan range. He loves trekking, socializing, and amateur swimming.",
+		"socials":[ { "type": "github", "username": "Siddharth2001-July" } ]
+	},
+	{
+		"image": "/assets/images/people/stasa-bugarski.jpg",
+		"name": "Staša Bugarski",
+		"role": "Product Manager",
+		"location": "Serbia",
+		"gender": "She/Her/Hers",
+		"bio": "Staša loves working as part of a team, understanding others, and solving problems. In her free time, she’s happiest when she’s with her dogs, outside, preferably on top of a mountain.",
+		"socials":[ { "type": "linkedin", "username": "sta%C5%A1a-bugarski-612243a3" } ]
+	},
+	{
+		"image": "/assets/images/people/stefan-kieleithner.jpg",
+		"name": "Stefan Kieleithner",
+		"role": "iOS Engineer",
+		"location": "Austria",
+		"gender": "He/Him/His",
+		"bio": "Stefan began his journey into iOS development in 2013 and has been passionate about it ever since. In his free time, he enjoys playing board and video games, spending time with his cats, and gardening on his balcony.",
+		"socials": [
+			{ "type": "github", "username": "steviki" },
+			{ "type": "twitter", "username": "steviki" }
+		]
+	},
+	{
+		"image": "/assets/images/people/stephen-carter.jpg",
+		"name": "Stephen Carter",
+		"role": "Software Engineer",
+		"location": "United Kingdom",
+		"gender": "He/Him/His",
+		"bio": "Stephen is a software developer with experience in a wide range of development technologies and designing solutions to meet customer needs. He’s also a BSAC Dive Leader and an Assistant Open Water Instructor.",
+		"socials": [
+			{ "type": "github", "username": "StephenAtAquaforest" },
+			{ "type": "linkedin", "username": "stephen-carter-34194a80" }
+		]
+	},
+	{
+		"image": "/assets/images/people/steve-izzo.jpg",
+		"name": "Steve Izzo",
+		"role": "QA Engineer",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Steve is good at finding where things break and then explaining how he did it. It’s important to him that our software works great for our customers, and he enjoys knowing he’s a part of that process.",
+		"socials": [{ "type": "twitter", "username": "Stevo1220" }]
+	},
+	{
+		"image": "/assets/images/people/tom-laskey.jpg",
+		"name": "Tom Laskey",
+		"role": "Controller",
+		"location": "United States",
+		"gender": "He/Him/His"
+	},
+	{
+		"image": "/assets/images/people/tom-martin.jpg",
+		"name": "Tom Martin",
+		"role": "Director of Customer & Partner Success, Workflow Automation Platform",
+		"location": "United States",
+		"bio": "Tom is a US Navy Veteran with more than 25 years of technical and leadership experience. He enjoys hunting, fishing, and cheering on the Green Bay Packers.",
+		"socials":[ { "type": "linkedin", "username": "tjmartin02" } ]
+	},
+	{
+		"image": "/assets/images/people/tom-rezk.jpg",
+		"name": "Tom Rezk",
+		"role": "Sales Director, Workflow Automation Platform",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Tom has 15 years of software sales experience and is passionate about how technology can align with business needs to improve overall operations. He enjoys golfing, biking, reading, concerts, and Chicago summers."
+	},
+	{
+		"image": "/assets/images/people/tomas-surin.jpg",
+		"name": "Tomáš Šurín",
+		"role": "Server and Services Engineer",
+		"location": "Slovakia",
+		"gender": "He/Him/His",
+		"bio": "Tomáš has a deep interest in building (and breaking) stuff both in the digital and physical world. In his spare time, you’ll find him relaxing off the grid, cooking good food, playing board games, and discussing science and philosophy.",
+		"socials": [{ "type": "twitter", "username": "tomassurin" }]
+	},
+	{
+		"image": "/assets/images/people/veronica-marini.jpg",
+		"name": "Veronica Marini",
+		"role": "Web Engineer",
+		"location": "Austria",
+		"gender": "She/Her/Hers",
+		"bio": "Veronica’s passion for puzzles got her into programming. She likes everything frontend, bringing design to life, and measuring herself with coding. She also collects hobbies: from yoga to surfing to playing Brazilian drums.",
+		"socials": [{ "type": "github", "username": "veroo-m" }]
+	},
+	{
+		"image": "/assets/images/people/victoria-whitaker.jpg",
+		"name": "Victoria Whitaker",
+		"role": "Regional Sales Representative",
+		"location": "United States",
+		"gender": "She/Her/Hers",
+		"socials": [{ "type": "linkedin", "username": "victoria-whitaker-4032b5175" }]
+	},
+	{
+		"image": "/assets/images/people/wei-li.jpg",
+		"name": "Wei Li",
+		"role": "Finance and Administration",
+		"location": "Austria",
+		"gender": "She/Her/Hers",
+		"bio": "Wei provides general administrative and organizational support to management, finance, and HR. She is warm-hearted and patient and is always being helpful."
+	},
+	{
+		"image": "/assets/images/people/yann-domalain.jpg",
+		"name": "Yann Domalain",
+		"role": "Senior Regional Sales Representative",
+		"location": "United States",
+		"gender": "He/Him/His",
+		"bio": "Yann works with sales and customer success to ensure we’re continuously providing excellent service to our customers. When he’s not in the office, you can find Yann outdoors on his bike, on the soccer field, or hiking with his dogs.",
+		"socials": [
+			{ "type": "linkedin", "username": "yann-domalain-14a96b135" }
+		]
+	},
+	{
+		"image": "/assets/images/people/yu-zhang.jpg",
+		"name": "Yu Zhang",
+		"role": "Staff Accountant",
+		"location": "United States",
+		"gender": "She/Her/Hers"
+	}
+]
