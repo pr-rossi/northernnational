@@ -7,6 +7,7 @@ category: Development
 tags: Agile, Python, Jira, Markdown, Productivity, Development
 published: true
 secret: false
+people: [maureen-blando]
 ---
 
 In the ever-evolving landscape of document management, PDF SDKs (Software Development Kits) have become indispensable tools for developers. Whether you're building enterprise applications or working on document automation, understanding PDF SDKs is crucial for modern software development.
