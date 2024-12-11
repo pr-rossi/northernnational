@@ -58,6 +58,25 @@ from jira2markdown import convert
 ...
 ```
 
+```python
+...
+def compose_out_for_today_message():
+    done_issue_data = extract_issue_data(fetch_issues("done"))
+    in_progress_issue_data = extract_issue_data(fetch_issues("in-progress"))
+    blocked_issue_data = extract_issue_data(fetch_issues("blocked"))
+
+    out_for_today_message = "*Stand down*\n"
+    out_for_today_message += "  - *What did I do today*?\n"
+    out_for_today_message = add_items_to_out_for_today_message(out_for_today_message, done_issue_data)
+    out_for_today_message += "  - *What will I work on tomorrow?*\n"
+    out_for_today_message = add_items_to_out_for_today_message(out_for_today_message, in_progress_issue_data)
+    out_for_today_message += "  - *Am I blocked by anything?*\n"
+    out_for_today_message = add_items_to_out_for_today_message(out_for_today_message, blocked_issue_data)
+    out_for_today_message += "  - *Others:*\n"
+    return out_for_today_message
+...
+```
+
 ## Test
 
 ## Choosing the Right SDK
