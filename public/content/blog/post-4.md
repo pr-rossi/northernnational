@@ -82,6 +82,15 @@ def compose_out_for_today_message():
 ...
 ```
 
+<!-- prettier-ignore-start -->
+<%=
+partialV2 'quote', renderIndents: false, locals: {
+	type: 'info',
+	quote: 'For more information about these changes, refer to <a href="https://en.e-rechnung-bund.de/e-invoicing-faq/e-invoicing/">the official e-invoicing FAQ</a>.',
+}
+%>
+<!-- prettier-ignore-end -->
+
 ## Test
 
 ## Choosing the Right SDK
