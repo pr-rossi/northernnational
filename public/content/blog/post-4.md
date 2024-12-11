@@ -51,6 +51,46 @@ convenience init(
 @interface PSPDFEmbeddedFile : PSPDFModel
 ```
 
+```php
+<?php
+
+$FileHandle = fopen('result.pdf', 'w+');
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://api.nutrient.io/build',
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_POSTFIELDS => array(
+    'instructions' => '{
+      "parts": [
+        {
+          "file": "document"
+        }
+      ],
+      "actions": [
+        {
+          "type": "flatten"
+        }
+      ]
+    }',
+    'document' => new CURLFILE('input-file.pdf')
+  ),
+  CURLOPT_HTTPHEADER => array(
+    'Authorization: Bearer your_api_key_here'
+  ),
+  CURLOPT_FILE => $FileHandle,
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+
+fclose($FileHandle);
+```
+
 ## Choosing the Right SDK
 
 When selecting a PDF SDK for your project, consider these crucial factors:
