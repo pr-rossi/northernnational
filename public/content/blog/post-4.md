@@ -47,6 +47,14 @@ convenience init(
 ) throws
 ```
 
+```objective-c
+- (id) initWithOwnerPassword:(NSString *) ownerPassword 
+                userPassword:(NSString *) userPassword 
+                   keyLength:(NSUInteger) keyLength 
+                 permissions:(PSPDFDocumentPermissions) documentPermissions 
+                       error:(NSError * *) error;
+```
+
 ## Choosing the Right SDK
 
 When selecting a PDF SDK for your project, consider these crucial factors:
