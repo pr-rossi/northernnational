@@ -56,38 +56,44 @@ convenience init(
 
 $FileHandle = fopen('result.pdf', 'w+');
 
+if (!$FileHandle) {
+    die('Failed to open file handle.');
+}
+
 $curl = curl_init();
+
+$postFields = array(
+    'instructions' => json_encode(array(
+        "parts" => array(
+            array("file" => "document")
+        ),
+        "actions" => array(
+            array("type" => "flatten")
+        )
+    )),
+    'document' => new CURLFILE('input-file.pdf')
+);
 
 curl_setopt_array($curl, array(
   CURLOPT_URL => 'https://api.nutrient.io/build',
   CURLOPT_CUSTOMREQUEST => 'POST',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
-  CURLOPT_POSTFIELDS => array(
-    'instructions' => '{
-      "parts": [
-        {
-          "file": "document"
-        }
-      ],
-      "actions": [
-        {
-          "type": "flatten"
-        }
-      ]
-    }',
-    'document' => new CURLFILE('input-file.pdf')
-  ),
+  CURLOPT_POSTFIELDS => $postFields,
   CURLOPT_HTTPHEADER => array(
-    'Authorization: Bearer your_api_key_here'
+    'Authorization: Bearer your_api_key_here',
+    'Content-Type: multipart/form-data'
   ),
   CURLOPT_FILE => $FileHandle,
 ));
 
 $response = curl_exec($curl);
 
-curl_close($curl);
+if ($response === false) {
+    echo 'cURL Error: ' . curl_error($curl);
+}
 
+curl_close($curl);
 fclose($FileHandle);
 ```
 
