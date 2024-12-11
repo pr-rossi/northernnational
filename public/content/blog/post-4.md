@@ -48,11 +48,7 @@ convenience init(
 ```
 
 ```objective-c
-- (id) initWithOwnerPassword:(NSString *) ownerPassword 
-                userPassword:(NSString *) userPassword 
-                   keyLength:(NSUInteger) keyLength 
-                 permissions:(PSPDFDocumentPermissions) documentPermissions 
-                       error:(NSError * *) error;
+@interface PSPDFEmbeddedFile : PSPDFModel
 ```
 
 ## Choosing the Right SDK
