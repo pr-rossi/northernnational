@@ -1,19 +1,17 @@
 // /api/printful/product/[id].js
 import Cors from 'cors'
 
-// Initialize the cors middleware with more permissive options
 const cors = Cors({
   methods: ['GET', 'HEAD', 'POST', 'OPTIONS'],
   origin: [
     'https://visual-room-188826.framer.app',
     'https://visual-room-188826.framer.app/',
-    'http://localhost:3000' // For local development
+    'http://localhost:3000'
   ],
   credentials: true,
   optionsSuccessStatus: 200
 })
 
-// Helper function to run middleware
 function runMiddleware(req, res, fn) {
   return new Promise((resolve, reject) => {
     fn(req, res, (result) => {
@@ -42,10 +40,15 @@ export default async function handler(req, res) {
     }
 
     const { id } = req.query;
+    const storeId = process.env.PRINTFUL_STORE_ID;
 
-    console.log('Fetching Printful product:', id);
+    if (!storeId) {
+      throw new Error('PRINTFUL_STORE_ID is not configured');
+    }
 
-    const response = await fetch(`https://api.printful.com/store/products/${id}`, {
+    console.log('Fetching Printful product:', { id, storeId });
+
+    const response = await fetch(`https://api.printful.com/store/products/${id}?store_id=${storeId}`, {
       headers: {
         'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
       },
