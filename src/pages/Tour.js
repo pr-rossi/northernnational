@@ -18,12 +18,12 @@ function Tour() {
 
   // You can move this to a data file or fetch from an API
   const shows = [
-    // {
-    //   date: "DEC 15",
-    //   venue: "The Bomb Factory - Dallas, TX",
-    //   venueUrl: "https://thebombfactory.com",
-    //   ticketUrl: "https://tickets.thebombfactory.com/event/your-event"
-    // }
+    {
+      date: "DEC 15",
+      venue: "The Bomb Factory - Dallas, TX",
+      venueUrl: "https://thebombfactory.com",
+      ticketUrl: "https://tickets.thebombfactory.com/event/your-event"
+    }
   ];
 
   return (
