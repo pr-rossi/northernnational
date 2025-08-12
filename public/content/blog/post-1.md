@@ -33,7 +33,7 @@ Known for their charismatic stage presence, Northern National transforms each li
 
 As they continue to grow, Northern National remains focused on evolving their sound and reaching new audiences. They are currently working on their next album, expected to drop later this year, promising more of their signature sound with some new experimental twists.
 
-For updates on tour dates and new releases, follow Northern National on [their official website](http://www.northernnationalmusic.com) and social media platforms.
+For updates on tour dates and new releases, follow Northern National on <a href="http://www.northernnationalmusic.com" target="_blank" rel="noopener noreferrer">their official website</a> and social media platforms.
 
 ## Conclusion
 
