@@ -1,64 +1,141 @@
-/* Article body. Scoped to .article so nothing leaks into the rest of the site. */
-.article blockquote {
-  margin: 2.5rem 0;
-  padding: 0 0 0 1.5rem;
-  border-left: 3px solid #FF3B21;
-  font-style: normal;
-  font-size: 1.5rem;
-  line-height: 1.35;
-  font-weight: 600;
-  font-stretch: 110%;
-  letter-spacing: -0.01em;
-  color: #EDEBE6;
-  background: none;
+/* ---------------------------------------------------------------------------
+   Article pages. Markdown from Keystatic is rendered into .post-body.
+   ------------------------------------------------------------------------- */
+
+/* Red tape holding the cover to the page (same red as the homepage sticker). */
+.taped .tape {
+  position: absolute;
+  z-index: 2;
+  top: -14px;
+  left: 50%;
+  width: 132px;
+  height: 30px;
+  transform: translateX(-50%) rotate(-4deg);
+  background: rgba(255, 59, 33, 0.92);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
 }
 
-.article blockquote p {
-  margin: 0;
-  color: inherit;
-}
-
-.article strong {
-  color: #EDEBE6;
-  font-weight: 700;
-}
-
-/* Post body (Markdown rendered at build time). */
-.post-body h2 {
-  margin: 4rem 0 1.5rem;
-  font-size: 28px;
-  line-height: 32px;
-  font-weight: 900;
-  font-stretch: 120%;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  color: #EDEBE6;
-}
-.post-body h3 {
-  margin: 2.5rem 0 1rem;
-  font-size: 20px;
-  line-height: 28px;
-  font-weight: 700;
-  font-stretch: 112%;
-  letter-spacing: -0.01em;
-  color: #EDEBE6;
-}
-@media (min-width: 768px) {
-  .post-body h2 { font-size: 36px; line-height: 44px; }
-  .post-body h3 { font-size: 28px; line-height: 32px; }
+/* Body copy */
+.post-body {
+  max-width: 680px;
+  font-size: 18px;
+  line-height: 30px;
+  color: #A8A49C;
 }
 .post-body p,
 .post-body ul,
 .post-body ol {
   margin: 0 0 1.5rem;
-  font-size: 18px;
-  line-height: 30px;
-  color: #A8A49C;
 }
-.post-body ul { list-style: disc; padding-left: 1.5rem; }
+.post-body strong {
+  color: #EDEBE6;
+  font-weight: 700;
+}
+
+/* Opening paragraph: larger, with a red display drop cap. */
+.post-body > p:first-child {
+  font-size: 22px;
+  line-height: 34px;
+  color: #EDEBE6;
+}
+.post-body > p:first-child::first-letter {
+  float: left;
+  margin: 0.08em 0.12em 0 -0.02em;
+  font-weight: 900;
+  font-stretch: 125%;
+  font-size: 5.4em;
+  line-height: 0.78;
+  color: #FF3B21;
+}
+
+/* Section headings with a red marker */
+.post-body h2 {
+  position: relative;
+  margin: 4.5rem 0 1.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(237, 235, 230, 0.14);
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 900;
+  font-stretch: 125%;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  color: #EDEBE6;
+}
+.post-body h2::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: #FF3B21;
+}
+.post-body h3 {
+  margin: 2.75rem 0 1rem;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 800;
+  font-stretch: 115%;
+  letter-spacing: -0.01em;
+  color: #EDEBE6;
+}
+@media (min-width: 768px) {
+  .post-body h2 { font-size: 40px; line-height: 44px; }
+  .post-body h3 { font-size: 26px; line-height: 32px; }
+}
+
+/* Lyrics and quotes: poster-sized, with a giant red quote mark */
+.post-body blockquote {
+  position: relative;
+  margin: 3.5rem 0;
+  padding: 0 0 0 0;
+  border: 0;
+  background: none;
+  font-style: normal;
+}
+.post-body blockquote::before {
+  content: '\201C';
+  display: block;
+  height: 0.5em;
+  margin-bottom: 0.15em;
+  font-weight: 900;
+  font-stretch: 125%;
+  font-size: 120px;
+  line-height: 1;
+  color: #FF3B21;
+}
+.post-body blockquote p {
+  margin: 0;
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 800;
+  font-stretch: 118%;
+  letter-spacing: -0.02em;
+  color: #EDEBE6;
+}
+@media (min-width: 768px) {
+  .post-body blockquote { margin-left: -2rem; margin-right: -4rem; }
+  .post-body blockquote p { font-size: 40px; line-height: 46px; }
+}
+
+/* Lists */
+.post-body ul { list-style: none; padding-left: 0; }
+.post-body ul li { position: relative; padding-left: 1.5rem; }
+.post-body ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.75em;
+  width: 8px;
+  height: 2px;
+  background: #FF3B21;
+}
 .post-body ol { list-style: decimal; padding-left: 1.5rem; }
+.post-body ol li::marker { color: #FF3B21; font-weight: 700; }
 .post-body li + li { margin-top: 0.5rem; }
-.post-body img { display: block; width: 100%; margin: 3rem 0; border-radius: 2px; }
+
+/* Links */
 .post-body a {
   color: #EDEBE6;
   text-decoration: underline;
@@ -68,3 +145,36 @@
   transition: color 200ms;
 }
 .post-body a:hover { color: #FF3B21; }
+
+/* Photos break out of the text column, captioned from their description */
+.post-body .post-figure,
+.post-body > p > img {
+  margin: 3.5rem 0;
+}
+.post-body .post-figure img,
+.post-body > p > img {
+  display: block;
+  width: 100%;
+  border-radius: 2px;
+  filter: grayscale(1) contrast(1.15);
+  transition: filter 500ms ease-out;
+}
+.post-body .post-figure:hover img { filter: none; }
+.post-body figcaption {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8C8881;
+}
+.post-body figcaption::before {
+  content: 'Fig.';
+  color: #FF3B21;
+}
+@media (min-width: 1024px) {
+  .post-body .post-figure { margin-left: -6rem; margin-right: -6rem; }
+}

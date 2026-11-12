@@ -2,6 +2,7 @@
 // Vercel serves the functions in /api alongside the static build, exactly as before.
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
+import rehypeFigures from './src/lib/rehype-figures.mjs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -79,6 +80,7 @@ function keystaticDev() {
 export default defineConfig({
   site: 'https://northernnationalmusic.com',
   integrations: [react()],
+  markdown: { rehypePlugins: [rehypeFigures] },
   vite: {
     // Keep the existing Vercel variable names (REACT_APP_*) working in the browser.
     envPrefix: ['PUBLIC_', 'REACT_APP_'],

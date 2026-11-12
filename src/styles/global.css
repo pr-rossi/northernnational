@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 body {
+  /* clip (not hidden/auto) so sticky elements keep working */
+  overflow-x: clip;
   background-color: #0B0B0B;
   color: #EDEBE6;
   min-height: 100vh;
@@ -23,8 +25,14 @@ body {
 .grain {
   pointer-events: none;
   position: fixed;
-  inset: -50%;
+  inset: 0;
   z-index: 60;
+  overflow: hidden;
+}
+.grain::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
   opacity: 0.06;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain 600ms steps(1) infinite;
@@ -37,15 +45,11 @@ body {
   80% { transform: translate(3%, 3%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .grain { animation: none; }
+  .grain::before { animation: none; }
 }
 
 
-html, body {
-  overflow: auto !important;
-  height: auto !important;
-  position: relative !important;
-}
+
 
 /* The content editor brings its own theme; don't let the site's colours bleed in. */
 html.keystatic body,
@@ -71,13 +75,14 @@ html.keystatic #root {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: none; }
 }
+/* Same motion as the homepage hero and tour headline: fade up 60px, no masking. */
 @keyframes intro-title {
-  from { clip-path: inset(0 0 100% 0); transform: translateY(35%); }
-  to { clip-path: inset(-20% -5% -25% -5%); transform: none; }
+  from { opacity: 0; transform: translateY(60px); }
+  to { opacity: 1; transform: none; }
 }
 @keyframes intro-media {
-  from { opacity: 0; transform: scale(1.04); clip-path: inset(6% 6% 6% 6%); }
-  to { opacity: 1; transform: none; clip-path: inset(0); }
+  from { opacity: 0; transform: translateY(32px) scale(0.98); }
+  to { opacity: 1; transform: none; }
 }
 .intro-rise,
 .intro-title,
@@ -88,8 +93,8 @@ html.keystatic #root {
   animation-delay: var(--d, 0ms);
 }
 .intro-rise { animation-name: intro-rise; }
-.intro-title { animation-name: intro-title; animation-duration: 900ms; }
-.intro-media { animation-name: intro-media; animation-duration: 1100ms; }
+.intro-title { animation-name: intro-title; }
+.intro-media { animation-name: intro-media; animation-duration: 1000ms; }
 @media (prefers-reduced-motion: reduce) {
   .intro-rise,
   .intro-title,

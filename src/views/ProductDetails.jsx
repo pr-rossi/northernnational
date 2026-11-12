@@ -214,7 +214,7 @@ function ProductDetails({ id: idProp }) {
 
           {!loading && product && !error && (
             <div className="mt-8 grid gap-10 md:gap-16 md:grid-cols-12 md:items-start">
-              <div className="md:col-span-7">
+              <div className="md:col-span-7 min-w-0">
                 <div className="intro-media relative aspect-square overflow-hidden rounded-nn bg-nn-surface">
                   {current && (
                     <img
@@ -246,7 +246,7 @@ function ProductDetails({ id: idProp }) {
                 )}
               </div>
 
-              <div className="md:col-span-5 md:sticky md:top-28">
+              <div className="md:col-span-5 min-w-0 md:sticky md:top-28">
                 <Label className="intro-rise mb-4" style={{ '--d': '80ms' }}>Merch</Label>
                 <h1 className="intro-title display text-nn-text text-[40px] md:text-[56px]" style={{ '--d': '160ms' }}>
                   {title}

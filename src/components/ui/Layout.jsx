@@ -23,7 +23,7 @@ export function PageHeader({ label, title, intro, children }) {
       <Container>
         <Label className="mb-6 intro-rise">{label}</Label>
         <h1
-          className="intro-title display text-nn-text text-[min(13vw,64px)] md:text-[clamp(72px,10vw,160px)]"
+          className="intro-title display text-nn-text text-[min(10.5vw,64px)] md:text-[clamp(72px,10vw,160px)]"
           style={{ '--d': '120ms' }}
         >
           {title}
