@@ -2,12 +2,16 @@
 // Shared by the browser (admin UI) and the dev server (src/setupProxy.js), so keep this file plain ESM, no JSX.
 import { config, fields, collection, singleton } from '@keystatic/core';
 
+// Keystatic Cloud project, e.g. "northern-national/website". Set it in Vercel to turn on editing on the live site.
 const cloudProject = process.env.REACT_APP_KEYSTATIC_CLOUD_PROJECT;
+// Locally you edit files directly; set REACT_APP_KEYSTATIC_STORAGE=cloud to try the cloud flow from `npm start`.
+const useCloud =
+  Boolean(cloudProject) &&
+  (process.env.NODE_ENV !== 'development' || process.env.REACT_APP_KEYSTATIC_STORAGE === 'cloud');
 
-export const storage =
-  process.env.NODE_ENV === 'development' || !cloudProject
-    ? { kind: 'local' } // writes straight to the files in this repo (dev server only)
-    : { kind: 'cloud' }; // edits on the live site, committed to GitHub through Keystatic Cloud
+export const storage = useCloud
+  ? { kind: 'cloud' } // edits on the live site, committed to GitHub through Keystatic Cloud
+  : { kind: 'local' }; // writes straight to the files in this repo (dev server only)
 
 export default config({
   storage,
