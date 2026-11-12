@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useProducts from '../hooks/useProducts';
+import ProductImage from './ProductImage';
 import { Container } from './ui/Layout';
 
 function ProductCard({ product }) {
@@ -10,16 +11,7 @@ function ProductCard({ product }) {
       to={`/product/${product.id}`}
       className="group block rounded-nn focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-text focus-visible:ring-offset-4 focus-visible:ring-offset-nn-bg"
     >
-      <div className="aspect-[4/5] overflow-hidden rounded-nn bg-nn-surface">
-        {product.thumbnail_url && (
-          <img
-            src={product.thumbnail_url}
-            alt=""
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-          />
-        )}
-      </div>
+      <ProductImage product={product} className="aspect-[4/5]" />
       <div className="mt-3 md:mt-4 flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 md:gap-4">
         <h2 className="text-body md:text-lead font-bold [font-stretch:112%] tracking-[-0.01em] text-nn-text line-clamp-2 transition-colors duration-200 group-hover:text-nn-brand">
           {product.name}

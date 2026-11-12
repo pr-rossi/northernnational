@@ -1,0 +1,15 @@
+{
+  "name": "The Boys Tee",
+  "printfulId": "371475218",
+  "hidden": false,
+  "featured": true,
+  "order": 4,
+  "description": "",
+  "images": [
+    {
+      "image": "/images/merch/the-boys-tee/images/0/image.webp",
+      "alt": "Black tee with the retro triangle Northern National graphic",
+      "variant": ""
+    }
+  ]
+}

@@ -57,3 +57,8 @@ html.keystatic #root {
   html.keystatic body,
   html.keystatic #root { background: #1c1c1c; }
 }
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

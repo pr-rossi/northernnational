@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Button, { Arrow } from './ui/Button';
 import useProducts from '../hooks/useProducts';
+import ProductImage from './ProductImage';
 
 function SkeletonCard() {
   return (
@@ -31,7 +32,9 @@ function RailButton({ dir, disabled, onClick }) {
 }
 
 export default function MerchRail() {
-  const { products, error } = useProducts();
+  const { products: all, error } = useProducts();
+  // Homepage shows the products marked "Show on the homepage" in Keystatic, or everything if none are.
+  const products = all && (all.some((p) => p.featured) ? all.filter((p) => p.featured) : all);
   const [edges, setEdges] = useState({ start: true, end: false });
   const trackRef = useRef(null);
 
@@ -108,16 +111,7 @@ export default function MerchRail() {
                     className="group w-[260px] md:w-[300px] shrink-0 snap-start rounded-nn
                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-action focus-visible:ring-offset-4 focus-visible:ring-offset-nn-bg"
                   >
-                    <div className="relative aspect-square overflow-hidden rounded-nn bg-nn-surface">
-                      {p.thumbnail_url && (
-                        <img
-                          src={p.thumbnail_url}
-                          alt=""
-                          loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04]"
-                        />
-                      )}
-                    </div>
+                    <ProductImage product={p} className="aspect-square" />
                     <div className="mt-4 flex items-baseline justify-between gap-4">
                       <h3 className="text-body font-semibold [font-stretch:110%] text-nn-text line-clamp-2 group-hover:text-nn-brand transition-colors duration-200">{p.name}</h3>
                       {price && (

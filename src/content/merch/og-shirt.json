@@ -1,0 +1,35 @@
+{
+  "name": "OG Shirt",
+  "printfulId": "371474912",
+  "order": 1,
+  "featured": true,
+  "hidden": false,
+  "description": "",
+  "images": [
+    {
+      "image": "/images/merch/og-shirt/images/0/image.webp",
+      "alt": "Solid black tee with the Northern National script logo",
+      "variant": "Solid Black Triblend"
+    },
+    {
+      "image": "/images/merch/og-shirt/images/1/image.webp",
+      "alt": "Aqua tee with the Northern National script logo",
+      "variant": "Aqua Triblend"
+    },
+    {
+      "image": "/images/merch/og-shirt/images/2/image.webp",
+      "alt": "Berry tee with the Northern National script logo",
+      "variant": "Berry Triblend"
+    },
+    {
+      "image": "/images/merch/og-shirt/images/3/image.webp",
+      "alt": "Emerald tee with the Northern National script logo",
+      "variant": "Emerald Triblend"
+    },
+    {
+      "image": "/images/merch/og-shirt/images/4/image.webp",
+      "alt": "Teal tee with the Northern National script logo",
+      "variant": "Teal"
+    }
+  ]
+}

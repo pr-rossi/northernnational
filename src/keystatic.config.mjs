@@ -20,7 +20,7 @@ export default config({
     brand: { name: 'Northern National' },
     navigation: {
       Site: ['home'],
-      Content: ['shows', 'posts'],
+      Content: ['shows', 'posts', 'merch'],
     },
   },
 
@@ -117,6 +117,43 @@ export default config({
         venue: fields.text({ label: 'Venue', validation: { isRequired: true } }),
         ticketUrl: fields.url({ label: 'Ticket link' }),
         soldOut: fields.checkbox({ label: 'Sold out', defaultValue: false }),
+      },
+    }),
+
+    merch: collection({
+      label: 'Merch',
+      path: 'src/content/merch/*',
+      slugField: 'name',
+      format: { data: 'json' },
+      columns: ['order', 'featured', 'hidden'],
+      schema: {
+        name: fields.slug({ name: { label: 'Name on the site', validation: { isRequired: true } } }),
+        printfulId: fields.text({
+          label: 'Printful product ID',
+          description: 'Links this entry to the Printful product (prices, sizes and checkout come from Printful).',
+          validation: { isRequired: true },
+        }),
+        order: fields.integer({ label: 'Order', description: 'Lower numbers show first.', defaultValue: 10 }),
+        featured: fields.checkbox({ label: 'Show on the homepage', defaultValue: false }),
+        hidden: fields.checkbox({ label: 'Hide from the site', defaultValue: false }),
+        description: fields.text({ label: 'Description', multiline: true }),
+        images: fields.array(
+          fields.object({
+            image: fields.image({
+              label: 'Mockup',
+              description: 'Transparent PNG or WebP works best.',
+              directory: 'public/images/merch',
+              publicPath: '/images/merch/',
+              validation: { isRequired: true },
+            }),
+            alt: fields.text({ label: 'Description (for screen readers)' }),
+            variant: fields.text({
+              label: 'Show for option',
+              description: 'Optional. A colour or size from Printful, e.g. "Aqua Triblend" or "11 oz". Picking it on the product page switches to this image.',
+            }),
+          }),
+          { label: 'Images', description: 'The first image is the main one.', itemLabel: (p) => p.fields.alt.value || p.fields.variant.value || 'Image' }
+        ),
       },
     }),
 

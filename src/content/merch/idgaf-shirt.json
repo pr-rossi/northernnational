@@ -1,0 +1,20 @@
+{
+  "name": "IDGAF Shirt",
+  "printfulId": "371475073",
+  "hidden": false,
+  "featured": true,
+  "order": 2,
+  "description": "",
+  "images": [
+    {
+      "image": "/images/merch/idgaf-shirt/images/0/image.webp",
+      "alt": "Back: IDGAF graphic",
+      "variant": ""
+    },
+    {
+      "image": "/images/merch/idgaf-shirt/images/1/image.webp",
+      "alt": "Front: small Northern National logo",
+      "variant": ""
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Black Glossy Mug",
+  "printfulId": "371475243",
+  "hidden": false,
+  "featured": false,
+  "order": 7,
+  "description": "",
+  "images": [
+    {
+      "image": "/images/merch/black-glossy-mug/images/0/image.webp",
+      "alt": "11 oz black glossy mug with the NN mark",
+      "variant": "11 oz"
+    },
+    {
+      "image": "/images/merch/black-glossy-mug/images/1/image.webp",
+      "alt": "15 oz black glossy mug with the NN mark",
+      "variant": "15 oz"
+    }
+  ]
+}

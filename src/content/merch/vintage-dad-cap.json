@@ -1,0 +1,20 @@
+{
+  "name": "Vintage Dad Cap",
+  "printfulId": "371474971",
+  "hidden": false,
+  "featured": false,
+  "order": 6,
+  "description": "",
+  "images": [
+    {
+      "image": "/images/merch/vintage-dad-cap/images/0/image.webp",
+      "alt": "Washed black dad cap with the script logo",
+      "variant": ""
+    },
+    {
+      "image": "/images/merch/vintage-dad-cap/images/1/image.webp",
+      "alt": "Back of the dad cap with the NN mark",
+      "variant": ""
+    }
+  ]
+}

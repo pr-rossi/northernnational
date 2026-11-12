@@ -1,0 +1,20 @@
+{
+  "name": "Classic Snapback",
+  "printfulId": "371474951",
+  "hidden": false,
+  "featured": false,
+  "order": 5,
+  "description": "",
+  "images": [
+    {
+      "image": "/images/merch/classic-snapback/images/0/image.webp",
+      "alt": "Black snapback with the script logo",
+      "variant": ""
+    },
+    {
+      "image": "/images/merch/classic-snapback/images/1/image.webp",
+      "alt": "Back of the snapback with the NN mark",
+      "variant": ""
+    }
+  ]
+}
