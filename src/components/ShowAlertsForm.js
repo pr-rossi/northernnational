@@ -33,7 +33,7 @@ export default function ShowAlertsForm({ id = 'show-alerts' }) {
       onSubmit={onSubmit}
       className="w-full max-w-[480px]"
     >
-      <label htmlFor={inputId} className="block text-meta text-nn-muted mb-2">
+      <label htmlFor={inputId} className="block label text-nn-muted mb-2">
         Email address
       </label>
       <div className="flex flex-col sm:flex-row gap-2">
@@ -54,7 +54,7 @@ export default function ShowAlertsForm({ id = 'show-alerts' }) {
           className={`h-12 w-full sm:flex-1 min-w-0 rounded-nn bg-nn-surface px-4 text-body text-nn-text placeholder:text-nn-subtle
             border transition-colors duration-200
             focus:outline-none focus:ring-2 focus:border-transparent
-            ${status === 'error' ? 'border-[#FCA5A5] focus:ring-[#FCA5A5]' : `focus:ring-nn-action ${email ? 'border-nn-text/40' : 'border-nn-line'}`}`}
+            ${status === 'error' ? 'border-nn-danger focus:ring-nn-danger' : `focus:ring-nn-text ${email ? 'border-nn-text/40' : 'border-nn-line'}`}`}
         />
         <Button type="submit" size="lg" disabled={!email}>
           Get show alerts
@@ -62,10 +62,10 @@ export default function ShowAlertsForm({ id = 'show-alerts' }) {
       </div>
       <p id={msgId} aria-live="polite" className="mt-2 min-h-[20px] text-meta">
         {status === 'error' && (
-          <span className="text-[#FCA5A5]">Sorry, that email doesn't look right. Check it and try again.</span>
+          <span className="text-nn-danger">Sorry, that email doesn't look right. Check it and try again.</span>
         )}
         {status === 'sent' && (
-          <span className="text-nn-action">You're almost in. Confirm in the tab that just opened.</span>
+          <span className="text-nn-text">You're almost in. Confirm in the tab that just opened.</span>
         )}
         {status === 'idle' && <span className="text-nn-subtle">Only news about shows and releases. Unsubscribe anytime.</span>}
       </p>

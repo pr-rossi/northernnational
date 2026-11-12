@@ -65,12 +65,12 @@ export default function MerchRail() {
   const empty = !error && products && products.length === 0;
 
   return (
-    <section aria-labelledby="merch-title" className="py-24 md:py-32 bg-nn-bg overflow-hidden">
+    <section aria-labelledby="merch-title" className="py-24 md:py-40 bg-nn-bg border-t border-nn-line overflow-hidden">
       <div className="mx-auto max-w-7xl px-5 md:px-6">
         <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between mb-10">
           <div>
-            <p className="text-meta text-nn-subtle mb-2">Merch</p>
-            <h2 id="merch-title" className="font-thunder text-poster-sm md:text-poster text-nn-text">
+            <p className="label text-nn-muted mb-6">Merch</p>
+            <h2 id="merch-title" className="display text-nn-text text-[min(12vw,56px)] md:text-[112px]">
               Wear it loud
             </h2>
           </div>
@@ -91,7 +91,7 @@ export default function MerchRail() {
       {error || empty ? (
         <div className="mx-auto max-w-7xl px-5 md:px-6">
           <div className="rounded-nn bg-nn-surface p-8 md:p-10">
-            <p className="text-lead text-nn-text">
+            <p className="text-lead font-semibold [font-stretch:110%] text-nn-text">
               {error ? "The merch table didn't load." : 'The merch table is restocking.'}
             </p>
             <p className="mt-1 text-body text-nn-muted">
@@ -119,7 +119,7 @@ export default function MerchRail() {
                     className="group w-[260px] md:w-[300px] shrink-0 snap-start rounded-nn
                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-action focus-visible:ring-offset-4 focus-visible:ring-offset-nn-bg"
                   >
-                    <div className="aspect-square overflow-hidden rounded-nn bg-nn-surface">
+                    <div className="relative aspect-square overflow-hidden rounded-nn bg-nn-surface">
                       {p.thumbnail_url && (
                         <img
                           src={p.thumbnail_url}
@@ -130,10 +130,10 @@ export default function MerchRail() {
                       )}
                     </div>
                     <div className="mt-4 flex items-baseline justify-between gap-4">
-                      <h3 className="text-body font-medium text-nn-text line-clamp-2">{p.name}</h3>
+                      <h3 className="text-body font-semibold [font-stretch:110%] text-nn-text line-clamp-2 group-hover:text-nn-brand transition-colors duration-200">{p.name}</h3>
                       {price && (
-                        <p className="text-body text-nn-muted shrink-0">
-                          <span className="text-meta">$</span>
+                        <p className="label text-nn-muted shrink-0">
+                          $
                           {parseFloat(price).toFixed(2)}
                         </p>
                       )}

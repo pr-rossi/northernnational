@@ -79,8 +79,8 @@ function App() {
       toast.success('Order placed successfully!', {
         icon: '🎉',
         style: {
-          background: '#D4FF99',
-          color: 'black',
+          background: '#EDEBE6',
+          color: '#0B0B0B',
         },
       });
       // Clean up URL and redirect to home
@@ -89,8 +89,8 @@ function App() {
       toast.error('Order was canceled', {
         icon: '❌',
         style: {
-          background: '#ff4444',
-          color: 'white',
+          background: '#FF3B21',
+          color: '#0B0B0B',
         },
       });
       // Clean up URL and redirect to home
@@ -104,7 +104,8 @@ function App() {
   return (
     <LenisProvider>
       <CartProvider>
-        <div className="min-h-screen bg-zinc-950">
+        <div className="min-h-screen bg-nn-bg">
+          <div className="grain" aria-hidden="true" />
           <Toaster 
             position="top-center"
             toastOptions={{

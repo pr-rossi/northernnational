@@ -1,93 +1,102 @@
-import { Link } from 'react-router-dom';
-import { Mail, Instagram, Twitter } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import ShowAlertsForm from './ShowAlertsForm';
+import { Arrow } from './ui/Button';
+
+const columns = [
+  {
+    title: 'Listen',
+    links: [
+      { label: 'Spotify', href: 'https://open.spotify.com/artist/77uddrwADVuSI16ASFWF3c?si=bVUiHtZyS-u8cE4CuxYLFA' },
+      { label: 'This Is Northern National', href: 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO4daEGQ?si=78a79f6bacdd4641' },
+    ],
+  },
+  {
+    title: 'Follow',
+    links: [
+      { label: 'Instagram', href: 'https://instagram.com/northernnational' },
+      { label: 'X / Twitter', href: 'https://twitter.com/northernnational' },
+    ],
+  },
+  {
+    title: 'Site',
+    links: [
+      { label: 'Tour', to: '/tour' },
+      { label: 'Merch', to: '/merch' },
+      { label: 'News', to: '/blog' },
+    ],
+  },
+  {
+    title: 'Contact',
+    links: [{ label: 'contact@northernnational.com', href: 'mailto:contact@northernnational.com' }],
+  },
+];
+
+const linkCls =
+  'inline-flex items-center gap-2 text-body text-nn-text/80 hover:text-nn-text transition-colors duration-200 ' +
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-text rounded-nn';
 
 function Footer() {
+  const { pathname } = useLocation();
+  const showSignup = pathname !== '/'; // the homepage has its own signup in the tour section
+
   return (
-    <footer className="bg-black">
-      {/* Newsletter Section */}
-      <div className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8 text-[#D4FF99]">CONNECT WITH US</h2>
-          <div className="flex justify-center space-x-8 mb-12">
-            <a 
-              href="https://instagram.com/northernnational" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-[#D4FF99] transition duration-300"
-            >
-              <Instagram className="w-8 h-8" />
-            </a>
-            <a 
-              href="https://twitter.com/northernnational" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-[#D4FF99] transition duration-300"
-            >
-              <Twitter className="w-8 h-8" />
-            </a>
-            <a 
-              href="mailto:contact@northernnational.com"
-              className="text-white hover:text-[#D4FF99] transition duration-300"
-            >
-              <Mail className="w-8 h-8" />
-            </a>
+    <footer className="relative bg-nn-bg border-t border-nn-line overflow-hidden">
+      <div className="max-w-7xl mx-auto px-5 md:px-6 pt-20 md:pt-28">
+        {showSignup && (
+          <div className="grid gap-8 md:grid-cols-12 md:items-end pb-16 md:pb-20 mb-16 md:mb-20 border-b border-nn-line">
+            <div className="md:col-span-6">
+              <p className="label text-nn-muted mb-4">Show alerts</p>
+              <p className="display text-nn-text text-[40px] md:text-[64px]">Hear it first.</p>
+            </div>
+            <div className="md:col-span-6">
+              <ShowAlertsForm id="footer-alerts" />
+            </div>
           </div>
-          <div className="bg-zinc-950 p-8 rounded-lg shadow-lg">
-            <form
-              action="https://northernnationalmusic.us17.list-manage.com/subscribe/post?u=22d3f967aaa29a31ccd2275a1&amp;id=7e228c82dc&amp;f_id=0048c2e1f0"
-              method="post"
-              id="mc-embedded-subscribe-form"
-              name="mc-embedded-subscribe-form"
-              className="validate"
-              target="_blank"
-            >
-              <h3 className="text-xl font-bold mb-4 text-white">JOIN OUR MAILING LIST</h3>
-              <div className="flex flex-col sm:flex-row max-w-md mx-auto space-y-2 sm:space-y-0">
-                <input
-                  type="email"
-                  name="EMAIL"
-                  className="flex-1 p-2 bg-black border border-zinc-800 rounded sm:rounded-l focus:outline-none focus:border-[#D4FF99]"
-                  id="mce-EMAIL"
-                  placeholder="Enter your email"
-                  required
-                />
-                <button 
-                  type="submit"
-                  name="subscribe"
-                  id="mc-embedded-subscribe"
-                  className="px-6 py-2 bg-[#D4FF99] hover:bg-[#bfe589] text-black font-medium rounded sm:rounded-r transition duration-300"
-                >
-                  SUBSCRIBE
-                </button>
-              </div>
-              {/* Bot protection */}
-              <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
-                <input type="text" name="b_22d3f967aaa29a31ccd2275a1_7e228c82dc" tabIndex="-1" value="" />
-              </div>
-            </form>
-          </div>
+        )}
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+          {columns.map((col) => (
+            <div key={col.title}>
+              <p className="label text-nn-subtle mb-4">{col.title}</p>
+              <ul className="space-y-2">
+                {col.links.map((l) => (
+                  <li key={l.label}>
+                    {l.to ? (
+                      <Link to={l.to} className={linkCls}>
+                        {l.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={l.href}
+                        className={`${linkCls} break-all`}
+                        {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      >
+                        {l.label}
+                        {l.href.startsWith('http') && <Arrow external className="shrink-0 text-nn-subtle" />}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 flex flex-col gap-2 sm:flex-row sm:justify-between label text-nn-subtle">
+          <p>© {new Date().getFullYear()} Northern National</p>
+          <p>Made loud in Dallas, TX</p>
         </div>
       </div>
 
-      {/* Bottom Footer */}
-      <div className="py-8 px-6 bg-zinc-950">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-gray-400">© {new Date().getFullYear()} Northern National. All rights reserved.</p>
-          <nav className="flex space-x-6">
-            <Link to="/merch" className="text-gray-400 hover:text-[#D4FF99] transition duration-300">
-              Merch
-            </Link>
-            <Link to="/tour" className="text-gray-400 hover:text-[#D4FF99] transition duration-300">
-              Tour
-            </Link>
-            <Link to="/blog" className="text-gray-400 hover:text-[#D4FF99] transition duration-300">
-              Blog
-            </Link>
-          </nav>
-        </div>
-      </div>
+      <p
+        aria-hidden="true"
+        className="display text-nn-text/[0.06] select-none whitespace-nowrap px-4 md:px-5 mt-8
+          text-[calc((100vw-32px)/14.4)] md:text-[calc((100vw-40px)/14.4)] leading-[0.8] mb-[-0.12em]"
+      >
+        Northern National
+      </p>
     </footer>
   );
 }
 
-export default Footer; 
+export default Footer;

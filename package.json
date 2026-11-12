@@ -4,6 +4,8 @@
   "homepage": "https://northernnationalmusic.com",
   "private": true,
   "dependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
     "@stripe/react-stripe-js": "^2.9.0",
     "@stripe/stripe-js": "^4.10.0",
     "@studio-freight/lenis": "^1.0.42",

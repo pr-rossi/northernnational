@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 // variant = emphasis (primary | secondary | tertiary), size = md (40) | lg (48)
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-nn font-medium whitespace-nowrap select-none ' +
+  'inline-flex items-center justify-center gap-2 rounded-nn font-semibold [font-stretch:112%] tracking-[-0.01em] whitespace-nowrap select-none ' +
   'transition-[background-color,border-color,color,transform] duration-200 ease-out ' +
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-action focus-visible:ring-offset-2 focus-visible:ring-offset-nn-bg ' +
   'active:scale-[0.98] aria-disabled:pointer-events-none aria-disabled:opacity-40 aria-disabled:cursor-not-allowed';

@@ -7,7 +7,7 @@ import PageTransition from '../components/PageTransition';
 import FeaturedBlogs from '../components/FeaturedBlogs';
 import MerchRail from '../components/MerchRail';
 import ShowAlertsForm from '../components/ShowAlertsForm';
-import Button, { Arrow, Sun } from '../components/ui/Button';
+import Button, { Arrow } from '../components/ui/Button';
 
 // ---------------------------------------------------------------------------
 // Content
@@ -29,7 +29,14 @@ const LATEST = {
 // Add shows here: { date: '2027-03-14', city: 'Dallas', region: 'TX', venue: 'The Bomb Factory', ticketUrl: 'https://…' }
 const SHOWS = [];
 
-const TICKER = ['IDGAF out now', 'Alternative rock from Dallas, TX', 'Writing loud since 2016', 'Shows announced here first'];
+const TICKER = ['IDGAF out now', 'Dallas, Texas', 'Loud since 2016', 'New dates soon'];
+
+const PHOTOS = [
+  { src: '/images/nn-boys-show.jpg', alt: 'The band mid-song on stage', tag: 'Live', pos: 'object-center' },
+  { src: '/images/rossi.jpg', alt: 'Guitarist playing under blue light', tag: 'Guitar', pos: 'object-center' },
+  { src: '/images/anthony.jpg', alt: 'Drummer behind the kit', tag: 'Drums', pos: 'object-center' },
+  { src: '/images/dylan.jpg', alt: 'Bassist playing under red light', tag: 'Bass', pos: 'object-right' },
+];
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -40,8 +47,16 @@ function Container({ className = '', children }) {
   return <div className={`mx-auto w-full max-w-7xl px-5 md:px-6 ${className}`}>{children}</div>;
 }
 
-function Eyebrow({ children, className = '' }) {
-  return <p className={`text-meta text-nn-subtle mb-3 ${className}`}>{children}</p>;
+function Label({ children, className = '', as: Tag = 'p' }) {
+  return <Tag className={`label text-nn-muted ${className}`}>{children}</Tag>;
+}
+
+function PlayGlyph({ className = '' }) {
+  return (
+    <svg width="12" height="12" viewBox="0 0 14 14" aria-hidden="true" className={className}>
+      <path d="M3 1.5v11L12.5 7z" fill="currentColor" />
+    </svg>
+  );
 }
 
 function Hero({ onAlerts }) {
@@ -52,8 +67,7 @@ function Hero({ onAlerts }) {
     if (reduce || !imgRef.current) return;
     gsap.registerPlugin(ScrollTrigger);
     const tween = gsap.to(imgRef.current, {
-      scale: 1.12,
-      yPercent: 6,
+      scale: 1.15,
       ease: 'none',
       scrollTrigger: { trigger: imgRef.current, start: 'top top', end: 'bottom top', scrub: true },
     });
@@ -63,82 +77,92 @@ function Hero({ onAlerts }) {
     };
   }, [reduce]);
 
-  // Attention layers: caption -> title -> actions (MO1)
-  const layer = (i) =>
+  const layer = (i, y = 32) =>
     reduce
       ? {}
       : {
-          initial: { opacity: 0, y: 24 },
+          initial: { opacity: 0, y },
           animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.8, ease: [0.45, 0, 0.55, 1], delay: 0.3 + i * 0.18 },
+          transition: { duration: 0.8, ease, delay: 0.25 + i * 0.16 },
         };
 
   return (
     <header className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-nn-bg">
-      <div
-        ref={imgRef}
-        className="absolute inset-0 bg-cover bg-[center_30%] origin-top"
-        style={{ backgroundImage: "url('/images/the-boys-show.jpeg')" }}
-        role="img"
-        aria-label="Northern National on stage under white lights"
-      />
-      {/* Single-color scrim, clear at the top so the stage reads (E8) */}
+      <div ref={imgRef} className="absolute inset-0 origin-center">
+        <img
+          src="/images/the-boys-show.jpeg"
+          alt="Northern National on stage under white lights"
+          className="photo-bw h-full w-full object-cover object-[center_30%]"
+        />
+      </div>
       <div
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(to bottom, rgba(10,10,10,0.35) 0%, rgba(10,10,10,0.10) 30%, rgba(10,10,10,0.70) 62%, #0A0A0A 100%)',
+            'linear-gradient(to bottom, rgba(11,11,11,0.55) 0%, rgba(11,11,11,0) 28%, rgba(11,11,11,0.35) 55%, rgba(11,11,11,0.92) 85%, #0B0B0B 100%)',
         }}
       />
 
       <Container className="relative z-10 pt-40">
-        <motion.p {...layer(0)} className="text-body md:text-lead text-nn-text/90 max-w-[600px]">
-          Alternative rock from Dallas, TX. New single <span className="font-medium text-nn-text">IDGAF</span> is out now.
-        </motion.p>
-        <motion.div {...layer(2)} className="mt-6 flex flex-wrap gap-3">
-          <Button size="lg" href={LINKS.single}>
-            <PlayGlyph /> Play IDGAF
-          </Button>
-          <Button size="lg" variant="secondary" href="#tour" onClick={onAlerts}>
-            Get show alerts
-          </Button>
+        <motion.div {...layer(0, 16)} className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <ul className="label text-nn-text/90 flex flex-wrap gap-x-4 gap-y-1">
+            <li>Alternative rock</li>
+            <li aria-hidden="true" className="text-nn-brand">/</li>
+            <li>Dallas, TX</li>
+            <li aria-hidden="true" className="text-nn-brand">/</li>
+            <li>Est. 2016</li>
+          </ul>
+          <div className="flex flex-wrap gap-3">
+            <Button size="lg" href={LINKS.single}>
+              <PlayGlyph /> Play IDGAF
+            </Button>
+            <Button size="lg" variant="secondary" href="#tour" onClick={onAlerts} className="backdrop-blur-sm">
+              Get show alerts
+            </Button>
+          </div>
         </motion.div>
       </Container>
 
-      {/* The wordmark is the poster: full width, cropped by the bottom edge */}
-      <motion.h1
-        {...layer(1)}
-        className="relative z-10 mt-8 md:mt-10 px-3 md:px-6 font-thunder text-nn-text leading-[0.78] tracking-[-0.01em]
-          text-[clamp(6rem,30vw,9.5rem)] md:text-[calc((100vw-40px)/5.25)] mb-[-0.1em] select-none"
-      >
-        <span className="block md:inline">Northern</span> <span className="block md:inline">National</span>
-      </motion.h1>
-    </header>
-  );
-}
+      <div className="relative z-10 mt-6 md:mt-8 px-4 md:px-5">
+        <motion.h1
+          {...layer(1, 60)}
+          className="display text-nn-text text-[calc((100vw-32px)/7.5)] md:text-[calc((100vw-40px)/7.5)] leading-[0.84] mb-[-0.06em]"
+        >
+          <span className="block">Northern</span>
+          <span className="block">National</span>
+        </motion.h1>
 
-function PlayGlyph() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
-      <path d="M3 1.5v11L12.5 7z" fill="currentColor" />
-    </svg>
+        {/* Red tape sticker: the one brand-colour moment in the hero */}
+        <motion.a
+          href="#music"
+          initial={reduce ? false : { opacity: 0, scale: 1.4, rotate: -12 }}
+          animate={{ opacity: 1, scale: 1, rotate: -4 }}
+          transition={reduce ? undefined : { type: 'spring', damping: 14, mass: 0.8, delay: 1.0 }}
+          className="absolute hidden md:block md:right-[6vw] md:top-[2vw] z-20 bg-nn-brand text-nn-on-brand
+            px-4 py-2 md:px-5 md:py-3 shadow-e5
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-text focus-visible:ring-offset-2 focus-visible:ring-offset-nn-bg"
+        >
+          <span className="display text-[18px] md:text-[28px] leading-none tracking-[-0.02em]">New single: IDGAF</span>
+        </motion.a>
+      </div>
+    </header>
   );
 }
 
 function Ticker() {
   const [paused, setPaused] = useState(false);
-  const items = [...TICKER, ...TICKER];
+  const items = [...TICKER, ...TICKER, ...TICKER, ...TICKER];
   return (
-    <div className="relative bg-nn-action text-nn-on-action overflow-hidden" aria-label="Announcements">
+    <div className="relative bg-nn-brand text-nn-on-brand overflow-hidden" aria-label="Announcements">
       <div
-        className="flex w-max animate-marquee motion-reduce:[animation-play-state:paused] py-3"
+        className="flex w-max animate-marquee motion-reduce:[animation-play-state:paused] py-3 md:py-4"
         style={paused ? { animationPlayState: 'paused' } : undefined}
         aria-hidden="true"
       >
         {items.map((t, i) => (
-          <span key={i} className="flex items-center gap-6 pr-6 font-thunder text-[32px] leading-[32px] whitespace-nowrap">
+          <span key={i} className="display flex items-center gap-6 pr-6 text-[28px] md:text-[44px] leading-none whitespace-nowrap">
             {t}
-            <Sun className="h-5 w-5 shrink-0" />
+            <span className="inline-block h-[0.4em] w-[0.4em] rotate-45 bg-nn-on-brand" />
           </span>
         ))}
       </div>
@@ -148,14 +172,14 @@ function Ticker() {
         onClick={() => setPaused((p) => !p)}
         aria-pressed={paused}
         aria-label={paused ? 'Play announcements' : 'Pause announcements'}
-        className="absolute right-0 top-0 bottom-0 w-14 flex items-center justify-center bg-nn-action
-          shadow-[-16px_0_16px_#D4FF99] hover:bg-nn-action-hover transition-colors duration-100
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-nn-on-action"
+        className="absolute right-0 top-0 bottom-0 w-14 flex items-center justify-center bg-nn-brand
+          shadow-[-20px_0_20px_#FF3B21] transition-colors duration-100 hover:bg-[#FF5640]
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-nn-on-brand"
       >
         {paused ? (
           <PlayGlyph />
         ) : (
-          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 14 14" aria-hidden="true">
             <path d="M3 2h3v10H3zM8 2h3v10H8z" fill="currentColor" />
           </svg>
         )}
@@ -164,51 +188,83 @@ function Ticker() {
   );
 }
 
-function LatestRelease() {
-  const date = new Date(LATEST.released + 'T12:00:00').toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
+function Vinyl() {
   return (
-    <section id="music" aria-labelledby="latest-title" className="py-24 md:py-32 bg-nn-bg">
-      <Container className="grid gap-10 md:grid-cols-12 md:gap-10 items-center">
-        <a
-          href={LINKS.single}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Play IDGAF on Spotify"
-          className="group md:col-span-6 relative block aspect-square overflow-hidden rounded-nn shadow-e6
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-action focus-visible:ring-offset-4 focus-visible:ring-offset-nn-bg"
-        >
-          <img
-            src={LATEST.cover}
-            alt="IDGAF cover art: a cyan figure with three silhouettes and three suns above her head"
-            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-          />
-          <span
-            className="absolute bottom-5 left-5 h-14 w-14 flex items-center justify-center rounded-full bg-nn-action text-nn-on-action shadow-e5
-              scale-90 opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100 group-focus-visible:opacity-100"
-            aria-hidden="true"
-          >
-            <PlayGlyph />
-          </span>
-        </a>
+    <span
+      aria-hidden="true"
+      className="absolute top-[3%] left-[3%] h-[94%] w-[94%] rounded-full shadow-e6
+        translate-x-[22%] group-hover:translate-x-[46%] group-focus-visible:translate-x-[46%]
+        transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+      style={{
+        background:
+          'radial-gradient(circle, transparent 0 69%, rgba(237,235,230,0.10) 69.4%, transparent 70%), ' +
+          'repeating-radial-gradient(circle, #0d0d0d 0 2px, #222 2.5px 3.5px), #151515',
+        boxShadow: 'inset 0 0 0 2px rgba(237,235,230,0.08), 0 16px 32px rgba(0,0,0,0.5)',
+      }}
+    >
+      <span
+        className="absolute inset-[31%] rounded-full bg-cover bg-center"
+        style={{ backgroundImage: `url('${LATEST.cover}')` }}
+      />
+      <span className="absolute inset-[48.8%] rounded-full bg-nn-bg" />
+      <span
+        className="absolute inset-0 rounded-full"
+        style={{
+          background:
+            'conic-gradient(from 30deg, transparent 0 10%, rgba(255,255,255,0.08) 14%, transparent 20% 60%, rgba(255,255,255,0.06) 64%, transparent 70%)',
+        }}
+      />
+    </span>
+  );
+}
 
-        <div className="md:col-span-6 md:pl-6">
-          <Eyebrow>Latest single · {date}</Eyebrow>
-          <h2 id="latest-title" className="font-thunder text-nn-text text-[120px] leading-[96px] md:text-poster-lg">
+function LatestRelease() {
+  const d = new Date(LATEST.released + 'T12:00:00');
+  const date = `${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}.${d.getFullYear()}`;
+  return (
+    <section id="music" aria-labelledby="latest-title" className="relative py-24 md:py-40 bg-nn-bg overflow-hidden scroll-mt-16">
+      <Container className="grid gap-16 md:grid-cols-12 md:gap-10 items-center">
+        <div className="md:col-span-6 pr-[18%] md:pr-[14%]">
+          <a
+            href={LINKS.single}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Play IDGAF on Spotify"
+            className="group relative block aspect-square focus-visible:outline-none"
+            style={{ overflow: 'visible' }}
+          >
+            <Vinyl />
+            <span className="relative block h-full w-full overflow-hidden shadow-e6 group-focus-visible:ring-2 group-focus-visible:ring-nn-text group-focus-visible:ring-offset-4 group-focus-visible:ring-offset-nn-bg">
+              <img
+                src={LATEST.cover}
+                alt="IDGAF cover art: a cyan figure with three silhouettes and three suns above her head"
+                className="h-full w-full object-cover"
+              />
+              <span className="absolute bottom-4 left-4 flex items-center gap-2 bg-nn-bg/85 px-3 py-2 label text-nn-text backdrop-blur-sm">
+                <PlayGlyph className="text-nn-brand" /> Play
+              </span>
+            </span>
+          </a>
+        </div>
+
+        <div className="md:col-span-6">
+          <div className="flex items-center gap-3">
+            <span className="h-2 w-2 bg-nn-brand" aria-hidden="true" />
+            <Label>Latest single</Label>
+            <Label className="text-nn-subtle">{date}</Label>
+          </div>
+          <h2 id="latest-title" className="display mt-4 text-nn-text text-[min(22vw,96px)] md:text-[min(10.5vw,150px)]">
             {LATEST.title}
           </h2>
-          <blockquote className="mt-6 mb-0 mx-0 py-0 pr-0 border-l-2 border-nn-action pl-5 not-italic bg-transparent rounded-none text-body">
-            <p className="text-lead text-nn-text">
-              {LATEST.lyric[0]}
+          <blockquote className="mt-8 mb-0 mx-0 p-0 border-0 bg-transparent rounded-none not-italic">
+            <p className="text-[28px] leading-[34px] md:text-[36px] md:leading-[42px] font-semibold [font-stretch:110%] tracking-[-0.02em] text-nn-text">
+              “{LATEST.lyric[0]}
               <br />
-              {LATEST.lyric[1]}
+              {LATEST.lyric[1]}.”
             </p>
-            <footer className="mt-2 text-meta text-nn-subtle">First lines of IDGAF</footer>
+            <footer className="mt-3 label text-nn-subtle">Verse one</footer>
           </blockquote>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-10 flex flex-wrap items-center gap-3">
             <Button size="lg" href={LINKS.single}>
               <PlayGlyph /> Play on Spotify
             </Button>
@@ -233,44 +289,48 @@ function LatestRelease() {
 
 function About() {
   return (
-    <section aria-labelledby="about-title" className="py-24 md:py-32 bg-nn-surface">
-      <Container className="grid gap-12 md:grid-cols-12 md:gap-10">
-        <div className="md:col-span-5">
-          <Eyebrow>About</Eyebrow>
-          <h2 id="about-title" className="font-thunder text-nn-text text-poster-sm md:text-poster">
-            Built in Dallas. Played loud.
-          </h2>
-          <p className="mt-6 text-lead text-nn-muted max-w-[460px]">
-            Northern National is an alternative rock band from Dallas, TX. Since 2016 we've been writing songs with driving
-            guitars, atmospheric layers and honest lyrics about the stuff people don't always say out loud.
+    <section aria-labelledby="about-title" className="py-24 md:py-40 bg-nn-bg border-t border-nn-line">
+      <Container>
+        <Label className="mb-6">About</Label>
+        <h2 id="about-title" className="display text-nn-text text-[44px] md:text-[clamp(56px,7.2vw,112px)] max-w-[14ch]">
+          Loud, honest rock <span className="text-nn-brand">from Dallas.</span>
+        </h2>
+        <div className="mt-10 md:mt-14 grid gap-10 md:grid-cols-12">
+          <p className="md:col-span-5 md:col-start-8 text-lead text-nn-muted">
+            Northern National has been writing together since 2016: driving guitars, atmospheric layers and lyrics about
+            the stuff people don't always say out loud. Turn it up.
           </p>
-          <div className="mt-8">
-            <Button variant="tertiary" href={LINKS.artist}>
-              Follow us on Spotify <Arrow external />
-            </Button>
-          </div>
         </div>
 
-        <div className="md:col-span-7 grid grid-cols-6 gap-3 md:gap-4 self-start">
-          <img
-            src="/images/nn-boys-show.jpg"
-            alt="The band mid-song on stage"
-            loading="lazy"
-            className="col-span-6 aspect-[16/10] w-full object-cover rounded-nn"
-          />
-          {[
-            ['/images/rossi.jpg', 'Guitarist playing under blue light', 'object-center'],
-            ['/images/anthony.jpg', 'Drummer behind the kit', 'object-center'],
-            ['/images/dylan.jpg', 'Bassist playing under red light', 'object-right'],
-          ].map(([src, alt, pos]) => (
-            <img
-              key={src}
-              src={src}
-              alt={alt}
-              loading="lazy"
-              className={`col-span-2 aspect-[3/4] w-full object-cover rounded-nn ${pos}`}
-            />
+        <div className="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-12 md:grid-rows-[repeat(2,minmax(0,1fr))] gap-3 md:gap-4 md:h-[760px]">
+          {PHOTOS.map((p, i) => (
+            <figure
+              key={p.src}
+              className={`group relative overflow-hidden bg-nn-surface m-0 ${
+                i === 0
+                  ? 'col-span-2 aspect-[4/5] md:aspect-auto md:col-span-6 md:row-span-2'
+                  : i === 3
+                  ? 'col-span-2 aspect-[16/9] md:aspect-auto md:col-span-6'
+                  : 'aspect-[3/4] md:aspect-auto md:col-span-3'
+              }`}
+            >
+              <img
+                src={p.src}
+                alt={p.alt}
+                loading="lazy"
+                className={`photo-bw h-full w-full object-cover ${p.pos} transition-[filter,transform] duration-500 ease-out
+                  group-hover:[filter:none] group-hover:scale-[1.03]`}
+              />
+              <figcaption className="absolute left-3 bottom-3 label text-nn-text bg-nn-bg/80 px-2 py-1">
+                {String(i + 1).padStart(2, '0')} / {p.tag}
+              </figcaption>
+            </figure>
           ))}
+        </div>
+        <div className="mt-10">
+          <Button variant="tertiary" href={LINKS.artist}>
+            Follow us on Spotify <Arrow external />
+          </Button>
         </div>
       </Container>
     </section>
@@ -283,60 +343,64 @@ function Tour() {
     reduce
       ? {}
       : {
-          initial: { opacity: 0, y: 40 },
+          initial: { opacity: 0, y: 60 },
           whileInView: { opacity: 1, y: 0 },
           viewport: { once: true, margin: '-80px' },
           transition: { duration: 0.8, ease, delay: i * 0.15 },
         };
 
   return (
-    <section id="tour" aria-labelledby="tour-title" className="py-24 md:py-32 bg-nn-bg scroll-mt-20">
+    <section
+      id="tour"
+      aria-labelledby="tour-title"
+      className="py-24 md:py-40 bg-nn-bg border-t border-nn-line scroll-mt-16 overflow-hidden"
+    >
       <Container>
-        <Eyebrow>Tour</Eyebrow>
+        <Label className="mb-6">Tour</Label>
         {SHOWS.length === 0 ? (
-          <div className="grid gap-10 md:grid-cols-12 md:items-end">
-            <h2
-              id="tour-title"
-              className="md:col-span-7 font-thunder text-nn-text text-[112px] leading-[88px] md:text-[200px] md:leading-[160px]"
-            >
+          <>
+            <h2 id="tour-title" className="display text-nn-text text-[clamp(64px,16vw,248px)]">
               <motion.span {...reveal(0)} className="block">
-                No dates
+                No dates.
               </motion.span>
-              <motion.span {...reveal(1)} className="block text-nn-text/45">
-                yet.
+              <motion.span {...reveal(1)} className="block text-nn-brand">
+                Yet.
               </motion.span>
             </h2>
-            <motion.div {...reveal(2)} className="md:col-span-5 md:pb-4">
-              <p className="text-lead text-nn-text mb-6 max-w-[420px]">
+            <motion.div {...reveal(2)} className="mt-12 md:mt-16 grid gap-8 md:grid-cols-12 md:items-start">
+              <p className="md:col-span-5 text-lead text-nn-text">
                 Dallas always hears first. Get an email the day new shows are announced.
               </p>
-              <ShowAlertsForm id="tour-alerts" />
+              <div className="md:col-span-6 md:col-start-7">
+                <ShowAlertsForm id="tour-alerts" />
+              </div>
             </motion.div>
-          </div>
+          </>
         ) : (
           <>
-            <h2 id="tour-title" className="font-thunder text-nn-text text-poster-sm md:text-poster mb-10">
-              Upcoming shows
+            <h2 id="tour-title" className="display text-nn-text text-[56px] md:text-[112px] mb-10">
+              On the road
             </h2>
-            <ul className="divide-y divide-nn-line border-y border-nn-line">
+            <ul className="border-t border-nn-line">
               {SHOWS.map((s, i) => {
                 const d = new Date(s.date + 'T12:00:00');
                 return (
                   <motion.li
                     key={s.date + s.city}
                     {...reveal(i)}
-                    className="grid grid-cols-[72px_1fr] md:grid-cols-[120px_1fr_auto] items-center gap-x-6 gap-y-3 py-6"
+                    className="group grid grid-cols-[80px_1fr] md:grid-cols-[140px_1fr_auto] items-center gap-x-6 gap-y-4 py-6 border-b border-nn-line"
                   >
-                    <time dateTime={s.date} className="font-thunder text-nn-text text-[40px] leading-[36px]">
-                      {d.toLocaleDateString('en-US', { month: 'short' })}
-                      <span className="block text-nn-muted">{d.getDate()}</span>
+                    <time dateTime={s.date} className="label text-nn-muted">
+                      {d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      <span className="block text-nn-subtle">{d.toLocaleDateString('en-US', { weekday: 'short' })}</span>
                     </time>
                     <div>
-                      <p className="font-thunder text-nn-text text-[56px] leading-[48px] md:text-poster md:leading-[84px]">
+                      <p className="display text-nn-text text-[40px] md:text-[72px] group-hover:text-nn-brand transition-colors duration-300">
                         {s.city}
-                        <span className="text-nn-subtle text-[24px] align-top ml-2">{s.region}</span>
                       </p>
-                      <p className="text-body text-nn-muted mt-1">{s.venue}</p>
+                      <p className="mt-2 text-body text-nn-muted">
+                        {s.venue} · {s.region}
+                      </p>
                     </div>
                     <div className="col-span-2 md:col-span-1">
                       {s.soldOut ? (
@@ -362,13 +426,13 @@ function Tour() {
 
 function News() {
   return (
-    <section aria-labelledby="news-title" className="py-24 md:py-32 bg-nn-bg">
+    <section aria-labelledby="news-title" className="py-24 md:py-40 bg-nn-bg border-t border-nn-line">
       <Container>
-        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between mb-10">
+        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between mb-12">
           <div>
-            <Eyebrow>News</Eyebrow>
-            <h2 id="news-title" className="font-thunder text-nn-text text-poster-sm md:text-poster">
-              From the band
+            <Label className="mb-6">News</Label>
+            <h2 id="news-title" className="display text-nn-text text-[min(10.5vw,56px)] md:text-[112px]">
+              Dispatches
             </h2>
           </div>
           <Button variant="secondary" to="/blog" className="shrink-0">
@@ -393,7 +457,6 @@ export default function Home() {
     e.preventDefault();
     if (lenis) lenis.scrollTo(el, { offset: -40, duration: 1.2 });
     else el.scrollIntoView({ behavior: 'smooth' });
-    // Move focus to the field for keyboard users once the scroll settles
     setTimeout(() => el.querySelector('input[type="email"]')?.focus({ preventScroll: true }), 1250);
   };
 
