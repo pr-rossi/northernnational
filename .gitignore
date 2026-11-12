@@ -28,3 +28,5 @@ yarn-error.log*
 
 # vercel
 .vercel
+# generated from post frontmatter by scripts/build-content-index.js
+/public/content/blog/index.json

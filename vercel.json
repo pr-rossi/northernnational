@@ -1,5 +1,22 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "build",
-  "framework": "create-react-app"
+  "framework": "create-react-app",
+  "redirects": [
+    {
+      "source": "/blog/post-1",
+      "destination": "/blog/spotlight-on-northern-national-dallas-s-alternative-rock-phenomenon",
+      "permanent": true
+    },
+    {
+      "source": "/blog/post-2",
+      "destination": "/blog/northern-national-releases-poignant-new-single-idgaf",
+      "permanent": true
+    },
+    {
+      "source": "/blog/post-3",
+      "destination": "/blog/northern-national-crafting-new-sounds-for-2025",
+      "permanent": true
+    }
+  ]
 }
