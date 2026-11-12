@@ -1,10 +1,12 @@
 ---
-title: "Northern National: Crafting New Sounds for 2025"
-date: "2024-11-13"
-coverImage: "/images/blog/post-3/coverImage.jpg"
-excerpt: "Northern National is back in the studio, gearing up to release new music at the start of 2025, including a much-anticipated single and an EP."
+title: 'Northern National: Crafting New Sounds for 2025'
+date: 2024-11-13
+published: true
+coverImage: /images/blog/northern-national-crafting-new-sounds-for-2025/coverImage.jpg
+excerpt: >-
+  Northern National is back in the studio, gearing up to release new music at
+  the start of 2025, including a much-anticipated single and an EP.
 ---
-
 As the leaves change and 2024 winds down, Northern National is heating things up in the studio, crafting what promises to be their most ambitious projects yet. The Dallas-based alternative rock band is currently deep in the writing and recording process, with plans to drop a brand-new single at the start of 2025 followed closely by an exciting new EP.
 
 ## A Glimpse Into the Creative Process
@@ -27,9 +29,10 @@ The band has been sharing snippets of their recording sessions on social media, 
 
 For updates on the single's release, the EP, and possible sneak peeks, fans should keep an eye on Northern National’s [official website](https://www.northernnationalmusic.com) and their social media pages.
 
-![Band Working](/images/blog/post-3/nn-staring.jpg)
+![Band Working](/images/blog/northern-national-crafting-new-sounds-for-2025/nn-staring.jpg)
 
 As 2025 approaches, the anticipation builds not just for the new single and EP but for what's next in the evolving saga of Northern National. Stay connected, and be the first to hear the fresh sounds of Northern National as they set the stage for another exciting chapter in their musical journey.
 
 ---
+
 Follow us for more music updates and band reviews at [NN Updates](https://www.northernnationalmusic.com/blog).
