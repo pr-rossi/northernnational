@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { showToast } from '../components/ui/Toast';
 import Button, { Arrow } from '../components/ui/Button';
 import { Container, Label } from '../components/ui/Layout';
 import { getMerchEntry, imageForVariant, normalize } from '../data/merch';
@@ -171,7 +171,12 @@ function ProductDetails({ id: idProp }) {
       window.location.href = url;
     } catch (err) {
       console.error('Error processing buy now:', err);
-      toast.error("Sorry, checkout didn't open. Please try again.");
+      showToast({
+        tone: 'error',
+        eyebrow: 'Checkout',
+        title: 'That didn’t go through.',
+        body: 'Checkout couldn’t open, and you weren’t charged. Try again in a moment.',
+      });
       setBuying(false);
     }
   };
@@ -183,7 +188,6 @@ function ProductDetails({ id: idProp }) {
 
   return (
       <div className="min-h-screen bg-nn-bg pt-32 md:pt-40 pb-24 md:pb-40">
-        <Toaster position="top-center" toastOptions={{ style: { background: '#EDEBE6', color: '#0B0B0B', borderRadius: '2px' } }} />
         <Container>
           <BackLink />
 
