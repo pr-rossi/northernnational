@@ -1,0 +1,17 @@
+---
+// The content editor. Keystatic handles its own routes under /keystatic (see vercel.json rewrite).
+import KeystaticAdmin from '../views/KeystaticAdmin.jsx';
+---
+
+<!doctype html>
+<html lang="en" class="keystatic">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Editor · Northern National</title>
+  </head>
+  <body>
+    <KeystaticAdmin client:only="react" />
+  </body>
+</html>

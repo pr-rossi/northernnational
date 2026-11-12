@@ -8,7 +8,7 @@ export default function useProducts() {
 
   useEffect(() => {
     let alive = true;
-    fetch(`${process.env.REACT_APP_API_URL || ''}/api/products`)
+    fetch(`${import.meta.env.REACT_APP_API_URL || ''}/api/products`)
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
       .then((d) => alive && setProducts(mergeProducts(Array.isArray(d?.result) ? d.result : [])))
       .catch(() => alive && setError(true));

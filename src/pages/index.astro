@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { Hero, Ticker, LatestRelease, About, News } from '../views/Home.jsx';
+import TourBlock from '../components/TourBlock.jsx';
+import MerchRail from '../components/MerchRail.jsx';
+import { getPosts, summarize } from '../lib/posts';
+
+const posts = (await getPosts()).slice(0, 3).map(summarize);
+---
+
+<Base>
+  <Hero client:load />
+  <Ticker client:visible />
+  <LatestRelease />
+  <About />
+  <TourBlock client:visible />
+  <MerchRail client:visible />
+  <News posts={posts} />
+</Base>

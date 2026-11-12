@@ -1,0 +1,19 @@
+---
+// One static page per product in Keystatic's Merch list, plus a "fallback" page that
+// Vercel serves for any other product ID (the page reads the ID from the URL).
+import Base from '../../layouts/Base.astro';
+import ProductDetails from '../../views/ProductDetails.jsx';
+
+export function getStaticPaths() {
+  const entries = Object.values(import.meta.glob('../../content/merch/*.json', { eager: true, import: 'default' }));
+  const ids = entries.map((e) => String(e.printfulId)).filter(Boolean);
+  return [...ids, 'fallback'].map((id) => ({ params: { id }, props: { entry: entries.find((e) => String(e.printfulId) === id) } }));
+}
+
+const { id } = Astro.params;
+const { entry } = Astro.props;
+---
+
+<Base title={entry?.name || 'Merch'} image={entry?.images?.[0]?.image}>
+  <ProductDetails client:only="react" id={id} />
+</Base>

@@ -1,0 +1,8 @@
+---
+import Base from '../layouts/Base.astro';
+import TourBlock from '../components/TourBlock.jsx';
+---
+
+<Base title="Tour" description="Northern National tour dates. Get an email the day new shows are announced.">
+  <TourBlock client:load as="h1" page />
+</Base>

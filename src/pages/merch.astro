@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import MerchSection from '../components/MerchSection.jsx';
+import { PageHeader } from '../components/ui/Layout.jsx';
+---
+
+<Base title="Merch" description="Northern National shirts, hats and more. Printed to order and shipped to you.">
+  <PageHeader
+    label="Merch"
+    title="Wear it loud"
+    intro="Shirts, hoodies and the rest of the merch table. Printed to order and shipped to you."
+  />
+  <MerchSection client:load />
+</Base>

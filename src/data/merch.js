@@ -1,9 +1,9 @@
 // Merch entries edited in Keystatic (Merch). Each is a JSON file in src/content/merch/,
 // linked to a Printful product by ID. Printful stays the source for prices, sizes and checkout;
 // these entries control the name, order, visibility and mockup images on the site.
-const ctx = require.context('../content/merch', false, /\.json$/);
+const files = import.meta.glob('../content/merch/*.json', { eager: true, import: 'default' });
 
-const ENTRIES = ctx.keys().map((key) => ctx(key));
+const ENTRIES = Object.values(files);
 const byId = new Map(ENTRIES.filter((e) => e && e.printfulId).map((e) => [String(e.printfulId).trim(), e]));
 
 export const normalize = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');

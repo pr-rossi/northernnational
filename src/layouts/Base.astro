@@ -1,0 +1,84 @@
+---
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
+import '../styles/global.css';
+import Navigation from '../components/Navigation.jsx';
+import Footer from '../components/Footer.jsx';
+import CheckoutNotice from '../components/CheckoutNotice.jsx';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description = 'Northern National is an alternative rock band from Dallas, TX. New single IDGAF out now.',
+  image = '/images/nn-og.jpg',
+} = Astro.props;
+const pageTitle = title ? `${title} · Northern National` : 'Northern National · Alternative rock from Dallas, TX';
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0B0B0B" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" type="image/svg+xml" href="/images/favicon-light.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47W02TXQRW" is:inline></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-47W02TXQRW');
+    </script>
+  </head>
+  <body class="bg-nn-bg text-nn-text">
+    <div class="grain" aria-hidden="true"></div>
+    <Navigation client:load pathname={pathname} />
+    <main>
+      <slot />
+    </main>
+    <Footer client:visible pathname={pathname} />
+    <CheckoutNotice client:idle />
+
+    <script>
+      // Smooth scrolling (skipped for people who prefer reduced motion).
+      import Lenis from 'lenis';
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const lenis = new Lenis();
+        window.__lenis = lenis;
+        const raf = (time) => {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        };
+        requestAnimationFrame(raf);
+      }
+    </script>
+  </body>
+</html>

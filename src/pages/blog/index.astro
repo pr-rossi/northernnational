@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import FeaturedBlogs from '../../components/FeaturedBlogs.jsx';
+import { Container, PageHeader } from '../../components/ui/Layout.jsx';
+import { getPosts, summarize } from '../../lib/posts';
+
+const posts = (await getPosts()).map(summarize);
+---
+
+<Base title="News" description="New music, studio sessions and whatever else is happening with Northern National.">
+  <PageHeader label="News" title="Dispatches" intro="New music, studio sessions and whatever else is happening with the band." />
+  <Container className="pb-24 md:pb-40">
+    <FeaturedBlogs posts={posts} />
+  </Container>
+</Base>

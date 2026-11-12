@@ -1,0 +1,77 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { Arrow } from '../../components/ui/Button.jsx';
+import { Container, Label, formatDate } from '../../components/ui/Layout.jsx';
+import { getPosts } from '../../lib/posts';
+import '../../styles/blog.css';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, next: posts.length > 1 ? posts[(i + 1) % posts.length] : null },
+  }));
+}
+
+const { post, next } = Astro.props;
+const { Content } = await render(post);
+const date = post.data.date.toISOString().slice(0, 10);
+---
+
+<Base title={post.data.title} description={post.data.excerpt} image={post.data.coverImage}>
+  <article class="article min-h-screen bg-nn-bg pt-32 md:pt-40 pb-24 md:pb-40">
+    <Container>
+      <a
+        href="/blog"
+        class="label inline-flex items-center gap-2 text-nn-muted hover:text-nn-text transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-text rounded-nn"
+      >
+        <Arrow className="rotate-180" /> All news
+      </a>
+    </Container>
+
+    <Container className="mt-10">
+      <div class="flex items-center gap-3">
+        <span class="h-2 w-2 bg-nn-brand" aria-hidden="true"></span>
+        <Label as="time" dateTime={date}>{formatDate(date)}</Label>
+      </div>
+      <h1 class="display mt-6 max-w-[18ch] text-nn-text text-[min(9vw,40px)] md:text-[clamp(48px,5.6vw,88px)] leading-[0.92]">
+        {post.data.title}
+      </h1>
+      {post.data.excerpt && <p class="mt-8 max-w-[640px] text-lead text-nn-muted">{post.data.excerpt}</p>}
+    </Container>
+
+    {
+      post.data.coverImage && (
+        <div class="mt-12 md:mt-16 mx-auto max-w-7xl px-5 md:px-6">
+          <img src={post.data.coverImage} alt="" class="w-full max-h-[78vh] aspect-[16/9] object-cover rounded-nn" />
+        </div>
+      )
+    }
+
+    <Container className="mt-16 md:mt-24">
+      <div class="post-body mx-auto max-w-[680px]">
+        <Content />
+      </div>
+    </Container>
+
+    {
+      next && next.id !== post.id && (
+        <Container className="mt-24 md:mt-32">
+          <a
+            href={`/blog/${next.id}`}
+            class="group block border-y border-nn-line py-10 md:py-14 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-text"
+          >
+            <Label className="mb-4">Next dispatch</Label>
+            <span class="flex items-end justify-between gap-6">
+              <span class="display text-nn-text text-[28px] md:text-[56px] leading-[0.95] max-w-[20ch] transition-colors duration-200 group-hover:text-nn-brand">
+                {next.data.title}
+              </span>
+              <Arrow className="h-8 w-8 shrink-0 text-nn-text transition-transform duration-300 group-hover:translate-x-2" />
+            </span>
+          </a>
+        </Container>
+      )
+    }
+  </article>
+</Base>

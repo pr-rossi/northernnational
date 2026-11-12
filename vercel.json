@@ -1,7 +1,7 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "build",
-  "framework": "create-react-app",
+  "outputDirectory": "dist",
+  "framework": "astro",
   "redirects": [
     {
       "source": "/blog/post-1",
@@ -18,5 +18,16 @@
       "destination": "/blog/northern-national-crafting-new-sounds-for-2025",
       "permanent": true
     }
-  ]
+  ],
+  "rewrites": [
+    {
+      "source": "/keystatic/:path*",
+      "destination": "/keystatic"
+    },
+    {
+      "source": "/product/:id",
+      "destination": "/product/fallback"
+    }
+  ],
+  "trailingSlash": false
 }
