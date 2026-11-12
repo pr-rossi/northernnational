@@ -10,6 +10,6 @@ const posts = (await getPosts()).map(summarize);
 <Base title="News" description="New music, studio sessions and whatever else is happening with Northern National.">
   <PageHeader label="News" title="Dispatches" intro="New music, studio sessions and whatever else is happening with the band." />
   <Container className="pb-24 md:pb-40">
-    <FeaturedBlogs posts={posts} />
+    <FeaturedBlogs posts={posts} animate />
   </Container>
 </Base>

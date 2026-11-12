@@ -16,7 +16,7 @@ function BackLink() {
   return (
     <a
       href="/merch"
-      className="label inline-flex items-center gap-2 text-nn-muted hover:text-nn-text transition-colors duration-200
+      className="intro-rise label inline-flex items-center gap-2 text-nn-muted hover:text-nn-text transition-colors duration-200
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-text rounded-nn"
     >
       <Arrow className="rotate-180" /> All merch
@@ -199,7 +199,7 @@ function ProductDetails({ id: idProp }) {
           )}
 
           {!loading && (error || !product) && (
-            <div className="mt-8 rounded-nn bg-nn-surface p-8 md:p-12 max-w-[720px]">
+            <div className="intro-rise mt-8 rounded-nn bg-nn-surface p-8 md:p-12 max-w-[720px]" style={{ '--d': '120ms' }}>
               <p className="display text-nn-text text-[32px] md:text-[48px]">Lost in the crowd.</p>
               <p className="mt-4 text-lead text-nn-muted">
                 We couldn't load this item. It may be sold out, or the store is having a moment.
@@ -215,7 +215,7 @@ function ProductDetails({ id: idProp }) {
           {!loading && product && !error && (
             <div className="mt-8 grid gap-10 md:gap-16 md:grid-cols-12 md:items-start">
               <div className="md:col-span-7">
-                <div className="relative aspect-square overflow-hidden rounded-nn bg-nn-surface">
+                <div className="intro-media relative aspect-square overflow-hidden rounded-nn bg-nn-surface">
                   {current && (
                     <img
                       key={current.src}
@@ -226,7 +226,7 @@ function ProductDetails({ id: idProp }) {
                   )}
                 </div>
                 {gallery.length > 1 && (
-                  <div className="mt-3 flex gap-3 overflow-x-auto" role="tablist" aria-label="Product photos">
+                  <div className="intro-rise mt-3 flex gap-3 overflow-x-auto" role="tablist" aria-label="Product photos" style={{ '--d': '300ms' }}>
                     {gallery.map((g, i) => (
                       <button
                         key={g.src}
@@ -247,19 +247,21 @@ function ProductDetails({ id: idProp }) {
               </div>
 
               <div className="md:col-span-5 md:sticky md:top-28">
-                <Label className="mb-4">Merch</Label>
-                <h1 className="display text-nn-text text-[40px] md:text-[56px]">{title}</h1>
+                <Label className="intro-rise mb-4" style={{ '--d': '80ms' }}>Merch</Label>
+                <h1 className="intro-title display text-nn-text text-[40px] md:text-[56px]" style={{ '--d': '160ms' }}>
+                  {title}
+                </h1>
                 {price && (
-                  <p className="mt-6 text-h4 font-bold [font-stretch:112%] text-nn-text">
+                  <p className="intro-rise mt-6 text-h4 font-bold [font-stretch:112%] text-nn-text" style={{ '--d': '300ms' }}>
                     <span className="text-lead text-nn-muted align-top mr-0.5">$</span>
                     {parseFloat(price).toFixed(2)}
                   </p>
                 )}
                 {(entry?.description || product.description) && (
-                  <p className="mt-6 text-body text-nn-muted whitespace-pre-line">{entry?.description || product.description}</p>
+                  <p className="intro-rise mt-6 text-body text-nn-muted whitespace-pre-line" style={{ '--d': '360ms' }}>{entry?.description || product.description}</p>
                 )}
 
-                <div className="mt-8 space-y-6">
+                <div className="intro-rise mt-8 space-y-6" style={{ '--d': '420ms' }}>
                   {colors.length > 1 && (
                     <OptionPicker
                       legend="Color"
@@ -289,7 +291,7 @@ function ProductDetails({ id: idProp }) {
                   )}
                 </div>
 
-                <div className="mt-8">
+                <div className="intro-rise mt-8" style={{ '--d': '520ms' }}>
                   <Button size="lg" className="w-full" onClick={handleBuyNow} loading={buying} disabled={!selectedVariant}>
                     {selectedVariant ? 'Buy now' : 'That combo is sold out'}
                     {price && selectedVariant && <span className="font-normal opacity-60">· {money(price)}</span>}

@@ -21,9 +21,18 @@ export function PageHeader({ label, title, intro, children }) {
   return (
     <header className="pt-36 md:pt-48 pb-12 md:pb-16">
       <Container>
-        <Label className="mb-6">{label}</Label>
-        <h1 className="display text-nn-text text-[min(13vw,64px)] md:text-[clamp(72px,10vw,160px)]">{title}</h1>
-        {intro && <p className="mt-8 max-w-[560px] text-lead text-nn-muted">{intro}</p>}
+        <Label className="mb-6 intro-rise">{label}</Label>
+        <h1
+          className="intro-title display text-nn-text text-[min(13vw,64px)] md:text-[clamp(72px,10vw,160px)]"
+          style={{ '--d': '120ms' }}
+        >
+          {title}
+        </h1>
+        {intro && (
+          <p className="intro-rise mt-8 max-w-[560px] text-lead text-nn-muted" style={{ '--d': '320ms' }}>
+            {intro}
+          </p>
+        )}
         {children}
       </Container>
     </header>

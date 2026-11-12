@@ -3,15 +3,19 @@ import { Arrow } from './ui/Button';
 import { formatDate } from './ui/Layout';
 
 // Static list of posts (rendered at build time from the blog content collection).
-export default function FeaturedBlogs({ posts = [] }) {
+export default function FeaturedBlogs({ posts = [], animate = false }) {
   if (posts.length === 0) {
     return <p className="text-body text-nn-muted">No news yet. New posts show up here first.</p>;
   }
 
   return (
     <ul className="divide-y divide-nn-line border-y border-nn-line">
-      {posts.map((post) => (
-        <li key={post.slug}>
+      {posts.map((post, i) => (
+        <li
+          key={post.slug}
+          className={animate ? 'intro-rise' : undefined}
+          style={animate ? { '--d': `${420 + Math.min(i, 8) * 80}ms` } : undefined}
+        >
           <a
             href={`/blog/${post.slug}`}
             className="group grid grid-cols-[1fr_auto] sm:grid-cols-[140px_1fr_auto] items-center gap-x-6 gap-y-1 py-6

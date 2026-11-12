@@ -62,3 +62,36 @@ html.keystatic #root {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* ---------------------------------------------------------------------------
+   Page intro animations (match the homepage hero: label -> title -> content).
+   Set the stagger with style="--d: 120ms". Off for reduced motion.
+   ------------------------------------------------------------------------- */
+@keyframes intro-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes intro-title {
+  from { clip-path: inset(0 0 100% 0); transform: translateY(35%); }
+  to { clip-path: inset(-20% -5% -25% -5%); transform: none; }
+}
+@keyframes intro-media {
+  from { opacity: 0; transform: scale(1.04); clip-path: inset(6% 6% 6% 6%); }
+  to { opacity: 1; transform: none; clip-path: inset(0); }
+}
+.intro-rise,
+.intro-title,
+.intro-media {
+  animation-duration: 800ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+  animation-delay: var(--d, 0ms);
+}
+.intro-rise { animation-name: intro-rise; }
+.intro-title { animation-name: intro-title; animation-duration: 900ms; }
+.intro-media { animation-name: intro-media; animation-duration: 1100ms; }
+@media (prefers-reduced-motion: reduce) {
+  .intro-rise,
+  .intro-title,
+  .intro-media { animation: none; }
+}
