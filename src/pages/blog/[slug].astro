@@ -30,6 +30,15 @@ const share = {
   facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
 };
 const cover = post.data.coverImage;
+
+// Headline size from the title itself: longer titles get smaller type, and the longest word
+// always fits its column (Archivo Expanded Black is ~0.92em per letter).
+const title = post.data.title;
+const longest = Math.max(...title.split(/\s+/).map((w) => w.length), 1);
+const maxPx = title.length <= 30 ? 80 : title.length <= 60 ? 56 : 46;
+const colPx = cover ? 680 : 1080; // headline column width at full desktop size
+const titleDesktop = `clamp(32px, min(${(46 / (0.92 * longest)).toFixed(2)}vw, ${Math.floor(colPx / (0.92 * longest))}px), ${maxPx}px)`;
+const titleMobile = `min(${title.length <= 30 ? 10 : title.length <= 60 ? 8.5 : 7.5}vw, calc((100vw - 40px) / ${(0.92 * longest).toFixed(2)}))`;
 ---
 
 <Base title={post.data.title} description={post.data.excerpt} image={cover}>
@@ -56,8 +65,8 @@ const cover = post.data.coverImage;
             <Label className="text-nn-subtle">{minutes} min read</Label>
           </div>
           <h1
-            style="--d: 160ms"
-            class="intro-title display mt-8 text-nn-text text-[min(10vw,44px)] md:text-[clamp(48px,5.4vw,96px)] leading-[0.92]"
+            style={`--d: 160ms; --title-m: ${titleMobile}; --title-d: ${titleDesktop}`}
+            class="post-title intro-title display mt-8 text-nn-text leading-[0.94]"
           >
             {post.data.title}
           </h1>
@@ -150,7 +159,7 @@ const cover = post.data.coverImage;
             <span class="relative flex min-h-[320px] md:min-h-[420px] flex-col justify-between gap-10 p-8 md:p-12">
               <span class="label text-nn-muted">Next dispatch</span>
               <span class="flex items-end justify-between gap-6">
-                <span class="display text-nn-text text-[32px] md:text-[64px] leading-[0.92] max-w-[16ch] transition-colors duration-300 group-hover:text-nn-brand">
+                <span class="display text-nn-text text-[min(8vw,32px)] md:text-[clamp(32px,3.6vw,52px)] leading-[0.94] max-w-[20ch] transition-colors duration-300 group-hover:text-nn-brand">
                   {next.data.title}
                 </span>
                 <span class="shrink-0 h-14 w-14 md:h-16 md:w-16 rounded-full bg-nn-text text-nn-bg flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">

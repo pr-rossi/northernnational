@@ -15,6 +15,12 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
 }
 
+/* Headline: size is set per post from its length (see [slug].astro). */
+.post-title { font-size: var(--title-m); text-wrap: balance; }
+@media (min-width: 768px) {
+  .post-title { font-size: var(--title-d); }
+}
+
 /* Body copy */
 .post-body {
   max-width: 680px;
