@@ -2,7 +2,8 @@
 title: 'Spotlight on Northern National: Dallas''s Alternative Rock Phenomenon'
 date: 2024-11-12
 published: true
-coverImage: /images/blog/post-1/coverImage.jpg
+coverImage: >-
+  /images/blog/spotlight-on-northern-national-dallas-s-alternative-rock-phenomenon/coverImage.jpg
 excerpt: >-
   Dive into the story of Northern National, a band from Dallas that's making
   waves in the alternative rock scene with their unique sound and electrifying
@@ -28,7 +29,7 @@ Each track showcases the band's ability to blend intense emotions with upbeat rh
 
 ## Live Performances
 
-![Live Performance](/images/blog/post-1/the-boys-show.jpeg)
+![Live Performance](/images/blog/spotlight-on-northern-national-dallas-s-alternative-rock-phenomenon/the-boys-show.jpeg)
 
 Known for their charismatic stage presence, Northern National transforms each live show into an unforgettable experience. Whether it's a small intimate venue or a large outdoor festival, they connect with the audience in a way few bands can. Their live performances are often described as "electric," with a palpable energy that flows from the stage to every corner of the crowd.
 
