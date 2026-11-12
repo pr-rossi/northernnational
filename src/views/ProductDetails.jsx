@@ -92,7 +92,7 @@ function ProductDetails({ id: idProp }) {
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const response = await fetch(`${import.meta.env.REACT_APP_API_URL || ''}/api/product-details?id=${id}`);
+        const response = await fetch(`/api/product-details?id=${encodeURIComponent(id)}`);
         const data = await response.json();
         if (!response.ok || !data.result) throw new Error('Failed to fetch product details');
         const variants = data.result.sync_variants || [];
