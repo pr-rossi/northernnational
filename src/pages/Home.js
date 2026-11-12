@@ -30,10 +30,10 @@ const LATEST = {
 const TICKER = ['IDGAF out now', 'Dallas, Texas', 'Loud since 2016', 'New dates soon'];
 
 const PHOTOS = [
-  { src: '/images/nn-boys-show.jpg', alt: 'The band mid-song on stage', tag: 'Live', pos: 'object-center' },
-  { src: '/images/rossi.jpg', alt: 'Guitarist playing under blue light', tag: 'Guitar', pos: 'object-center' },
-  { src: '/images/anthony.jpg', alt: 'Drummer behind the kit', tag: 'Drums', pos: 'object-center' },
-  { src: '/images/dylan.jpg', alt: 'Bassist playing under red light', tag: 'Bass', pos: 'object-right' },
+  { src: '/images/nn-boys-show.jpg', alt: 'Northern National mid-song on stage', name: 'Live', pos: 'object-center' },
+  { src: '/images/rossi.jpg', alt: 'Rossi playing guitar under blue light', name: 'Rossi', role: 'Guitar, vox', pos: 'object-center' },
+  { src: '/images/anthony.jpg', alt: 'Anthony behind the drum kit', name: 'Anthony', role: 'Drums', pos: 'object-center' },
+  { src: '/images/dylan.jpg', alt: 'Dylan playing bass under red light', name: 'Dylan', role: 'Bass, guitar, vox', pos: 'object-right' },
 ];
 
 const ease = [0.22, 1, 0.36, 1];
@@ -287,8 +287,8 @@ function About() {
         </h2>
         <div className="mt-10 md:mt-14 grid gap-10 md:grid-cols-12">
           <p className="md:col-span-5 md:col-start-8 text-lead text-nn-muted">
-            Northern National has been writing together since 2016: driving guitars, atmospheric layers and lyrics about
-            the stuff people don't always say out loud. Turn it up.
+            Rossi, Anthony and Dylan have been writing together as Northern National since 2016: driving guitars,
+            atmospheric layers and lyrics about the stuff people don't always say out loud. Turn it up.
           </p>
         </div>
 
@@ -311,8 +311,10 @@ function About() {
                 className={`photo-bw h-full w-full object-cover ${p.pos} transition-[filter,transform] duration-500 ease-out
                   group-hover:[filter:none] group-hover:scale-[1.03]`}
               />
-              <figcaption className="absolute left-3 bottom-3 label text-nn-text bg-nn-bg/80 px-2 py-1">
-                {String(i + 1).padStart(2, '0')} / {p.tag}
+              <figcaption className="absolute left-3 bottom-3 flex items-center gap-2 bg-nn-bg/85 px-2 py-1">
+                <span className="label text-nn-subtle">{String(i + 1).padStart(2, '0')}</span>
+                <span className="label text-nn-text">{p.name}</span>
+                {p.role && <span className="label text-nn-muted">/ {p.role}</span>}
               </figcaption>
             </figure>
           ))}
