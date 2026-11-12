@@ -2,7 +2,8 @@
 title: Northern National Releases Poignant New Single 'IDGAF'
 date: 2024-01-05
 published: true
-coverImage: /images/blog/post-2/coverImage.png
+coverImage: >-
+  /images/blog/northern-national-releases-poignant-new-single-idgaf/coverImage.png
 excerpt: >-
   Dive deep into the raw emotions and stark realism of Northern National's
   latest track, 'IDGAF'.
