@@ -72,7 +72,7 @@ function Footer() {
       {/* Bottom Footer */}
       <div className="py-8 px-6 bg-zinc-950">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-gray-400">© 2024 Northern National. All rights reserved.</p>
+          <p className="text-gray-400">© {new Date().getFullYear()} Northern National. All rights reserved.</p>
           <nav className="flex space-x-6">
             <Link to="/merch" className="text-gray-400 hover:text-[#D4FF99] transition duration-300">
               Merch
