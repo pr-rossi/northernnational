@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Button, { Arrow } from './ui/Button';
+import useProducts from '../hooks/useProducts';
 
 function SkeletonCard() {
   return (
@@ -30,21 +31,9 @@ function RailButton({ dir, disabled, onClick }) {
 }
 
 export default function MerchRail() {
-  const [products, setProducts] = useState(null); // null = loading
-  const [error, setError] = useState(false);
+  const { products, error } = useProducts();
   const [edges, setEdges] = useState({ start: true, end: false });
   const trackRef = useRef(null);
-
-  useEffect(() => {
-    let alive = true;
-    fetch(`${process.env.REACT_APP_API_URL || ''}/api/products`)
-      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((d) => alive && setProducts(Array.isArray(d?.result) ? d.result : []))
-      .catch(() => alive && setError(true));
-    return () => {
-      alive = false;
-    };
-  }, []);
 
   const updateEdges = useCallback(() => {
     const el = trackRef.current;

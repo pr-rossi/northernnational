@@ -37,7 +37,7 @@ const linkCls =
 
 function Footer() {
   const { pathname } = useLocation();
-  const showSignup = pathname !== '/'; // the homepage has its own signup in the tour section
+  const showSignup = pathname !== '/' && pathname !== '/tour'; // these pages carry their own signup
 
   return (
     <footer className="relative bg-nn-bg border-t border-nn-line overflow-hidden">

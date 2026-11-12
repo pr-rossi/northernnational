@@ -1,10 +1,60 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import PageTransition from '../components/PageTransition';
 import { useLenis } from '@studio-freight/react-lenis';
 import toast from 'react-hot-toast';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import Button, { Arrow } from '../components/ui/Button';
+import { Container, Label } from '../components/ui/Layout';
+
+// Printful returns { sync_product, sync_variants }
+const productName = (p) => p?.sync_product?.name || p?.name || 'Merch';
+const sizeOf = (v) => v?.size || String(v?.name || '').split('/').pop().trim();
+const imageFor = (p, v) =>
+  v?.files?.find((f) => f.type === 'preview')?.preview_url || p?.sync_product?.thumbnail_url || p?.thumbnail_url;
+
+function BackLink() {
+  return (
+    <Link
+      to="/merch"
+      className="label inline-flex items-center gap-2 text-nn-muted hover:text-nn-text transition-colors duration-200
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-text rounded-nn"
+    >
+      <Arrow className="rotate-180" /> All merch
+    </Link>
+  );
+}
+
+function SizePicker({ variants, selected, onSelect }) {
+  return (
+    <fieldset>
+      <legend className="label text-nn-muted mb-3">Size</legend>
+      <div className="flex flex-wrap gap-2">
+        {variants.map((v) => {
+          const active = selected?.id === v.id;
+          return (
+            <label
+              key={v.id}
+              className={`relative min-w-[56px] h-12 px-4 inline-flex items-center justify-center rounded-nn border cursor-pointer
+                font-semibold [font-stretch:112%] transition-colors duration-200
+                has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-nn-text has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-nn-bg
+                ${active ? 'bg-nn-text text-nn-bg border-nn-text' : 'border-nn-line text-nn-text hover:border-nn-text/60'}`}
+            >
+              <input
+                type="radio"
+                name="size"
+                value={v.id}
+                checked={active}
+                onChange={() => onSelect(v)}
+                className="sr-only"
+              />
+              {sizeOf(v)}
+            </label>
+          );
+        })}
+      </div>
+    </fieldset>
+  );
+}
 
 function ProductDetails() {
   const { id } = useParams();
@@ -12,45 +62,22 @@ function ProductDetails() {
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [buying, setBuying] = useState(false);
   const lenis = useLenis();
-  const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Scroll to top when component mounts
     window.scrollTo(0, 0);
-    // Also reset Lenis scroll
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
-    }
+    lenis?.scrollTo(0, { immediate: true });
   }, [lenis]);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/product-details?id=${id}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL || ''}/api/product-details?id=${id}`);
         const data = await response.json();
-
-        if (!response.ok) {
-          console.error('API Error:', {
-            status: response.status,
-            statusText: response.statusText,
-            error: JSON.stringify(data)
-          });
-          throw new Error(data.error?.message || data.result || 'Failed to fetch product details');
-        }
-
-        if (!data.result) {
-          throw new Error('No product data received');
-        }
-
-        console.log('Product data received:', data.result);
+        if (!response.ok || !data.result) throw new Error('Failed to fetch product details');
         setProduct(data.result);
-        
-        // Set first variant as default if available
-        if (data.result.sync_variants?.length > 0) {
-          setSelectedVariant(data.result.sync_variants[0]);
-        }
+        if (data.result.sync_variants?.length > 0) setSelectedVariant(data.result.sync_variants[0]);
       } catch (err) {
         console.error('Error fetching product:', err);
         setError(err.message);
@@ -58,209 +85,115 @@ function ProductDetails() {
         setLoading(false);
       }
     };
-
-    if (id) {
-      fetchProductDetails();
-    }
+    if (id) fetchProductDetails();
   }, [id]);
 
   const handleBuyNow = async () => {
     if (!selectedVariant) return;
-
+    setBuying(true);
     try {
-      const productData = {
-        name: `${product.name} - ${selectedVariant.name}`,
-        images: [product.files?.[0]?.preview_url || product.thumbnail_url],
-      };
-
-      if (product.description && product.description.trim()) {
-        productData.description = product.description;
-      }
+      const name = `${productName(product)} - ${selectedVariant.name}`;
+      const image = imageFor(product, selectedVariant);
+      const productData = { name, images: [image] };
+      if (product.description && product.description.trim()) productData.description = product.description;
 
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          items: [{
-            name: productData.name,
-            image: productData.images[0],
-            unit_amount: Math.round(parseFloat(selectedVariant.retail_price) * 100),
-            quantity: 1,
-            variantId: selectedVariant.id.toString(),
-            product_data: productData
-          }],
+          items: [
+            {
+              name,
+              image,
+              unit_amount: Math.round(parseFloat(selectedVariant.retail_price) * 100),
+              quantity: 1,
+              variantId: selectedVariant.id.toString(),
+              product_data: productData,
+            },
+          ],
         }),
       });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Failed to create checkout session');
-      }
-
+      if (!response.ok) throw new Error('Failed to create checkout session');
       const { url } = await response.json();
-      
-      // Instead of directly redirecting, open in new tab
       window.location.href = url;
-      
-      // Listen for messages from the checkout window
-      window.addEventListener('message', function(event) {
-        if (event.data === 'checkout-complete') {
-          toast.success('Order placed successfully!');
-          navigate('/');
-        } else if (event.data === 'checkout-canceled') {
-          toast.error('Order was canceled');
-          navigate('/');
-        }
-      });
-
-    } catch (error) {
-      console.error('Error processing buy now:', error);
-      toast.error('Failed to process purchase. Please try again.');
+    } catch (err) {
+      console.error('Error processing buy now:', err);
+      toast.error("Sorry, checkout didn't open. Please try again.");
+      setBuying(false);
     }
   };
 
-  // Helper function to get the correct image URL
-  const getImageUrl = (product) => {
-    return product?.sync_product?.thumbnail_url || product?.thumbnail_url;
-  };
-
-  // Custom size selector component
-  const SizeSelector = ({ variants, selectedVariant, onSelect }) => {
-    return (
-      <div className="relative">
-        <label className="block text-sm font-medium text-gray-200 mb-2">
-          Select Size
-        </label>
-        
-        {/* Selected Size Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white flex items-center justify-between hover:bg-zinc-700 transition-colors"
-        >
-          <span>{selectedVariant ? selectedVariant.name : 'Select a size'}</span>
-          <ChevronDown 
-            className={`w-5 h-5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-          />
-        </button>
-
-        {/* Dropdown Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="absolute z-50 w-full mt-2 bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg overflow-hidden"
-            >
-              {variants.map((variant) => (
-                <motion.button
-                  key={variant.id}
-                  onClick={() => {
-                    onSelect(variant);
-                    setIsOpen(false);
-                  }}
-                  className={`w-full p-3 text-left hover:bg-[#D4FF99] hover:text-black transition-colors
-                    ${selectedVariant?.id === variant.id 
-                      ? 'bg-[#D4FF99] text-black' 
-                      : 'text-white'}`}
-                  whileHover={{ x: 4 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {variant.name}
-                </motion.button>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Overlay to close dropdown when clicking outside */}
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40"
-            onClick={() => setIsOpen(false)}
-          />
-        )}
-      </div>
-    );
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#D4FF99]"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-red-500">{error}</p>
-      </div>
-    );
-  }
-
-  if (!product) return null;
+  const variants = product?.sync_variants || [];
+  const price = selectedVariant?.retail_price;
 
   return (
     <PageTransition>
-      <div className="pt-48 pb-32 min-h-screen bg-zinc-950">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Product Image */}
-            <div>
-              {product && (
-                <img 
-                  src={getImageUrl(product)} 
-                  alt={product.name}
-                  className="w-full rounded-lg"
-                />
-              )}
-            </div>
+      <div className="min-h-screen bg-nn-bg pt-32 md:pt-40 pb-24 md:pb-40">
+        <Container>
+          <BackLink />
 
-            {/* Product Details */}
-            <div className="space-y-8">
-              <h1 className="text-4xl font-bold text-white">{product?.name}</h1>
-              <p className="text-gray-300">{product?.description}</p>
-              
-              {/* Price */}
-              <div className="text-2xl font-bold text-white">
-                ${selectedVariant?.retail_price || product?.retail_price}
+          {loading && (
+            <div className="mt-8 grid gap-10 md:grid-cols-12" aria-busy="true">
+              <div className="md:col-span-7 aspect-square rounded-nn bg-nn-raised animate-pulse" />
+              <div className="md:col-span-5 space-y-4">
+                <div className="h-16 w-4/5 rounded-nn bg-nn-raised animate-pulse" />
+                <div className="h-6 w-24 rounded-nn bg-nn-raised animate-pulse" />
+                <div className="h-12 w-full rounded-nn bg-nn-raised animate-pulse" />
+              </div>
+            </div>
+          )}
+
+          {!loading && (error || !product) && (
+            <div className="mt-8 rounded-nn bg-nn-surface p-8 md:p-12 max-w-[720px]">
+              <p className="display text-nn-text text-[32px] md:text-[48px]">Lost in the crowd.</p>
+              <p className="mt-4 text-lead text-nn-muted">
+                We couldn't load this item. It may be sold out, or the store is having a moment.
+              </p>
+              <div className="mt-8">
+                <Button size="lg" to="/merch">
+                  Browse all merch <Arrow />
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {!loading && product && !error && (
+            <div className="mt-8 grid gap-10 md:gap-16 md:grid-cols-12 md:items-start">
+              <div className="md:col-span-7 aspect-square overflow-hidden rounded-nn bg-nn-surface">
+                <img src={imageFor(product, selectedVariant)} alt={productName(product)} className="h-full w-full object-cover" />
               </div>
 
-              {/* Custom Size Selector */}
-              {product?.sync_variants && product.sync_variants.length > 1 && (
-                <SizeSelector
-                  variants={product.sync_variants}
-                  selectedVariant={selectedVariant}
-                  onSelect={setSelectedVariant}
-                />
-              )}
+              <div className="md:col-span-5 md:sticky md:top-28">
+                <Label className="mb-4">Merch</Label>
+                <h1 className="display text-nn-text text-[40px] md:text-[56px]">{productName(product)}</h1>
+                {price && (
+                  <p className="mt-6 text-h4 font-bold [font-stretch:112%] text-nn-text">
+                    <span className="text-lead text-nn-muted align-top mr-0.5">$</span>
+                    {parseFloat(price).toFixed(2)}
+                  </p>
+                )}
+                {product.description && <p className="mt-6 text-body text-nn-muted">{product.description}</p>}
 
-              {/* Buy Now Button */}
-              <button
-                onClick={handleBuyNow}
-                disabled={product?.sync_variants?.length > 1 && !selectedVariant}
-                className={`w-full px-6 py-3 text-black font-bold rounded-lg transition-colors ${
-                  product?.sync_variants?.length > 1 && !selectedVariant
-                    ? 'bg-gray-500 cursor-not-allowed'
-                    : 'bg-[#D4FF99] hover:bg-[#bfe589]'
-                }`}
-              >
-                {product?.sync_variants?.length > 1 && !selectedVariant ? 'Select a size' : 'Buy Now'}
-              </button>
+                {variants.length > 1 && (
+                  <div className="mt-8">
+                    <SizePicker variants={variants} selected={selectedVariant} onSelect={setSelectedVariant} />
+                  </div>
+                )}
+
+                <div className="mt-8">
+                  <Button size="lg" className="w-full" onClick={handleBuyNow} loading={buying} disabled={!selectedVariant}>
+                    {selectedVariant ? `Buy ${variants.length > 1 ? `size ${sizeOf(selectedVariant)}` : 'now'}` : 'Choose a size'}
+                    {price && <span className="font-normal opacity-60">· ${parseFloat(price).toFixed(2)}</span>}
+                  </Button>
+                  <p className="mt-3 label text-nn-subtle">Secure checkout with Stripe. Printed to order.</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          )}
+        </Container>
       </div>
     </PageTransition>
   );
 }
 
-export default ProductDetails; 
+export default ProductDetails;

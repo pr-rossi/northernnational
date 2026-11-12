@@ -13,6 +13,7 @@ import Merch from './pages/Merch';
 import Tour from './pages/Tour';
 import Footer from './components/Footer';
 import ProductDetails from './pages/ProductDetails';
+import NotFound from './pages/NotFound';
 import { Toaster, toast } from 'react-hot-toast';
 
 function AnimatedRoutes() {
@@ -27,6 +28,7 @@ function AnimatedRoutes() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   );
@@ -98,9 +100,6 @@ function App() {
     }
   }, [location.search, navigate]);
 
-  // Check if current path is a blog post
-  const isBlogPost = location.pathname.startsWith('/blog/');
-
   return (
     <LenisProvider>
       <CartProvider>
@@ -117,9 +116,9 @@ function App() {
               },
             }}
           />
-          {!isBlogPost && <Navigation />}
+          <Navigation />
           <AnimatedRoutes />
-          {!isBlogPost && <Footer />}
+          <Footer />
         </div>
       </CartProvider>
     </LenisProvider>

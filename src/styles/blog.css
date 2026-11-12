@@ -1,15 +1,24 @@
-blockquote {
-  border-left: 4px solid #D4FF99;
-  margin: 2rem 0;
-  padding: 1rem 0 1rem 2rem;
-  font-style: italic;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: #D4FF99;
-  background: rgba(212, 255, 153, 0.05);
-  border-radius: 0 8px 8px 0;
+/* Article body. Scoped to .article so nothing leaks into the rest of the site. */
+.article blockquote {
+  margin: 2.5rem 0;
+  padding: 0 0 0 1.5rem;
+  border-left: 3px solid #FF3B21;
+  font-style: normal;
+  font-size: 1.5rem;
+  line-height: 1.35;
+  font-weight: 600;
+  font-stretch: 110%;
+  letter-spacing: -0.01em;
+  color: #EDEBE6;
+  background: none;
 }
 
-blockquote p {
+.article blockquote p {
   margin: 0;
-} 
+  color: inherit;
+}
+
+.article strong {
+  color: #EDEBE6;
+  font-weight: 700;
+}

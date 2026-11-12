@@ -7,7 +7,7 @@ export function useInitialTransition() {
     document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollY}px`;
     document.body.style.width = '100%';
-    document.body.style.backgroundColor = '#09090B';
+    document.body.style.backgroundColor = '#0B0B0B';
 
     // Remove scroll lock after initial page load
     return () => {

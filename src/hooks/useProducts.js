@@ -1,0 +1,20 @@
+import { useEffect, useState } from 'react';
+
+// products: null while loading, [] when the store is empty
+export default function useProducts() {
+  const [products, setProducts] = useState(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    fetch(`${process.env.REACT_APP_API_URL || ''}/api/products`)
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((d) => alive && setProducts(Array.isArray(d?.result) ? d.result : []))
+      .catch(() => alive && setError(true));
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  return { products, error };
+}
