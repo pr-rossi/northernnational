@@ -20,7 +20,7 @@ const {
 } = Astro.props;
 const pageTitle = title ? `${title} · Northern National` : 'Northern National · Alternative rock from Dallas, TX';
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const canonical = new URL(pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 ---
 
