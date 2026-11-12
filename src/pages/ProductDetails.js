@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
 import PageTransition from '../components/PageTransition';
 import { useLenis } from '@studio-freight/react-lenis';
 import toast from 'react-hot-toast';
@@ -13,7 +12,6 @@ function ProductDetails() {
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { addToCart } = useCart();
   const lenis = useLenis();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -66,17 +64,6 @@ function ProductDetails() {
     }
   }, [id]);
 
-  const handleAddToCart = () => {
-    if (!selectedVariant) return;
-    
-    const enrichedProduct = {
-      ...product,
-      sync_variants: [selectedVariant]
-    };
-    
-    addToCart(enrichedProduct);
-  };
-
   const handleBuyNow = async () => {
     if (!selectedVariant) return;
 
@@ -115,7 +102,7 @@ function ProductDetails() {
       const { url } = await response.json();
       
       // Instead of directly redirecting, open in new tab
-      const checkoutWindow = window.location.href = url;
+      window.location.href = url;
       
       // Listen for messages from the checkout window
       window.addEventListener('message', function(event) {
@@ -137,12 +124,6 @@ function ProductDetails() {
   // Helper function to get the correct image URL
   const getImageUrl = (product) => {
     return product?.sync_product?.thumbnail_url || product?.thumbnail_url;
-  };
-
-  // Helper function to simplify variant names
-  const getSimpleSize = (variantName) => {
-    // Split by '/' and get the last part, then trim whitespace
-    return variantName.split('/').pop().trim();
   };
 
   // Custom size selector component

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import {
   Elements,
@@ -156,11 +156,6 @@ export default function CheckoutModal({ isOpen, onClose, product }) {
   };
 
   if (!isOpen || !product) return null;
-
-  // Safely access product price
-  const price = product.sync_variants?.[0]?.retail_price 
-    ? parseFloat(product.sync_variants[0].retail_price).toFixed(2)
-    : 'Price unavailable';
 
   return (
     <div className={`fixed inset-0 bg-black/75 flex items-center justify-center z-50 ${isOpen ? '' : 'hidden'}`}>

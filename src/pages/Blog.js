@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getSortedPosts } from '../utils/blogUtils';
 import PageTransition from '../components/PageTransition';
@@ -8,7 +7,6 @@ import { useLenis } from '@studio-freight/react-lenis';
 
 function Blog() {
   const [posts, setPosts] = useState([]);
-  const navigate = useNavigate();
   const lenis = useLenis();
 
   useEffect(() => {

@@ -70,7 +70,7 @@ function App() {
         page_path: location.pathname + location.search
       });
     }
-  }, [location.pathname, lenis]);
+  }, [location.pathname, location.search, lenis]);
 
   useEffect(() => {
     // Check URL parameters for success/cancel

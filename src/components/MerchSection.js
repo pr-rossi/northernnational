@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { loadStripe } from '@stripe/stripe-js';
-import CheckoutModal from './CheckoutModal';
-import { useCart } from '../context/CartContext';
 import Cart from './Cart';
 import './MerchSection.css';
 import { motion } from 'framer-motion';
@@ -49,9 +47,7 @@ const MerchSection = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const sectionRef = useRef(null);
-  const [selectedProduct, setSelectedProduct] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { addToCart, cartItems } = useCart();
 
   const containerVariants = {
     hidden: {},
@@ -143,90 +139,6 @@ const MerchSection = ({
       });
     }
   }, [products]);
-
-  const handleBuyNow = async (product) => {
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/product-details?id=${product.id}`);
-      const productDetails = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(productDetails.details || 'Failed to fetch product details');
-      }
-
-      const variant = productDetails.result.sync_variants[0];
-      console.log('Variant details:', variant);
-
-      const checkoutResponse = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          items: [{
-            name: product.name,
-            image: product.thumbnail_url,
-            unit_amount: Math.round(parseFloat(variant.retail_price) * 100),
-            variantId: variant.id.toString(),
-          }],
-        }),
-      });
-
-      const { url } = await checkoutResponse.json();
-      window.location = url;
-    } catch (error) {
-      console.error('Error processing buy now:', error);
-      alert('Failed to process purchase. Please try again.');
-    }
-  };
-
-  const handleAddToCart = async (product) => {
-    console.log('Initial product:', product);
-    
-    try {
-      const apiUrl = `${process.env.REACT_APP_API_URL}/api/product-details?id=${product.id}`;
-      console.log('Fetching product details from:', apiUrl);
-      
-      const response = await fetch(apiUrl);
-      console.log('Response status:', response.status);
-
-      const responseData = await response.json();
-      console.log('Response data:', responseData);
-
-      if (!response.ok) {
-        throw new Error(responseData.details || 'Failed to fetch product details');
-      }
-
-      if (!responseData.result?.sync_variants?.[0]) {
-        console.error('Invalid product details structure:', responseData);
-        throw new Error('Invalid product details structure');
-      }
-
-      const variant = responseData.result.sync_variants[0];
-      console.log('Variant data:', variant);
-      
-      if (!variant.retail_price) {
-        console.error('Missing retail price in variant:', variant);
-        throw new Error('Product price not available');
-      }
-
-      const enrichedProduct = {
-        ...product,
-        sync_variants: [{
-          retail_price: variant.retail_price,
-          name: variant.name,
-          files: variant.files,
-          id: variant.id
-        }]
-      };
-
-      console.log('Adding to cart:', enrichedProduct);
-      addToCart(enrichedProduct);
-      setIsCartOpen(true);
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-      alert(error.message || 'Failed to add product to cart. Please try again.');
-    }
-  };
 
   if (loading) {
     return (
