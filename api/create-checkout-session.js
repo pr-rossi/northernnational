@@ -1,5 +1,27 @@
 import Stripe from 'stripe';
 
+const DEFAULT_SITE = 'https://northernnationalmusic.com';
+
+function siteUrl(req) {
+  if (process.env.SITE_URL) return process.env.SITE_URL.replace(/\/$/, '');
+  const candidate =
+    req.headers.origin ||
+    (req.headers['x-forwarded-host'] ? `https://${req.headers['x-forwarded-host']}` : null);
+  try {
+    const url = new URL(candidate);
+    const host = url.hostname;
+    const ours =
+      host === 'northernnationalmusic.com' ||
+      host.endsWith('.northernnationalmusic.com') ||
+      (host.startsWith('northernnational') && host.endsWith('.vercel.app')) ||
+      host === 'localhost';
+    if (ours) return url.origin;
+  } catch {
+    // fall through
+  }
+  return DEFAULT_SITE;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
@@ -7,16 +29,15 @@ export default async function handler(req, res) {
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-  const domain = process.env.REACT_APP_API_URL;
-  
-  if (!domain) {
-    return res.status(500).json({ 
-      message: 'Server configuration error: REACT_APP_API_URL is not set' 
-    });
-  }
+  // Where Stripe sends shoppers back to: the site they checked out from (our domains,
+  // Vercel previews or local dev), otherwise the main site. SITE_URL overrides it if set.
+  const domain = siteUrl(req);
 
   try {
-    const { items } = req.body;
+    const { items } = req.body || {};
+    if (!Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({ message: 'No items to check out' });
+    }
     
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
