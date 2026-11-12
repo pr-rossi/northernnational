@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { CartProvider } from './context/CartContext';
@@ -125,8 +125,19 @@ function App() {
   );
 }
 
+const KeystaticAdmin = lazy(() => import('./pages/KeystaticAdmin'));
+
 // Wrap App with Router since we need useLocation
 function AppWrapper() {
+  // The content editor runs on its own, outside the site chrome and smooth scrolling.
+  if (window.location.pathname.startsWith('/keystatic')) {
+    document.documentElement.classList.add('keystatic');
+    return (
+      <Suspense fallback={null}>
+        <KeystaticAdmin />
+      </Suspense>
+    );
+  }
   return (
     <Router>
       <App />

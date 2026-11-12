@@ -9,32 +9,37 @@ import MerchRail from '../components/MerchRail';
 import TourBlock from '../components/TourBlock';
 import Button, { Arrow } from '../components/ui/Button';
 import { Container, Label } from '../components/ui/Layout';
+import home from '../content/home.json';
 
 // ---------------------------------------------------------------------------
 // Content
 // ---------------------------------------------------------------------------
+// Copy and images come from src/content/home.json, edited in Keystatic (Homepage).
 const LINKS = {
-  single: 'https://open.spotify.com/track/1rM0BBBaWZ0OMQtPHVZatl?si=49e44d58176846ff',
   playlist: 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO4daEGQ?si=78a79f6bacdd4641',
   artist: 'https://open.spotify.com/artist/77uddrwADVuSI16ASFWF3c?si=bVUiHtZyS-u8cE4CuxYLFA',
 };
 
+const HERO = home.hero || {};
 const LATEST = {
-  title: 'IDGAF',
-  released: '2024-01-05',
-  cover: '/images/idgaf-cover.jpg',
-  lyric: ["You don't gotta say it", 'I already know it'],
-  story: '/blog/post-2',
+  ...home.latest,
+  lyric: String(home.latest?.lyric || '').split('\n').map((l) => l.trim()).filter(Boolean),
+  story: home.latest?.story ? `/blog/${home.latest.story}` : null,
 };
+const TICKER = (home.ticker || []).filter(Boolean);
+const ABOUT = home.about || {};
 
-const TICKER = ['IDGAF out now', 'Dallas, Texas', 'Loud since 2016', 'New dates soon'];
-
+const FOCUS = { left: 'object-left', right: 'object-right', center: 'object-center' };
 const PHOTOS = [
-  { src: '/images/nn-boys-show.jpg', alt: 'Northern National mid-song on stage', name: 'Live', pos: 'object-center' },
-  { src: '/images/rossi.jpg', alt: 'Rossi playing guitar under blue light', name: 'Rossi', role: 'Guitar, vox', pos: 'object-center' },
-  { src: '/images/anthony.jpg', alt: 'Anthony behind the drum kit', name: 'Anthony', role: 'Drums', pos: 'object-center' },
-  { src: '/images/dylan.jpg', alt: 'Dylan playing bass under red light', name: 'Dylan', role: 'Bass, guitar, vox', pos: 'object-right' },
-];
+  ...(ABOUT.livePhoto ? [{ src: ABOUT.livePhoto, alt: ABOUT.livePhotoAlt || '', name: 'Live', pos: 'object-center' }] : []),
+  ...(home.members || []).map((m) => ({
+    src: m.photo,
+    alt: m.photoAlt || m.name,
+    name: m.name,
+    role: m.role,
+    pos: FOCUS[m.focus] || 'object-center',
+  })),
+].filter((p) => p.src);
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -80,8 +85,8 @@ function Hero({ onAlerts }) {
     <header className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-nn-bg">
       <div ref={imgRef} className="absolute inset-0 origin-center">
         <img
-          src="/images/the-boys-show.jpeg"
-          alt="Northern National on stage under white lights"
+          src={HERO.image}
+          alt={HERO.imageAlt || ''}
           className="photo-bw h-full w-full object-cover object-[center_30%]"
         />
       </div>
@@ -96,15 +101,20 @@ function Hero({ onAlerts }) {
       <Container className="relative z-10 pt-40">
         <motion.div {...layer(0, 16)} className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <ul className="label text-nn-text/90 flex flex-wrap gap-x-4 gap-y-1">
-            <li>Alternative rock</li>
-            <li aria-hidden="true" className="text-nn-brand">/</li>
-            <li>Dallas, TX</li>
-            <li aria-hidden="true" className="text-nn-brand">/</li>
-            <li>Est. 2016</li>
+            {(HERO.tags || []).map((t, i) => (
+              <React.Fragment key={t + i}>
+                {i > 0 && (
+                  <li aria-hidden="true" className="text-nn-brand">
+                    /
+                  </li>
+                )}
+                <li>{t}</li>
+              </React.Fragment>
+            ))}
           </ul>
           <div className="flex flex-wrap gap-3">
-            <Button size="lg" href={LINKS.single}>
-              <PlayGlyph /> Play IDGAF
+            <Button size="lg" href={LATEST.spotifyUrl}>
+              <PlayGlyph /> Play {LATEST.title}
             </Button>
             <Button size="lg" variant="secondary" href="#tour" onClick={onAlerts} className="backdrop-blur-sm">
               Get show alerts
@@ -123,17 +133,19 @@ function Hero({ onAlerts }) {
         </motion.h1>
 
         {/* Red tape sticker: the one brand-colour moment in the hero */}
-        <motion.a
-          href="#music"
-          initial={reduce ? false : { opacity: 0, scale: 1.4, rotate: -12 }}
-          animate={{ opacity: 1, scale: 1, rotate: -4 }}
-          transition={reduce ? undefined : { type: 'spring', damping: 14, mass: 0.8, delay: 1.0 }}
-          className="absolute hidden md:block md:right-[6vw] md:top-[2vw] z-20 bg-nn-brand text-nn-on-brand
-            px-4 py-2 md:px-5 md:py-3 shadow-e5
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-text focus-visible:ring-offset-2 focus-visible:ring-offset-nn-bg"
-        >
-          <span className="display text-[18px] md:text-[28px] leading-none tracking-[-0.02em]">New single: IDGAF</span>
-        </motion.a>
+        {HERO.sticker && (
+          <motion.a
+            href="#music"
+            initial={reduce ? false : { opacity: 0, scale: 1.4, rotate: -12 }}
+            animate={{ opacity: 1, scale: 1, rotate: -4 }}
+            transition={reduce ? undefined : { type: 'spring', damping: 14, mass: 0.8, delay: 1.0 }}
+            className="absolute hidden md:block md:right-[6vw] md:top-[2vw] z-20 bg-nn-brand text-nn-on-brand
+              px-4 py-2 md:px-5 md:py-3 shadow-e5
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-text focus-visible:ring-offset-2 focus-visible:ring-offset-nn-bg"
+          >
+            <span className="display text-[18px] md:text-[28px] leading-none tracking-[-0.02em]">{HERO.sticker}</span>
+          </motion.a>
+        )}
       </div>
     </header>
   );
@@ -141,6 +153,7 @@ function Hero({ onAlerts }) {
 
 function Ticker() {
   const [paused, setPaused] = useState(false);
+  if (TICKER.length === 0) return null;
   const items = [...TICKER, ...TICKER, ...TICKER, ...TICKER];
   return (
     <div className="relative bg-nn-brand text-nn-on-brand overflow-hidden" aria-label="Announcements">
@@ -216,10 +229,10 @@ function LatestRelease() {
       <Container className="grid gap-16 md:grid-cols-12 md:gap-10 items-center">
         <div className="md:col-span-6 pr-[18%] md:pr-[14%]">
           <a
-            href={LINKS.single}
+            href={LATEST.spotifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Play IDGAF on Spotify"
+            aria-label={`Play ${LATEST.title} on Spotify`}
             className="group relative block aspect-square focus-visible:outline-none"
             style={{ overflow: 'visible' }}
           >
@@ -227,7 +240,7 @@ function LatestRelease() {
             <span className="relative block h-full w-full overflow-hidden shadow-e6 group-focus-visible:ring-2 group-focus-visible:ring-nn-text group-focus-visible:ring-offset-4 group-focus-visible:ring-offset-nn-bg">
               <img
                 src={LATEST.cover}
-                alt="IDGAF cover art: a cyan figure with three silhouettes and three suns above her head"
+                alt={LATEST.coverAlt || `${LATEST.title} cover art`}
                 className="h-full w-full object-cover"
               />
               <span className="absolute bottom-4 left-4 flex items-center gap-2 bg-nn-bg/85 px-3 py-2 label text-nn-text backdrop-blur-sm">
@@ -246,21 +259,29 @@ function LatestRelease() {
           <h2 id="latest-title" className="display mt-4 text-nn-text text-[min(22vw,96px)] md:text-[min(10.5vw,150px)]">
             {LATEST.title}
           </h2>
-          <blockquote className="mt-8 mb-0 mx-0 p-0 border-0 bg-transparent rounded-none not-italic">
-            <p className="text-[28px] leading-[34px] md:text-[36px] md:leading-[42px] font-semibold [font-stretch:110%] tracking-[-0.02em] text-nn-text">
-              “{LATEST.lyric[0]}
-              <br />
-              {LATEST.lyric[1]}.”
-            </p>
-            <footer className="mt-3 label text-nn-subtle">Verse one</footer>
-          </blockquote>
+          {LATEST.lyric.length > 0 && (
+            <blockquote className="mt-8 mb-0 mx-0 p-0 border-0 bg-transparent rounded-none not-italic">
+              <p className="text-[28px] leading-[34px] md:text-[36px] md:leading-[42px] font-semibold [font-stretch:110%] tracking-[-0.02em] text-nn-text">
+                {LATEST.lyric.map((line, i) => (
+                  <React.Fragment key={i}>
+                    {i === 0 && '“'}
+                    {line}
+                    {i === LATEST.lyric.length - 1 ? '.”' : <br />}
+                  </React.Fragment>
+                ))}
+              </p>
+              {LATEST.lyricCredit && <footer className="mt-3 label text-nn-subtle">{LATEST.lyricCredit}</footer>}
+            </blockquote>
+          )}
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <Button size="lg" href={LINKS.single}>
+            <Button size="lg" href={LATEST.spotifyUrl}>
               <PlayGlyph /> Play on Spotify
             </Button>
-            <Button size="lg" variant="secondary" to={LATEST.story}>
-              Read the story behind it
-            </Button>
+            {LATEST.story && (
+              <Button size="lg" variant="secondary" to={LATEST.story}>
+                Read the story behind it
+              </Button>
+            )}
           </div>
           <a
             href={LINKS.playlist}
@@ -283,12 +304,11 @@ function About() {
       <Container>
         <Label className="mb-6">About</Label>
         <h2 id="about-title" className="display text-nn-text text-[44px] md:text-[clamp(56px,7.2vw,112px)] max-w-[14ch]">
-          Loud, honest rock <span className="text-nn-brand">from Dallas.</span>
+          {ABOUT.heading} {ABOUT.highlight && <span className="text-nn-brand">{ABOUT.highlight}</span>}
         </h2>
         <div className="mt-10 md:mt-14 grid gap-10 md:grid-cols-12">
           <p className="md:col-span-5 md:col-start-8 text-lead text-nn-muted">
-            Rossi, Anthony and Dylan have been writing together as Northern National since 2016: driving guitars,
-            atmospheric layers and lyrics about the stuff people don't always say out loud. Turn it up.
+            {ABOUT.body}
           </p>
         </div>
 

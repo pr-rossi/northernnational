@@ -46,3 +46,14 @@ html, body {
   height: auto !important;
   position: relative !important;
 }
+
+/* The content editor brings its own theme; don't let the site's colours bleed in. */
+html.keystatic body,
+html.keystatic #root {
+  background: #fff;
+  color: initial;
+}
+@media (prefers-color-scheme: dark) {
+  html.keystatic body,
+  html.keystatic #root { background: #1c1c1c; }
+}

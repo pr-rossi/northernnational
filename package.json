@@ -6,6 +6,8 @@
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",
     "@fontsource/jetbrains-mono": "^5.3.0",
+    "@keystar/ui": "^0.10.0",
+    "@keystatic/core": "^0.6.9",
     "@stripe/react-stripe-js": "^2.9.0",
     "@stripe/stripe-js": "^4.10.0",
     "@studio-freight/lenis": "^1.0.42",
@@ -21,18 +23,22 @@
     "lucide-react": "^0.359.0",
     "node-fetch": "^2.6.1",
     "react": "^18.2.0",
+    "react-aria": "^3.50.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-markdown": "^9.0.1",
     "react-router-dom": "^6.28.0",
     "react-scripts": "5.0.1",
     "react-scroll": "^1.9.0",
+    "react-stately": "^3.48.0",
     "stripe": "^14.25.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "prestart": "node scripts/build-content-index.js",
+    "start": "GENERATE_SOURCEMAP=false react-scripts start",
+    "prebuild": "node scripts/build-content-index.js",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -58,7 +64,9 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@craco/craco": "^7.1.0",
     "autoprefixer": "^10.4.20",
+    "js-yaml": "^4.3.2",
     "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.14"
+    "tailwindcss": "^3.4.14",
+    "http-proxy-middleware": "^2.0.7"
   }
 }

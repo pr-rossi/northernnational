@@ -1,13 +1,27 @@
+// Posts live in public/content/blog/*.md (edited in Keystatic).
+// index.json is generated from their frontmatter by scripts/build-content-index.js.
+
+let indexPromise;
+
+function loadIndex() {
+  if (!indexPromise) {
+    indexPromise = fetch('/content/blog/index.json')
+      .then((r) => {
+        if (!r.ok) throw new Error('Failed to fetch blog posts');
+        return r.json();
+      })
+      .catch((err) => {
+        indexPromise = undefined; // allow a retry on the next call
+        throw err;
+      });
+  }
+  return indexPromise;
+}
+
 export async function getSortedPosts() {
   try {
-    // Fetch the blog posts from your content directory
-    const response = await fetch('/content/blog/index.json');
-    if (!response.ok) throw new Error('Failed to fetch blog posts');
-    
-    const posts = await response.json();
-    
-    // Sort posts by date
-    return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const posts = await loadIndex();
+    return [...posts].sort((a, b) => String(b.date).localeCompare(String(a.date)));
   } catch (error) {
     console.error('Error fetching blog posts:', error);
     return [];
@@ -16,31 +30,16 @@ export async function getSortedPosts() {
 
 export async function getPostBySlug(slug) {
   try {
-    // Fetch the specific blog post content
-    const response = await fetch(`/content/blog/${slug}.md`);
-    if (!response.ok) throw new Error('Failed to fetch blog post');
-    
-    const content = await response.text();
-    
-    // Parse frontmatter
-    const frontmatter = content.match(/---\n([\s\S]*?)\n---/)[1];
-    const metadata = Object.fromEntries(
-      frontmatter.split('\n').map(line => {
-        const [key, ...value] = line.split(': ');
-        return [key, value.join(': ').replace(/^"(.*)"$/, '$1')];
-      })
-    );
-    
-    // Get content without frontmatter
-    const postContent = content.replace(/---\n[\s\S]*?\n---/, '').trim();
-    
-    return {
-      slug,
-      content: postContent,
-      ...metadata
-    };
+    const [posts, response] = await Promise.all([loadIndex(), fetch(`/content/blog/${encodeURIComponent(slug)}.md`)]);
+    const meta = posts.find((p) => p.slug === slug);
+    if (!meta || !response.ok) return null; // unpublished or missing
+
+    const raw = await response.text();
+    if (raw.trimStart().startsWith('<!DOCTYPE')) return null; // SPA fallback served instead of a post
+    const content = raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '').trim();
+    return { ...meta, content };
   } catch (error) {
     console.error('Error fetching blog post:', error);
     return null;
   }
-} 
+}

@@ -1,0 +1,58 @@
+{
+  "hero": {
+    "image": "/images/site/hero/image.jpeg",
+    "imageAlt": "Northern National on stage under white lights",
+    "tags": [
+      "Alternative rock",
+      "Dallas, TX",
+      "Est. 2016"
+    ],
+    "sticker": "New single: IDGAF"
+  },
+  "ticker": [
+    "IDGAF out now",
+    "Dallas, Texas",
+    "Loud since 2016",
+    "New dates soon"
+  ],
+  "latest": {
+    "title": "IDGAF",
+    "released": "2024-01-05",
+    "cover": "/images/site/latest/cover.jpg",
+    "coverAlt": "IDGAF cover art: a cyan figure with three silhouettes and three suns above her head",
+    "spotifyUrl": "https://open.spotify.com/track/1rM0BBBaWZ0OMQtPHVZatl?si=49e44d58176846ff",
+    "lyric": "You don't gotta say it\nI already know it",
+    "lyricCredit": "Verse one",
+    "story": "post-2"
+  },
+  "about": {
+    "heading": "Loud, honest rock",
+    "highlight": "from Dallas.",
+    "body": "Rossi, Anthony and Dylan have been writing together as Northern National since 2016: driving guitars, atmospheric layers and lyrics about the stuff people don't always say out loud. Turn it up.",
+    "livePhoto": "/images/site/about/livePhoto.jpg",
+    "livePhotoAlt": "Northern National mid-song on stage"
+  },
+  "members": [
+    {
+      "name": "Rossi",
+      "role": "Guitar, vox",
+      "photo": "/images/site/members/0/photo.jpg",
+      "photoAlt": "Rossi playing guitar under blue light",
+      "focus": "center"
+    },
+    {
+      "name": "Anthony",
+      "role": "Drums",
+      "photo": "/images/site/members/1/photo.jpg",
+      "photoAlt": "Anthony behind the drum kit",
+      "focus": "center"
+    },
+    {
+      "name": "Dylan",
+      "role": "Bass, guitar, vox",
+      "photo": "/images/site/members/2/photo.jpg",
+      "photoAlt": "Dylan playing bass under red light",
+      "focus": "right"
+    }
+  ]
+}

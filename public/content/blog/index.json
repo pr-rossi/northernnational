@@ -1,23 +1,23 @@
 [
   {
+    "slug": "post-3",
+    "title": "Northern National: Crafting New Sounds for 2025",
+    "date": "2024-11-13",
+    "coverImage": "/images/blog/post-3/coverImage.jpg",
+    "excerpt": "Northern National is back in the studio, gearing up to release new music at the start of 2025, including a much-anticipated single and an EP."
+  },
+  {
     "slug": "post-1",
     "title": "Spotlight on Northern National: Dallas's Alternative Rock Phenomenon",
     "date": "2024-11-12",
-    "coverImage": "/images/blog/nn-og.jpg",
-    "excerpt": "Dive into the story of Northern National..."
+    "coverImage": "/images/blog/post-1/coverImage.jpg",
+    "excerpt": "Dive into the story of Northern National, a band from Dallas that's making waves in the alternative rock scene with their unique sound and electrifying performances."
   },
   {
-      "slug": "post-2",
-      "title": "Northern National Releases Poignant New Single 'IDGAF'",
-      "date": "2024-01-05",
-      "coverImage": "/images/blog/IDGAFArtwork.png",
-      "excerpt": "Dive deep into the raw emotions and..."
-    },
-    {
-      "slug": "post-3",
-      "title": "Northern National: Crafting New Sounds for 2025",
-      "date": "2024-11-13",
-      "coverImage": "/images/blog/nn-studio.jpg",
-      "excerpt": "Northern National is back in the studio..."
-    }
+    "slug": "post-2",
+    "title": "Northern National Releases Poignant New Single 'IDGAF'",
+    "date": "2024-01-05",
+    "coverImage": "/images/blog/post-2/coverImage.png",
+    "excerpt": "Dive deep into the raw emotions and stark realism of Northern National's latest track, 'IDGAF'."
+  }
 ]

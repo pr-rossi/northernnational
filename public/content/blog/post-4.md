@@ -5,7 +5,7 @@ coverImage: "pdf-sdk.jpg"
 excerpt: "Explore the world of PDF SDKs and learn how these powerful tools can transform your document management capabilities with practical code examples and implementation strategies."
 category: Development
 tags: Agile, Python, Jira, Markdown, Productivity, Development
-published: true
+published: false
 secret: false
 people: [maureen-blando]
 ---
