@@ -21,7 +21,7 @@ export default config({
   ui: {
     brand: { name: 'Northern National' },
     navigation: {
-      Site: ['home'],
+      Site: ['home', 'privacy'],
       Content: ['shows', 'posts', 'merch'],
     },
   },
@@ -100,6 +100,17 @@ export default config({
           }),
           { label: 'Band members', itemLabel: (p) => `${p.fields.name.value}${p.fields.role.value ? ` · ${p.fields.role.value}` : ''}` }
         ),
+      },
+    }),
+    privacy: singleton({
+      label: 'Privacy policy',
+      path: 'src/content/pages/privacy',
+      format: { contentField: 'content' },
+      entryLayout: 'content',
+      schema: {
+        title: fields.text({ label: 'Title', validation: { isRequired: true } }),
+        updated: fields.date({ label: 'Last updated' }),
+        content: fields.markdoc({ label: 'Policy', extension: 'md' }),
       },
     }),
   },

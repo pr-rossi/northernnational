@@ -5,6 +5,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import FeaturedBlogs from '../components/FeaturedBlogs';
 import Button, { Arrow } from '../components/ui/Button';
 import { Container, Label } from '../components/ui/Layout';
+import { track } from '../lib/analytics';
 import home from '../content/home.json';
 
 // ---------------------------------------------------------------------------
@@ -109,7 +110,7 @@ function Hero({ onAlerts = goToAlerts }) {
             ))}
           </ul>
           <div className="flex flex-wrap gap-3">
-            <Button size="lg" href={LATEST.spotifyUrl}>
+            <Button size="lg" href={LATEST.spotifyUrl} onClick={() => track('play_song', { song: LATEST.title, location: 'hero' })}>
               <PlayGlyph /> Play {LATEST.title}
             </Button>
             <Button size="lg" variant="secondary" href="#tour" onClick={onAlerts} className="backdrop-blur-sm">
@@ -226,6 +227,7 @@ function LatestRelease() {
         <div className="md:col-span-6 pr-[18%] md:pr-[14%]">
           <a
             href={LATEST.spotifyUrl}
+            onClick={() => track('play_song', { song: LATEST.title, location: 'cover' })}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Play ${LATEST.title} on Spotify`}
@@ -270,7 +272,7 @@ function LatestRelease() {
             </blockquote>
           )}
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <Button size="lg" href={LATEST.spotifyUrl}>
+            <Button size="lg" href={LATEST.spotifyUrl} onClick={() => track('play_song', { song: LATEST.title, location: 'release' })}>
               <PlayGlyph /> Play on Spotify
             </Button>
             {LATEST.story && (

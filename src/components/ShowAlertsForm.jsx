@@ -1,5 +1,6 @@
 import React, { useId, useState } from 'react';
 import Button from './ui/Button';
+import { track } from '../lib/analytics';
 
 const MAILCHIMP_ACTION =
   'https://northernnationalmusic.us17.list-manage.com/subscribe/post?u=22d3f967aaa29a31ccd2275a1&id=7e228c82dc&f_id=0048c2e1f0';
@@ -21,6 +22,7 @@ export default function ShowAlertsForm({ id = 'show-alerts' }) {
     }
     // Let the native POST open Mailchimp's confirmation in a new tab.
     setStatus('sent');
+    track('generate_lead', { lead_source: 'show_alerts', form_id: id });
   };
 
   return (
@@ -67,7 +69,14 @@ export default function ShowAlertsForm({ id = 'show-alerts' }) {
         {status === 'sent' && (
           <span className="text-nn-text">You're almost in. Confirm in the tab that just opened.</span>
         )}
-        {status === 'idle' && <span className="text-nn-subtle">Only news about shows and releases. Unsubscribe anytime.</span>}
+        {status === 'idle' && (
+          <span className="text-nn-subtle">
+            Only news about shows and releases. Unsubscribe anytime.{' '}
+            <a href="/privacy" className="underline underline-offset-2 hover:text-nn-text">
+              Privacy
+            </a>
+          </span>
+        )}
       </p>
       {/* Mailchimp bot protection */}
       <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">

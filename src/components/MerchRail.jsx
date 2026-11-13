@@ -2,6 +2,7 @@ import React from 'react';
 import Button, { Arrow } from './ui/Button';
 import useProducts from '../hooks/useProducts';
 import ProductImage from './ProductImage';
+import { track, gaItem } from '../lib/analytics';
 
 const MAX = 4;
 
@@ -48,10 +49,13 @@ export default function MerchRail() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 md:gap-x-5 gap-y-10" aria-busy={products === null}>
             {products === null
               ? Array.from({ length: MAX }).map((_, i) => <SkeletonCard key={i} />)
-              : products.map((p) => (
+              : products.map((p, i) => (
                   <a
                     key={p.id}
                     href={`/product/${p.id}`}
+                    onClick={() =>
+                      track('select_item', { item_list_name: 'Homepage', items: [gaItem({ id: p.id, name: p.name, listName: 'Homepage', index: i })] })
+                    }
                     className="group block rounded-nn focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-action focus-visible:ring-offset-4 focus-visible:ring-offset-nn-bg"
                   >
                     <ProductImage product={p} className="aspect-square" />

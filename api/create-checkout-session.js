@@ -64,7 +64,7 @@ export default async function handler(req, res) {
       metadata: {
         variant_ids: items.map(item => item.variantId).join(',')
       },
-      success_url: `${domain}?success=true`,
+      success_url: `${domain}?success=true&session_id={CHECKOUT_SESSION_ID}`, // Stripe fills in the ID
       cancel_url: `${domain}?canceled=true`,
       shipping_address_collection: {
         allowed_countries: ['US'],

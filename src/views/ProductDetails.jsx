@@ -1,8 +1,9 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { showToast } from '../components/ui/Toast';
 import Button, { Arrow } from '../components/ui/Button';
 import { Container, Label } from '../components/ui/Layout';
 import { getMerchEntry, imageForVariant, normalize } from '../data/merch';
+import { track, gaItem, money as gaValue, rememberCheckout } from '../lib/analytics';
 
 // Printful returns { sync_product, sync_variants }
 const printfulName = (p) => p?.sync_product?.name || p?.name || 'Merch';
@@ -10,6 +11,7 @@ const sizeOf = (v) => v?.size || String(v?.name || '').split('/').pop().trim();
 const printfulImage = (p, v) =>
   v?.files?.find((f) => f.type === 'preview')?.preview_url || p?.sync_product?.thumbnail_url || p?.thumbnail_url;
 const unique = (list) => [...new Set(list.filter(Boolean))];
+const variantLabel = (v) => [v?.color, v?.size].filter(Boolean).join(' / ') || v?.name;
 const money = (n) => `$${parseFloat(n).toFixed(2)}`;
 
 function BackLink() {
@@ -142,9 +144,21 @@ function ProductDetails({ id: idProp }) {
     return img?.image;
   };
 
+  // GA4: one view_item per product page view (sent once the product has loaded).
+  const viewed = useRef(false);
+  useEffect(() => {
+    if (!product || !selectedVariant || viewed.current) return;
+    viewed.current = true;
+    const item = gaItem({ id, name: entry?.name || printfulName(product), variant: variantLabel(selectedVariant), price: selectedVariant.retail_price });
+    track('view_item', { currency: 'USD', value: gaValue(selectedVariant.retail_price), items: [item] });
+  }, [product, selectedVariant, entry, id]);
+
   const handleBuyNow = async () => {
     if (!selectedVariant) return;
     setBuying(true);
+    const item = gaItem({ id, name: entry?.name || printfulName(product), variant: variantLabel(selectedVariant), price: selectedVariant.retail_price });
+    track('begin_checkout', { currency: 'USD', value: gaValue(selectedVariant.retail_price), items: [item] });
+    rememberCheckout({ value: gaValue(selectedVariant.retail_price), items: [item] });
     try {
       const name = `${printfulName(product)} - ${selectedVariant.name.split(' / ').slice(1).join(' / ') || selectedVariant.name}`;
       const image = printfulImage(product, selectedVariant);

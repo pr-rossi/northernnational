@@ -11,7 +11,7 @@ const posts = (await getPosts()).slice(0, 3).map(summarize);
 <Base>
   <Hero client:load />
   <Ticker client:visible />
-  <LatestRelease />
+  <LatestRelease client:visible />
   <About />
   <TourBlock client:visible />
   <MerchRail client:visible />

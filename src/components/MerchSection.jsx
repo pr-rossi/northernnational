@@ -1,6 +1,7 @@
 import React from 'react';
 import useProducts from '../hooks/useProducts';
 import ProductImage from './ProductImage';
+import { track, gaItem } from '../lib/analytics';
 import { Container } from './ui/Layout';
 
 function ProductCard({ product, index = 0 }) {
@@ -8,6 +9,9 @@ function ProductCard({ product, index = 0 }) {
   return (
     <a
       href={`/product/${product.id}`}
+      onClick={() =>
+        track('select_item', { item_list_name: 'Merch', items: [gaItem({ id: product.id, name: product.name, listName: 'Merch', index })] })
+      }
       style={{ '--d': `${80 + Math.min(index, 8) * 70}ms` }}
       className="intro-rise group block rounded-nn focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nn-text focus-visible:ring-offset-4 focus-visible:ring-offset-nn-bg"
     >

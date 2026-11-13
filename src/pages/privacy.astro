@@ -1,0 +1,26 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { Container, Label, formatDate } from '../components/ui/Layout.jsx';
+import '../styles/blog.css';
+
+const page = await getEntry('pages', 'privacy');
+if (!page) throw new Error('Missing src/content/pages/privacy.md');
+const { Content } = await render(page);
+const updated = page.data.updated ? page.data.updated.toISOString().slice(0, 10) : null;
+---
+
+<Base title={page.data.title} description="How Northern National handles your information.">
+  <article class="article bg-nn-bg pt-36 md:pt-48 pb-24 md:pb-40">
+    <Container>
+      <Label className="intro-rise mb-6">Legal</Label>
+      <h1 class="intro-title display text-nn-text text-[min(10.5vw,64px)] md:text-[clamp(64px,7vw,112px)]" style="--d: 120ms">
+        {page.data.title}
+      </h1>
+      {updated && <Label className="intro-rise mt-6 text-nn-subtle" style={{ '--d': '260ms' }}>Last updated {formatDate(updated)}</Label>}
+      <div class="intro-rise post-body post-body--plain mt-12 md:mt-16" style="--d: 360ms">
+        <Content />
+      </div>
+    </Container>
+  </article>
+</Base>

@@ -184,3 +184,7 @@
 @media (min-width: 1024px) {
   .post-body .post-figure { margin-left: -6rem; margin-right: -6rem; }
 }
+
+/* Plain pages (privacy policy): no drop cap or oversized lead. */
+.post-body--plain > p:first-child { font-size: 18px; line-height: 30px; color: #A8A49C; }
+.post-body--plain > p:first-child::first-letter { float: none; font-size: inherit; color: inherit; margin: 0; font-weight: inherit; line-height: inherit; }

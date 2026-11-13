@@ -14,4 +14,13 @@ const posts = defineCollection({
   }),
 });
 
-export const collections = { posts };
+// Standalone pages edited in Keystatic (e.g. the privacy policy).
+const pages = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/pages' }),
+  schema: z.object({
+    title: z.string(),
+    updated: z.coerce.date().optional(),
+  }),
+});
+
+export const collections = { posts, pages };

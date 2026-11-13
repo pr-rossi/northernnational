@@ -82,7 +82,12 @@ function Footer({ pathname = '/' }) {
 
         <div className="mt-16 flex flex-col gap-2 sm:flex-row sm:justify-between label text-nn-subtle">
           <p>© {new Date().getFullYear()} Northern National</p>
-          <p>Made loud in Dallas, TX</p>
+          <p className="flex gap-6">
+            <a href="/privacy" className="hover:text-nn-text transition-colors duration-200">
+              Privacy
+            </a>
+            <span>Made loud in Dallas, TX</span>
+          </p>
         </div>
       </div>
 
