@@ -1,7 +1,18 @@
-// Google Analytics 4 events. Safe when GA is blocked (ad blockers) or not loaded yet.
+// Analytics events for Google Tag Manager. Pushed to the dataLayer; GTM forwards them to GA4
+// (and any other tags set up there). Safe when GTM is blocked or still loading.
+const ECOMMERCE = new Set(['view_item', 'select_item', 'begin_checkout', 'purchase']);
+
 export function track(name, params = {}) {
   try {
-    if (typeof window !== 'undefined' && typeof window.gtag === 'function') window.gtag('event', name, params);
+    if (typeof window === 'undefined') return;
+    window.dataLayer = window.dataLayer || [];
+    if (ECOMMERCE.has(name)) {
+      // GA4 ecommerce via GTM expects the data under `ecommerce`; clear the previous one first.
+      window.dataLayer.push({ ecommerce: null });
+      window.dataLayer.push({ event: name, ecommerce: params });
+    } else {
+      window.dataLayer.push({ event: name, ...params });
+    }
   } catch {
     // never let analytics break the page
   }

@@ -6,7 +6,7 @@ This page explains what information northernnationalmusic.com collects, why, and
 
 ## What we collect
 
-**When you browse the site.** We use Google Analytics to understand how people find and use the site: pages viewed, roughly where visitors are, the device and browser used, and actions like viewing merch or clicking play. Google Analytics uses cookies to do this. It does not give us your name or email address.
+**When you browse the site.** We use Google Analytics to understand how people find and use the site: pages viewed, roughly where visitors are, the device and browser used, and actions like viewing merch or clicking play. Google Analytics uses cookies to do this. It does not give us your name or email address. Google Analytics is loaded through Google Tag Manager.
 
 **When you sign up for show alerts.** We collect your email address so we can email you about shows and releases. The list is run by Mailchimp.
 
@@ -22,7 +22,7 @@ We don't sell your information.
 
 ## Who helps us
 
-- **Google Analytics** for site statistics.
+- **Google Analytics** (loaded with Google Tag Manager) for site statistics.
 - **Mailchimp** for the email list.
 - **Stripe** for payments.
 - **Printful** for printing and shipping merch.
